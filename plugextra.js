@@ -41,7 +41,7 @@ function toggleLog()
 		elem.style.opacity = "0.8";
 		elem.scrollTop = elem.scrollHeight;
 		explog.style.backgroundColor = "#111111";
-		explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 1px white";
+		explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 2px white";
 	}
 	else 
 	{
@@ -63,7 +63,7 @@ explog.style.color = "white";
 explog.style.backgroundColor = "#111111";
 explog.style.border = "0px solid black";
 explog.style.borderRadius = "15px";
-explog.style.boxShadow = "1px 1px 1px white inset";
+explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 2px white";
 explog.style.height = "25px";
 explog.style.lineHeight = "25px";
 explog.style.margin = "auto";
