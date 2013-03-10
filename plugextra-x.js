@@ -86,14 +86,14 @@ function toggleFeedback(track)
 	var trackfeed = document.getElementById("trackfeed" + track); 
 	if (trackfeed.style.maxHeight != "0px") 
 	{ 
-		trackfeed.style.transition = "max-height 0.5s ease 0.5s, opacity 0.5s"; 
+		trackfeed.style.transition = "max-height 0.25s ease 0.25s, opacity 0.25s"; 
 		trackfeed.style.maxHeight = "0px"; 
 		trackfeed.style.opacity = "0"; 
 		prevtrack.style.textDecoration = "none"; 
 	} 
 	else 
 	{ 
-		trackfeed.style.transition = "max-height 0.5s, opacity 0.5s ease 0.5s"; 
+		trackfeed.style.transition = "max-height 0.25s, opacity 0.25s ease 0.25s"; 
 		var log = document.getElementById("log"); 
 		var doscroll = log.scrollTop == log.scrollHeight - log.offsetHeight; 
 		trackfeed.style.maxHeight = "1000px"; 
