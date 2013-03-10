@@ -162,7 +162,7 @@ function toggleJoin()
 		autojoin = false;
 		var expj = document.getElementById("expjoin");
 		expj.style.backgroundColor = "#000022";
-		expj.style.boxShadow = "1px 1px 1px #55FF55 inset, 0px 0px 0px white";
+		expj.style.boxShadow = "1px 1px 1px #5555FF inset, 0px 0px 0px white";
 	}
 	else
 	{
@@ -170,7 +170,7 @@ function toggleJoin()
 		joinList();
 		var expj = document.getElementById("expjoin");
 		expj.style.backgroundColor = "#000055";
-		expj.style.boxShadow = "1px 1px 1px #55FF55 inset, 0px 0px 2px white";
+		expj.style.boxShadow = "1px 1px 1px #5555FF inset, 0px 0px 2px white";
 	}
 }
 
