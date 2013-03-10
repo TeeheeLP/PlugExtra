@@ -1,4 +1,4 @@
-var playcount = 0; 
+var playcount = 1; 
 var autowoot = false;
 var autojoin = false;
 
@@ -103,10 +103,10 @@ function toggleFeedback(track)
 	} 
 } 
 
-document.getElementById("log").innerHTML += "<div id='track" + (playcount + 1) + "' style='text-decoration:underline;display:inline;' onclick='toggleFeedback(" 
-	+ (playcount + 1) + ")'>Track: <span style='color:white'>" + (playcount + 1) + "</span> - <span style='color:white'>" + API.getDJs()[0].username 
+document.getElementById("log").innerHTML += "<div id='track" + (playcount) + "' style='text-decoration:underline;display:inline;' onclick='toggleFeedback(" 
+	+ (playcount) + ")'>Track: <span style='color:white'>" + (playcount) + "</span> - <span style='color:white'>" + API.getDJs()[0].username 
 	+ "</span> is playing <span style='color:white;font-weight:bold;'>" + API.getMedia().title
-	+ "</span> by <span style='color:white'>" + API.getMedia().author + "</span>.</div><div id='trackfeed" + (playcount + 1) 
+	+ "</span> by <span style='color:white'>" + API.getMedia().author + "</span>.</div><div id='trackfeed" + (playcount) 
 	+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
 
 var expwoot = document.createElement("div");
