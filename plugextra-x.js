@@ -116,13 +116,17 @@ function toggleWoot()
 	if (autowoot)
 	{
 		autowoot = false;
-		document.getElementById("expwoot").style.backgroundColor = "#002200";
+		var expw = document.getElementById("expwoot");
+		expw.style.backgroundColor = "#002200";
+		expw.style.box-shadow = "1px 1px 1px #55FF55 inset, 0px 0px 0px white";
 	}
 	else
 	{
 		autowoot = true;
 		document.getElementById("button-vote-positive").click();
-		document.getElementById("expwoot").style.backgroundColor = "#005500";
+		var expw = document.getElementById("expwoot");
+		expw.style.backgroundColor = "#005500";
+		expw.style.box-shadow = "1px 1px 1px #55FF55 inset, 0px 0px 2px white";
 	}
 }
 
@@ -156,13 +160,17 @@ function toggleJoin()
 	if (autojoin)
 	{
 		autojoin = false;
-		document.getElementById("expjoin").style.backgroundColor = "#000022";
+		var expj = document.getElementById("expjoin");
+		expj.style.backgroundColor = "#000022";
+		expj.style.box-shadow = "1px 1px 1px #55FF55 inset, 0px 0px 0px white";
 	}
 	else
 	{
 		autojoin = true;
 		joinList();
-		document.getElementById("expjoin").style.backgroundColor = "#000055";
+		var expj = document.getElementById("expjoin");
+		expj.style.backgroundColor = "#000055";
+		expj.style.box-shadow = "1px 1px 1px #55FF55 inset, 0px 0px 2px white";
 	}
 }
 
