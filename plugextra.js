@@ -19,7 +19,6 @@ elem.style.overflowY = "scroll";
 elem.style.margin = "auto";
 //elem.style.borderRadius = "5px";
 elem.style.padding = "5px";
-elem.style.backgroundImage = "url('http://poke-helper.bplaced.net/images/noise.png')";
 elem.style.backgroundColor = "#050505";
 elem.style.opacity = "0.8";
 //elem.style.boxShadow = "1px 1px 2px 1px #444444 inset";
