@@ -116,13 +116,13 @@ function toggleWoot()
 	if (autojoin)
 	{
 		autowoot = false;
-		document.getElementById("expwoot").backgroundColor = "#000022";
+		document.getElementById("expwoot").style.backgroundColor = "#000022";
 	}
 	else
 	{
 		autowoot = true;
 		document.getElementById("button-vote-positive").click();
-		document.getElementById("expwoot").backgroundColor = "#000055";
+		document.getElementById("expwoot").style.backgroundColor = "#000055";
 	}
 }
 
@@ -156,13 +156,13 @@ function toggleJoin()
 	if (autojoin)
 	{
 		autojoin = false;
-		document.getElementById("expjoin").backgroundColor = "#000022";
+		document.getElementById("expjoin").style.backgroundColor = "#000022";
 	}
 	else
 	{
 		autojoin = true;
 		joinList();
-		document.getElementById("expjoin").backgroundColor = "#000055";
+		document.getElementById("expjoin").style.backgroundColor = "#000055";
 	}
 }
 
