@@ -41,6 +41,7 @@ function toggleLog()
 		elem.style.opacity = "0.8";
 		elem.scrollTop = elem.scrollHeight;
 		explog.style.backgroundColor = "#111111";
+		explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 1px white";
 	}
 	else 
 	{
@@ -50,6 +51,7 @@ function toggleLog()
 		elem.style.opacity = "0";
 		elem.scrollTop = elem.scrollHeight;
 		explog.style.backgroundColor = "black";
+		explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 0px white";
 	}
 }
 
