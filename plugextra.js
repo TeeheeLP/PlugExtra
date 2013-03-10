@@ -74,4 +74,4 @@ explog.style.textDecoration = "none";
 explog.title = "Toggle Log";
 
 document.body.appendChild(explog);
-setTimeout(function(){startBot()}, 5000);
+setTimeout(function(){startBot()}, 0);
