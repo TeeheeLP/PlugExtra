@@ -113,16 +113,16 @@ var expwoot = document.createElement("div");
 
 function toggleWoot()
 {
-	if (autojoin)
+	if (autowoot)
 	{
 		autowoot = false;
-		document.getElementById("expwoot").style.backgroundColor = "#000022";
+		document.getElementById("expwoot").style.backgroundColor = "#002200";
 	}
 	else
 	{
 		autowoot = true;
 		document.getElementById("button-vote-positive").click();
-		document.getElementById("expwoot").style.backgroundColor = "#000055";
+		document.getElementById("expwoot").style.backgroundColor = "#000022";
 	}
 }
 
