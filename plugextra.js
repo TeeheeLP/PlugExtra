@@ -14,7 +14,7 @@ elem.style.display = "block";
 elem.style.zIndex = "10";
 elem.style.textShadow ="0px 0px 2px black";
 elem.style.height = "281px";
-elem.style.width = "1200px";
+elem.style.width = "840px";
 elem.style.overflowY = "scroll";
 elem.style.margin = "auto";
 //elem.style.borderRadius = "5px";
@@ -24,6 +24,7 @@ elem.style.backgroundColor = "#050505";
 elem.style.opacity = "0.8";
 //elem.style.boxShadow = "1px 1px 2px 1px #444444 inset";
 elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
+elem.style.right = "180px";
 document.body.appendChild(elem);
 
 var explog = document.createElement("div");
