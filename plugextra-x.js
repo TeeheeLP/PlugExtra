@@ -118,7 +118,7 @@ function toggleWoot()
 		autowoot = false;
 		var expw = document.getElementById("expwoot");
 		expw.style.backgroundColor = "#002200";
-		expw.style.box-shadow = "1px 1px 1px #55FF55 inset, 0px 0px 0px white";
+		expw.style.boxShadow = "1px 1px 1px #55FF55 inset, 0px 0px 0px white";
 	}
 	else
 	{
@@ -126,7 +126,7 @@ function toggleWoot()
 		document.getElementById("button-vote-positive").click();
 		var expw = document.getElementById("expwoot");
 		expw.style.backgroundColor = "#005500";
-		expw.style.box-shadow = "1px 1px 1px #55FF55 inset, 0px 0px 2px white";
+		expw.style.boxShadow = "1px 1px 1px #55FF55 inset, 0px 0px 2px white";
 	}
 }
 
@@ -162,7 +162,7 @@ function toggleJoin()
 		autojoin = false;
 		var expj = document.getElementById("expjoin");
 		expj.style.backgroundColor = "#000022";
-		expj.style.box-shadow = "1px 1px 1px #55FF55 inset, 0px 0px 0px white";
+		expj.style.boxShadow = "1px 1px 1px #55FF55 inset, 0px 0px 0px white";
 	}
 	else
 	{
@@ -170,7 +170,7 @@ function toggleJoin()
 		joinList();
 		var expj = document.getElementById("expjoin");
 		expj.style.backgroundColor = "#000055";
-		expj.style.box-shadow = "1px 1px 1px #55FF55 inset, 0px 0px 2px white";
+		expj.style.boxShadow = "1px 1px 1px #55FF55 inset, 0px 0px 2px white";
 	}
 }
 
