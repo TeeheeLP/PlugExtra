@@ -122,7 +122,7 @@ function toggleWoot()
 	{
 		autowoot = true;
 		document.getElementById("button-vote-positive").click();
-		document.getElementById("expwoot").style.backgroundColor = "#000022";
+		document.getElementById("expwoot").style.backgroundColor = "#005500";
 	}
 }
 
