@@ -196,3 +196,17 @@ expjoin.style.textDecoration = "none";
 expjoin.title = "Toggle Auto-Join";
 
 document.body.appendChild(expjoin);
+
+//	-------------------
+//	Userlist management
+//	-------------------
+
+var userlist = document.createElement("div");
+
+userlist.id = "userlistx";
+userlist.position = "absolute";
+userlist.height = "100%";
+userlist.width = "150px";
+userlist.backgroundColor = "#000000";
+
+document.body.appendChild(userlist);
