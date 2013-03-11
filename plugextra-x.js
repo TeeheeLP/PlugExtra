@@ -218,7 +218,7 @@ function showUserList()
 
 userlist.id = "userlistx";
 userlist.style.position = "absolute";
-userlist.style.height = "100%";
+userlist.style.height = "97%";
 userlist.style.width = "150px";
 userlist.style.backgroundImage = "url('http://poke-helper.bplaced.net/images/noise.png')";
 userlist.style.backgroundColor = "#070707";
@@ -230,7 +230,7 @@ userlist.style.zIndex = "9001";
 userlist.style.padding = "10px";
 userlist.style.overflowX = "hidden";
 userlist.style.overflowY = "auto";
-userlist.style.boxShadow = "0px 0px 10px #000000, -1px 0px #000000 inset";
+userlist.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
 userlist.style.borderRight = "1px solid transparent";
 userlist.onclick = function() { showUserList(); };
 
