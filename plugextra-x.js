@@ -218,7 +218,7 @@ function showUserList()
 
 userlist.id = "userlistx";
 userlist.style.position = "absolute";
-userlist.style.height = "100%";
+userlist.style.height = "97%";
 userlist.style.width = "150px";
 userlist.style.backgroundImage = "url('http://poke-helper.bplaced.net/images/noise.png')";
 userlist.style.backgroundColor = "#070707";
@@ -230,7 +230,7 @@ userlist.style.zIndex = "9001";
 userlist.style.padding = "10px";
 userlist.style.overflowX = "hidden";
 userlist.style.overflowY = "auto";
-userlist.style.boxShadow = "0px 0px 10px #000000, -1px 0px #000000 inset";
+userlist.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
 userlist.style.borderRight = "1px solid transparent";
 userlist.onclick = function() { showUserList(); };
 
@@ -329,7 +329,7 @@ function sortList(list)
 	for (var i in list.childNodes)
 	{
 		if (list.childNodes[i].nodeType == 1)
-			templist[i] = list.childNodes[i].innerHTML;
+			templist[i] = list.childNodes[i].innerHTML + "|" + list.childNodes[i].id;
 	}
 	for (var i in templist)
 	{
@@ -347,7 +347,8 @@ function sortList(list)
 	}
 	for (var i in templist)
 	{
-		list.childNodes[i].innerHTML = templist[i];
+		list.childNodes[i].innerHTML = templist[i].split("|")[0];
+		list.childNodes[i].id = templist[i].split("|")[1];
 	}
 }
 
@@ -358,7 +359,7 @@ function addToList(user)
 	var userit = document.createElement("li");
 	userit.id = "pgx" + user.id;
 	userit.style.width = "100%";
-	userit.style.height = "1.5em";
+	userit.style.marginTop = "5px";
 	userit.innerHTML = user.username;
 	
 	var staff = API.getStaff();
