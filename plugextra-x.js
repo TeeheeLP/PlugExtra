@@ -238,25 +238,44 @@ userlist.style.boxShadow = "0px 0px 10px #000000";
 userlist.style.borderRight = "1px solid transparent";
 userlist.onclick = function() { toggleUserList(); };
 
-var users = API.getUsers();
 var staff = API.getStaff();
+var staffdiv = document.createElement("div");
 
-for (var i in users)
+for (var i in staff)
 {
 	var user = document.createElement("div");
 	user.id = users[i].id;
 	user.style.width = "100%";
 	user.style.height = "1.5em";
+	user.style.color = "#D90066";
 	user.innerHTML = users[i].username;
+	
+	staffdiv.appendChild(user);
+}
+userlist.appendChild(staffdiv);
+
+var users = API.getUsers();
+var usersdiv = document.createElement("div");
+
+for (var i in users)
+{
+	var cont = true;
 	for (var n in staff)
 	{
 		if (users[i].id == staff[n].id)
-		{
-			user.style.color = "#D90066";
-		}
+			cont = false;
 	}
+	if (cont)
+	{
+		var user = document.createElement("div");
+		user.id = users[i].id;
+		user.style.width = "100%";
+		user.style.height = "1.5em";
+		user.innerHTML = users[i].username;
 	
-	userlist.appendChild(user);
+		usersdiv.appendChild(user);
+	}
 }
+userlist.appendChild(usersdiv);
 
 document.body.appendChild(userlist);
