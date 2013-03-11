@@ -267,6 +267,8 @@ var staff = API.getStaff();
 var stafflist = document.createElement("ul");
 stafflist.id = "stafflistx";
 stafflist.style.listStyle = "none";
+stafflist.style.padding = "0px";
+stafflist.style.margin = "0px";
 
 for (var i in staff)
 {
@@ -285,6 +287,8 @@ var users = API.getUsers();
 var usersul = document.createElement("ul");
 usersul.id = "usersulx";
 usersul.style.listStyle = "none";
+usersul.style.padding = "0px";
+usersul.style.margin = "0px";
 
 for (var i in users)
 {
