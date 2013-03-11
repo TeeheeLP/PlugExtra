@@ -248,7 +248,7 @@ function hideUserList()
 var hidelistbut = document.createElement("div");
 hidelistbut.style.backgroundColor = "#333333";
 hidelistbut.style.borderRadius = "7px";
-hidelistbut.style.boxShadow = "0px 0px 4px #000000, -1px -1px 15px #111111 inset";
+hidelistbut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
 hidelistbut.style.width = "100%";
 hidelistbut.style.textAlign = "center";
 hidelistbut.style.height = "1.75em";
