@@ -207,16 +207,22 @@ function toggleUserList()
 {
 	var userlist = document.getElementById("userlistx");
 	if (userlist.style.left == "0px")
+	{
 		userlist.style.left = "-160px";
+		setTimeout(function() { userlist.style.opacity = "0" }, "500");
+	}
 	else
+	{
 		userlist.style.left = "0px";
+		userlist.style.opacity = "1";
+	}
 }
 
 userlist.id = "userlistx";
 userlist.style.position = "absolute";
 userlist.style.height = "100%";
 userlist.style.width = "150px";
-userlist.style.backgroundColor = "#000000";
+userlist.style.backgroundColor = "#070707";
 userlist.style.top = "0px";
 userlist.style.left = "0px";
 userlist.style.transition = "left 0.5s";
