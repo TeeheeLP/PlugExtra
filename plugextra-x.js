@@ -274,9 +274,9 @@ stafflist.style.margin = "0px";
 for (var i in staff)
 {
 	var user = document.createElement("li");
-	user.id = staff[i].id;
+	user.id = "pgx" + staff[i].id;
 	user.style.width = "100%";
-	user.style.height = "1.5em";
+	user.style.marginTop = "5px";
 	user.style.color = "#D90066";
 	user.innerHTML = staff[i].username;
 	
@@ -302,9 +302,9 @@ for (var i in users)
 	if (cont)
 	{
 		var user = document.createElement("li");
-		user.id = users[i].id;
+		user.id = "pgx" + users[i].id;
 		user.style.width = "100%";
-		user.style.height = "1.5em";
+		user.style.marginTop = "5px";
 		user.innerHTML = users[i].username;
 	
 		usersul.appendChild(user);
@@ -321,9 +321,23 @@ function sortList(list)
 	var templist = new Array;
 	for (var i in list.childNodes)
 	{
-		templist[i] = list.childNodes[i].innerHTML;
+		if (list.childNodes[i].nodeType == 1)
+			templist[i] = list.childNodes[i].innerHTML;
+	}
+	for (var i in templist)
+	{
+		templist[i] = templist[i][0].toUpperCase() + templist[i];
 	}
 	templist.sort();
+	for (var i in templist)
+	{
+		var str = "";
+		for (var n = 1; n < templist[i].length; n++)
+		{
+			str += templist[i][n];
+		}
+		templist[i] = str;
+	}
 	for (var i in templist)
 	{
 		list.childNodes[i].innerHTML = templist[i];
@@ -335,7 +349,7 @@ function addToList(user)
 	var isstaff = false;
 	
 	var userit = document.createElement("li");
-	userit.id = user.id;
+	userit.id = "pgx" + user.id;
 	userit.style.width = "100%";
 	userit.style.height = "1.5em";
 	userit.innerHTML = user.username;
@@ -363,3 +377,11 @@ function addToList(user)
 }
 
 API.addEventListener(API.USER_JOIN, addToList);
+
+function removeFromList(user)
+{
+	var userit = document.getElementById("pgx" + user.id);
+	userit.parentNode.removeChild(userit);
+}
+
+API.addEventListener(API.USER_LEAVE, removeFromList);
