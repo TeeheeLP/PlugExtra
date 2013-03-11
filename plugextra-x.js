@@ -279,7 +279,7 @@ for (var i in staff)
 	
 	stafflist.appendChild(user);
 }
-userlist.appendChild(staffdiv);
+userlist.appendChild(stafflist);
 
 var users = API.getUsers();
 var usersul = document.createElement("ul");
@@ -310,3 +310,51 @@ userlist.appendChild(usersul);
 document.body.appendChild(userlist);
 
 //	Realtime management
+
+function sortList(list)
+{
+	var templist = new Array;
+	for (var i in list.childNodes)
+	{
+		templist[i] = list.childNodes[i].innerHTML;
+	}
+	templist.sort();
+	for (var i in templist)
+	{
+		list.childNodes[i].innerHTML = templist[i];
+	}
+}
+
+function addToList(user)
+{
+	var isstaff = false;
+	
+	var userit = document.createElement("li");
+	userit.id = user.id;
+	userit.style.width = "100%";
+	userit.style.height = "1.5em";
+	userit.innerHTML = user.username;
+	
+	var staff = API.getStaff();
+	for (var i in staff)
+	{
+		if (user.id == staff[i].id)
+			isstaff = true;
+	}
+	
+	if (isstaff)
+	{
+		userit.style.color = "#D90066";
+		var list = document.getElementById("stafflistx");
+		list.appendChild(userit);
+		sortList(list);
+	}
+	else
+	{
+		var list = document.getElementById("usersulx");
+		list.appendChild(userit);
+		sortList(list);
+	}
+}
+
+API.addEventListener(API.USER_JOIN, addToList);
