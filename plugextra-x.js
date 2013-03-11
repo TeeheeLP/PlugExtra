@@ -239,7 +239,7 @@ function hideUserList()
 	{
 		userlist.style.left = "-160px";
 		userlist.style.boxShadow = "0px 0px 0px #000000";
-		setTimeout(function() { userlist.style.opacity = "0" }, "500");
+		//setTimeout(function() { userlist.style.opacity = "0" }, "500");
 	}
 }
 
