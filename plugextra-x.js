@@ -329,7 +329,7 @@ function sortList(list)
 	for (var i in list.childNodes)
 	{
 		if (list.childNodes[i].nodeType == 1)
-			templist[i] = list.childNodes[i].innerHTML;
+			templist[i] = list.childNodes[i].innerHTML + "|" + list.childNodes[i].id;
 	}
 	for (var i in templist)
 	{
@@ -347,7 +347,8 @@ function sortList(list)
 	}
 	for (var i in templist)
 	{
-		list.childNodes[i].innerHTML = templist[i];
+		list.childNodes[i].innerHTML = templist[i].split("|")[0];
+		list.childNodes[i].id = templist[i].split("|")[1];
 	}
 }
 
