@@ -265,6 +265,7 @@ hidelistbut.onclick = function() { hideUserList(); };
 userlist.appendChild(hidelistbut);
 
 var curusercount = document.createElement("div");
+curusercount.id = "cusercount";
 curusercount.style.textAlign = "center";
 curusercount.innerHTML = API.getUsers().length + " users online";
 
@@ -380,6 +381,7 @@ function addToList(user)
 		list.appendChild(userit);
 		sortList(list);
 	}
+	document.getElementById("cusercount").innerHTML = API.getUsers().length + " users online";
 }
 
 API.addEventListener(API.USER_JOIN, addToList);
@@ -388,6 +390,7 @@ function removeFromList(user)
 {
 	var userit = document.getElementById("pgx" + user.id);
 	userit.parentNode.removeChild(userit);
+	document.getElementById("cusercount").innerHTML = API.getUsers().length + " users online";
 }
 
 API.addEventListener(API.USER_LEAVE, removeFromList);
