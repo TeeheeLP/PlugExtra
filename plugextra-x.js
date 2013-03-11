@@ -212,7 +212,7 @@ function showUserList()
 		userlist.style.left = "0px";
 		userlist.style.opacity = "1";
 		userlist.style.boxShadow = "0px 0px 10px #000000, -1px 0px #000000 inset";
-		setTimeout(function() { dissmartcl = true; userlist.style.overflowY = "hidden"; }, "500");
+		setTimeout(function() { dissmartcl = true; userlist.style.overflowY = "auto"; }, "500");
 	}
 }
 
@@ -241,7 +241,7 @@ function hideUserList()
 		var userlist = document.getElementById("userlistx");
 		userlist.style.left = "-160px";
 		userlist.style.boxShadow = "0px 0px 0px #000000";
-		userlist.style.overflowY = "auto";
+		userlist.style.overflowY = "hidden";
 		setTimeout(function() { userlist.style.opacity = "0"; dissmartcl = false; }, "500");
 	}
 }
