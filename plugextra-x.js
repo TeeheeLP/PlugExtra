@@ -203,16 +203,10 @@ document.body.appendChild(expjoin);
 
 var userlist = document.createElement("div");
 
-function toggleUserList()
+function showUserList()
 {
 	var userlist = document.getElementById("userlistx");
-	if (userlist.style.left == "0px")
-	{
-		userlist.style.left = "-160px";
-		userlist.style.boxShadow = "0px 0px 0px #000000";
-		setTimeout(function() { userlist.style.opacity = "0" }, "500");
-	}
-	else
+	if (userlist.style.left == "-160px")
 	{
 		userlist.style.left = "0px";
 		userlist.style.opacity = "1";
@@ -231,12 +225,31 @@ userlist.style.left = "0px";
 userlist.style.transition = "left 0.5s, box-shadow 0.5s";
 userlist.style.color = "#FFFFFF";
 userlist.style.zIndex = "9001";
-userlist.style.padding = "5px";
+userlist.style.padding = "10px";
 userlist.style.overflowX = "hidden";
 userlist.style.overflowY = "auto";
 userlist.style.boxShadow = "0px 0px 10px #000000";
 userlist.style.borderRight = "1px solid transparent";
-userlist.onclick = function() { toggleUserList(); };
+userlist.onclick = function() { showUserList(); };
+
+function hideUserList()
+{
+	var userlist = document.getElementById("userlistx");
+	userlist.style.left = "-160px";
+	userlist.style.boxShadow = "0px 0px 0px #000000";
+	setTimeout(function() { userlist.style.opacity = "0" }, "500");
+}
+
+var hidelistbut = document.createElement("div");
+hidelistbut.style.backgroundColor = "#070707";
+hidelistbut.style.borderRadius = "7px";
+hidelistbut.style.boxShadow = "0px 0px 4px #000000, -1px -1px 4px #333333";
+hidelistbut.style.width = "100%";
+hidelistbut.style.textAlign = "center";
+hidelistbut.innerHTML = "Hide";
+hidelistbut.onclick = function() { hideUserList(); };
+
+userlist.appendChild(hidelistbut);
 
 var staff = API.getStaff();
 var staffdiv = document.createElement("div");
