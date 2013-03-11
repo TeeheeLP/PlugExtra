@@ -244,11 +244,11 @@ var staffdiv = document.createElement("div");
 for (var i in staff)
 {
 	var user = document.createElement("div");
-	user.id = users[i].id;
+	user.id = staff[i].id;
 	user.style.width = "100%";
 	user.style.height = "1.5em";
 	user.style.color = "#D90066";
-	user.innerHTML = users[i].username;
+	user.innerHTML = staff[i].username;
 	
 	staffdiv.appendChild(user);
 }
