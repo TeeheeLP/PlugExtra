@@ -1,7 +1,7 @@
 function startBot()
 {
 var scr = document.createElement("script");
-scr.src = ('https://raw.github.com/TeeheeLP/PlugExtra/master/plugextra-x.js');
+scr.src = ('https://raw.github.com/TeeheeLP/PlugExtra/dev/plugextra-x.js');
 document.body.appendChild(scr);
 }
 
@@ -11,7 +11,7 @@ elem.style.color = "lightgray";
 elem.style.position = "relative";
 elem.style.top = "288px";
 elem.style.display = "block";
-elem.style.zIndex = "10";
+elem.style.zIndex = "8";
 elem.style.textShadow ="0px 0px 2px black";
 elem.style.height = "281px";
 elem.style.width = "837px";
@@ -66,7 +66,7 @@ explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 2px white";
 explog.style.height = "25px";
 explog.style.lineHeight = "25px";
 explog.style.margin = "auto";
-explog.style.zIndex = "9";
+explog.style.zIndex = "13";
 explog.style.textAlign = "center";
 explog.style.left = "225px";
 explog.style.cursor = "pointer";

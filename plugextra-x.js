@@ -86,14 +86,14 @@ function toggleFeedback(track)
 	var trackfeed = document.getElementById("trackfeed" + track); 
 	if (trackfeed.style.maxHeight != "0px") 
 	{ 
-		trackfeed.style.transition = "max-height 0.5s ease 0.5s, opacity 0.5s"; 
+		trackfeed.style.transition = "max-height 0.25s ease 0.25s, opacity 0.25s"; 
 		trackfeed.style.maxHeight = "0px"; 
 		trackfeed.style.opacity = "0"; 
 		prevtrack.style.textDecoration = "none"; 
 	} 
 	else 
 	{ 
-		trackfeed.style.transition = "max-height 0.5s, opacity 0.5s ease 0.5s"; 
+		trackfeed.style.transition = "max-height 0.25s, opacity 0.25s ease 0.25s"; 
 		var log = document.getElementById("log"); 
 		var doscroll = log.scrollTop == log.scrollHeight - log.offsetHeight; 
 		trackfeed.style.maxHeight = "1000px"; 
@@ -142,7 +142,7 @@ expwoot.style.boxShadow = "1px 1px 1px #55FF55 inset";
 expwoot.style.height = "25px";
 expwoot.style.lineHeight = "25px";
 expwoot.style.margin = "auto";
-expwoot.style.zIndex = "9";
+expwoot.style.zIndex = "13";
 expwoot.style.textAlign = "center";
 expwoot.style.left = "198px";
 expwoot.style.cursor = "pointer";
@@ -186,7 +186,7 @@ expjoin.style.boxShadow = "1px 1px 1px #5555FF inset";
 expjoin.style.height = "25px";
 expjoin.style.lineHeight = "25px";
 expjoin.style.margin = "auto";
-expjoin.style.zIndex = "9";
+expjoin.style.zIndex = "13";
 expjoin.style.textAlign = "center";
 expjoin.style.left = "171px";
 expjoin.style.cursor = "pointer";
