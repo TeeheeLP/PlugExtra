@@ -212,7 +212,7 @@ userlist.style.top = "0px";
 userlist.style.left = "0px";
 userlist.style.transition = "left 0.5s";
 userlist.style.color = "#FFFFFF";
-userlist.style.zIndex = "90";
+userlist.style.zIndex = "9001";
 userlist.style.padding = "5px";
 
 var users = API.getUsers();
