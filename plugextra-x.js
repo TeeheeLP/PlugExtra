@@ -196,3 +196,192 @@ expjoin.style.textDecoration = "none";
 expjoin.title = "Toggle Auto-Join";
 
 document.body.appendChild(expjoin);
+
+//	-------------------
+//	Userlist management
+//	-------------------
+
+var dissmartcl = true;
+var userlist = document.createElement("div");
+
+function showUserList()
+{
+	if (!dissmartcl)
+	{
+		var userlist = document.getElementById("userlistx");
+		userlist.style.left = "0px";
+		userlist.style.opacity = "1";
+		userlist.style.boxShadow = "0px 0px 10px #000000, -1px 0px #000000 inset";
+		setTimeout(function() { dissmartcl = true; userlist.style.overflowY = "hidden"; }, "500");
+	}
+}
+
+userlist.id = "userlistx";
+userlist.style.position = "absolute";
+userlist.style.height = "100%";
+userlist.style.width = "150px";
+userlist.style.backgroundImage = "url('http://poke-helper.bplaced.net/images/noise.png')";
+userlist.style.backgroundColor = "#070707";
+userlist.style.top = "0px";
+userlist.style.left = "0px";
+userlist.style.transition = "left 0.5s, box-shadow 0.5s, opacity 0.3s";
+userlist.style.color = "#FFFFFF";
+userlist.style.zIndex = "9001";
+userlist.style.padding = "10px";
+userlist.style.overflowX = "hidden";
+userlist.style.overflowY = "auto";
+userlist.style.boxShadow = "0px 0px 10px #000000, -1px 0px #000000 inset";
+userlist.style.borderRight = "1px solid transparent";
+userlist.onclick = function() { showUserList(); };
+
+function hideUserList()
+{
+	if (dissmartcl)
+	{
+		var userlist = document.getElementById("userlistx");
+		userlist.style.left = "-160px";
+		userlist.style.boxShadow = "0px 0px 0px #000000";
+		userlist.style.overflowY = "auto";
+		setTimeout(function() { userlist.style.opacity = "0"; dissmartcl = false; }, "500");
+	}
+}
+
+var hidelistbut = document.createElement("div");
+hidelistbut.style.backgroundColor = "#333333";
+hidelistbut.style.borderRadius = "7px";
+hidelistbut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
+hidelistbut.style.width = "100%";
+hidelistbut.style.textAlign = "center";
+hidelistbut.style.height = "1.75em";
+hidelistbut.style.display = "block";
+hidelistbut.style.cursor = "pointer";
+hidelistbut.style.lineHeight = "1.75em";
+hidelistbut.style.marginBottom = "5px";
+hidelistbut.style.fontSize = "1.5em";
+hidelistbut.style.fontWeight = "bold";
+hidelistbut.innerHTML = "Hide";
+hidelistbut.onclick = function() { hideUserList(); };
+
+userlist.appendChild(hidelistbut);
+
+var staff = API.getStaff();
+var stafflist = document.createElement("ul");
+stafflist.id = "stafflistx";
+stafflist.style.listStyle = "none";
+stafflist.style.padding = "0px";
+stafflist.style.margin = "0px";
+
+for (var i in staff)
+{
+	var user = document.createElement("li");
+	user.id = "pgx" + staff[i].id;
+	user.style.width = "100%";
+	user.style.marginTop = "5px";
+	user.style.color = "#D90066";
+	user.innerHTML = staff[i].username;
+	
+	stafflist.appendChild(user);
+}
+userlist.appendChild(stafflist);
+
+var users = API.getUsers();
+var usersul = document.createElement("ul");
+usersul.id = "usersulx";
+usersul.style.listStyle = "none";
+usersul.style.padding = "0px";
+usersul.style.margin = "0px";
+
+for (var i in users)
+{
+	var cont = true;
+	for (var n in staff)
+	{
+		if (users[i].id == staff[n].id)
+			cont = false;
+	}
+	if (cont)
+	{
+		var user = document.createElement("li");
+		user.id = "pgx" + users[i].id;
+		user.style.width = "100%";
+		user.style.marginTop = "5px";
+		user.innerHTML = users[i].username;
+	
+		usersul.appendChild(user);
+	}
+}
+userlist.appendChild(usersul);
+
+document.body.appendChild(userlist);
+
+//	Realtime management
+
+function sortList(list)
+{
+	var templist = new Array;
+	for (var i in list.childNodes)
+	{
+		if (list.childNodes[i].nodeType == 1)
+			templist[i] = list.childNodes[i].innerHTML;
+	}
+	for (var i in templist)
+	{
+		templist[i] = templist[i][0].toUpperCase() + templist[i];
+	}
+	templist.sort();
+	for (var i in templist)
+	{
+		var str = "";
+		for (var n = 1; n < templist[i].length; n++)
+		{
+			str += templist[i][n];
+		}
+		templist[i] = str;
+	}
+	for (var i in templist)
+	{
+		list.childNodes[i].innerHTML = templist[i];
+	}
+}
+
+function addToList(user)
+{
+	var isstaff = false;
+	
+	var userit = document.createElement("li");
+	userit.id = "pgx" + user.id;
+	userit.style.width = "100%";
+	userit.style.height = "1.5em";
+	userit.innerHTML = user.username;
+	
+	var staff = API.getStaff();
+	for (var i in staff)
+	{
+		if (user.id == staff[i].id)
+			isstaff = true;
+	}
+	
+	if (isstaff)
+	{
+		userit.style.color = "#D90066";
+		var list = document.getElementById("stafflistx");
+		list.appendChild(userit);
+		sortList(list);
+	}
+	else
+	{
+		var list = document.getElementById("usersulx");
+		list.appendChild(userit);
+		sortList(list);
+	}
+}
+
+API.addEventListener(API.USER_JOIN, addToList);
+
+function removeFromList(user)
+{
+	var userit = document.getElementById("pgx" + user.id);
+	userit.parentNode.removeChild(userit);
+}
+
+API.addEventListener(API.USER_LEAVE, removeFromList);
