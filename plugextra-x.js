@@ -211,7 +211,7 @@ function showUserList()
 		var userlist = document.getElementById("userlistx");
 		userlist.style.left = "0px";
 		userlist.style.opacity = "1";
-		userlist.style.boxShadow = "0px 0px 10px #000000";
+		userlist.style.boxShadow = "0px 0px 10px #000000, -1px 0px #000000 inset";
 		setTimeout(function() { dissmartcl = true; }, "500");
 	}
 }
@@ -224,13 +224,13 @@ userlist.style.backgroundImage = "url('http://poke-helper.bplaced.net/images/noi
 userlist.style.backgroundColor = "#070707";
 userlist.style.top = "0px";
 userlist.style.left = "0px";
-userlist.style.transition = "left 0.5s, box-shadow 0.5s, opacity 0.5s";
+userlist.style.transition = "left 0.5s, box-shadow 0.5s, opacity 0.3s";
 userlist.style.color = "#FFFFFF";
 userlist.style.zIndex = "9001";
 userlist.style.padding = "10px";
 userlist.style.overflowX = "hidden";
 userlist.style.overflowY = "auto";
-userlist.style.boxShadow = "0px 0px 10px #000000";
+userlist.style.boxShadow = "0px 0px 10px #000000, -1px 0px #000000 inset";
 userlist.style.borderRight = "1px solid transparent";
 userlist.onclick = function() { showUserList(); };
 
@@ -264,23 +264,27 @@ hidelistbut.onclick = function() { hideUserList(); };
 userlist.appendChild(hidelistbut);
 
 var staff = API.getStaff();
-var staffdiv = document.createElement("div");
+var stafflist = document.createElement("ul");
+stafflist.id = "stafflistx";
+stafflist.style.listDecoration = "none";
 
 for (var i in staff)
 {
-	var user = document.createElement("div");
+	var user = document.createElement("li");
 	user.id = staff[i].id;
 	user.style.width = "100%";
 	user.style.height = "1.5em";
 	user.style.color = "#D90066";
 	user.innerHTML = staff[i].username;
 	
-	staffdiv.appendChild(user);
+	stafflist.appendChild(user);
 }
 userlist.appendChild(staffdiv);
 
 var users = API.getUsers();
-var usersdiv = document.createElement("div");
+var usersul = document.createElement("ul");
+usersul.id = "usersulx";
+usersul.style.listDecoration = "none";
 
 for (var i in users)
 {
@@ -292,15 +296,65 @@ for (var i in users)
 	}
 	if (cont)
 	{
-		var user = document.createElement("div");
+		var user = document.createElement("li");
 		user.id = users[i].id;
 		user.style.width = "100%";
 		user.style.height = "1.5em";
 		user.innerHTML = users[i].username;
 	
-		usersdiv.appendChild(user);
+		usersul.appendChild(user);
 	}
 }
-userlist.appendChild(usersdiv);
+userlist.appendChild(usersul);
 
 document.body.appendChild(userlist);
+
+//	Realtime management
+
+function sortList(list)
+{
+	var templist = new Array;
+	for (var i in list.childNodes)
+	{
+		templist[i] = list.childNodes[i].innerHTML;
+	}
+	templist.sort();
+	for (var i in templist)
+	{
+		list.childNodes[i].innerHTML = templist[i];
+	}
+}
+
+function addToList(user)
+{
+	var isstaff = false;
+	
+	var userit = document.createElement("li");
+	userit.id = user.id;
+	userit.style.width = "100%";
+	userit.style.height = "1.5em";
+	userit.innerHTML = user.sername;
+	
+	var staff = API.getStaff();
+	for (var i in staff)
+	{
+		if (user.id == staff[i].id)
+			isstaff = true;
+	}
+	
+	if (isstaff)
+	{
+		userit.style.color = "#D90066";
+		var list = document.getElementById("stafflistx");
+		list.appendChild(userit);
+		sortList(list);
+	}
+	else
+	{
+		var list = document.getElementById("usersulx");
+		list.appendChild(userit);
+		sortList(list);
+	}
+}
+
+API.addEventListener(API.USER_JOIN, addToList);
