@@ -204,9 +204,9 @@ document.body.appendChild(expjoin);
 var userlist = document.createElement("div");
 
 userlist.id = "userlistx";
-userlist.position = "absolute";
-userlist.height = "100%";
-userlist.width = "150px";
-userlist.backgroundColor = "#000000";
+userlist.style.position = "absolute";
+userlist.style.height = "100%";
+userlist.style.width = "150px";
+userlist.style.backgroundColor = "#000000";
 
 document.body.appendChild(userlist);
