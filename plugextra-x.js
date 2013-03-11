@@ -208,5 +208,21 @@ userlist.style.position = "absolute";
 userlist.style.height = "100%";
 userlist.style.width = "150px";
 userlist.style.backgroundColor = "#000000";
+userlist.style.top = "0px";
+userlist.style.left = "0px";
+userlist.style.transition = "left 0.5s";
+userlist.style.color = "#FFFFFF";
+
+var users = API.getUsers();
+
+for (var i = 0; i < users.length; i++)
+{
+	var user = document.createElement("div");
+	user.style.width = "100%";
+	user.style.height = "1em";
+	user.innerHTML = users[i].username;
+	
+	userlist.appendChild(user);
+}
 
 document.body.appendChild(userlist);
