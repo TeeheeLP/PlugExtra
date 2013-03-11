@@ -1,7 +1,7 @@
 function startBot()
 {
 var scr = document.createElement("script");
-scr.src = ('https://raw.github.com/TeeheeLP/PlugExtra/dev/plugextra-x.js');
+scr.src = ('https://raw.github.com/TeeheeLP/PlugExtra/master/plugextra-x.js');
 document.body.appendChild(scr);
 }
 
