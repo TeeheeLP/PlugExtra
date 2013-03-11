@@ -203,6 +203,11 @@ document.body.appendChild(expjoin);
 
 var userlist = document.createElement("div");
 
+function toggleUserList()
+{
+	document.getElementById("userlistx").style.left = "-150px";
+}
+
 userlist.id = "userlistx";
 userlist.style.position = "absolute";
 userlist.style.height = "100%";
@@ -214,6 +219,10 @@ userlist.style.transition = "left 0.5s";
 userlist.style.color = "#FFFFFF";
 userlist.style.zIndex = "9001";
 userlist.style.padding = "5px";
+userlist.style.overflowX = "hidden";
+userlist.style.overflowY = "auto";
+userlist.style.boxShadow = "0px 0px 10px #000000";
+userlist.style.borderRight = "2px solid #FFFFFF";
 
 var users = API.getUsers();
 
