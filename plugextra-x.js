@@ -201,13 +201,15 @@ document.body.appendChild(expjoin);
 //	Userlist management
 //	-------------------
 
+var dissmartcl = true;
 var userlist = document.createElement("div");
 
 function showUserList()
 {
-	var userlist = document.getElementById("userlistx");
-	if (userlist.style.left == "-160px")
+	if (!dissmartcl)
 	{
+		var userlist = document.getElementById("userlistx");
+		dissmartcl = false;
 		userlist.style.left = "0px";
 		userlist.style.opacity = "1";
 		userlist.style.boxShadow = "0px 0px 10px #000000";
@@ -234,9 +236,9 @@ userlist.onclick = function() { showUserList(); };
 
 function hideUserList()
 {
-	var userlist = document.getElementById("userlistx");
-	if (userlist.style.left == "0px")
+	if (dissmartcl)
 	{
+		var userlist = document.getElementById("userlistx");
 		userlist.style.left = "-160px";
 		userlist.style.boxShadow = "0px 0px 0px #000000";
 		setTimeout(function() { userlist.style.opacity = "0"; }, "500");
@@ -254,6 +256,8 @@ hidelistbut.style.display = "block";
 hidelistbut.style.cursor = "pointer";
 hidelistbut.style.lineHeight = "2.5em";
 hidelistbut.style.marginBottom = "5px";
+hidelistbut.style.fontSize = "2em";
+hidelistbut.style.fontWeight = "bold";
 hidelistbut.innerHTML = "Hide";
 hidelistbut.onclick = function() { hideUserList(); };
 
