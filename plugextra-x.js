@@ -246,6 +246,9 @@ hidelistbut.style.borderRadius = "7px";
 hidelistbut.style.boxShadow = "0px 0px 4px #000000, -1px -1px 4px #333333";
 hidelistbut.style.width = "100%";
 hidelistbut.style.textAlign = "center";
+hidelistbut.style.height = "2.5em";
+hidelistbut.style.display = "block";
+hidelistbut.style.cursor = "pointer";
 hidelistbut.innerHTML = "Hide";
 hidelistbut.onclick = function() { hideUserList(); };
 
