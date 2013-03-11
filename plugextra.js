@@ -5,6 +5,21 @@ scr.src = ('https://raw.github.com/TeeheeLP/PlugExtra/dev/plugextra-x.js');
 document.body.appendChild(scr);
 }
 
+var dodrag = false;
+var oldcx;
+var oldcy;
+
+//	WIP
+
+function dragLog(e)
+{
+	var log = document.getElementById("log");
+	var but1 = document.getElementById("togg");
+	var but1 = document.getElementById("expwoot");
+	var but1 = document.getElementById("expjoin");
+	//var movex = e.clientX
+}
+
 var elem = document.createElement("p");
 elem.id = "log";
 elem.style.color = "lightgray";
@@ -24,6 +39,9 @@ elem.style.opacity = "0.8";
 //elem.style.boxShadow = "1px 1px 2px 1px #444444 inset";
 elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
 elem.style.right = "177px";
+elem.onclick = function() { dodrag = true; };
+elem.onmousemove = function () { dragLog(event); };
+elem.onmouseup = function() { dodrag = false; };
 document.body.appendChild(elem);
 
 var explog = document.createElement("div");
