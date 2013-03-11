@@ -212,6 +212,8 @@ userlist.style.top = "0px";
 userlist.style.left = "0px";
 userlist.style.transition = "left 0.5s";
 userlist.style.color = "#FFFFFF";
+userlist.style.zIndex = "90";
+userlist.style.padding = "5px";
 
 var users = API.getUsers();
 
@@ -219,7 +221,7 @@ for (var i = 0; i < users.length; i++)
 {
 	var user = document.createElement("div");
 	user.style.width = "100%";
-	user.style.height = "1em";
+	user.style.height = "1.2em";
 	user.innerHTML = users[i].username;
 	
 	userlist.appendChild(user);
