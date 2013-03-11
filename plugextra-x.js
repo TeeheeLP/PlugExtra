@@ -239,6 +239,7 @@ function hideUserList()
 	if (dissmartcl)
 	{
 		var userlist = document.getElementById("userlistx");
+		dissmartcl = true;
 		userlist.style.left = "-160px";
 		userlist.style.boxShadow = "0px 0px 0px #000000";
 		setTimeout(function() { userlist.style.opacity = "0"; }, "500");
@@ -254,9 +255,9 @@ hidelistbut.style.textAlign = "center";
 hidelistbut.style.height = "2.5em";
 hidelistbut.style.display = "block";
 hidelistbut.style.cursor = "pointer";
-hidelistbut.style.lineHeight = "2.5em";
+hidelistbut.style.lineHeight = "1.75em";
 hidelistbut.style.marginBottom = "5px";
-hidelistbut.style.fontSize = "2em";
+hidelistbut.style.fontSize = "1.5em";
 hidelistbut.style.fontWeight = "bold";
 hidelistbut.innerHTML = "Hide";
 hidelistbut.onclick = function() { hideUserList(); };
