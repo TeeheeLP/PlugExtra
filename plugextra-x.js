@@ -217,11 +217,12 @@ userlist.style.padding = "5px";
 
 var users = API.getUsers();
 
-for (var i = 0; i < users.length; i++)
+for (var i in users)
 {
 	var user = document.createElement("div");
+	user.id = users[i].id;
 	user.style.width = "100%";
-	user.style.height = "1.2em";
+	user.style.height = "1.5em";
 	user.innerHTML = users[i].username;
 	
 	userlist.appendChild(user);
