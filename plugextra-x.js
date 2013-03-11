@@ -264,6 +264,12 @@ hidelistbut.onclick = function() { hideUserList(); };
 
 userlist.appendChild(hidelistbut);
 
+var curusercount = document.createElement("div");
+curusercount.style.textAlign = "center";
+curusercount.innerHTML = API.getUsers().length + " users online";
+
+userlist.appendChild(curusercount);
+
 var staff = API.getStaff();
 var stafflist = document.createElement("ul");
 stafflist.id = "stafflistx";
