@@ -266,7 +266,7 @@ userlist.appendChild(hidelistbut);
 var staff = API.getStaff();
 var stafflist = document.createElement("ul");
 stafflist.id = "stafflistx";
-stafflist.style.listDecoration = "none";
+stafflist.style.listStyle = "none";
 
 for (var i in staff)
 {
@@ -284,7 +284,7 @@ userlist.appendChild(stafflist);
 var users = API.getUsers();
 var usersul = document.createElement("ul");
 usersul.id = "usersulx";
-usersul.style.listDecoration = "none";
+usersul.style.listStyle = "none";
 
 for (var i in users)
 {
