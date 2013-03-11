@@ -250,7 +250,7 @@ for (var i in users)
 	user.innerHTML = users[i].username;
 	for (var n in staff)
 	{
-		if (users[i].id == staff[i].id)
+		if (users[i].id == staff[n].id)
 		{
 			user.style.color = "#D90066";
 		}
