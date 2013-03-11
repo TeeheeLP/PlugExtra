@@ -359,7 +359,7 @@ function addToList(user)
 	var userit = document.createElement("li");
 	userit.id = "pgx" + user.id;
 	userit.style.width = "100%";
-	userit.style.height = "1.5em";
+	userit.style.marginTop = "5px";
 	userit.innerHTML = user.username;
 	
 	var staff = API.getStaff();
