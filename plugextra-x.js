@@ -205,7 +205,11 @@ var userlist = document.createElement("div");
 
 function toggleUserList()
 {
-	document.getElementById("userlistx").style.left = "-150px";
+	var userlist = document.getElementById("userlistx");
+	if (userlist.style.left = "0px")
+		userlist.style.left = "-160px";
+	else
+		userlist.style.left = "0px";
 }
 
 userlist.id = "userlistx";
