@@ -235,9 +235,12 @@ userlist.onclick = function() { showUserList(); };
 function hideUserList()
 {
 	var userlist = document.getElementById("userlistx");
-	userlist.style.left = "-160px";
-	userlist.style.boxShadow = "0px 0px 0px #000000";
-	setTimeout(function() { userlist.style.opacity = "0" }, "500");
+	if (userlist.style.left == "0px")
+	{
+		userlist.style.left = "-160px";
+		userlist.style.boxShadow = "0px 0px 0px #000000";
+		setTimeout(function() { userlist.style.opacity = "0" }, "500");
+	}
 }
 
 var hidelistbut = document.createElement("div");
