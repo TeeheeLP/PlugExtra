@@ -333,7 +333,7 @@ function addToList(user)
 	userit.id = user.id;
 	userit.style.width = "100%";
 	userit.style.height = "1.5em";
-	userit.innerHTML = user.sername;
+	userit.innerHTML = user.username;
 	
 	var staff = API.getStaff();
 	for (var i in staff)
