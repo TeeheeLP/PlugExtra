@@ -239,19 +239,20 @@ function hideUserList()
 	{
 		userlist.style.left = "-160px";
 		userlist.style.boxShadow = "0px 0px 0px #000000";
-		//setTimeout(function() { userlist.style.opacity = "0" }, "500");
+		setTimeout(function() { userlist.style.opacity = "0"; }, "500");
 	}
 }
 
 var hidelistbut = document.createElement("div");
-hidelistbut.style.backgroundColor = "#070707";
+hidelistbut.style.backgroundColor = "#666666";
 hidelistbut.style.borderRadius = "7px";
-hidelistbut.style.boxShadow = "0px 0px 4px #000000, -1px -1px 4px #333333";
+hidelistbut.style.boxShadow = "0px 0px 4px #000000, -1px -1px 15px #333333";
 hidelistbut.style.width = "100%";
 hidelistbut.style.textAlign = "center";
 hidelistbut.style.height = "2.5em";
 hidelistbut.style.display = "block";
 hidelistbut.style.cursor = "pointer";
+hidelistbut.style.lineHeight = "2.5em";
 hidelistbut.innerHTML = "Hide";
 hidelistbut.onclick = function() { hideUserList(); };
 
