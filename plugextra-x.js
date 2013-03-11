@@ -226,7 +226,7 @@ userlist.style.padding = "5px";
 userlist.style.overflowX = "hidden";
 userlist.style.overflowY = "auto";
 userlist.style.boxShadow = "0px 0px 10px #000000";
-userlist.style.borderRight = "2px solid #FFFFFF";
+userlist.style.borderRight = "1px solid transparent";
 userlist.onclick = function() { toggleUserList(); };
 
 var users = API.getUsers();
