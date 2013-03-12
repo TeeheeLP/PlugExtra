@@ -31,6 +31,7 @@ function dragLog(e)
 			
 			//log.style.right = (parseFloat(log.style.right) + movex) + "px";
 			log.style.top = (parseInt(log.style.top) + movey) + "px";
+			log.style.right = (parseInt(log.style.right) + movex) + "px";
 		}
 	}
 }
