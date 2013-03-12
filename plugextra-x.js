@@ -6,7 +6,7 @@ var willprintmsg = false;
 var awaymsg = "I'm away";
 var oldwaitlist = API.getWaitList();
 
-function checkWaitlist(users)
+function checkWaitList(users)
 {
 	var newwaitlist = API.getWaitList();
 	for (i in oldwaitlist)
@@ -33,9 +33,10 @@ function checkWaitlist(users)
 				+ i + "</span>.<br>";
 		}
 	}
+	oldwaitlist = API.getWaitList();
 }
 
-API.addEventListener(API.WAIT_LIST_UPDATE, checkWaitlist);
+API.addEventListener(API.WAIT_LIST_UPDATE, checkWaitList);
 
 function joinList() 
 { 
