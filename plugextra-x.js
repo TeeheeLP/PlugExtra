@@ -2,6 +2,7 @@ var playcount = 1;
 var autowoot = false;
 var autojoin = false;
 var isaway = false;
+var willprintmsg = false;
 var awaymsg = "I'm away";
 
 function joinList() 
@@ -289,12 +290,14 @@ function awayBot()
 			awaymsg = awaymsgin.value;
 		else awaymsg = "I'm away";
 		isaway = true;
+		willprintmsg = true;
 		document.getElementById("awaybutx").innerHTML = "Back";
 		document.getElementById("dialog-menu-userstatus").value = 1;
 	}
 	else
 	{
 		isaway = false;
+		willprintmsg = false;
 		document.getElementById("awaybutx").innerHTML = "Away";
 		document.getElementById("dialog-menu-userstatus").value = 0;
 	}
@@ -487,11 +490,13 @@ API.addEventListener(API.USER_LEAVE, removeFromList);*/
 
 function checkMessage(data)
 {
-	if (isaway)
+	if (isaway && willprintmsg)
 	{
 		if (data.message.search("@" + API.getSelf().username) != -1)
 		{
 			API.sendChat(awaymsg);
+			willprintmsg = false;
+			setTimeout(function() { willprintmsg = true; }, "30000");
 		}
 	}
 }
