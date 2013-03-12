@@ -453,7 +453,7 @@ function checkMessage(data)
 {
 	if (isaway)
 	{
-		if (data.message.search("@" + API.getSelf().username))
+		if (data.message.search("@" + API.getSelf().username) != -1)
 		{
 			API.sendChat(awaymsg);
 		}
