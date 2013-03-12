@@ -11,8 +11,10 @@ var oldcy;
 
 function dragLog(e)
 {
+	var log = document.getElementById("log");
 	if (dodrag)
 	{
+		window.getSelection().removeAllRanges();
 		if (oldcx == "" || oldcx == null)
 		{
 			oldcx = e.clientX;
@@ -20,7 +22,6 @@ function dragLog(e)
 		}
 		else
 		{
-			var log = document.getElementById("log");
 			var but1 = document.getElementById("togg");
 			var but2 = document.getElementById("expwoot");
 			var but3 = document.getElementById("expjoin");
