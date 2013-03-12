@@ -289,11 +289,13 @@ function awayBot()
 		else awaymsg = "I'm away";
 		isaway = true;
 		document.getElementById("awaybutx").innerHTML = "Back";
+		document.getElementById("dialog-menu-userstatus").value = 1;
 	}
 	else
 	{
 		isaway = false;
 		document.getElementById("awaybutx").innerHTML = "Away";
+		document.getElementById("dialog-menu-userstatus").value = 0;
 	}
 }
 
