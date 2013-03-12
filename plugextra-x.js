@@ -346,7 +346,7 @@ function refreshUserlist()
 {
 	var staff = API.getStaff();
 	var stafflist = document.getElementById("stafflistx");
-	stafflist.childNodes = null;
+	stafflist.innerHTML = "";
 	for (var i in staff)
 	{
 		var user = document.createElement("li");
@@ -363,7 +363,7 @@ function refreshUserlist()
 	
 	var users = API.getUsers();
 	var usersul = document.getElementById("usersulx");
-	usersul.childNodes = null;
+	usersul.innerHTML = "";
 	for (var i in users)
 	{
 		var cont = true;
