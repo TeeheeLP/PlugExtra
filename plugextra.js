@@ -11,7 +11,7 @@ var oldcy;
 
 function dragLog(e)
 {
-	if (dodrag)
+	if (!dodrag)
 	{
 		if (oldcx == "" || oldcx == null)
 		{
