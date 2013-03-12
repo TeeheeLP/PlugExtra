@@ -33,7 +33,7 @@ function dragLog(e)
 			//log.style.right = (parseFloat(log.style.right) + movex) + "px";
 			log.style.top = (parseInt(log.style.top) + movey) + "px";
 			log.style.right = (parseInt(log.style.right) - movex) + "px";
-			log.style.zIndex = "13";
+			log.style.zIndex = "15";
 			but1.style.top = (parseInt(but1.style.top) + movey) + "px";
 			but1.style.left = (parseInt(but1.style.left) + movex) + "px";
 			but2.style.top = (parseInt(but2.style.top) + movey) + "px";
@@ -133,7 +133,7 @@ explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 2px white";
 explog.style.height = "25px";
 explog.style.lineHeight = "25px";
 explog.style.margin = "auto";
-explog.style.zIndex = "13";
+explog.style.zIndex = "15";
 explog.style.textAlign = "center";
 explog.style.left = "225px";
 explog.style.cursor = "pointer";
