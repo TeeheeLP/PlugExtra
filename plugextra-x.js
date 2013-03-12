@@ -214,7 +214,7 @@ function showUserList()
 		userlist.style.left = "0px";
 		userlist.style.opacity = "1";
 		userlist.style.boxShadow = "0px 0px 10px #000000, -1px 0px #000000 inset";
-		setTimeout(function() { dissmartcl = true; userlist.style.overflowY = "auto"; }, "500");
+		setTimeout(function() { dissmartcl = true; userlist.style.overflowY = "scroll"; }, "500");
 	}
 }
 
@@ -231,7 +231,7 @@ userlist.style.color = "#FFFFFF";
 userlist.style.zIndex = "9001";
 userlist.style.padding = "10px";
 userlist.style.overflowX = "hidden";
-userlist.style.overflowY = "auto";
+userlist.style.overflowY = "scroll";
 userlist.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
 userlist.style.borderRight = "1px solid transparent";
 userlist.onclick = function() { showUserList(); };
@@ -243,8 +243,7 @@ function hideUserList()
 		var userlist = document.getElementById("userlistx");
 		userlist.style.left = "-160px";
 		userlist.style.boxShadow = "0px 0px 0px #000000";
-		userlist.style.overflowY = "hidden";
-		setTimeout(function() { userlist.style.opacity = "0"; dissmartcl = false; }, "500");
+		setTimeout(function() { userlist.style.opacity = "0"; dissmartcl = false; userlist.style.overflowY = "hidden"; }, "500");
 	}
 }
 
@@ -270,13 +269,11 @@ var awaymsgin = document.createElement("input");
 awaymsgin.id = "awaymsginx";
 awaymsgin.style.height = "1em";
 awaymsgin.style.marginBottom = "5px";
-awaymsgin.style.width = "100%";
-awaymsgin.style.left = "-1.5%";
+awaymsgin.style.width = "129px";
 awaymsgin.style.borderRadius = "5px";
 awaymsgin.style.boxShadow = "1px 1px 3px #000000 inset";
 awaymsgin.style.border = "2px solid #FFFFFF";
 awaymsgin.style.backgroundColor = "#FFFFFF";
-awaymsgin.style.position = "relative";
 
 userlist.appendChild(awaymsgin);
 
