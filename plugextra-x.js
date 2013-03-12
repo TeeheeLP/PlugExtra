@@ -254,17 +254,22 @@ hidelistbut.style.borderRadius = "7px";
 hidelistbut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
 hidelistbut.style.width = "100%";
 hidelistbut.style.textAlign = "center";
-hidelistbut.style.height = "1.75em";
+hidelistbut.style.height = "1.5em";
 hidelistbut.style.display = "block";
 hidelistbut.style.cursor = "pointer";
-hidelistbut.style.lineHeight = "1.75em";
+hidelistbut.style.lineHeight = "1.5em";
 hidelistbut.style.marginBottom = "5px";
-hidelistbut.style.fontSize = "1.5em";
+hidelistbut.style.fontSize = "1.2em";
 hidelistbut.style.fontWeight = "bold";
 hidelistbut.innerHTML = "Hide";
 hidelistbut.onclick = function() { hideUserList(); };
 
 userlist.appendChild(hidelistbut);
+
+var awaymsgin = document.createElement("input");
+awaymsgin.style.height = "1.5em";
+
+userlist.appendChild(awaymsgin);
 
 function awayBot()
 {
@@ -288,12 +293,12 @@ awaybut.style.borderRadius = "7px";
 awaybut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
 awaybut.style.width = "100%";
 awaybut.style.textAlign = "center";
-awaybut.style.height = "1.75em";
+awaybut.style.height = "1.5em";
 awaybut.style.display = "block";
 awaybut.style.cursor = "pointer";
-awaybut.style.lineHeight = "1.75em";
+awaybut.style.lineHeight = "1.5em";
 awaybut.style.marginBottom = "5px";
-awaybut.style.fontSize = "1.5em";
+awaybut.style.fontSize = "1.2em";
 awaybut.style.fontWeight = "bold";
 awaybut.innerHTML = "Away";
 awaybut.onclick = function() { awayBot(); };
