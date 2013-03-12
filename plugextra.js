@@ -12,7 +12,7 @@ var oldcy;
 function dragLog(e)
 {
 	var log = document.getElementById("log");
-	if (dodrag && e.clientY < parseInt(log.style.top) + 5)
+	if (dodrag && e.clientY < parseInt(log.style.top) + 15)
 	{
 		window.getSelection().removeAllRanges();
 		if (oldcx == "" || oldcx == null)
