@@ -270,10 +270,13 @@ var awaymsgin = document.createElement("input");
 awaymsgin.id = "awaymsginx";
 awaymsgin.style.height = "1em";
 awaymsgin.style.marginBottom = "5px";
-awaymsgin.style.width = "129px";
+awaymsgin.style.width = "100%";
+awaymsgin.style.left = "-1.5%";
 awaymsgin.style.borderRadius = "5px";
 awaymsgin.style.boxShadow = "1px 1px 3px #000000 inset";
 awaymsgin.style.border = "2px solid #FFFFFF";
+awaymsgin.style.backgroundColor = "#FFFFFF";
+awaymsgin.style.position = "relative;"
 
 userlist.appendChild(awaymsgin);
 
