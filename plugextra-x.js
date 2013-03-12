@@ -97,10 +97,10 @@ function toggleFeedback(track)
 	{ 
 		trackfeed.style.transition = "max-height 0.25s, opacity 0.25s ease 0.25s"; 
 		var log = document.getElementById("log"); 
-		var doscroll = log.scrollTop == log.scrollHeight - log.offsetHeight; 
+		//var doscroll = log.scrollTop == log.scrollHeight - log.offsetHeight; 
 		trackfeed.style.maxHeight = "1000px"; 
 		trackfeed.style.opacity = "1"; 
-		if (doscroll) log.scrollTop = log.scrollHeight; 
+		log.scrollTop = log.scrollHeight; 
 		prevtrack.style.textDecoration = "underline"; 
 	} 
 } 
@@ -328,7 +328,7 @@ function mentionUser(id)
 	for (i in users)
 	{
 		if (users[i].id == id)
-			document.getElementById("chat-input-field").innerHTML += "@" + users[i].username;
+			document.getElementById("chat-input-field").value += "@" + users[i].username;
 	}
 }
 
