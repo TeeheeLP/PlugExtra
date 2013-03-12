@@ -30,7 +30,6 @@ function dragLog(e)
 			oldcx = e.clientX;
 			oldcy = e.clientY;
 			
-			//log.style.right = (parseFloat(log.style.right) + movex) + "px";
 			log.style.top = (parseInt(log.style.top) + movey) + "px";
 			log.style.right = (parseInt(log.style.right) - movex) + "px";
 			log.style.zIndex = "15";
