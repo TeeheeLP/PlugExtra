@@ -30,7 +30,7 @@ function dragLog(e)
 			oldcy = e.clientY;
 			
 			//log.style.right = (parseFloat(log.style.right) + movex) + "px";
-			log.innerHTML = (parseInt(log.style.top) + movey) + "px" + e.clientY + "#" + log.style.top + "#" + movey;
+			log.style.top = (parseInt(log.style.top) + movey) + "px";
 		}
 	}
 }
