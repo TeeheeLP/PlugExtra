@@ -9,7 +9,7 @@ var dodrag = false;
 var oldcx;
 var oldcy;
 
-function startDrag()
+function startDrag(e)
 {
 	dodrag = true;
 }
