@@ -267,7 +267,11 @@ hidelistbut.onclick = function() { hideUserList(); };
 userlist.appendChild(hidelistbut);
 
 var awaymsgin = document.createElement("input");
-awaymsgin.style.height = "1.5em";
+awaymsgin.style.height = "1em";
+awaymsgin.style.marginBottom = "5px";
+awaymsgin.style.width = "129px";
+awaymsgin.style.borderRadius = "5px";
+awaymsgin.style.boxShadow = "1px 1px 3px #000000";
 
 userlist.appendChild(awaymsgin);
 
