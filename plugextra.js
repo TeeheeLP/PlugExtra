@@ -11,13 +11,13 @@ var oldcy;
 
 function startDrag(e)
 {
-	dodrag = true;
+	if (e.clientY < parseInt(log.style.top) + 15) dodrag = true;
 }
 
 function dragLog(e)
 {
 	var log = document.getElementById("log");
-	if (dodrag && e.clientY < parseInt(log.style.top) + 15)
+	if (dodrag)
 	{
 		window.getSelection().removeAllRanges();
 		if (oldcx == "" || oldcx == null)
