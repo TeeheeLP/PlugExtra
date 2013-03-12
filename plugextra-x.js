@@ -396,9 +396,9 @@ usersul.style.margin = "0px";
 
 userlist.appendChild(usersul);
 
-refreshUserlist();
-
 document.body.appendChild(userlist);
+
+refreshUserlist();
 
 //	Realtime management
 
