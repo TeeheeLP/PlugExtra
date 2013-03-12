@@ -4,6 +4,75 @@ var autojoin = false;
 var isaway = false;
 var willprintmsg = false;
 var awaymsg = "I'm away";
+var oldwaitlist = API.getWaitList();
+var olddjbooth = API.getDJs();
+
+function checkWaitList(users)
+{
+	var newwaitlist = API.getWaitList();
+	for (i in oldwaitlist)
+	{
+		var notinlist = true;
+		for (n in newwaitlist)
+		{
+			if (oldwaitlist[i].id == newwaitlist[n].id)
+				notinlist = false;
+		}
+		if (notinlist)
+		{
+			var djs = API.getDJs();
+			for (n in djs)
+			{
+				if (oldwaitlist[i].id == djs[n].id)
+					notinlist = false;
+			}
+		}
+		if (notinlist)
+		{
+			document.getElementById("trackfeed" + playcount).innerHTML += "<span style='color:white'>"
+				+ oldwaitlist[i].username + "</span> <span style='color:#AA44FF'>left</span> the waitlist at place <span style='color:#AA44FF'>"
+				+ (parseInt(i) + 1) + "</span>.<br>";
+		}
+	}
+	oldwaitlist = API.getWaitList();
+}
+
+API.addEventListener(API.WAIT_LIST_UPDATE, checkWaitList);
+
+function checkDJBooth()
+{
+	var newdjbooth = API.getDJs();
+	for (i in olddjbooth)
+	{
+		var notinlist = true;
+		if (i > 0)
+		{
+			for (n in newdjbooth)
+			{
+				if (olddjbooth[i].id == newdjbooth[n].id)
+					notinlist = false;
+			}
+			if (notinlist)
+			{
+				var djs = API.getDJs();
+				for (n in djs)
+				{
+					if (olddjbooth[i].id == djs[n].id)
+						notinlist = false;
+				}
+			}
+		}
+		if (notinlist)
+		{
+			document.getElementById("trackfeed" + playcount).innerHTML += "<span style='color:white'>"
+				+ olddjbooth[i].username + "</span> <span style='color:#FF00BD'>left</span> the dj booth at place <span style='color:#FF00BD'>"
+				+ (parseInt(i) + 1) + "</span>.<br>";
+		}
+	}
+	olddjbooth = API.getDJs();
+}
+
+API.addEventListener(API.DJ_UPDATE, checkDJBooth);
 
 function joinList() 
 { 
@@ -44,7 +113,7 @@ function callback(obj)
 	log.innerHTML += "<div id='track" + playcount + "' style='text-decoration:underline;display:inline;' onclick='toggleFeedback(" + playcount 
 		+ ")'>Track: <span style='color:white'>" + playcount + "</span> - <span style='color:white'>" + obj.dj.username 
 		+ "</span> is playing <span style='color:white;font-weight:bold;'>" + obj.media.title 
-		+ "</span> by <span style='color:white'>" + obj.media.author + "</span>.</div><div id=\'trackfeed" + playcount 
+		+ "</span> by <span style='color:white'>" + obj.media.author + "</span>.</div><div id='trackfeed" + playcount 
 		+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
 	log.scrollTop = log.scrollHeight; 
 } 
