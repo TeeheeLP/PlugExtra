@@ -22,8 +22,8 @@ function dragLog(e)
 		{
 			var log = document.getElementById("log");
 			var but1 = document.getElementById("togg");
-			var but1 = document.getElementById("expwoot");
-			var but1 = document.getElementById("expjoin");
+			var but2 = document.getElementById("expwoot");
+			var but3 = document.getElementById("expjoin");
 			var movex = e.clientX - oldcx;
 			var movey = e.clientY - oldcy;
 			oldcx = e.clientX;
@@ -31,7 +31,13 @@ function dragLog(e)
 			
 			//log.style.right = (parseFloat(log.style.right) + movex) + "px";
 			log.style.top = (parseInt(log.style.top) + movey) + "px";
-			log.style.right = (parseInt(log.style.right) + movex) + "px";
+			log.style.right = (parseInt(log.style.right) - movex) + "px";
+			but1.style.top = (parseInt(but1.style.top) + movey) + "px";
+			but1.style.left = (parseInt(but1.style.left) + movex) + "px";
+			but2.style.top = (parseInt(but2.style.top) + movey) + "px";
+			but2.style.left = (parseInt(but2.style.left) + movex) + "px";
+			but3.style.top = (parseInt(but3.style.top) + movey) + "px";
+			but3.style.left = (parseInt(but3.style.left) + movex) + "px";
 		}
 	}
 }
