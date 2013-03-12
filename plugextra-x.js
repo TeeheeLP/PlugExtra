@@ -29,7 +29,7 @@ function checkWaitList(users)
 		if (notinlist)
 		{
 			document.getElementById("trackfeed" + playcount).innerHTML += "<span style='color:white'>"
-			+ oldwaitlist[i].username + "</span> <span style='color:blue'>left</span> the waitlist at place <span style='color:blue'>
+			+ oldwaitlist[i].username + "</span> <span style='color:blue'>left</span> the waitlist at place <span style='color:blue'>"
 			+ i + "</span>.<br>";
 		}
 	}
