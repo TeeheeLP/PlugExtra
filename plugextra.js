@@ -5,14 +5,10 @@ scr.src = ('https://raw.github.com/TeeheeLP/PlugExtra/dev/plugextra-x.js');
 document.body.appendChild(scr);
 }
 
+var isclicked = false;
 var dodrag = false;
 var oldcx;
 var oldcy;
-
-function startDrag(e)
-{
-	document.body.innerHTML = e.clientY;
-}
 
 function dragLog(e)
 {
@@ -91,7 +87,7 @@ elem.style.opacity = "0.8";
 //elem.style.boxShadow = "1px 1px 2px 1px #444444 inset";
 elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
 elem.style.right = "177px";
-elem.setAttribute("onmousedown", "startDrag();");
+elem.setAttribute("onclick", "dodrag = true;");
 elem.setAttribute("ondblclick", "resetLayout();");
 elem.setAttribute("onmousemove", "dragLog(event);");
 elem.setAttribute("onmouseup", "stopDrag();");
