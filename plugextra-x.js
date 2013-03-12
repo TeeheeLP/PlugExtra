@@ -328,7 +328,7 @@ function mentionUser(id)
 	for (i in users)
 	{
 		if (users[i].id == id)
-			document.getElementById("chat-input-field") += "@" + users[i].username;
+			document.getElementById("chat-input-field").innerHTML += "@" + users[i].username;
 	}
 }
 
