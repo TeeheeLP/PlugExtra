@@ -67,7 +67,8 @@ function resetLayout()
 
 function stopDrag()
 {
-	dodrag = false; 
+	isclicked = false;
+	dodrag = false;
 	oldcx = ''; 
 	oldcy = ''; 
 }
