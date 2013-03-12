@@ -49,7 +49,7 @@ function resetLayout()
 	var log = document.getElementById("log");
 	log.style.top = "288px";
 	log.style.right = "177px";
-	log.style.zIndex = "13";
+	log.style.zIndex = "8";
 	var but1 = document.getElementById("togg");
 	but1.style.top = "280px";
 	but1.style.left = "225px";
