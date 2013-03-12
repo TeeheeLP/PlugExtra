@@ -385,6 +385,7 @@ function refreshUserlist()
 			usersul.appendChild(user);
 		}
 	}
+	document.getElementById("cusercount").innerHTML = API.getUsers().length + " users online";
 }
 userlist.appendChild(stafflist);
 
