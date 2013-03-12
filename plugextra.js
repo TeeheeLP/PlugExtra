@@ -11,7 +11,7 @@ var oldcy;
 
 function dragLog(e)
 {
-	if (!dodrag)
+	if (dodrag)
 	{
 		if (oldcx == "" || oldcx == null)
 		{
@@ -29,6 +29,8 @@ function dragLog(e)
 			
 			log.style.left = (parseFloat(log.style.left) + movex) + "px";
 			log.style.top = (parseFloat(log.style.top) + movey) + "px";
+			oldcx = e.clientX;
+			oldcx = e.clientY;
 		}
 	}
 }
