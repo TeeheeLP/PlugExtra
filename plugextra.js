@@ -59,6 +59,13 @@ function resetLayout()
 	but3.style.left = "171px";
 }
 
+function stopDrag()
+{
+	dodrag = false; 
+	oldcx = ''; 
+	oldcy = ''; 
+}
+
 var elem = document.createElement("p");
 elem.id = "log";
 elem.style.color = "lightgray";
@@ -81,7 +88,7 @@ elem.style.right = "177px";
 elem.setAttribute("onmousedown", "dodrag = true;");
 elem.setAttribute("ondblclick", "resetLayout();");
 elem.setAttribute("onmousemove", "dragLog(event);");
-elem.setAttribute("onmouseup", "function() { dodrag = false; oldcx = ''; oldcy = ''; }");
+elem.setAttribute("onmouseup", "stopDrag();");
 document.body.appendChild(elem);
 
 var explog = document.createElement("div");
