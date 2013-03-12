@@ -27,7 +27,7 @@ function dragLog(e)
 			var movex = e.clientX - oldcx;
 			var movey = e.clientY - oldcy;
 			
-			log.style.right = (parseFloat(log.style.right) + movex) + "px";
+			//log.style.right = (parseFloat(log.style.right) + movex) + "px";
 			log.style.top = (parseFloat(log.style.top) + movey) + "px";
 			oldcx = e.clientX;
 			oldcx = e.clientY;
