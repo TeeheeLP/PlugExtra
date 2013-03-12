@@ -418,7 +418,7 @@ function sortList(list)
 	{
 		list.childNodes[i].innerHTML = templist[i].split("|")[0];
 		list.childNodes[i].id = templist[i].split("|")[1];
-		list.childNodes[i].setAttribute("onclick", "mentionUser('" + templist[i].split("|")[1].slice(3, templist[i].length + "');");
+		list.childNodes[i].setAttribute("onclick", "mentionUser('" + templist[i].split("|")[1].slice(3, templist[i].split("|")[1].length) + "');");
 	}
 }
 
