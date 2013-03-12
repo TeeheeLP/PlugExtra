@@ -54,7 +54,7 @@ elem.style.opacity = "0.8";
 //elem.style.boxShadow = "1px 1px 2px 1px #444444 inset";
 elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
 elem.style.right = "177px";
-elem.onclick = function() { dodrag = true; };
+elem.onmousedown = function() { dodrag = true; };
 elem.onmousemove = function () { dragLog(event); };
 elem.onmouseup = function() { dodrag = false; };
 document.body.appendChild(elem);
