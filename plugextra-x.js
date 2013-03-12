@@ -336,25 +336,54 @@ function mentionUser(id)
 
 userlist.appendChild(curusercount);
 
-var staff = API.getStaff();
 var stafflist = document.createElement("ul");
 stafflist.id = "stafflistx";
 stafflist.style.listStyle = "none";
 stafflist.style.padding = "0px";
 stafflist.style.margin = "0px";
 
-for (var i in staff)
+function refreshUserlist()
 {
-	var user = document.createElement("li");
-	user.id = "pgx" + staff[i].id;
-	user.style.width = "100%";
-	user.style.marginTop = "5px";
-	user.style.color = "#D90066";
-	user.style.cursor = "pointer";
-	user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
-	user.innerHTML = staff[i].username;
+	var staff = API.getStaff();
+	var stafflist = document.getElementById("stafflistx");
+	stafflist.childNodes = null;
+	for (var i in staff)
+	{
+		var user = document.createElement("li");
+		user.id = "pgx" + staff[i].id;
+		user.style.width = "100%";
+		user.style.marginTop = "5px";
+		user.style.color = "#D90066";
+		user.style.cursor = "pointer";
+		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
+		user.innerHTML = staff[i].username;
+		
+		stafflist.appendChild(user);
+	}
 	
-	stafflist.appendChild(user);
+	var users = API.getUsers();
+	var usersul = document.getElementById("usersulx");
+	for (var i in users)
+	{
+		var cont = true;
+		for (var n in staff)
+		{
+			if (users[i].id == staff[n].id)
+				cont = false;
+		}
+		if (cont)
+		{
+			var user = document.createElement("li");
+			user.id = "pgx" + users[i].id;
+			user.style.width = "100%";
+			user.style.marginTop = "5px";
+			user.style.cursor = "pointer";
+			user.setAttribute("onclick", "mentionUser('" + users[i].id + "');");
+			user.innerHTML = users[i].username;
+		
+			usersul.appendChild(user);
+		}
+	}
 }
 userlist.appendChild(stafflist);
 
@@ -365,34 +394,15 @@ usersul.style.listStyle = "none";
 usersul.style.padding = "0px";
 usersul.style.margin = "0px";
 
-for (var i in users)
-{
-	var cont = true;
-	for (var n in staff)
-	{
-		if (users[i].id == staff[n].id)
-			cont = false;
-	}
-	if (cont)
-	{
-		var user = document.createElement("li");
-		user.id = "pgx" + users[i].id;
-		user.style.width = "100%";
-		user.style.marginTop = "5px";
-		user.style.cursor = "pointer";
-		user.setAttribute("onclick", "mentionUser('" + users[i].id + "');");
-		user.innerHTML = users[i].username;
-	
-		usersul.appendChild(user);
-	}
-}
 userlist.appendChild(usersul);
+
+refreshUserlist();
 
 document.body.appendChild(userlist);
 
 //	Realtime management
 
-function sortList(list)
+/*function sortList(list)
 {
 	var templist = new Array;
 	for (var i in list.childNodes)
@@ -466,7 +476,7 @@ function removeFromList(user)
 	document.getElementById("cusercount").innerHTML = API.getUsers().length + " users online";
 }
 
-API.addEventListener(API.USER_LEAVE, removeFromList);
+API.addEventListener(API.USER_LEAVE, removeFromList);*/
 
 //	---------------
 //	Chat management
