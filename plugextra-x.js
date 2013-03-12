@@ -363,6 +363,7 @@ function refreshUserlist()
 	
 	var users = API.getUsers();
 	var usersul = document.getElementById("usersulx");
+	usersul.childNodes = null;
 	for (var i in users)
 	{
 		var cont = true;
@@ -399,6 +400,7 @@ userlist.appendChild(usersul);
 document.body.appendChild(userlist);
 
 refreshUserlist();
+setInterval(function() { refreshUserlist(); }, "15000");
 
 //	Realtime management
 
