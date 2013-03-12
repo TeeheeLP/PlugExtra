@@ -2,7 +2,7 @@ var playcount = 1;
 var autowoot = false;
 var autojoin = false;
 var isaway = false;
-var awaymsg = "";
+var awaymsg = "I'm away";
 
 function joinList() 
 { 
@@ -283,7 +283,7 @@ function awayBot()
 {
 	if (!isaway)
 	{
-		awaymsg = "";
+		awaymsg = document.getElementById("awaymsginx").value;
 		isaway = true;
 		document.getElementById("awaybutx").innerHTML = "Back";
 	}
@@ -444,3 +444,20 @@ function removeFromList(user)
 }
 
 API.addEventListener(API.USER_LEAVE, removeFromList);
+
+//	---------------
+//	Chat management
+//	---------------
+
+function checkMessage(data)
+{
+	if (isaway)
+	{
+		if (data.message.search("@" + API.getSelf().username))
+		{
+			API.sendChat(awaymsg);
+		}
+	}
+}
+
+API.addEventListener(API.CHAT, checkMessage);
