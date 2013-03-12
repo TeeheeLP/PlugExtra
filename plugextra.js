@@ -13,7 +13,11 @@ var oldcy;
 function dragLog(e)
 {
 	var log = document.getElementById("log");
-	if (dodrag)
+	if (isclicked)
+	{
+		if (e.clientY > parseInt(log.style.top) + 5) dodrag = true;
+	}
+	else if (dodrag)
 	{
 		window.getSelection().removeAllRanges();
 		if (oldcx == "" || oldcx == null)
@@ -87,7 +91,7 @@ elem.style.opacity = "0.8";
 //elem.style.boxShadow = "1px 1px 2px 1px #444444 inset";
 elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
 elem.style.right = "177px";
-elem.setAttribute("onclick", "dodrag = true;");
+elem.setAttribute("onmousedown", "isclicked = true;");
 elem.setAttribute("ondblclick", "resetLayout();");
 elem.setAttribute("onmousemove", "dragLog(event);");
 elem.setAttribute("onmouseup", "stopDrag();");
