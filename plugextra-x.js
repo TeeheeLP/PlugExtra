@@ -264,6 +264,40 @@ hidelistbut.onclick = function() { hideUserList(); };
 
 userlist.appendChild(hidelistbut);
 
+function awayBot()
+{
+	if (!isaway)
+	{
+		awaymsg = "";
+		isaway = true;
+		document.getElementById("awaybutx").innerHTML = "Back";
+	}
+	else
+	{
+		isaway = false;
+		document.getElementById("awaybutx").innerHTML = "Away";
+	}
+}
+
+var awaybut = document.createElement("div");
+awaybut.id = "awaybutx";
+awaybut.style.backgroundColor = "#333333";
+awaybut.style.borderRadius = "7px";
+awaybut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
+awaybut.style.width = "100%";
+awaybut.style.textAlign = "center";
+awaybut.style.height = "1.75em";
+awaybut.style.display = "block";
+awaybut.style.cursor = "pointer";
+awaybut.style.lineHeight = "1.75em";
+awaybut.style.marginBottom = "5px";
+awaybut.style.fontSize = "1.5em";
+awaybut.style.fontWeight = "bold";
+awaybut.innerHTML = "Away";
+awaybut.onclick = function() { awayBot(); };
+
+userlist.appendChild(awaybut);
+
 var curusercount = document.createElement("div");
 curusercount.id = "cusercount";
 curusercount.style.textAlign = "center";
