@@ -4,6 +4,38 @@ var autojoin = false;
 var isaway = false;
 var willprintmsg = false;
 var awaymsg = "I'm away";
+var oldwaitlist = API.getWaitList();
+
+function checkWaitList(users)
+{
+	var newwaitlist = API.getWaitList();
+	for (i in oldwaitlist)
+	{
+		var notinlist = true;
+		for (n in newwaitlist)
+		{
+			if (oldwaitlist[i].id == newwaitlist[n].id)
+				notinlist = false;
+		}
+		if (notinlist)
+		{
+			var djs = API.getDJs();
+			for (n in djs)
+			{
+				if (oldwaitlist[i].id == djs[n].id)
+					notinlist = false;
+			}
+		}
+		if (notinlist)
+		{
+			document.getElementById("trackfeed" + playcount).innerHTML += "<span style='color:white'>"
+			+ oldwaitlist[i].username + "</span> <span style='color:blue'>left</span> the waitlist at place <span style='color:blue'>
+			+ i + "</span>.<br>";
+		}
+	}
+}
+
+API.addEventListener(API.WAIT_LIST_UPDATE, checkWaitlist);
 
 function joinList() 
 { 
@@ -44,7 +76,7 @@ function callback(obj)
 	log.innerHTML += "<div id='track" + playcount + "' style='text-decoration:underline;display:inline;' onclick='toggleFeedback(" + playcount 
 		+ ")'>Track: <span style='color:white'>" + playcount + "</span> - <span style='color:white'>" + obj.dj.username 
 		+ "</span> is playing <span style='color:white;font-weight:bold;'>" + obj.media.title 
-		+ "</span> by <span style='color:white'>" + obj.media.author + "</span>.</div><div id=\'trackfeed" + playcount 
+		+ "</span> by <span style='color:white'>" + obj.media.author + "</span>.</div><div id='trackfeed" + playcount 
 		+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
 	log.scrollTop = log.scrollHeight; 
 } 
