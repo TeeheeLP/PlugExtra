@@ -283,7 +283,10 @@ function awayBot()
 {
 	if (!isaway)
 	{
-		awaymsg = document.getElementById("awaymsginx").value;
+		var awaymsgin = document.getElementById("awaymsginx");
+		if (awaymsgin.value != "" && awaymsgin.value != null)
+			awaymsg = awaymsgin.value;
+		else awaymsg = "I'm away";
 		isaway = true;
 		document.getElementById("awaybutx").innerHTML = "Back";
 	}
