@@ -9,15 +9,28 @@ var dodrag = false;
 var oldcx;
 var oldcy;
 
-//	WIP
-
 function dragLog(e)
 {
-	var log = document.getElementById("log");
-	var but1 = document.getElementById("togg");
-	var but1 = document.getElementById("expwoot");
-	var but1 = document.getElementById("expjoin");
-	//var movex = e.clientX
+	if (dodrag)
+	{
+		if (oldcx == "" || oldcx == null)
+		{
+			oldcx = e.clientX;
+			oldcy = e.clientY;
+		}
+		else
+		{
+			var log = document.getElementById("log");
+			var but1 = document.getElementById("togg");
+			var but1 = document.getElementById("expwoot");
+			var but1 = document.getElementById("expjoin");
+			var movex = e.clientX - oldcx;
+			var movey = e.clientY - oldcy;
+			
+			log.style.left = (parseFloat(log.style.left) + movex) + "px";
+			log.style.top = (parseFloat(log.style.top) + movey) + "px";
+		}
+	}
 }
 
 var elem = document.createElement("p");
