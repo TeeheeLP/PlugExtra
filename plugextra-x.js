@@ -1,6 +1,8 @@
 var playcount = 1; 
 var autowoot = false;
 var autojoin = false;
+var isaway = false;
+var awaymsg = "";
 
 function joinList() 
 { 
