@@ -227,7 +227,7 @@ userlist.style.backgroundImage = "url('http://poke-helper.bplaced.net/images/noi
 userlist.style.backgroundColor = "#070707";
 userlist.style.top = "0px";
 userlist.style.left = "0px";
-userlist.style.transition = "left 0.5s, box-shadow 0.5s, opacity 0.5s";
+userlist.style.transition = "left 0.5s, box-shadow 0.5s, opacity 0.3s";
 userlist.style.color = "#FFFFFF";
 userlist.style.zIndex = "9001";
 userlist.style.padding = "10px";
@@ -244,7 +244,8 @@ function hideUserList()
 		var userlist = document.getElementById("userlistx");
 		userlist.style.left = "-160px";
 		userlist.style.boxShadow = "0px 0px 0px #000000";
-		setTimeout(function() { userlist.style.opacity = "0"; dissmartcl = false; userlist.style.overflowY = "hidden"; }, "500");
+		userlist.style.opacity = "0";
+		setTimeout(function() { dissmartcl = false; userlist.style.overflowY = "hidden"; }, "500");
 	}
 }
 
