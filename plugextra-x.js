@@ -45,6 +45,7 @@ function checkDJBooth()
 	for (i in olddjbooth)
 	{
 		var notinlist = true;
+		if (i == 0) notinlist = false;
 		if (i > 0)
 		{
 			for (n in newdjbooth)
