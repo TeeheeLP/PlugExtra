@@ -43,6 +43,22 @@ function dragLog(e)
 	}
 }
 
+function resetLayout()
+{
+	var log = document.getElementById("log");
+	log.style.top = "288px";
+	log.style.right = "177px";
+	var but1 = document.getElementById("togg");
+	but1.style.top = "280px";
+	but1.style.left = "225px";
+	var but2 = document.getElementById("expwoot");
+	but2.style.top = "255px";
+	but2.style.left = "198px";
+	var but3 = document.getElementById("expjoin");
+	but3.style.top = "230px";
+	but3.style.left = "171px";
+}
+
 var elem = document.createElement("p");
 elem.id = "log";
 elem.style.color = "lightgray";
@@ -63,6 +79,7 @@ elem.style.opacity = "0.8";
 elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
 elem.style.right = "177px";
 elem.setAttribute("onmousedown", "dodrag = true;");
+elem.setAttribute("ondblclick", "resetLayout();");
 elem.setAttribute("onmousemove", "dragLog(event);");
 elem.setAttribute("onmouseup", "dodrag = false;");
 document.body.appendChild(elem);
