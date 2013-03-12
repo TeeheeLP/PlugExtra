@@ -1,6 +1,8 @@
 var playcount = 1; 
 var autowoot = false;
 var autojoin = false;
+var isaway = false;
+var awaymsg = "I'm away";
 
 function joinList() 
 { 
@@ -212,7 +214,8 @@ function showUserList()
 		userlist.style.left = "0px";
 		userlist.style.opacity = "1";
 		userlist.style.boxShadow = "0px 0px 10px #000000, -1px 0px #000000 inset";
-		setTimeout(function() { dissmartcl = true; userlist.style.overflowY = "auto"; }, "500");
+		userlist.style.overflowY = "scroll";
+		setTimeout(function() { dissmartcl = true; }, "500");
 	}
 }
 
@@ -229,7 +232,7 @@ userlist.style.color = "#FFFFFF";
 userlist.style.zIndex = "9001";
 userlist.style.padding = "10px";
 userlist.style.overflowX = "hidden";
-userlist.style.overflowY = "auto";
+userlist.style.overflowY = "scroll";
 userlist.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
 userlist.style.borderRight = "1px solid transparent";
 userlist.onclick = function() { showUserList(); };
@@ -241,8 +244,8 @@ function hideUserList()
 		var userlist = document.getElementById("userlistx");
 		userlist.style.left = "-160px";
 		userlist.style.boxShadow = "0px 0px 0px #000000";
-		userlist.style.overflowY = "hidden";
-		setTimeout(function() { userlist.style.opacity = "0"; dissmartcl = false; }, "500");
+		userlist.style.opacity = "0";
+		setTimeout(function() { dissmartcl = false; userlist.style.overflowY = "hidden"; }, "500");
 	}
 }
 
@@ -252,17 +255,66 @@ hidelistbut.style.borderRadius = "7px";
 hidelistbut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
 hidelistbut.style.width = "100%";
 hidelistbut.style.textAlign = "center";
-hidelistbut.style.height = "1.75em";
+hidelistbut.style.height = "1.5em";
 hidelistbut.style.display = "block";
 hidelistbut.style.cursor = "pointer";
-hidelistbut.style.lineHeight = "1.75em";
+hidelistbut.style.lineHeight = "1.5em";
 hidelistbut.style.marginBottom = "5px";
-hidelistbut.style.fontSize = "1.5em";
+hidelistbut.style.fontSize = "1.2em";
 hidelistbut.style.fontWeight = "bold";
 hidelistbut.innerHTML = "Hide";
 hidelistbut.onclick = function() { hideUserList(); };
 
 userlist.appendChild(hidelistbut);
+
+var awaymsgin = document.createElement("input");
+awaymsgin.id = "awaymsginx";
+awaymsgin.style.height = "1em";
+awaymsgin.style.marginBottom = "5px";
+awaymsgin.style.width = "129px";
+awaymsgin.style.borderRadius = "5px";
+awaymsgin.style.boxShadow = "1px 1px 3px #000000 inset";
+awaymsgin.style.border = "2px solid #FFFFFF";
+awaymsgin.style.backgroundColor = "#FFFFFF";
+
+userlist.appendChild(awaymsgin);
+
+function awayBot()
+{
+	if (!isaway)
+	{
+		var awaymsgin = document.getElementById("awaymsginx");
+		if (awaymsgin.value != "" && awaymsgin.value != null)
+			awaymsg = awaymsgin.value;
+		else awaymsg = "I'm away";
+		isaway = true;
+		document.getElementById("awaybutx").innerHTML = "Back";
+	}
+	else
+	{
+		isaway = false;
+		document.getElementById("awaybutx").innerHTML = "Away";
+	}
+}
+
+var awaybut = document.createElement("div");
+awaybut.id = "awaybutx";
+awaybut.style.backgroundColor = "#333333";
+awaybut.style.borderRadius = "7px";
+awaybut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
+awaybut.style.width = "100%";
+awaybut.style.textAlign = "center";
+awaybut.style.height = "1.5em";
+awaybut.style.display = "block";
+awaybut.style.cursor = "pointer";
+awaybut.style.lineHeight = "1.5em";
+awaybut.style.marginBottom = "5px";
+awaybut.style.fontSize = "1.2em";
+awaybut.style.fontWeight = "bold";
+awaybut.innerHTML = "Away";
+awaybut.onclick = function() { awayBot(); };
+
+userlist.appendChild(awaybut);
 
 var curusercount = document.createElement("div");
 curusercount.id = "cusercount";
@@ -395,3 +447,20 @@ function removeFromList(user)
 }
 
 API.addEventListener(API.USER_LEAVE, removeFromList);
+
+//	---------------
+//	Chat management
+//	---------------
+
+function checkMessage(data)
+{
+	if (isaway)
+	{
+		if (data.message.search("@" + API.getSelf().username) != -1)
+		{
+			API.sendChat(awaymsg);
+		}
+	}
+}
+
+API.addEventListener(API.CHAT, checkMessage);
