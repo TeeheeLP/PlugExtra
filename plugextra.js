@@ -11,7 +11,7 @@ var oldcy;
 
 function startDrag(e)
 {
-	if (e.pageY < parseInt(log.style.top) + 15) dodrag = true;
+	document.body.innerHTML = e.clientY;
 }
 
 function dragLog(e)
