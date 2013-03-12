@@ -5,6 +5,7 @@ var isaway = false;
 var willprintmsg = false;
 var awaymsg = "I'm away";
 var oldwaitlist = API.getWaitList();
+var olddjbooth = API.getDJs();
 
 function checkWaitList(users)
 {
@@ -29,14 +30,46 @@ function checkWaitList(users)
 		if (notinlist)
 		{
 			document.getElementById("trackfeed" + playcount).innerHTML += "<span style='color:white'>"
-				+ oldwaitlist[i].username + "</span> <span style='color:blue'>left</span> the waitlist at place <span style='color:blue'>"
-				+ i + "</span>.<br>";
+				+ oldwaitlist[i].username + "</span> <span style='color:#AA44FF'>left</span> the waitlist at place <span style='color:#AA44FF'>"
+				+ (i + 1) + "</span>.<br>";
 		}
 	}
 	oldwaitlist = API.getWaitList();
 }
 
 API.addEventListener(API.WAIT_LIST_UPDATE, checkWaitList);
+
+function checkDJBooth()
+{
+	var newdjbooth = API.getDJs();
+	for (i in olddjbooth)
+	{
+		var notinlist = true;
+		for (n in newdjbooth)
+		{
+			if (olddjbooth[i].id == newdjbooth[n].id)
+				notinlist = false;
+		}
+		if (notinlist)
+		{
+			var djs = API.getDJs();
+			for (n in djs)
+			{
+				if (olddjbooth[i].id == djs[n].id)
+					notinlist = false;
+			}
+		}
+		if (notinlist)
+		{
+			document.getElementById("trackfeed" + playcount).innerHTML += "<span style='color:white'>"
+				+ olddjbooth[i].username + "</span> <span style='color:#FF00BD'>left</span> the waitlist at place <span style='color:#FF00BD'>"
+				+ (i + 1) + "</span>.<br>";
+		}
+	}
+	olddjbooth = API.getDJs();
+}
+
+API.addEventListener(API.DJ_UPDATE, checkDJBooth);
 
 function joinList() 
 { 
