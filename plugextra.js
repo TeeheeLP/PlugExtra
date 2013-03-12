@@ -17,7 +17,7 @@ function dragLog(e)
 	{
 		if (e.clientY > parseInt(log.style.top) + 5) dodrag = true;
 	}
-	else if (dodrag)
+	if (dodrag)
 	{
 		window.getSelection().removeAllRanges();
 		if (oldcx == "" || oldcx == null)
