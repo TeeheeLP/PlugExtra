@@ -39,23 +39,23 @@ function callback(obj)
 	} 
 	playcount += 1;
 	log = document.getElementById("log"); 
-	var doscroll = log.scrollTop == log.scrollHeight - log.offsetHeight; 
+	//var doscroll = log.scrollTop == log.scrollHeight - log.offsetHeight; 
 	log.innerHTML += "<div id='track" + playcount + "' style='text-decoration:underline;display:inline;' onclick='toggleFeedback(" + playcount 
 		+ ")'>Track: <span style='color:white'>" + playcount + "</span> - <span style='color:white'>" + obj.dj.username 
 		+ "</span> is playing <span style='color:white;font-weight:bold;'>" + obj.media.title 
 		+ "</span> by <span style='color:white'>" + obj.media.author + "</span>.</div><div id=\'trackfeed" + playcount 
 		+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
-	if (doscroll) log.scrollTop = log.scrollHeight; 
+	log.scrollTop = log.scrollHeight; 
 } 
 
 API.addEventListener(API.CURATE_UPDATE, showcura); 
 function showcura(obj) 
 { 
 	log = document.getElementById("log"); 
-	var doscroll = log.scrollTop == log.scrollHeight - log.offsetHeight; 
+	//var doscroll = log.scrollTop == log.scrollHeight - log.offsetHeight; 
 	var trackfeed = document.getElementById("trackfeed" + playcount); 
 	trackfeed.innerHTML += "<span style='color:white'>" + obj.user.username + "</span> <span style='color:yellow'>added</span> the current song.<br>"; 
-	if (doscroll) log.scrollTop = log.scrollHeight; 
+	log.scrollTop = log.scrollHeight; 
 	prevscore = API.getRoomScore(); 
 } 
 
@@ -67,11 +67,11 @@ function showvoter(obj)
 	if (document.getElementById(obj.user.id + playcount) == null) 
 	{ 
 		var log = document.getElementById("log"); 
-		var doscroll = log.scrollTop == log.scrollHeight - log.offsetHeight; 
+		//var doscroll = log.scrollTop == log.scrollHeight - log.offsetHeight; 
 		var trackfeed = document.getElementById("trackfeed" + playcount); 
 		trackfeed.innerHTML += "<span style='color:white'>" + obj.user.username + "</span> voted <span id=\'" + obj.user.id + playcount + "' style='color:" 
 			+ spancolor + "'>" + vote + "</span>.<br>"; 
-		if (doscroll) log.scrollTop = log.scrollHeight; 
+		log.scrollTop = log.scrollHeight; 
 	} 
 	else 
 	{
@@ -322,6 +322,16 @@ curusercount.id = "cusercount";
 curusercount.style.textAlign = "center";
 curusercount.innerHTML = API.getUsers().length + " users online";
 
+function mentionUser(id)
+{
+	var users = API.getUsers();
+	for (i in users)
+	{
+		if (users[i].id == id)
+			document.getElementByID("chat-input-field") += "@" + users[i].username;
+	}
+}
+
 userlist.appendChild(curusercount);
 
 var staff = API.getStaff();
@@ -338,6 +348,8 @@ for (var i in staff)
 	user.style.width = "100%";
 	user.style.marginTop = "5px";
 	user.style.color = "#D90066";
+	user.style.cursor = "pointer";
+	user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
 	user.innerHTML = staff[i].username;
 	
 	stafflist.appendChild(user);
@@ -365,6 +377,8 @@ for (var i in users)
 		user.id = "pgx" + users[i].id;
 		user.style.width = "100%";
 		user.style.marginTop = "5px";
+		user.style.cursor = "pointer";
+		user.setAttribute("onclick", "mentionUser('" + users[i].id + "');");
 		user.innerHTML = users[i].username;
 	
 		usersul.appendChild(user);
@@ -413,6 +427,8 @@ function addToList(user)
 	userit.id = "pgx" + user.id;
 	userit.style.width = "100%";
 	userit.style.marginTop = "5px";
+	user.style.cursor = "pointer";
+	user.setAttribute("onclick", "mentionUser('" + user.id + "');");
 	userit.innerHTML = user.username;
 	
 	var staff = API.getStaff();
