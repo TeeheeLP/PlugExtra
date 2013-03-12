@@ -214,7 +214,8 @@ function showUserList()
 		userlist.style.left = "0px";
 		userlist.style.opacity = "1";
 		userlist.style.boxShadow = "0px 0px 10px #000000, -1px 0px #000000 inset";
-		setTimeout(function() { dissmartcl = true; userlist.style.overflowY = "scroll"; }, "500");
+		userlist.style.overflowY = "scroll";
+		setTimeout(function() { dissmartcl = true; }, "500");
 	}
 }
 
