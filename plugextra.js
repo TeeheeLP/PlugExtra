@@ -11,7 +11,7 @@ var oldcy;
 
 function startDrag(e)
 {
-	if (e.clientY < parseInt(log.style.top) + 15) dodrag = true;
+	if (e.pageY < parseInt(log.style.top) + 15) dodrag = true;
 }
 
 function dragLog(e)
