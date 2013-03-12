@@ -276,7 +276,7 @@ awaymsgin.style.borderRadius = "5px";
 awaymsgin.style.boxShadow = "1px 1px 3px #000000 inset";
 awaymsgin.style.border = "2px solid #FFFFFF";
 awaymsgin.style.backgroundColor = "#FFFFFF";
-awaymsgin.style.position = "relative;"
+awaymsgin.style.position = "relative";
 
 userlist.appendChild(awaymsgin);
 
