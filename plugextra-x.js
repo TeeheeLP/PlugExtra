@@ -670,7 +670,7 @@ function checkOwnIn(e, chatin)
 					it's original position. Use the black button at its bottom right hand corner to hide \
 					or show the log.");
 				break;
-			case "$button":
+			case "$buttons":
 				printChat("When a log button is pressed it begins to glow slightly. The blue button \
 					toggles autojoin which makes you automatically join the waitlist if you're not \
 					in it already, while the green button toggles autowoot which makes you woot every song.");
