@@ -1,4 +1,3 @@
-
 //	-- Basic Initialisation --
 
 var version = "1.1";
@@ -154,9 +153,9 @@ var curwaitlist = document.createElement("ol");
 curwaitlist.id = "waitlistx";
 curwaitlist.style.margin = "0px";
 
-updateCurWaitList();
-
 userlist.appendChild(curwaitlist);
+
+
 
 var curusercount = document.createElement("div");
 curusercount.id = "cusercount";
