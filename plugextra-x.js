@@ -726,6 +726,7 @@ function checkOwnIn(e, chatin)
 						printChat("List of mod commands:<br> \
 							$remove [name]: Removes a user from the waitlist or dj \
 								booth<br> \
+							$add [name]: Adds a user to the waitlist \
 							");
 						break;
 					case "$remove":
@@ -770,6 +771,57 @@ function checkOwnIn(e, chatin)
 								API.moderateRemoveDJ(id);
 							else
 								printChat("Couldn't find " + username + " in waitlist or dj booth.");
+						}
+						else printChat("No user specified.");
+						break;
+					case "$add":
+						if (commandinfo.length > 1 && commandinfo[1] != null 
+							&& commandinfo[1] != "")
+						{
+							var username = "";
+							for (i in commandinfo)
+							{
+								if (i > 1)
+									username += " ";
+								if (i > 0)
+									username += commandinfo[i];
+							}
+							isvalid = false;
+							var id;
+							username = username.slice(1, username.length);
+							
+							var users = API.getUsers();
+							for (i in users)
+							{
+								if (users[i].username == username)
+								{
+									isvalid = true;
+									id = user[i].id;
+								}
+							}
+							
+							if (isvalid)
+							{
+								var waitlist = API.getWaitList();
+								var djbooth = API.getDJs();
+								for (i in waitlist)
+								{
+									if (id == waitlist[i].id)
+										isvalid = false;
+								}
+								for (i in djbooth)
+								{
+									if (id == djbooth[i].id)
+										isvalid = false;
+								}
+								if (isvalid)
+								{
+									API.moderateAddDJ(id);
+									printChat("Added " + username + " to the waitlist.");
+								}
+								else printChat(username + " already is a dj.");
+							}
+							else printChat("Can't find user " + username + ".");
 						}
 						else printChat("No user specified.");
 						break;
