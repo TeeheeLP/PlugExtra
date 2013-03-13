@@ -611,7 +611,7 @@ function checkMessage(data)
 	{
 		if (data.message.search("@" + API.getSelf().username) != -1)
 		{
-			API.sendChat(awaymsg);
+			API.sendChat("@" + data.from + " " + awaymsg);
 			willprintmsg = false;
 			setTimeout(function() { willprintmsg = true; }, "30000");
 		}
@@ -645,7 +645,7 @@ function checkOwnIn(e, chatin)
 					$version: Displays the current version<br> \
 					$changes: Shows the newest changes<br> \
 					$reset: Resets the log position<br> \
-					$away <message>: Activates or deactivates the awaybot");
+					$away \<message\>: Activates or deactivates the awaybot");
 				break;
 			case "$version":
 				printChat("Running on version " + version);
