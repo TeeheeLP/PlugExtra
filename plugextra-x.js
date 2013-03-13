@@ -721,7 +721,7 @@ function checkOwnIn(e, chatin)
 		
 		if (API.getSelf().permission > 1)
 		{
-			iscommand = true;
+			ismodcommand = true;
 			switch(commandinfo[0])
 			{
 				case "$modhelp":
@@ -829,12 +829,12 @@ function checkOwnIn(e, chatin)
 					else printChat("No user specified.");
 					break;
 				default:
-					iscommand = false;
+					ismodcommand = iscommand;
 					break;
 			}
 		}
 		
-		if (iscommand)
+		if (iscommand || ismodcommand)
 		{
 			chatin.value = "";
 		}
