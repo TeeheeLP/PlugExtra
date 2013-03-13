@@ -155,8 +155,6 @@ curwaitlist.style.margin = "0px";
 
 userlist.appendChild(curwaitlist);
 
-updateCurWaitList();
-
 var curusercount = document.createElement("div");
 curusercount.id = "cusercount";
 curusercount.style.textAlign = "center";
@@ -238,6 +236,7 @@ userlist.appendChild(usersul);
 
 document.body.appendChild(userlist);
 
+updateCurWaitList();
 refreshUserlist();
 setInterval(function() { refreshUserlist(); }, "15000");
 
