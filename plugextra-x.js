@@ -575,18 +575,18 @@ function addToList(user)
 	}
 	document.getElementById("cusercount").innerHTML = API.getUsers().length + " users online";
 }
-
-API.addEventListener(API.USER_JOIN, addToList);
-
+*/
+API.addEventListener(API.USER_JOIN, refreshUserlist);
+/*
 function removeFromList(user)
 {
 	var userit = document.getElementById("pgx" + user.id);
 	userit.parentNode.removeChild(userit);
 	document.getElementById("cusercount").innerHTML = API.getUsers().length + " users online";
 }
-
-API.addEventListener(API.USER_LEAVE, removeFromList);*/
-
+*/
+API.addEventListener(API.USER_LEAVE, refreshUserlist);*/
+/*
 //	---------------
 //	Chat management
 //	---------------
