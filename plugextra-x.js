@@ -771,8 +771,7 @@ function checkOwnIn(e, chatin)
 						
 						if (isvalid)
 						{
-							API.moderateRemoveDJ(id);
-							printChat("Succesfully removed " + username + " from the waitlist.");
+							new ModerationRemoveDJService(id);
 						}
 						else
 							printChat("Couldn't find " + username + " in waitlist or dj booth.");
@@ -821,7 +820,7 @@ function checkOwnIn(e, chatin)
 							}
 							if (isvalid)
 							{
-								API.moderateAddDJ(id);
+								new ModerationAddDJService(id);
 							}
 							else printChat(username + " already is a dj.");
 						}
