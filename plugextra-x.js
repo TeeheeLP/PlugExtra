@@ -770,7 +770,10 @@ function checkOwnIn(e, chatin)
 						}
 						
 						if (isvalid)
+						{
 							API.moderateRemoveDJ(id);
+							printChat("Succesfully removed " + username + " from the waitlist.");
+						}
 						else
 							printChat("Couldn't find " + username + " in waitlist or dj booth.");
 					}
