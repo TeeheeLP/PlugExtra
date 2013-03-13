@@ -9,16 +9,6 @@ var awaymsg = "I'm away";
 var oldwaitlist = API.getWaitList();
 var olddjbooth = API.getDJs();
 
-function firstRun()
-{
-	var chatwindow = document.getElementById("chat-messages");
-	chatwindow.innerHTML += "<div class='chat-update' style='color:#00ACFF;'>PlugExtra succesfully started!</div>";
-	chatwindow.scrollTop = chatwindow.scrollHeight;
-}
-
-firstRun();
-
-
 function checkWaitList(users)
 {
 	var newwaitlist = API.getWaitList();
@@ -584,3 +574,45 @@ function checkMessage(data)
 }
 
 API.addEventListener(API.CHAT, checkMessage);
+
+function printChat(str)
+{
+	var chatwindow = document.getElementById("chat-messages");
+	var doscroll = chatwindow.scrollTop >= chatwindow.scrollHeight - chatwindow.offsetHeight; 
+	chatwindow.innerHTML += "<div class='chat-update' style='color:#00ACFF;'>" + str + "</div>";
+	if (doscroll) chatwindow.scrollTop = chatwindow.scrollHeight;
+}
+
+function firstRun()
+{
+	printChat("Succesfully started PlugExtra!<br>Enter $help to view a list of available commands.");
+}
+
+firstRun();
+
+function checkOwnIn(chatin)
+{
+	var iscommand = true;
+	var commandinfo = chatin.value.split(' ');
+	
+	switch(commandinfo[0])
+	{
+		case "$help":
+			printChat("$help: Displays this message<br>$changes: Shows the newest changes");
+			break;
+		case "$changes":
+			printChat("Recent changes: Added commands and fixed scrolling in the log.");
+			break;
+		default:
+			iscommand = false;
+			break;
+	}
+	
+	if (iscommand)
+	{
+		chatin.value = "";
+	}
+}
+
+var chatinput = document.getElementById("chat-input-field");
+chatinput.setAttribute('onkeydown', 'checkOwnIn(this);');
