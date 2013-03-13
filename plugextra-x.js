@@ -702,7 +702,7 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("Recent changes: Added commands and the waitlist.");
+				printChat("Recent changes: Made the waitlist hideable and added mod commands.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
