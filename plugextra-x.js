@@ -182,7 +182,7 @@ function toggleCurWaitList(list)
 var curwaitlist = document.createElement("ol");
 curwaitlist.id = "waitlistx";
 curwaitlist.style.margin = "0px 0px 5px 0px";
-curwaitlist.style.padding = "10px 0px 0px 20px";
+curwaitlist.style.padding = "10px 0px 0px 27px";
 curwaitlist.style.transition = "max-height 0.5s, background-color 0.5s";
 curwaitlist.style.maxHeight = "500px";
 curwaitlist.style.overflowX = "visible";
