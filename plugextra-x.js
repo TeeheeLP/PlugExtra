@@ -623,7 +623,8 @@ API.addEventListener(API.CHAT, checkMessage);
 function firstRun()
 {
 	printChat("Succesfully started PlugExtra! Using version " + version + "<br> \
-		Enter $help to view a list of available commands.");
+		Enter $help to view a list of available commands or $manual to see an instruction \
+		on how to use the plugin.");
 }
 
 firstRun();
