@@ -204,7 +204,8 @@ function refreshUserlist()
 		user.id = "pgx" + staff[i].id;
 		user.style.width = "100%";
 		user.style.marginTop = "5px";
-		user.style.color = "#D90066";
+		if (staff[i].permission > 1) user.style.color = "#D90066";
+		else user.style.color = "#5400FF";
 		user.style.cursor = "pointer";
 		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
 		user.innerHTML = staff[i].username;
@@ -716,6 +717,67 @@ function checkOwnIn(e, chatin)
 			default:
 				iscommand = false;
 				break;
+			if (API.getSelf().permission > 1)
+			{
+				iscommand = true;
+				switch(commandinfo[0])
+				{
+					case "$modhelp":
+						printChat("List of mod commands:<br> \
+							$remove &ltname&gt: Removes a user from the waitlist or dj \
+								booth<br> \
+							");
+						break;
+					case "$remove":
+						if (commandinfo.length > 1 && commandinfo[1] != null 
+							&& commandinfo[1] != "")
+						{
+							var username = "";
+							for (i in commandinfo)
+							{
+								if (i > 1)
+									username += " ";
+								if (i > 0)
+									username += commandinfo[i];
+							}
+							isvalid = false;
+							var id;
+							username = username.slice(1, username.length);
+							
+							var waitlist = API.getWaitList();
+							var djbooth = API.getDJs();
+							for (n in waitlist)
+							{
+								if (username == waitlist[n].username)
+								{
+									isvalid = true;
+									id = waitlist[n].id;
+								}
+							}
+							if (!isvalid)
+							{
+								for (n in djbooth)
+								{
+									if (username == djbooth[n].username)
+									{
+										isvalid = true;
+										id = djbooth[n].id;
+									}
+								}
+							}
+							
+							if (isvalid)
+								API.moderateRemoveDJ(id);
+							else
+								printChat("Couldn't find " + username + " in waitlist or dj booth.");
+						}
+						else printChat("No user specified.");
+						break;
+					default:
+						iscommand = false;
+						break;
+				}
+			}
 		}
 		
 		if (iscommand)
