@@ -165,9 +165,16 @@ function updateCurWaitList()
 
 function toggleCurWaitList(list)
 {
-	if (list.style.maxHeight == "3000px")
+	if (list.style.maxHeight == "1000px")
+	{
 		list.style.maxHeight = "0px";
-	else list.style.maxHeight = "3000px";
+		list.style.overflow = "hidden";
+	}
+	else 
+	{
+		list.style.maxHeight = "1000px";
+		list.style.overflow = "auto";
+	}
 }
 
 var curwaitlist = document.createElement("ol");
