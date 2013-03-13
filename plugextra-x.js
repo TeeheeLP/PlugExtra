@@ -167,14 +167,14 @@ function toggleCurWaitList(list)
 {
 	if (list.style.maxHeight == "500px")
 	{
-		list.style.maxHeight = "5px";
+		list.style.maxHeight = "3px";
 		list.style.overflowY = "hidden";
 		list.style.backgroundColor = "#333333";
 	}
 	else 
 	{
 		list.style.maxHeight = "500px";
-		list.style.overflowY = "auto";
+		setTimeout(function() {list.style.overflowY = "auto";}, "500");
 		list.style.backgroundColor = "transparent";
 	}
 }
@@ -186,7 +186,7 @@ curwaitlist.style.padding = "10px 0px 0px 20px";
 curwaitlist.style.transition = "max-height 0.5s, background-color 0.5s";
 curwaitlist.style.maxHeight = "500px";
 curwaitlist.style.overflowX = "visible";
-curwaitlist.setAttribute("ondblclick", "toggleCurWaitList(this);");
+curwaitlist.setAttribute("onclick", "toggleCurWaitList(this);");
 
 userlist.appendChild(curwaitlist);
 
@@ -682,7 +682,8 @@ function checkOwnIn(e, chatin)
 			case "$list":
 				printChat("The userlist is at the left hand side of the screen. You can click at the very left \
 					to show it if it's hidden. It contains a list of all users currently in the waitlist \
-					and in the room.");
+					and in the room. Clicking the waitlist will hide it if it is visible or show it if it \
+					is hidden.");
 				break;
 			case "$log":
 				printChat("The log displays information suchs as woots and mehs for the current song. \
