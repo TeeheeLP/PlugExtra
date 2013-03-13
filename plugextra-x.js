@@ -690,19 +690,6 @@ function checkOwnIn(chatin)
 			printChat("Reset the log position.");
 			break;
 		case "$away":
-			if (!isaway)
-			{
-				if (commandinfo.length > 1)
-				{
-					var awaymsgin = "";
-					for (i in commandinfo)
-					{
-						if (i > 0)
-							awaymsgin += commandinfo[i];
-					}
-					document.getElementById("awaymsginx").value = awaymsgin;
-				}
-			}
 			awayBot();
 			break;
 		default:
