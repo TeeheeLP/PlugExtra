@@ -1,4 +1,5 @@
 //	-- Basic Initialisation --
+var version = "1.2";
 
 var playcount = 1; 
 var autowoot = false;
@@ -585,7 +586,8 @@ function printChat(str)
 
 function firstRun()
 {
-	printChat("Succesfully started PlugExtra!<br>Enter $help to view a list of available commands.");
+	printChat("Succesfully started PlugExtra! Using version " + version + ".<br> \
+		Enter $help to view a list of available commands.");
 }
 
 firstRun();
@@ -599,10 +601,28 @@ function checkOwnIn(chatin)
 	{
 		case "$help":
 			printChat("Here is a list of all available commands:<br> \
-				$help: Displays this message<br>$changes: Shows the newest changes");
+				$help: Displays this message<br> \
+				$changes: Shows the newest changes<br> \
+				$reset: Resets the log position");
 			break;
 		case "$changes":
 			printChat("Recent changes: Added commands and fixed scrolling in the log.");
+			break;
+		case "$reset":
+			var log = document.getElementById("log");
+			log.style.top = "288px";
+			log.style.right = "177px";
+			log.style.zIndex = "8";
+			var but1 = document.getElementById("togg");
+			but1.style.top = "280px";
+			but1.style.left = "225px";
+			var but2 = document.getElementById("expwoot");
+			but2.style.top = "255px";
+			but2.style.left = "198px";
+			var but3 = document.getElementById("expjoin");
+			but3.style.top = "230px";
+			but3.style.left = "171px";
+			printChat("Reset the log position.");
 			break;
 		default:
 			iscommand = false;
