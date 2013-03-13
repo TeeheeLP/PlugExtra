@@ -1,4 +1,3 @@
-$(document).ready(function(){
 function startBot()
 {
 var scr = document.createElement("script");
@@ -150,4 +149,3 @@ explog.title = "Toggle Log";
 
 document.body.appendChild(explog);
 setTimeout(function(){startBot()}, 0);
-});
