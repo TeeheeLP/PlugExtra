@@ -646,7 +646,7 @@ function checkOwnIn(chatin)
 			printChat("What information do you need?<br> \
 				$list: Information about the userlist<br> \
 				$log: Information about the log<br> \
-				$buttons: Information about the log buttons \
+				$buttons: Information about the log buttons<br> \
 				$awaybot: Information about the awaybot");
 			break;
 		case "$list":
@@ -690,7 +690,7 @@ function checkOwnIn(chatin)
 			printChat("Reset the log position.");
 			break;
 		case "$away":
-			awayBot();
+			document.getElementById("awaybutx").click();
 			break;
 		default:
 			iscommand = false;
