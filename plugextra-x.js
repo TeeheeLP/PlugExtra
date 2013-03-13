@@ -694,7 +694,15 @@ function checkOwnIn(e, chatin)
 			case "$away":
 				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
 				{
-					printChat("Working!");
+					var awaymsg = "";
+					for (i in commandinfo)
+					{
+						if (i > 0)
+						{
+							awaymsg += commandinfo[i] + " ";
+						}
+					}
+					document.getElementById("awaymsginx").value = awaymsg;
 				}
 				document.getElementById("awaybutx").click();
 				break;
