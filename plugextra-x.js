@@ -637,7 +637,7 @@ function checkOwnIn(chatin)
 				$version: Displays the current version<br> \
 				$changes: Shows the newest changes<br> \
 				$reset: Resets the log position<br> \
-				$away <message>: Activates the awaybot");
+				$away <message>: Activates or deactivates the awaybot");
 			break;
 		case "$version":
 			printChat("Running on version " + version);
@@ -692,7 +692,7 @@ function checkOwnIn(chatin)
 		case "$away":
 			if (!isaway)
 			{
-				if (commandinfo[1] != "" && commandinfo[1] != null)
+				if (commandinfo.length > 1)
 				{
 					var awaymsgin = "";
 					for (i in commandinfo)
