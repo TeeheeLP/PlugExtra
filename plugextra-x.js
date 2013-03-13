@@ -155,7 +155,7 @@ curwaitlist.style.margin = "0px";
 
 userlist.appendChild(curwaitlist);
 
-
+updateCurWaitList();
 
 var curusercount = document.createElement("div");
 curusercount.id = "cusercount";
