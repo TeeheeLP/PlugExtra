@@ -205,7 +205,7 @@ function refreshUserlist()
 		user.style.width = "100%";
 		user.style.marginTop = "5px";
 		if (staff[i].permission > 1) user.style.color = "#D90066";
-		else user.style.color = "#5400FF";
+		else user.style.color = "#5469FF";
 		user.style.cursor = "pointer";
 		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
 		user.innerHTML = staff[i].username;
