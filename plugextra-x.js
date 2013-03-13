@@ -184,7 +184,7 @@ curwaitlist.style.padding = "0px 0px 0px 20px";
 curwaitlist.style.borderBottom = "5px solid #333333";
 curwaitlist.style.transition = "max-height 0.5s";
 curwaitlist.style.maxHeight = "3000px";
-curwaitlist.setAttribute("ondblclick", "toggleCurWaitList(this);");
+curwaitlist.setAttribute("onclick", "toggleCurWaitList(this);");
 
 userlist.appendChild(curwaitlist);
 
