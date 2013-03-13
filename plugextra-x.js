@@ -1,4 +1,4 @@
-//	-- Basic Initialisation --
+//	-- Basic Stuff --
 
 var version = "1.1";
 
@@ -10,6 +10,14 @@ var willprintmsg = false;
 var awaymsg = "I'm away";
 var oldwaitlist = API.getWaitList();
 var olddjbooth = API.getDJs();
+
+function printChat(str)
+{
+	var chatwindow = document.getElementById("chat-messages");
+	var doscroll = chatwindow.scrollTop >= chatwindow.scrollHeight - chatwindow.offsetHeight; 
+	chatwindow.innerHTML += "<div class='chat-update' style='color:#00ACFF;'>" + str + "</div>";
+	if (doscroll) chatwindow.scrollTop = chatwindow.scrollHeight;
+}
 
 //	-------------------
 //	Userlist management
@@ -611,14 +619,6 @@ function checkMessage(data)
 }
 
 API.addEventListener(API.CHAT, checkMessage);
-
-function printChat(str)
-{
-	var chatwindow = document.getElementById("chat-messages");
-	var doscroll = chatwindow.scrollTop >= chatwindow.scrollHeight - chatwindow.offsetHeight; 
-	chatwindow.innerHTML += "<div class='chat-update' style='color:#00ACFF;'>" + str + "</div>";
-	if (doscroll) chatwindow.scrollTop = chatwindow.scrollHeight;
-}
 
 function firstRun()
 {
