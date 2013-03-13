@@ -475,6 +475,8 @@ expwoot.style.cursor = "pointer";
 expwoot.style.display = "block";
 expwoot.onclick = function () { toggleWoot(); };
 expwoot.style.textDecoration = "none";
+expwoot.style.fontSize = "0.7em";
+expwoot.innerHTML = "Woot";
 expwoot.title = "Toggle Auto-Woot";
 
 document.body.appendChild(expwoot);
@@ -519,6 +521,8 @@ expjoin.style.cursor = "pointer";
 expjoin.style.display = "block";
 expjoin.onclick = function () { toggleJoin(); };
 expjoin.style.textDecoration = "none";
+expjoin.style.fontSize = "0.7em";
+expjoin.innerHTML = "Join";
 expjoin.title = "Toggle Auto-Join";
 
 document.body.appendChild(expjoin);
