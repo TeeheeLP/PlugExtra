@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.1";
+var version = "1.2";
 
 var playcount = 1; 
 var autowoot = false;
@@ -163,10 +163,30 @@ function updateCurWaitList()
 	}
 }
 
+function toggleCurWaitList(list)
+{
+	if (list.style.maxHeight == "500px")
+	{
+		list.style.maxHeight = "3px";
+		list.style.overflowY = "hidden";
+		list.style.backgroundColor = "#333333";
+	}
+	else 
+	{
+		list.style.maxHeight = "500px";
+		setTimeout(function() {list.style.overflowY = "auto";}, "500");
+		list.style.backgroundColor = "transparent";
+	}
+}
+
 var curwaitlist = document.createElement("ol");
 curwaitlist.id = "waitlistx";
-curwaitlist.style.margin = "0px";
-curwaitlist.style.padding = "0px 0px 0px 20px";
+curwaitlist.style.margin = "0px 0px 5px 0px";
+curwaitlist.style.padding = "10px 0px 0px 20px";
+curwaitlist.style.transition = "max-height 0.5s, background-color 0.5s";
+curwaitlist.style.maxHeight = "500px";
+curwaitlist.style.overflowX = "visible";
+curwaitlist.setAttribute("onclick", "toggleCurWaitList(this);");
 
 userlist.appendChild(curwaitlist);
 
@@ -204,7 +224,8 @@ function refreshUserlist()
 		user.id = "pgx" + staff[i].id;
 		user.style.width = "100%";
 		user.style.marginTop = "5px";
-		user.style.color = "#D90066";
+		if (staff[i].permission > 1) user.style.color = "#D90066";
+		else user.style.color = "#5469FF";
 		user.style.cursor = "pointer";
 		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
 		user.innerHTML = staff[i].username;
@@ -641,12 +662,12 @@ function checkOwnIn(e, chatin)
 			case "$help":
 				printChat("Here is a list of available commands:<br> \
 					( <> = optional [] = necessary )<br> \
-					$manual: Shows how to use the plugin<br> \
-					$help: Displays this message<br> \
-					$version: Displays the current version<br> \
-					$changes: Shows the newest changes<br> \
-					$reset: Resets the log position<br> \
-					$away &ltmessage&gt: Activates or deactivates the awaybot");
+					$manual - Shows how to use the plugin<br> \
+					$help - Displays this message<br> \
+					$version - Displays the current version<br> \
+					$changes - Shows the newest changes<br> \
+					$reset - Resets the log position<br> \
+					$away - &ltmessage&gt: Activates or deactivates the awaybot");
 				break;
 			case "$version":
 				printChat("Running on version " + version);
@@ -661,7 +682,8 @@ function checkOwnIn(e, chatin)
 			case "$list":
 				printChat("The userlist is at the left hand side of the screen. You can click at the very left \
 					to show it if it's hidden. It contains a list of all users currently in the waitlist \
-					and in the room.");
+					and in the room. Clicking the waitlist will hide it if it is visible or show it if it \
+					is hidden.");
 				break;
 			case "$log":
 				printChat("The log displays information suchs as woots and mehs for the current song. \
@@ -680,7 +702,7 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("Recent changes: Added commands and the waitlist.");
+				printChat("Recent changes: Made the waitlist hideable and added mod commands.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
@@ -718,7 +740,185 @@ function checkOwnIn(e, chatin)
 				break;
 		}
 		
-		if (iscommand)
+		if (API.getSelf().permission > 1)
+		{
+			ismodcommand = true;
+			switch(commandinfo[0])
+			{
+				case "$modhelp":
+					printChat("List of mod commands:<br> \
+						( <> = optional [] = necessary )<br> \
+						$remove [name] - Removes a user from the waitlist or dj \
+							booth<br> \
+						$add [name] - Adds a user to the waitlist<br> \
+						$kick [name] : &ltreason&gt : &ltminutes&gt - Kicks a user for \
+							a specified amount of minutes or 60 by default \
+							and displays the given reason message");
+					break;
+				case "$remove":
+					if (commandinfo.length > 1 && commandinfo[1] != null 
+						&& commandinfo[1] != "")
+					{
+						var username = "";
+						for (i in commandinfo)
+						{
+							if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
+								username += " ";
+							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+								username += commandinfo[i];
+						}
+						isvalid = false;
+						var id;
+						username = username.slice(1, username.length);
+						
+						var waitlist = API.getWaitList();
+						var djbooth = API.getDJs();
+						for (n in waitlist)
+						{
+							if (username == waitlist[n].username)
+							{
+								isvalid = true;
+								id = waitlist[n].id;
+							}
+						}
+						if (!isvalid)
+						{
+							for (n in djbooth)
+							{
+								if (username == djbooth[n].username)
+								{
+									isvalid = true;
+									id = djbooth[n].id;
+								}
+							}
+						}
+						
+						if (isvalid)
+						{
+							new ModerationRemoveDJService(id);
+						}
+						else
+							printChat("Couldn't find " + username + " in waitlist or dj booth.");
+					}
+					else printChat("No user specified.");
+					break;
+				case "$add":
+					if (commandinfo.length > 1 && commandinfo[1] != null 
+						&& commandinfo[1] != "")
+					{
+						var username = "";
+						for (i in commandinfo)
+						{
+							if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
+								username += " ";
+							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+								username += commandinfo[i];
+						}
+						isvalid = false;
+						var id;
+						username = username.slice(1, username.length);
+						
+						var users = API.getUsers();
+						for (i in users)
+						{
+							if (users[i].username == username)
+							{
+								isvalid = true;
+								id = users[i].id;
+							}
+						}
+						
+						if (isvalid)
+						{
+							var waitlist = API.getWaitList();
+							var djbooth = API.getDJs();
+							for (i in waitlist)
+							{
+								if (id == waitlist[i].id)
+									isvalid = false;
+							}
+							for (i in djbooth)
+							{
+								if (id == djbooth[i].id)
+									isvalid = false;
+							}
+							if (isvalid)
+							{
+								new ModerationAddDJService(id);
+							}
+							else printChat(username + " already is a dj.");
+						}
+						else printChat("Can't find user " + username + ".");
+					}
+					else printChat("No user specified.");
+					break;
+				case "kick":
+					if (commandinfo.length > 1 && commandinfo[1] != null 
+						&& commandinfo[1] != "")
+					{
+						var username = "";
+						var infostart = 0;
+						for (i in commandinfo)
+						{
+							if (commandinfo[i] == ":")
+							{
+								infostart = i;
+								break;
+							}
+							if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
+								username += " ";
+							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+								username += commandinfo[i];
+						}
+						isvalid = false;
+						var id;
+						username = username.slice(1, username.length);
+						
+						var users = API.getUsers();
+						for (i in users)
+						{
+							if (users[i].username == username)
+							{
+								isvalid = true;
+								id = users[i].id;
+							}
+						}
+						
+						var message;
+						var time = 60;
+						
+						if (isvalid)
+						{
+							message = "";
+							for (var i = infostart; i < commandinfo.length; i++)
+							{
+								if (commandinfo[i] == ":")
+								{
+									time = commandinfo[i + 1];
+									break;
+								}
+								if (i > infostart + 1 && commandinfo[i] != "" && commandinfo[i] != null)
+									message += " ";
+								if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+									message += commandinfo[i];
+							}
+						}
+						
+						if (isvalid)
+						{
+							new ModerationKickUserService(id, message, time);
+						}
+						else printChat("Can't find user " + username + ".");
+					}
+					else printChat("No user specified.");
+					break;
+				default:
+					ismodcommand = iscommand;
+					break;
+			}
+		}
+		
+		if (iscommand || ismodcommand)
 		{
 			chatin.value = "";
 		}
