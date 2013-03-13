@@ -163,10 +163,21 @@ function updateCurWaitList()
 	}
 }
 
+function toggleCurWaitList(list)
+{
+	if (list.style.maxHeight == "3000px")
+		list.style.maxHeight = "0px";
+	else list.style.maxHeight = "3000px";
+}
+
 var curwaitlist = document.createElement("ol");
 curwaitlist.id = "waitlistx";
-curwaitlist.style.margin = "0px";
+curwaitlist.style.margin = "0px 0px 5px 0px";
 curwaitlist.style.padding = "0px 0px 0px 20px";
+curwaitlist.style.borderBottom = "5px solid #333333";
+curwaitlist.style.transition = "max-height 0.5s";
+curwaitlist.style.maxHeight = "3000px";
+curwaitlist.setAttribute("ondblclick", "toggleCurWaitList(this);");
 
 userlist.appendChild(curwaitlist);
 
