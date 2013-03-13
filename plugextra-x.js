@@ -142,7 +142,7 @@ function updateCurWaitList()
 	for (i in users)
 	{
 		var user = document.createElement("li");
-		user.innerHTML = users[i];
+		user.innerHTML = users[i].username;
 		user.style.color = "#D9F3FF";
 		
 		wlist.appendChild(user);
@@ -152,6 +152,7 @@ function updateCurWaitList()
 var curwaitlist = document.createElement("ol");
 curwaitlist.id = "waitlistx";
 curwaitlist.style.margin = "0px";
+curwaitlist.style.padding = "0px 0px 0px 20px";
 
 userlist.appendChild(curwaitlist);
 
