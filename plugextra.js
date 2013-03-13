@@ -145,6 +145,8 @@ explog.style.cursor = "pointer";
 explog.style.display = "block";
 explog.onclick = function () { toggleLog(); };
 explog.style.textDecoration = "none";
+explog.style.fontSize = "0.7em";
+explog.innerHTML = "Hide";
 explog.title = "Toggle Log";
 
 document.body.appendChild(explog);
