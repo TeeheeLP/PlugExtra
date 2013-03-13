@@ -798,7 +798,7 @@ function checkOwnIn(e, chatin)
 							if (users[i].username == username)
 							{
 								isvalid = true;
-								id = user[i].id;
+								id = users[i].id;
 							}
 						}
 						
