@@ -647,7 +647,7 @@ function checkOwnIn(e, chatin)
 					$version: Displays the current version<br> \
 					$changes: Shows the newest changes<br> \
 					$reset: Resets the log position<br> \
-					$away \<message\>: Activates or deactivates the awaybot");
+					$away &ltmessage&gt: Activates or deactivates the awaybot");
 				break;
 			case "$version":
 				printChat("Running on version " + version);
@@ -724,7 +724,7 @@ function checkOwnIn(e, chatin)
 				{
 					case "$modhelp":
 						printChat("List of mod commands:<br> \
-							$remove &ltname&gt: Removes a user from the waitlist or dj \
+							$remove [name]: Removes a user from the waitlist or dj \
 								booth<br> \
 							");
 						break;
