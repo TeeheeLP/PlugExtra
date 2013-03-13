@@ -167,7 +167,7 @@ function toggleCurWaitList(list)
 {
 	if (list.style.maxHeight == "1000px")
 	{
-		list.style.maxHeight = "0px";
+		list.style.maxHeight = "10px";
 		list.style.overflowY = "hidden";
 	}
 	else 
@@ -180,7 +180,7 @@ function toggleCurWaitList(list)
 var curwaitlist = document.createElement("ol");
 curwaitlist.id = "waitlistx";
 curwaitlist.style.margin = "0px 0px 5px 0px";
-curwaitlist.style.padding = "0px 0px 0px 20px";
+curwaitlist.style.padding = "5px 0px 0px 20px";
 curwaitlist.style.borderBottom = "5px solid #333333";
 curwaitlist.style.transition = "max-height 0.5s";
 curwaitlist.style.maxHeight = "1000px";
