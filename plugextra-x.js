@@ -168,12 +168,12 @@ function toggleCurWaitList(list)
 	if (list.style.maxHeight == "1000px")
 	{
 		list.style.maxHeight = "0px";
-		list.style.overflow = "hidden";
+		list.style.overflowY = "hidden";
 	}
 	else 
 	{
 		list.style.maxHeight = "1000px";
-		list.style.overflow = "auto";
+		list.style.overflowY = "auto";
 	}
 }
 
@@ -183,7 +183,7 @@ curwaitlist.style.margin = "0px 0px 5px 0px";
 curwaitlist.style.padding = "0px 0px 0px 20px";
 curwaitlist.style.borderBottom = "5px solid #333333";
 curwaitlist.style.transition = "max-height 0.5s";
-curwaitlist.style.maxHeight = "3000px";
+curwaitlist.style.maxHeight = "1000px";
 curwaitlist.setAttribute("onclick", "toggleCurWaitList(this);");
 
 userlist.appendChild(curwaitlist);
