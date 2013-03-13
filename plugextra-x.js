@@ -692,8 +692,10 @@ function checkOwnIn(e, chatin)
 				printChat("Reset the log position.");
 				break;
 			case "$away":
-				if (commandinfo.length > 1)
+				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
+				{
 					printChat("Working!");
+				}
 				document.getElementById("awaybutx").click();
 				break;
 			default:
