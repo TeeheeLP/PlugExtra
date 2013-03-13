@@ -1,5 +1,5 @@
 //	-- Basic Initialisation --
-var version = "1.2";
+var version = "1.1";
 
 var playcount = 1; 
 var autowoot = false;
@@ -602,6 +602,7 @@ function checkOwnIn(chatin)
 		case "$help":
 			printChat("Here is a list of all available commands:<br> \
 				$help: Displays this message<br> \
+				$version: Displays the current version<br> \
 				$changes: Shows the newest changes<br> \
 				$reset: Resets the log position");
 			break;
@@ -623,6 +624,9 @@ function checkOwnIn(chatin)
 			but3.style.top = "230px";
 			but3.style.left = "171px";
 			printChat("Reset the log position.");
+			break;
+		case "$version":
+			printChat("Running on version + " + version + ".");
 			break;
 		default:
 			iscommand = false;
