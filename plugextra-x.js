@@ -183,7 +183,6 @@ var curwaitlist = document.createElement("ol");
 curwaitlist.id = "waitlistx";
 curwaitlist.style.margin = "0px 0px 5px 0px";
 curwaitlist.style.padding = "10px 0px 0px 20px";
-curwaitlist.style.borderBottom = "5px solid #333333";
 curwaitlist.style.transition = "max-height 0.5s, background-color 0.5s";
 curwaitlist.style.maxHeight = "500px";
 curwaitlist.style.overflowX = "visible";
