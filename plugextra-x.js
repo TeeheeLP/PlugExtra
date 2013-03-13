@@ -622,10 +622,10 @@ function firstRun()
 
 firstRun();
 
-function checkOwnIn(e)
+function checkOwnIn(e, chatin)
 {
 	var iscommand = true;
-	var commandinfo = document.getElementById("chat-input-field").value.split(' ');
+	var commandinfo = chatin.value.split(' ');
 	
 	printChat(e.keyCode);
 	switch(commandinfo[0])
@@ -707,4 +707,4 @@ function checkOwnIn(e)
 }
 
 var chatinput = document.getElementById("chat-input-field");
-chatinput.setAttribute('onkeydown', 'checkOwnIn();');
+chatinput.setAttribute('onkeydown', 'checkOwnIn(event, this);');
