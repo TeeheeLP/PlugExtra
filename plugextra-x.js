@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.1";
+var version = "1.2";
 
 var playcount = 1; 
 var autowoot = false;
