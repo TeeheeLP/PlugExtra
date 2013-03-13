@@ -630,14 +630,48 @@ function checkOwnIn(chatin)
 	switch(commandinfo[0])
 	{
 		case "$help":
-			printChat("Here is a list of all available commands:<br> \
+			printChat("Here is a list of available commands:<br> \
+				( <> = optional [] = necessary )<br> \
+				$manual: Shows how to use the plugin<br> \
 				$help: Displays this message<br> \
 				$version: Displays the current version<br> \
 				$changes: Shows the newest changes<br> \
-				$reset: Resets the log position");
+				$reset: Resets the log position<br> \
+				$away <message>: Activates the awaybot");
+			break;
+		case "$version":
+			printChat("Running on version " + version);
+			break;
+		case "$manual":
+			printChat("What information do you need?<br> \
+				$list: Information about the userlist<br> \
+				$log: Information about the log<br> \
+				$buttons: Information about the log buttons \
+				$awaybot: Information about the awaybot");
+			break;
+		case "$list":
+			printChat("The userlist is at the left hand side of the screen. You can click at the very left \
+				to show it if it's hidden. It contains a list of all users currently in the waitlist \
+				and in the room.");
+			break;
+		case "$log":
+			printChat("The log displays information suchs as woots and mehs for the current song. \
+				You can move the log in the middle of the screen by dragging it \
+				with the top bar. Double click it or enter $reset to move the log back to \
+				it's original position. Use the black button at its bottom right hand corner to hide \
+				or show the log.");
+			break;
+		case "$button":
+			printChat("When a log button is pressed it begins to glow slightly. The blue button \
+				toggles autojoin which makes you automatically join the waitlist if you're not \
+				in it already, while the green button toggles autowoot which makes you woot every song.");
+			break;
+		case "$awaybot":
+			printChat("By clicking the 'Away'-button in the userlist or using the $away command you \
+				automatically reply with a specified message whenever somebody is mentioning you.");
 			break;
 		case "$changes":
-			printChat("Recent changes: Added commands and fixed scrolling in the log.");
+			printChat("Recent changes: Added commands and the waitlist.");
 			break;
 		case "$reset":
 			var log = document.getElementById("log");
@@ -655,8 +689,21 @@ function checkOwnIn(chatin)
 			but3.style.left = "171px";
 			printChat("Reset the log position.");
 			break;
-		case "$version":
-			printChat("Running on version " + version);
+		case "$away":
+			if (!isaway)
+			{
+				if (commandinfo[1] != "" && commandinfo[1] != null)
+				{
+					var awaymsgin = "";
+					for (i in commandinfo)
+					{
+						if (i > 0)
+							awaymsgin += commandinfo[i];
+					}
+					document.getElementById("awaymsginx").value = awaymsgin;
+				}
+			}
+			awayBot();
 			break;
 		default:
 			iscommand = false;
