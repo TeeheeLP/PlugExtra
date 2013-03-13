@@ -598,7 +598,8 @@ function checkOwnIn(chatin)
 	switch(commandinfo[0])
 	{
 		case "$help":
-			printChat("$help: Displays this message<br>$changes: Shows the newest changes");
+			printChat("Here is a list of all available commands:<br> \
+				$help: Displays this message<br>$changes: Shows the newest changes");
 			break;
 		case "$changes":
 			printChat("Recent changes: Added commands and fixed scrolling in the log.");
