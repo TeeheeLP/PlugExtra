@@ -108,23 +108,23 @@ function awayBot()
 		if (awaymsgin.value != "" && awaymsgin.value != null)
 			awaymsg = awaymsgin.value;
 		else awaymsg = "I'm away";
+		printChat("You will now reply this message when being mentioned: " + awaymsg);
 		isaway = true;
 		willprintmsg = true;
 		var awaybutx = document.getElementById("awaybutx");
 		awaybutx.innerHTML = "Back";
 		awaybutx.style.backgroundColor = "#333388";
 		document.getElementById("dialog-menu-userstatus").value = 1;
-		printChat("You will now reply this message when being mentioned: " + awaymsg);
 	}
 	else
 	{
+		printChat("You are no longer away!");
 		isaway = false;
 		willprintmsg = false;
 		var awaybutx = document.getElementById("awaybutx");
 		awaybutx.innerHTML = "Away";
 		awaybutx.style.backgroundColor = "#333333";
 		document.getElementById("dialog-menu-userstatus").value = 0;
-		printChat("You are no longer away!");
 	}
 }
 
