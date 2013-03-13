@@ -738,9 +738,9 @@ function checkOwnIn(e, chatin)
 						var username = "";
 						for (i in commandinfo)
 						{
-							if (i > 1)
+							if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
 								username += " ";
-							if (i > 0)
+							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
 								username += commandinfo[i];
 						}
 						isvalid = false;
@@ -783,9 +783,9 @@ function checkOwnIn(e, chatin)
 						var username = "";
 						for (i in commandinfo)
 						{
-							if (i > 1)
+							if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
 								username += " ";
-							if (i > 0)
+							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
 								username += commandinfo[i];
 						}
 						isvalid = false;
