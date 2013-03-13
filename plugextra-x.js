@@ -585,8 +585,8 @@ function removeFromList(user)
 	document.getElementById("cusercount").innerHTML = API.getUsers().length + " users online";
 }
 */
-API.addEventListener(API.USER_LEAVE, refreshUserlist);*/
-/*
+API.addEventListener(API.USER_LEAVE, refreshUserlist);
+
 //	---------------
 //	Chat management
 //	---------------
