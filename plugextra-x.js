@@ -1,3 +1,5 @@
+//	-- Basic Initialisation --
+
 var playcount = 1; 
 var autowoot = false;
 var autojoin = false;
@@ -6,6 +8,16 @@ var willprintmsg = false;
 var awaymsg = "I'm away";
 var oldwaitlist = API.getWaitList();
 var olddjbooth = API.getDJs();
+
+function firstRun()
+{
+	var chatwindow = document.getElementById("chat-messages");
+	chatwindow.innerHTML += "<div class='chat-update' style='color:#00ACFF;'>PlugExtra succesfully started!</div>";
+	chatwindow.scrollTop = chatwindow.scrollHeight;
+}
+
+firstRun();
+
 
 function checkWaitList(users)
 {
@@ -110,23 +122,23 @@ function callback(obj)
 	} 
 	playcount += 1;
 	log = document.getElementById("log"); 
-	//var doscroll = log.scrollTop == log.scrollHeight - log.offsetHeight; 
+	var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
 	log.innerHTML += "<div id='track" + playcount + "' style='text-decoration:underline;display:inline;' onclick='toggleFeedback(" + playcount 
 		+ ")'>Track: <span style='color:white'>" + playcount + "</span> - <span style='color:white'>" + obj.dj.username 
 		+ "</span> is playing <span style='color:white;font-weight:bold;'>" + obj.media.title 
 		+ "</span> by <span style='color:white'>" + obj.media.author + "</span>.</div><div id='trackfeed" + playcount 
 		+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
-	log.scrollTop = log.scrollHeight; 
+	if (doscroll) log.scrollTop = log.scrollHeight; 
 } 
 
 API.addEventListener(API.CURATE_UPDATE, showcura); 
 function showcura(obj) 
 { 
 	log = document.getElementById("log"); 
-	//var doscroll = log.scrollTop == log.scrollHeight - log.offsetHeight; 
+	var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
 	var trackfeed = document.getElementById("trackfeed" + playcount); 
 	trackfeed.innerHTML += "<span style='color:white'>" + obj.user.username + "</span> <span style='color:yellow'>added</span> the current song.<br>"; 
-	log.scrollTop = log.scrollHeight; 
+	if (doscroll) log.scrollTop = log.scrollHeight; 
 	prevscore = API.getRoomScore(); 
 } 
 
@@ -138,11 +150,11 @@ function showvoter(obj)
 	if (document.getElementById(obj.user.id + playcount) == null) 
 	{ 
 		var log = document.getElementById("log"); 
-		//var doscroll = log.scrollTop == log.scrollHeight - log.offsetHeight; 
+		var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
 		var trackfeed = document.getElementById("trackfeed" + playcount); 
 		trackfeed.innerHTML += "<span style='color:white'>" + obj.user.username + "</span> voted <span id=\'" + obj.user.id + playcount + "' style='color:" 
 			+ spancolor + "'>" + vote + "</span>.<br>"; 
-		log.scrollTop = log.scrollHeight; 
+		if (doscroll) log.scrollTop = log.scrollHeight; 
 	} 
 	else 
 	{
@@ -168,10 +180,10 @@ function toggleFeedback(track)
 	{ 
 		trackfeed.style.transition = "max-height 0.25s, opacity 0.25s ease 0.25s"; 
 		var log = document.getElementById("log"); 
-		//var doscroll = log.scrollTop == log.scrollHeight - log.offsetHeight; 
+		var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
 		trackfeed.style.maxHeight = "1000px"; 
 		trackfeed.style.opacity = "1"; 
-		log.scrollTop = log.scrollHeight; 
+		if (doscroll) log.scrollTop = log.scrollHeight; 
 		prevtrack.style.textDecoration = "underline"; 
 	} 
 } 
