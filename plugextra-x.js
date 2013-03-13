@@ -102,15 +102,21 @@ function awayBot()
 		else awaymsg = "I'm away";
 		isaway = true;
 		willprintmsg = true;
-		document.getElementById("awaybutx").innerHTML = "Back";
+		var awaybutx = document.getElementById("awaybutx");
+		awaybutx.innerHTML = "Back";
+		awaybutx.style.backgroundColor = "#333388";
 		document.getElementById("dialog-menu-userstatus").value = 1;
+		printChat("You will now reply this message when being mentioned: " + awaymsg);
 	}
 	else
 	{
 		isaway = false;
 		willprintmsg = false;
-		document.getElementById("awaybutx").innerHTML = "Away";
+		var awaybutx = document.getElementById("awaybutx");
+		awaybutx.innerHTML = "Away";
+		awaybutx.style.backgroundColor = "#333333";
 		document.getElementById("dialog-menu-userstatus").value = 0;
+		printChat("You are no longer away!");
 	}
 }
 
