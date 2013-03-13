@@ -662,12 +662,12 @@ function checkOwnIn(e, chatin)
 			case "$help":
 				printChat("Here is a list of available commands:<br> \
 					( <> = optional [] = necessary )<br> \
-					$manual: Shows how to use the plugin<br> \
-					$help: Displays this message<br> \
-					$version: Displays the current version<br> \
-					$changes: Shows the newest changes<br> \
-					$reset: Resets the log position<br> \
-					$away &ltmessage&gt: Activates or deactivates the awaybot");
+					$manual - Shows how to use the plugin<br> \
+					$help - Displays this message<br> \
+					$version - Displays the current version<br> \
+					$changes - Shows the newest changes<br> \
+					$reset - Resets the log position<br> \
+					$away - &ltmessage&gt: Activates or deactivates the awaybot");
 				break;
 			case "$version":
 				printChat("Running on version " + version);
@@ -747,10 +747,13 @@ function checkOwnIn(e, chatin)
 			{
 				case "$modhelp":
 					printChat("List of mod commands:<br> \
-						$remove [name]: Removes a user from the waitlist or dj \
+						( <> = optional [] = necessary )<br> \
+						$remove [name] - Removes a user from the waitlist or dj \
 							booth<br> \
-						$add [name]: Adds a user to the waitlist \
-						");
+						$add [name] - Adds a user to the waitlist<br> \
+						$kick [name] : <reason> : <minutes> - Kicks a user for \
+							a specified amount of minutes or 60 by default \
+							and displays the given reason message");
 					break;
 				case "$remove":
 					if (commandinfo.length > 1 && commandinfo[1] != null 
@@ -844,6 +847,66 @@ function checkOwnIn(e, chatin)
 								new ModerationAddDJService(id);
 							}
 							else printChat(username + " already is a dj.");
+						}
+						else printChat("Can't find user " + username + ".");
+					}
+					else printChat("No user specified.");
+					break;
+				case "kick":
+					if (commandinfo.length > 1 && commandinfo[1] != null 
+						&& commandinfo[1] != "")
+					{
+						var username = "";
+						var infostart = 0;
+						for (i in commandinfo)
+						{
+							if (commandinfo[i] == ":")
+							{
+								infostart = i;
+								break;
+							}
+							if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
+								username += " ";
+							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+								username += commandinfo[i];
+						}
+						isvalid = false;
+						var id;
+						username = username.slice(1, username.length);
+						
+						var users = API.getUsers();
+						for (i in users)
+						{
+							if (users[i].username == username)
+							{
+								isvalid = true;
+								id = users[i].id;
+							}
+						}
+						
+						var message;
+						var time = 60;
+						
+						if (isvalid)
+						{
+							message = "";
+							for (var i = infostart; i < commandinfo.length; i++)
+							{
+								if (commandinfo[i] == ":")
+								{
+									time = commandinfo[i + 1];
+									break;
+								}
+								if (i > infostart + 1 && commandinfo[i] != "" && commandinfo[i] != null)
+									message += " ";
+								if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+									message += commandinfo[i];
+							}
+						}
+						
+						if (isvalid)
+						{
+							new ModerationKickUserService(id, message, time);
 						}
 						else printChat("Can't find user " + username + ".");
 					}
