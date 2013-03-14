@@ -46,7 +46,7 @@ function dragLog(e)
 			but3.style.left = (parseInt(but3.style.left) + movex / 2) + "px";
 		}
 	}
-	if (isclicked)
+	if (isclicked && !dodrag)
 	{
 		log.style.transition = "";
 		log.style.zIndex = "15";
