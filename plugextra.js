@@ -19,7 +19,14 @@ function dragLog(e)
 	}
 	if (dodrag)
 	{
-		window.getSelection().removeAllRanges();
+		if (window.getSelection().empty) 
+		{  // Chrome
+    			window.getSelection().empty();
+  		} 
+  		else if (window.getSelection().removeAllRanges) 
+  		{  // Firefox
+  			window.getSelection().removeAllRanges();
+  		}
 		if (oldcx == "" || oldcx == null)
 		{
 			oldcx = e.clientX;
