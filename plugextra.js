@@ -36,7 +36,7 @@ function dragLog(e)
 			oldcy = e.clientY;
 			
 			log.style.top = (parseInt(log.style.top) + movey) + "px";
-			log.style.right = (parseInt(log.style.right) - movex) / 2 + "px";
+			log.style.right = (parseInt(log.style.right) - movex) + "px";
 			log.style.zIndex = "15";
 			but1.style.top = (parseInt(but1.style.top) + movey) + "px";
 			but1.style.left = (parseInt(but1.style.left) + movex) / 2 + "px";
