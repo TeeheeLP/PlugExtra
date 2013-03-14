@@ -96,6 +96,7 @@ awaymsgin.style.borderRadius = "5px";
 awaymsgin.style.boxShadow = "1px 1px 3px #000000 inset";
 awaymsgin.style.border = "2px solid #FFFFFF";
 awaymsgin.style.backgroundColor = "#FFFFFF";
+awaymsgin.setAttribute("onkeydown", "onPressAway(event);");
 awaymsgin.value = "I'm away";
 
 userlist.appendChild(awaymsgin);
@@ -126,6 +127,12 @@ function awayBot()
 		awaybutx.style.backgroundColor = "#333333";
 		document.getElementById("dialog-menu-userstatus").value = 0;
 	}
+}
+
+function onPressAway(e)
+{
+	if (e.keyCode == 13)
+		awayBot();
 }
 
 var awaybut = document.createElement("div");
@@ -646,6 +653,8 @@ function firstRun()
 	printChat("Succesfully started PlugExtra! Using version " + version + "<br> \
 		Enter $help to view a list of available commands or $manual to see an instruction \
 		on how to use the plugin.");
+	if (API.getSelf().permission > 1)
+		printChat("Use $modhelp to view commands only available to mods");
 }
 
 firstRun();
