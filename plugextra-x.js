@@ -236,7 +236,7 @@ function refreshUserlist()
 		else user.style.color = "#5469FF";
 		user.style.cursor = "pointer";
 		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
-		user.innerHTML = staff[i].username + " &lt" + staffsuffix[staff[i].permission - 1] + "&gt";		
+		user.innerHTML = staff[i].username + " (" + staffsuffix[staff[i].permission - 1] + ")";		
 		
 		stafflist.appendChild(user);
 	}
