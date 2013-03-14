@@ -208,10 +208,14 @@ curusercount.innerHTML = API.getUsers().length + " users online";
 function mentionUser(id)
 {
 	var users = API.getUsers();
+	var chatin = document.getElementById("chat-input-field");
 	for (i in users)
 	{
 		if (users[i].id == id)
-			document.getElementById("chat-input-field").value += "@" + users[i].username + " ";
+		{
+			chatin.value += "@" + users[i].username + " ";
+			chatin.focus();
+		}
 	}
 }
 
