@@ -167,7 +167,11 @@ function updateCurWaitList()
 		var user = document.createElement("li");
 		user.innerHTML = users[i].username;
 		user.style.color = "#D9F3FF";
-		if (users[i].id == API.getSelf().id) user.style.fontWeight = "bold";
+		if (users[i].id == API.getSelf().id)
+		{
+			user.style.fontWeight = "bold";
+			user.style.fontStyle = "italic";
+		}
 		
 		wlist.appendChild(user);
 	}

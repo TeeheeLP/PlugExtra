@@ -19,7 +19,14 @@ function dragLog(e)
 	}
 	if (dodrag)
 	{
-		window.getSelection().removeAllRanges();
+		if (window.getSelection().empty) 
+		{  // Chrome
+    			window.getSelection().empty();
+  		} 
+  		else if (window.getSelection().removeAllRanges) 
+  		{  // Firefox
+  			window.getSelection().removeAllRanges();
+  		}
 		if (oldcx == "" || oldcx == null)
 		{
 			oldcx = e.clientX;
@@ -46,17 +53,17 @@ function dragLog(e)
 			but3.style.left = (parseInt(but3.style.left) + movex) + "px";
 		}
 	}
-	if (isclicked)
+	/*if (isclicked && !dodrag)
 	{
 		log.style.transition = "";
 		log.style.zIndex = "15";
 		var but1 = document.getElementById("togg");
-		but1.style.left = (parseFloat(log.style.width) / 2 - 1.1*parseFloat(log.style.right)) + "px";
+		but1.style.left = (parseInt(log.style.width) / 2 - 1.1*parseInt(log.style.right)) + "px";
 		but1 = document.getElementById("expwoot");
-		but1.style.left = (parseFloat(log.style.width) / 2 - 1.1*parseFloat(log.style.right) - 27) + "px";
+		but1.style.left = (parseInt(log.style.width) / 2 - 1.1*parseInt(log.style.right) - 27) + "px";
 		but1 = document.getElementById("expjoin");
-		but1.style.left = (parseFloat(log.style.width) / 2 - 1.1*parseFloat(log.style.right) - 54) + "px";
-	}
+		but1.style.left = (parseInt(log.style.width) / 2 - 1.1*parseInt(log.style.right) - 54) + "px";
+	}*/
 }
 
 function resetLayout()
@@ -82,7 +89,7 @@ function stopDrag()
 {
 	isclicked = false;
 	dodrag = false;
-	elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
+	//elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
 	oldcx = ''; 
 	oldcy = ''; 
 }
@@ -106,7 +113,7 @@ elem.style.opacity = "0.8";
 //elem.style.boxShadow = "1px 1px 2px 1px #444444 inset";
 elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
 elem.style.right = "177px";
-elem.style.resize = "both";
+//elem.style.resize = "both";
 elem.setAttribute("onmousedown", "isclicked = true;");
 elem.setAttribute("ondblclick", "resetLayout();");
 elem.setAttribute("onmousemove", "dragLog(event);");
