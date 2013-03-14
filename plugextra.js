@@ -49,6 +49,7 @@ function dragLog(e)
 	if (isclicked)
 	{
 		log.style.transition = "";
+		log.style.zIndex = "15";
 		var but1 = document.getElementById("togg");
 		but1.style.left = (parseFloat(log.style.width) / 2 - 1.1*parseFloat(log.style.right)) + "px";
 		but1 = document.getElementById("expwoot");
