@@ -751,9 +751,8 @@ function checkOwnIn(e, chatin)
 						$remove [name] - Removes a user from the waitlist or dj \
 							booth<br> \
 						$add [name] - Adds a user to the waitlist<br> \
-						$kick [name] : &ltreason&gt : &ltminutes&gt - Kicks a user for \
-							a specified amount of minutes or 60 by default \
-							and displays the given reason message");
+						$kick [name] : &ltreason&gt - Kicks a user for \
+							60 minutes and displays the given reason message");
 					break;
 				case "$remove":
 					if (commandinfo.length > 1 && commandinfo[1] != null 
