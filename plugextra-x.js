@@ -677,7 +677,8 @@ function checkOwnIn(e, chatin)
 					$version - Displays the current version<br> \
 					$changes - Shows the newest changes<br> \
 					$reset - Resets the log position<br> \
-					$away - &ltmessage&gt: Activates or deactivates the awaybot");
+					$away - &ltmessage&gt: Activates or deactivates the awaybot<br> \
+					$whois [name] - Shows information about a user");
 				break;
 			case "$version":
 				printChat("Running on version " + version);
