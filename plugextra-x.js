@@ -752,7 +752,7 @@ function checkOwnIn(e, chatin)
 							booth<br> \
 						$add [name] - Adds a user to the waitlist<br> \
 						$kick [name] : &ltreason&gt - Kicks a user for \
-							60 minutes and displays the given reason message \
+							60 minutes and displays the given reason message<br> \
 						$ban [name] : &ltreason&gt - Bans a specified user");
 					break;
 				case "$remove":
