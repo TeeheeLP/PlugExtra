@@ -10,6 +10,7 @@ var willprintmsg = false;
 var awaymsg = "I'm away";
 var oldwaitlist = API.getWaitList();
 var olddjbooth = API.getDJs();
+var staffsuffix = new Array("Featured DJ", "Bouncer", "Manager", "Co-Host", "Host");
 
 function printChat(str)
 {
@@ -235,7 +236,7 @@ function refreshUserlist()
 		else user.style.color = "#5469FF";
 		user.style.cursor = "pointer";
 		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
-		user.innerHTML = staff[i].username;
+		user.innerHTML = staff[i].username + " &lt" + staffsuffix[staff[i].permission - 1] + "&gt";		
 		
 		stafflist.appendChild(user);
 	}
@@ -654,7 +655,7 @@ function firstRun()
 		Enter $help to view a list of available commands or $manual to see an instruction \
 		on how to use the plugin.");
 	if (API.getSelf().permission > 1)
-		printChat("Use $modhelp to view commands only available to mods");
+		printChat("Use $modhelp to view commands only available to mods.");
 }
 
 firstRun();
