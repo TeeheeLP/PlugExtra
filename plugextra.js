@@ -53,6 +53,8 @@ function resetLayout()
 	var log = document.getElementById("log");
 	log.style.top = "288px";
 	log.style.right = "177px";
+	log.style.width = "837px";
+	log.style.height = "276px";
 	log.style.zIndex = "8";
 	var but1 = document.getElementById("togg");
 	but1.style.top = "280px";
@@ -92,6 +94,7 @@ elem.style.opacity = "0.8";
 //elem.style.boxShadow = "1px 1px 2px 1px #444444 inset";
 elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
 elem.style.right = "177px";
+elem.style.resize = "both";
 elem.setAttribute("onmousedown", "isclicked = true;");
 elem.setAttribute("ondblclick", "resetLayout();");
 elem.setAttribute("onmousemove", "dragLog(event);");
