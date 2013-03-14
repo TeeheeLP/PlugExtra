@@ -11,6 +11,8 @@ var awaymsg = "I'm away";
 var oldwaitlist = API.getWaitList();
 var olddjbooth = API.getDJs();
 var suffix = new Array("User", "Featured DJ", "Bouncer", "Manager", "Co-Host", "Host");
+var leftwait = 0;
+var leftbooth = 0;
 
 function printChat(str)
 {
@@ -314,6 +316,7 @@ function checkWaitList(users)
 			document.getElementById("trackfeed" + playcount).innerHTML += "<span style='color:white'>"
 				+ oldwaitlist[i].username + "</span> <span style='color:#AA44FF'>left</span> the waitlist at place <span style='color:#AA44FF'>"
 				+ (parseInt(i) + 1) + "</span>.<br>";
+			leftwait++;
 		}
 	}
 	oldwaitlist = API.getWaitList();
@@ -350,6 +353,7 @@ function checkDJBooth()
 			document.getElementById("trackfeed" + playcount).innerHTML += "<span style='color:white'>"
 				+ olddjbooth[i].username + "</span> <span style='color:#FF00BD'>left</span> the dj booth at place <span style='color:#FF00BD'>"
 				+ (parseInt(i) + 1) + "</span>.<br>";
+			leftbooth++;
 		}
 	}
 	olddjbooth = API.getDJs();
@@ -389,6 +393,17 @@ function callback(obj)
 		prevtrack.innerHTML += " (<span style='color:white'>" + prevscore.positive + "<span> <span style='color:lime'>woots</span>, <span style='color:white'>" 
 			+ prevscore.negative + "<span> <span style='color:red'>mehs</span>, <span style='color:white'>" 
 			+ prevscore.curates + "<span> <span style='color:yellow'> curates</span>)"; 
+		if (leftwait > 0)
+		{
+			prevtrack.innerHTML += " " + leftwait + " <span style='color:#AA44FF'>left the waitlist</span>";
+		}
+		if (leftbooth > 0)
+		{
+			if (leftwait > 0) prevtrack.innerHTML += ", ";
+			prevtrack.innerHTML += " " + leftbooth + " <span style='color:#FF00BD'>left the dj booth</span>";
+		}
+		leftwait = 0;
+		leftbooth = 0;
 	} 
 	playcount += 1;
 	log = document.getElementById("log"); 
