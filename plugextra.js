@@ -39,11 +39,11 @@ function dragLog(e)
 			log.style.right = (parseInt(log.style.right) - movex) + "px";
 			log.style.zIndex = "15";
 			but1.style.top = (parseInt(but1.style.top) + movey) + "px";
-			but1.style.left = (parseInt(but1.style.left) + movex / 2) + "px";
+			but1.style.left = (parseInt(but1.style.left) + movex) + "px";
 			but2.style.top = (parseInt(but2.style.top) + movey) + "px";
-			but2.style.left = (parseInt(but2.style.left) + movex / 2) + "px";
+			but2.style.left = (parseInt(but2.style.left) + movex) + "px";
 			but3.style.top = (parseInt(but3.style.top) + movey) + "px";
-			but3.style.left = (parseInt(but3.style.left) + movex / 2) + "px";
+			but3.style.left = (parseInt(but3.style.left) + movex) + "px";
 		}
 	}
 	if (isclicked && !dodrag)
