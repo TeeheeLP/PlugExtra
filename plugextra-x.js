@@ -404,7 +404,7 @@ function callback(obj)
 		if (leftbooth > 0)
 		{
 			if (leftwait > 0) prevtrack.innerHTML += ", ";
-			else prevtrach.innerHTML += " -";
+			else prevtrack.innerHTML += " -";
 			prevtrack.innerHTML += " " + leftbooth + " <span style='color:#FF00BD'>left the dj booth</span>";
 		}
 		leftwait = 0;
