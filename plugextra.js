@@ -47,11 +47,11 @@ function dragLog(e)
 		}
 	}
 	var but1 = document.getElementById("togg");
-	but1.style.left = (parseInt(log.style.width) / 2 - 1.1*parseInt(log.style.right)) + "px";
+	but1.style.left = (parseFloat(log.style.width) / 2 - 1.1*parseFloat(log.style.right)) + "px";
 	but1 = document.getElementById("expwoot");
-	but1.style.left = (parseInt(log.style.width) / 2 - 1.1*parseInt(log.style.right) - 27) + "px";
+	but1.style.left = (parseFloat(log.style.width) / 2 - 1.1*parseFloat(log.style.right) - 27) + "px";
 	but1 = document.getElementById("expjoin");
-	but1.style.left = (parseInt(log.style.width) / 2 - 1.1*parseInt(log.style.right) - 54) + "px";
+	but1.style.left = (parseFloat(log.style.width) / 2 - 1.1*parseFloat(log.style.right) - 54) + "px";
 }
 
 function resetLayout()
