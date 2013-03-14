@@ -28,6 +28,8 @@ function dragLog(e)
 		else
 		{
 			var but1 = document.getElementById("togg");
+			var but2 = document.getElementById("expwoot");
+			var but3 = document.getElementById("expjoin");
 			var movex = e.clientX - oldcx;
 			var movey = e.clientY - oldcy;
 			oldcx = e.clientX;
