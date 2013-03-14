@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2";
+var version = "1.2.1";
 
 var playcount = 1; 
 var autowoot = false;
@@ -10,6 +10,7 @@ var willprintmsg = false;
 var awaymsg = "I'm away";
 var oldwaitlist = API.getWaitList();
 var olddjbooth = API.getDJs();
+var staffsuffix = new Array("Featured DJ", "Bouncer", "Manager", "Co-Host", "Host");
 
 function printChat(str)
 {
@@ -96,6 +97,7 @@ awaymsgin.style.borderRadius = "5px";
 awaymsgin.style.boxShadow = "1px 1px 3px #000000 inset";
 awaymsgin.style.border = "2px solid #FFFFFF";
 awaymsgin.style.backgroundColor = "#FFFFFF";
+awaymsgin.setAttribute("onkeydown", "onPressAway(event);");
 awaymsgin.value = "I'm away";
 
 userlist.appendChild(awaymsgin);
@@ -126,6 +128,12 @@ function awayBot()
 		awaybutx.style.backgroundColor = "#333333";
 		document.getElementById("dialog-menu-userstatus").value = 0;
 	}
+}
+
+function onPressAway(e)
+{
+	if (e.keyCode == 13)
+		awayBot();
 }
 
 var awaybut = document.createElement("div");
@@ -228,7 +236,7 @@ function refreshUserlist()
 		else user.style.color = "#5469FF";
 		user.style.cursor = "pointer";
 		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
-		user.innerHTML = staff[i].username;
+		user.innerHTML = staff[i].username + " (" + staffsuffix[staff[i].permission - 1] + ")";		
 		
 		stafflist.appendChild(user);
 	}
@@ -646,6 +654,8 @@ function firstRun()
 	printChat("Succesfully started PlugExtra! Using version " + version + "<br> \
 		Enter $help to view a list of available commands or $manual to see an instruction \
 		on how to use the plugin.");
+	if (API.getSelf().permission > 1)
+		printChat("Use $modhelp to view commands only available to mods.");
 }
 
 firstRun();
