@@ -112,6 +112,7 @@ function awayBot()
 		if (awaymsgin.value != "" && awaymsgin.value != null)
 			awaymsg = awaymsgin.value;
 		else awaymsg = "I'm away";
+		Models.user.changeStatus(1);
 		printChat("You will now reply this message when being mentioned: " + awaymsg);
 		isaway = true;
 		willprintmsg = true;
@@ -122,6 +123,7 @@ function awayBot()
 	}
 	else
 	{
+		Models.user.changeStatus(0);
 		printChat("You are no longer away!");
 		isaway = false;
 		willprintmsg = false;
