@@ -752,7 +752,8 @@ function checkOwnIn(e, chatin)
 							booth<br> \
 						$add [name] - Adds a user to the waitlist<br> \
 						$kick [name] : &ltreason&gt - Kicks a user for \
-							60 minutes and displays the given reason message");
+							60 minutes and displays the given reason message \
+						$ban [name] : &ltreason&gt - Bans a specified user");
 					break;
 				case "$remove":
 					if (commandinfo.length > 1 && commandinfo[1] != null 
@@ -851,6 +852,7 @@ function checkOwnIn(e, chatin)
 					}
 					else printChat("No user specified.");
 					break;
+				case "$ban":
 				case "$kick":
 					if (commandinfo.length > 1 && commandinfo[1] != null 
 						&& commandinfo[1] != "")
@@ -884,18 +886,12 @@ function checkOwnIn(e, chatin)
 						}
 						
 						var message;
-						var time = 60;
 						
 						if (isvalid)
 						{
 							message = "";
 							for (var i = infostart; i < commandinfo.length; i++)
 							{
-								if (commandinfo[i] == ":")
-								{
-									time = commandinfo[i + 1];
-									break;
-								}
 								if (i > infostart + 1 && commandinfo[i] != "" && commandinfo[i] != null)
 									message += " ";
 								if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
@@ -905,7 +901,14 @@ function checkOwnIn(e, chatin)
 						
 						if (isvalid)
 						{
-							new ModerationKickUserService(id, message, time);
+							if (commandinfo[0] == "$ban")
+							{
+								new ModerationKickUserService(id, message, -1);
+							}
+							else 
+							{
+								new ModerationKickUserService(id, message, 60);
+							}
 						}
 						else printChat("Can't find user " + username + ".");
 					}
