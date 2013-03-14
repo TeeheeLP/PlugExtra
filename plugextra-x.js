@@ -16,10 +16,7 @@ var leftbooth = 0;
 
 function printChat(str)
 {
-	var chatwindow = document.getElementById("chat-messages");
-	var doscroll = chatwindow.scrollTop >= chatwindow.scrollHeight - chatwindow.offsetHeight; 
-	chatwindow.innerHTML += "<div class='chat-update' style='color:#00ACFF;'>" + str + "</div>";
-	if (doscroll) chatwindow.scrollTop = chatwindow.scrollHeight;
+	Models.chat.receive({type:"update", message:("<span style='color:#00ACFF;'>" + str + "</span>")})
 }
 
 //	-------------------
@@ -231,9 +228,39 @@ stafflist.style.margin = "0px";
 
 function refreshUserlist()
 {
-	var staff = API.getStaff();
 	var stafflist = document.getElementById("stafflistx");
 	stafflist.innerHTML = "";
+	var admins = API.getAdmins();
+	for (var i in admins)
+	{
+		var user = document.createElement("li");
+		user.id = "pgx" + admins[i].id;
+		user.style.width = "100%";
+		user.style.marginTop = "5px";
+		user.style.color = "#FF3A97";
+		user.style.cursor = "pointer";
+		user.setAttribute("onclick", "mentionUser('" + admins[i].id + "');");
+		user.innerHTML = admins[i].username + " <span style='font-size:0.7em'>(Admin)</span>";		
+		
+		stafflist.appendChild(user);
+	}
+	
+	var ambs = API.getAmbassadors();
+	for (var i in ambs)
+	{
+		var user = document.createElement("li");
+		user.id = "pgx" + ambs[i].id;
+		user.style.width = "100%";
+		user.style.marginTop = "5px";
+		user.style.color = "#FF3A97";
+		user.style.cursor = "pointer";
+		user.setAttribute("onclick", "mentionUser('" + ambs[i].id + "');");
+		user.innerHTML = ambs[i].username + " <span style='font-size:0.7em'>(Ambassador)</span>";		
+		
+		stafflist.appendChild(user);
+	}
+	
+	var staff = API.getStaff();
 	for (var i in staff)
 	{
 		var user = document.createElement("li");
