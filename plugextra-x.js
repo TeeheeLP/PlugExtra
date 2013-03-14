@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.3";
+var version = "1.2.4";
 
 var playcount = 1; 
 var autowoot = false;
@@ -167,6 +167,7 @@ function updateCurWaitList()
 		var user = document.createElement("li");
 		user.innerHTML = users[i].username;
 		user.style.color = "#D9F3FF";
+		if (users[i].id == API.getSelf().id) user.style.fontWeight = "bold";
 		
 		wlist.appendChild(user);
 	}
