@@ -46,6 +46,12 @@ function dragLog(e)
 			but3.style.left = (parseInt(but3.style.left) + movex) + "px";
 		}
 	}
+	var but1 = document.getElementById("togg");
+	but1.style.left = (parseInt(log.style.width) / 2 - 1.1*parseInt(log.style.right)) + "px";
+	but1 = document.getElementById("expwoot");
+	but1.style.left = (parseInt(log.style.width) / 2 - 1.1*parseInt(log.style.right) - 27) + "px";
+	but1 = document.getElementById("expjoin");
+	but1.style.left = (parseInt(log.style.width) / 2 - 1.1*parseInt(log.style.right) - 54) + "px";
 }
 
 function resetLayout()
