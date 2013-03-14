@@ -28,8 +28,6 @@ function dragLog(e)
 		else
 		{
 			var but1 = document.getElementById("togg");
-			var but2 = document.getElementById("expwoot");
-			var but3 = document.getElementById("expjoin");
 			var movex = e.clientX - oldcx;
 			var movey = e.clientY - oldcy;
 			oldcx = e.clientX;
@@ -38,12 +36,12 @@ function dragLog(e)
 			log.style.top = (parseInt(log.style.top) + movey) + "px";
 			log.style.right = (parseInt(log.style.right) - movex) + "px";
 			log.style.zIndex = "15";
-			but1.style.top = (parseInt(but1.style.top) + movey) + "px";
-			but1.style.left = (parseInt(but1.style.left) + movex) + "px";
-			but2.style.top = (parseInt(but2.style.top) + movey) + "px";
-			but2.style.left = (parseInt(but2.style.left) + movex) + "px";
-			but3.style.top = (parseInt(but3.style.top) + movey) + "px";
-			but3.style.left = (parseInt(but3.style.left) + movex) + "px";
+			var but1 = document.getElementById("togg");
+			but1.style.left = (parseFloat(log.style.width) / 2 - 1.1*parseFloat(log.style.right)) + "px";
+			but1 = document.getElementById("expwoot");
+			but1.style.left = (parseFloat(log.style.width) / 2 - 1.1*parseFloat(log.style.right) - 27) + "px";
+			but1 = document.getElementById("expjoin");
+			but1.style.left = (parseFloat(log.style.width) / 2 - 1.1*parseFloat(log.style.right) - 54) + "px";
 		}
 	}
 	if (isclicked)
