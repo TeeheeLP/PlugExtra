@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.1";
+var version = "1.2.3";
 
 var playcount = 1; 
 var autowoot = false;
@@ -10,7 +10,9 @@ var willprintmsg = false;
 var awaymsg = "I'm away";
 var oldwaitlist = API.getWaitList();
 var olddjbooth = API.getDJs();
-var staffsuffix = new Array("Featured DJ", "Bouncer", "Manager", "Co-Host", "Host");
+var suffix = new Array("User", "Featured DJ", "Bouncer", "Manager", "Co-Host", "Host");
+var leftwait = 0;
+var leftbooth = 0;
 
 function printChat(str)
 {
@@ -206,10 +208,14 @@ curusercount.innerHTML = API.getUsers().length + " users online";
 function mentionUser(id)
 {
 	var users = API.getUsers();
+	var chatin = document.getElementById("chat-input-field");
 	for (i in users)
 	{
 		if (users[i].id == id)
-			document.getElementById("chat-input-field").value += "@" + users[i].username + " ";
+		{
+			chatin.value += "@" + users[i].username + " ";
+			chatin.focus();
+		}
 	}
 }
 
@@ -236,7 +242,7 @@ function refreshUserlist()
 		else user.style.color = "#5469FF";
 		user.style.cursor = "pointer";
 		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
-		user.innerHTML = staff[i].username + " (" + staffsuffix[staff[i].permission - 1] + ")";		
+		user.innerHTML = staff[i].username + " <span style='font-size:0.7em'>(" + suffix[staff[i].permission] + ")</span>";		
 		
 		stafflist.appendChild(user);
 	}
@@ -314,6 +320,7 @@ function checkWaitList(users)
 			document.getElementById("trackfeed" + playcount).innerHTML += "<span style='color:white'>"
 				+ oldwaitlist[i].username + "</span> <span style='color:#AA44FF'>left</span> the waitlist at place <span style='color:#AA44FF'>"
 				+ (parseInt(i) + 1) + "</span>.<br>";
+			leftwait++;
 		}
 	}
 	oldwaitlist = API.getWaitList();
@@ -350,6 +357,7 @@ function checkDJBooth()
 			document.getElementById("trackfeed" + playcount).innerHTML += "<span style='color:white'>"
 				+ olddjbooth[i].username + "</span> <span style='color:#FF00BD'>left</span> the dj booth at place <span style='color:#FF00BD'>"
 				+ (parseInt(i) + 1) + "</span>.<br>";
+			leftbooth++;
 		}
 	}
 	olddjbooth = API.getDJs();
@@ -389,6 +397,17 @@ function callback(obj)
 		prevtrack.innerHTML += " (<span style='color:white'>" + prevscore.positive + "<span> <span style='color:lime'>woots</span>, <span style='color:white'>" 
 			+ prevscore.negative + "<span> <span style='color:red'>mehs</span>, <span style='color:white'>" 
 			+ prevscore.curates + "<span> <span style='color:yellow'> curates</span>)"; 
+		if (leftwait > 0)
+		{
+			prevtrack.innerHTML += " " + leftwait + " <span style='color:#AA44FF'>left the waitlist</span>";
+		}
+		if (leftbooth > 0)
+		{
+			if (leftwait > 0) prevtrack.innerHTML += ", ";
+			prevtrack.innerHTML += " " + leftbooth + " <span style='color:#FF00BD'>left the dj booth</span>";
+		}
+		leftwait = 0;
+		leftbooth = 0;
 	} 
 	playcount += 1;
 	log = document.getElementById("log"); 
@@ -677,7 +696,8 @@ function checkOwnIn(e, chatin)
 					$version - Displays the current version<br> \
 					$changes - Shows the newest changes<br> \
 					$reset - Resets the log position<br> \
-					$away - &ltmessage&gt: Activates or deactivates the awaybot");
+					$away - &ltmessage&gt: Activates or deactivates the awaybot<br> \
+					$whois [name] - Shows information about a user");
 				break;
 			case "$version":
 				printChat("Running on version " + version);
@@ -712,7 +732,12 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("Recent changes: Made the waitlist hideable and added mod commands.");
+				printChat("Recent changes: Added the $whois command and a few mod commands. You can \
+					now press enter in the away-messagebox to turn the awaybot on or off. The chatinput \
+					will now be focused after mentioning somebody through the userlist. Also it now \
+					shows if and how many users left the waitlist or dj booth during a song next \
+					to its total mehs, woots and curates in the log. The rank of every staff member \
+					will now be displayed next to their name.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
@@ -744,6 +769,48 @@ function checkOwnIn(e, chatin)
 					document.getElementById("awaymsginx").value = awaymsg;
 				}
 				document.getElementById("awaybutx").click();
+				break;
+			case "$whois":
+				if (commandinfo.length > 1 && commandinfo[1] != null 
+					&& commandinfo[1] != "")
+				{
+					var username = "";
+					for (i in commandinfo)
+					{
+						if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
+							username += " ";
+						if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+							username += commandinfo[i];
+					}
+					isvalid = false;
+					var id;
+					username = username.slice(1, username.length);
+					
+					var users = API.getUsers();
+					for (i in users)
+					{
+						if (users[i].username == username)
+						{
+							isvalid = true;
+							id = users[i].id;
+						}
+					}
+					var user = API.getUser(id);
+					
+					if (isvalid)
+					{
+						printChat("Username: " + user.username
+							+ "<br>ID: " + user.id
+							+ "<br>Rank: " + suffix[user.permission]
+							+ "<br>Fans: " + user.fans
+							+ "<br>DJ points: " + user.djPoints
+							+ "<br>Listener points: " + user.listenerPoints
+							+ "<br>Curator points: " + user.curatorPoints
+							+ "<br>Total points: " + (user.djPoints + user.listenerPoints
+								+ user.curatorPoints));
+					}
+					else printChat("Couldn't find user " + username + ".");
+				}
 				break;
 			default:
 				iscommand = false;
