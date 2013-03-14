@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.1";
+var version = "1.2.2";
 
 var playcount = 1; 
 var autowoot = false;
@@ -10,7 +10,7 @@ var willprintmsg = false;
 var awaymsg = "I'm away";
 var oldwaitlist = API.getWaitList();
 var olddjbooth = API.getDJs();
-var staffsuffix = new Array("Featured DJ", "Bouncer", "Manager", "Co-Host", "Host");
+var suffix = new Array("User", "Featured DJ", "Bouncer", "Manager", "Co-Host", "Host");
 
 function printChat(str)
 {
@@ -236,7 +236,7 @@ function refreshUserlist()
 		else user.style.color = "#5469FF";
 		user.style.cursor = "pointer";
 		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
-		user.innerHTML = staff[i].username + " (" + staffsuffix[staff[i].permission - 1] + ")";		
+		user.innerHTML = staff[i].username + " (" + suffix[staff[i].permission] + ")";		
 		
 		stafflist.appendChild(user);
 	}
@@ -744,6 +744,43 @@ function checkOwnIn(e, chatin)
 					document.getElementById("awaymsginx").value = awaymsg;
 				}
 				document.getElementById("awaybutx").click();
+				break;
+			case "$whois":
+				if (commandinfo.length > 1 && commandinfo[1] != null 
+					&& commandinfo[1] != "")
+				{
+					var username = "";
+					for (i in commandinfo)
+					{
+						if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
+							username += " ";
+						if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+							username += commandinfo[i];
+					}
+					isvalid = false;
+					var id;
+					username = username.slice(1, username.length);
+					
+					var users = API.getUsers();
+					for (i in users)
+					{
+						if (users[i].username == username)
+						{
+							isvalid = true;
+							id = users[i].id;
+						}
+					}
+					var user = API.getUser(id);
+					
+					if (isvalid)
+					{
+						printChat("Username: " + user.username
+							+ "<br>ID: " + user.id
+							+ "<br>Rank: " + suffix[user.permission]
+							+ "<br>Fans: " + user.fans);
+					}
+					else printChat("Couldn't find user " + username + ".");
+				}
 				break;
 			default:
 				iscommand = false;
