@@ -852,7 +852,7 @@ function checkOwnIn(e, chatin)
 					}
 					else printChat("No user specified.");
 					break;
-				case "kick":
+				case "$kick":
 					if (commandinfo.length > 1 && commandinfo[1] != null 
 						&& commandinfo[1] != "")
 					{
