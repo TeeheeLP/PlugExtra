@@ -242,7 +242,7 @@ function refreshUserlist()
 		else user.style.color = "#5469FF";
 		user.style.cursor = "pointer";
 		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
-		user.innerHTML = staff[i].username + " (" + suffix[staff[i].permission] + ")";		
+		user.innerHTML = staff[i].username + " <span style='font-size:0.7em'>(" + suffix[staff[i].permission] + ")</span>";		
 		
 		stafflist.appendChild(user);
 	}
@@ -736,7 +736,8 @@ function checkOwnIn(e, chatin)
 					now press enter in the away-messagebox to turn the awaybot on or off. The chatinput \
 					will now be focused after mentioning somebody through the userlist. Also it now \
 					shows if and how many users left the waitlist or dj booth during a song next \
-					to its total mehs, woots and curates in the log.");
+					to its total mehs, woots and curates in the log. The rank of every staff member \
+					will now be displayed next to their name.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
