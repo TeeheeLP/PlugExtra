@@ -777,7 +777,12 @@ function checkOwnIn(e, chatin)
 						printChat("Username: " + user.username
 							+ "<br>ID: " + user.id
 							+ "<br>Rank: " + suffix[user.permission]
-							+ "<br>Fans: " + user.fans);
+							+ "<br>Fans: " + user.fans
+							+ "<br>DJ points: " + user.djPoints
+							+ "<br>Listener points: " + user.listenerPoints
+							+ "<br>Curator points: " + user.curatorPoints
+							+ "<br>Total points: " + (user.djPoints + user.listenerPoints
+								+ user.curatorPoints));
 					}
 					else printChat("Couldn't find user " + username + ".");
 				}
