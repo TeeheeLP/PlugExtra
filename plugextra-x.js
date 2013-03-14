@@ -399,11 +399,12 @@ function callback(obj)
 			+ prevscore.curates + "<span> <span style='color:yellow'> curates</span>)"; 
 		if (leftwait > 0)
 		{
-			prevtrack.innerHTML += " " + leftwait + " <span style='color:#AA44FF'>left the waitlist</span>";
+			prevtrack.innerHTML += " - " + leftwait + " <span style='color:#AA44FF'>left the waitlist</span>";
 		}
 		if (leftbooth > 0)
 		{
 			if (leftwait > 0) prevtrack.innerHTML += ", ";
+			else prevtrach.innerHTML += " -";
 			prevtrack.innerHTML += " " + leftbooth + " <span style='color:#FF00BD'>left the dj booth</span>";
 		}
 		leftwait = 0;
