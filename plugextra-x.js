@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.6";
+var version = "1.2.7";
 
 var playcount = 1; 
 var autowoot = false;
@@ -118,7 +118,6 @@ function awayBot()
 		var awaybutx = document.getElementById("awaybutx");
 		awaybutx.innerHTML = "Back";
 		awaybutx.style.backgroundColor = "#333388";
-		document.getElementById("dialog-menu-userstatus").value = 1;
 	}
 	else
 	{
@@ -129,7 +128,6 @@ function awayBot()
 		var awaybutx = document.getElementById("awaybutx");
 		awaybutx.innerHTML = "Away";
 		awaybutx.style.backgroundColor = "#333333";
-		document.getElementById("dialog-menu-userstatus").value = 0;
 	}
 }
 
@@ -760,8 +758,12 @@ function checkOwnIn(e, chatin)
 					$version - Displays the current version<br> \
 					$changes - Shows the newest changes<br> \
 					$reset - Resets the log position<br> \
-					$away - &ltmessage&gt: Activates or deactivates the awaybot<br> \
-					$whois [name] - Shows information about a user");
+					$nick [name] - Changes your nick<br> \
+					$back - Deactivates the awaybot<br> \
+					$away &ltmessage&gt - Activates or deactivates the awaybot<br> \
+					$status [status] - Changes your status<br> \
+					$whois [name] - Shows information about a user<br> \
+					$inhistory - Displays if the current song is in the history");
 				break;
 			case "$version":
 				printChat("Running on version " + version);
@@ -796,8 +798,7 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("Now displays unavailable users differently in the userlist. Also made \
-					the log resizable by dragging the bottom bar.");
+				printChat("Added new commands: $back, $status, $nick, $inhistory");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
@@ -815,6 +816,32 @@ function checkOwnIn(e, chatin)
 				but3.style.left = "171px";
 				printChat("Reset the log position.");
 				break;
+			case "$nick":
+				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
+				{
+					var nick = "";
+					for (i in commandinfo)
+					{
+						if (i > 0)
+						{
+							nick += commandinfo[i] + " ";
+						}
+					}
+					
+					if (nick != null && nick != "")
+					{
+						Models.user.changeDisplayName(nick);
+					}
+					else printChat("No nick specified.");
+				}
+				else printChat("No nick specified.");
+				break;
+			case "$back":
+				if (isaway)
+				{
+					$("#awaybutx").click();
+				}
+				break;
 			case "$away":
 				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
 				{
@@ -829,6 +856,47 @@ function checkOwnIn(e, chatin)
 					document.getElementById("awaymsginx").value = awaymsg;
 				}
 				document.getElementById("awaybutx").click();
+				break;
+			case "$status":
+				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
+				{
+					var stat = "";
+					var statint;
+					for (i in commandinfo)
+					{
+						if (i > 0)
+						{
+							stat += commandinfo[i] + " ";
+						}
+					}
+					stat = stat.toLowerCase();
+					switch(stat)
+					{
+						case "available":
+							statint = 0;
+							break;
+						case "afk":
+							statint = 1;
+							break;
+						case "working":
+							statint = 2;
+							break;
+						case "sleeping":
+							statint = 3;
+							break;
+						case "idle":
+							statint = 4;
+							break;
+						default:
+							break;
+					}
+					if (statint != "" && statint != null)
+					{
+						Models.user.changeStatus(statint);
+					}
+					else printChat("This is no valid status: " + stat);
+				}
+				else printChat("No status specified.");
 				break;
 			case "$whois":
 				if (commandinfo.length > 1 && commandinfo[1] != null 
@@ -871,6 +939,22 @@ function checkOwnIn(e, chatin)
 					}
 					else printChat("Couldn't find user " + username + ".");
 				}
+				break;
+			case "$inhistory":
+				var history = Models.history.data;
+				var media = API.getMedia();
+				var inhistory = false;
+				for (i in history)
+				{
+					if (i.title == history[i].media.title 
+						&& i.author == history[i].media.author)
+						inhistory = true;
+				}
+				if (inhistory)
+				{
+					printChat(media.title + " by " + media.author + " is in the current history.");
+				}
+				else printChat("Couldn't find " + media.title + " by " + media.author + " in history.");
 				break;
 			default:
 				iscommand = false;
