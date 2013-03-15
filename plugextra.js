@@ -128,7 +128,7 @@ function toggleLog()
 	{
 		elem.style.pointerEvents = "auto";
 		elem.style.backgroundColor = "#050505";
-		elem.style.height = "281px";
+		elem.style.height = "276px";
 		elem.style.opacity = "0.8";
 		elem.scrollTop = elem.scrollHeight;
 		explog.style.backgroundColor = "#111111";
