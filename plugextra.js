@@ -62,7 +62,7 @@ function dragLog(e)
 		oldcx = e.pageX;
 		oldcy = e.pageY;
 		
-		if (parseFloat(log.style.width) > 50)
+		if (parseFloat(log.style.width) > 50 || movex > 0)
 		{
 			log.style.width = (parseFloat(log.style.width) + movex) + "px";
 			but1.style.left = (parseFloat(but1.style.left) + movex / 2) + "px";
@@ -71,12 +71,12 @@ function dragLog(e)
 		}
 		else log.style.width = "50px";
 		
-		if (parseFloat(log.style.height) > 50)
+		if (parseFloat(log.style.height) > 50 || movey > 0)
 		{
 			log.style.height = (parseFloat(log.style.height) + movey) + "px";
-			but1.style.top = (parseFloat(but1.style.top) + movey / 8) + "px";
-			but2.style.top = (parseFloat(but2.style.top) + movey / 8) + "px";
-			but3.style.top = (parseFloat(but3.style.top) + movey / 8) + "px";
+			but1.style.top = (parseFloat(but1.style.top) + movey / 16) + "px";
+			but2.style.top = (parseFloat(but2.style.top) + movey / 16) + "px";
+			but3.style.top = (parseFloat(but3.style.top) + movey / 16) + "px";
 		}
 		else log.style.height = "50px";
 	}
