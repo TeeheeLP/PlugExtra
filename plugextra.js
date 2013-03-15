@@ -90,9 +90,6 @@ function stopDrag()
 	isclicked = false;
 	dodrag = false;
 	doresize = false;
-	$(document).css.userSelect = "all";
-	$(document).css.webkitUserSelect = "all";
-	$(document).css.MozUserSelect = "all";
 	//elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
 	oldcx = ''; 
 	oldcy = ''; 
