@@ -20,7 +20,7 @@ function dragLog(e)
 	if (dodrag)
 	{
    		document.getSelection().removeAllRanges();
-   		document.getSelection().empty();
+   		if ($.browser.webkit) document.getSelection().empty();
 		if (oldcx == "" || oldcx == null)
 		{
 			oldcx = e.pageX;
