@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.5";
+var version = "1.2.6";
 
 var playcount = 1; 
 var autowoot = false;
@@ -92,10 +92,11 @@ var awaymsgin = document.createElement("input");
 awaymsgin.id = "awaymsginx";
 awaymsgin.style.height = "1em";
 awaymsgin.style.marginBottom = "5px";
-awaymsgin.style.width = "129px";
+awaymsgin.style.width = "121px";
 awaymsgin.style.borderRadius = "5px";
 awaymsgin.style.boxShadow = "1px 1px 3px #000000 inset";
-awaymsgin.style.border = "2px solid #FFFFFF";
+awaymsgin.style.border = "1px solid #FFFFFF";
+awaymsgin.style.padding = "2px 5px";
 awaymsgin.style.backgroundColor = "#FFFFFF";
 awaymsgin.setAttribute("onkeydown", "onPressAway(event);");
 awaymsgin.value = "I'm away";
@@ -246,6 +247,11 @@ function refreshUserlist()
 		user.style.marginTop = "5px";
 		user.style.color = "#FF3A97";
 		user.style.cursor = "pointer";
+		if (admins[i].status > 0)
+		{
+			user.style.fontStyle = "italic";
+			user.style.color = "#D7498C";
+		}
 		user.setAttribute("onclick", "mentionUser('" + admins[i].id + "');");
 		user.innerHTML = admins[i].username + " <span style='font-size:0.7em'>(Admin)</span>";		
 		
@@ -261,6 +267,11 @@ function refreshUserlist()
 		user.style.marginTop = "5px";
 		user.style.color = "#FF3A97";
 		user.style.cursor = "pointer";
+		if (ambs[i].status > 0)
+		{
+			user.style.fontStyle = "italic";
+			user.style.color = "#D7498C";
+		}
 		user.setAttribute("onclick", "mentionUser('" + ambs[i].id + "');");
 		user.innerHTML = ambs[i].username + " <span style='font-size:0.7em'>(Ambassador)</span>";		
 		
@@ -274,9 +285,18 @@ function refreshUserlist()
 		user.id = "pgx" + staff[i].id;
 		user.style.width = "100%";
 		user.style.marginTop = "5px";
-		if (staff[i].permission > 1) user.style.color = "#D90066";
-		else user.style.color = "#5469FF";
+		if (staff[i].permission > 1)
+		{
+			user.style.color = "#D90066";
+			if (staff[i].status > 0) user.style.color = "#B72E6E";
+		}
+		else
+		{
+			user.style.color = "#5469FF";
+			if (staff[i].status > 0) user.style.color = "#5B65AC";
+		}
 		user.style.cursor = "pointer";
+		if (staff[i].status > 0) user.style.fontStyle = "italic";
 		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
 		user.innerHTML = staff[i].username + " <span style='font-size:0.7em'>(" + suffix[staff[i].permission] + ")</span>";		
 		
@@ -301,6 +321,11 @@ function refreshUserlist()
 			user.style.width = "100%";
 			user.style.marginTop = "5px";
 			user.style.cursor = "pointer";
+			if (users[i].status > 0)
+			{
+				user.style.fontStyle = "italic";
+				user.style.color = "#B6B6B6";
+			}
 			user.setAttribute("onclick", "mentionUser('" + users[i].id + "');");
 			user.innerHTML = users[i].username;
 		
@@ -759,7 +784,7 @@ function checkOwnIn(e, chatin)
 					You can move the log in the middle of the screen by dragging it \
 					with the top bar. Double click it or enter $reset to move the log back to \
 					it's original position. Use the black button at its bottom right hand corner to hide \
-					or show the log.");
+					or show the log. You can also drag the bottom bar to resize the log.");
 				break;
 			case "$buttons":
 				printChat("When a log button is pressed it begins to glow slightly. The blue button \
@@ -771,8 +796,8 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("Added full chrome support. Also shows ambassadors and admins differently \
-					instead of like normal users in the list now.");
+				printChat("Now displays unavailable users differently in the userlist. Also made \
+					the log resizable by dragging the bottom bar.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");

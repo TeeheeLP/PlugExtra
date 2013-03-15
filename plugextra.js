@@ -7,6 +7,7 @@ document.body.appendChild(scr);
 
 var isclicked = false;
 var dodrag = false;
+var doresize = false;
 var oldcx;
 var oldcy;
 
@@ -16,48 +17,66 @@ function dragLog(e)
 	if (isclicked)
 	{
 		if (e.pageY < parseInt(log.style.top) + 10) dodrag = true;
+		if (e.pageY > parseInt(log.style.top) + parseInt(log.style.height) - 10) doresize = true;
 	}
-	if (dodrag)
+	if (dodrag || doresize)
 	{
-   		document.getSelection().removeAllRanges();
+		document.getSelection().removeAllRanges();
    		if ($.browser.webkit) document.getSelection().empty();
 		if (oldcx == "" || oldcx == null)
 		{
 			oldcx = e.pageX;
 			oldcy = e.pageY;
 		}
-		else
-		{
-			var but1 = document.getElementById("togg");
-			var but2 = document.getElementById("expwoot");
-			var but3 = document.getElementById("expjoin");
-			var movex = e.pageX - oldcx;
-			var movey = e.pageY - oldcy;
-			oldcx = e.pageX;
-			oldcy = e.pageY;
-			
-			log.style.top = (parseInt(log.style.top) + movey) + "px";
-			log.style.right = (parseInt(log.style.right) - movex) + "px";
-			log.style.zIndex = "15";
-			but1.style.top = (parseInt(but1.style.top) + movey) + "px";
-			but1.style.left = (parseInt(but1.style.left) + movex) + "px";
-			but2.style.top = (parseInt(but2.style.top) + movey) + "px";
-			but2.style.left = (parseInt(but2.style.left) + movex) + "px";
-			but3.style.top = (parseInt(but3.style.top) + movey) + "px";
-			but3.style.left = (parseInt(but3.style.left) + movex) + "px";
-		}
 	}
-	/*if (isclicked && !dodrag)
+	if (dodrag)
 	{
-		log.style.transition = "";
-		log.style.zIndex = "15";
 		var but1 = document.getElementById("togg");
-		but1.style.left = (parseInt(log.style.width) / 2 - 1.1*parseInt(log.style.right)) + "px";
-		but1 = document.getElementById("expwoot");
-		but1.style.left = (parseInt(log.style.width) / 2 - 1.1*parseInt(log.style.right) - 27) + "px";
-		but1 = document.getElementById("expjoin");
-		but1.style.left = (parseInt(log.style.width) / 2 - 1.1*parseInt(log.style.right) - 54) + "px";
-	}*/
+		var but2 = document.getElementById("expwoot");
+		var but3 = document.getElementById("expjoin");
+		var movex = e.pageX - oldcx;
+		var movey = e.pageY - oldcy;
+		oldcx = e.pageX;
+		oldcy = e.pageY;
+		
+		log.style.right = (parseFloat(log.style.right) - movex) + "px";
+		but1.style.left = (parseFloat(but1.style.left) + movex) + "px";
+		but2.style.left = (parseFloat(but2.style.left) + movex) + "px";
+		but3.style.left = (parseFloat(but3.style.left) + movex) + "px";
+		
+		log.style.top = (parseFloat(log.style.top) + movey) + "px";
+		but1.style.top = (parseFloat(but1.style.top) + movey) + "px";
+		but2.style.top = (parseFloat(but2.style.top) + movey) + "px";
+		but3.style.top = (parseFloat(but3.style.top) + movey) + "px";
+	}
+	if (doresize)
+	{
+		var but1 = document.getElementById("togg");
+		var but2 = document.getElementById("expwoot");
+		var but3 = document.getElementById("expjoin");
+		log.style.transition = "";
+		log.style.webkitTransition = "";
+
+		var movex = e.pageX - oldcx;
+		var movey = e.pageY - oldcy;
+		oldcx = e.pageX;
+		oldcy = e.pageY;
+		
+		if (parseFloat(log.style.width) > 93 || movex > 0)
+		{
+			log.style.width = (parseFloat(log.style.width) + movex) + "px";
+			but1.style.left = (parseFloat(but1.style.left) + movex / 2) + "px";
+			but2.style.left = (parseFloat(but2.style.left) + movex / 2) + "px";
+			but3.style.left = (parseFloat(but3.style.left) + movex / 2) + "px";
+		}
+		else log.style.width = "93px";
+		
+		if (parseFloat(log.style.height) > 50 || movey > 0)
+		{
+			log.style.height = (parseFloat(log.style.height) + movey) + "px";
+		}
+		else log.style.height = "50px";
+	}
 }
 
 function resetLayout()
@@ -66,8 +85,7 @@ function resetLayout()
 	log.style.top = "288px";
 	log.style.right = "177px";
 	log.style.width = "837px";
-	log.style.height = "276px";
-	log.style.zIndex = "8";
+	log.style.height = "271px";
 	var but1 = document.getElementById("togg");
 	but1.style.top = "280px";
 	but1.style.left = "225px";
@@ -81,14 +99,17 @@ function resetLayout()
 
 function stopDrag()
 {
-	isclicked = false;
-	dodrag = false;
-	$(document).css.userSelect = "all";
-	$(document).css.webkitUserSelect = "all";
-	$(document).css.MozUserSelect = "all";
-	//elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
-	oldcx = ''; 
-	oldcy = ''; 
+	if (isclicked || dodrag || doresize)
+	{
+		isclicked = false;
+		dodrag = false;
+		doresize = false;
+		oldcx = ''; 
+		oldcy = ''; 
+		var log = document.getElementById("log");
+		log.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
+		log.style.webkitTransition = "background 0.5s, opacity 0.5s, height 0.5s";
+	}
 }
 
 var elem = document.createElement("p");
@@ -97,13 +118,16 @@ elem.style.color = "lightgray";
 elem.style.position = "relative";
 elem.style.top = "288px";
 elem.style.display = "block";
-elem.style.zIndex = "8";
+elem.style.zIndex = "15";
 elem.style.textShadow ="0px 0px 2px black";
-elem.style.height = "276px";
+elem.style.height = "271px";
 elem.style.width = "837px";
+elem.style.minHeight = "50px";
+elem.style.minWidth = "50px";
 elem.style.overflowY = "scroll";
 elem.style.margin = "auto";
 elem.style.borderTop = "5px solid #333333";
+elem.style.borderBottom = "5px solid #333333";
 elem.style.padding = "5px";
 elem.style.backgroundColor = "#050505";
 elem.style.opacity = "0.8";
@@ -115,7 +139,7 @@ elem.style.right = "177px";
 elem.setAttribute("onmousedown", "isclicked = true;");
 elem.setAttribute("ondblclick", "resetLayout();");
 //elem.setAttribute("onmousemove", "dragLog(event);");
-elem.setAttribute("onmouseup", "stopDrag();");
+//elem.setAttribute("onmouseup", "stopDrag();");
 document.body.appendChild(elem);
 
 var explog = document.createElement("div");
@@ -168,6 +192,7 @@ explog.style.textDecoration = "none";
 explog.title = "Toggle Log";
 
 $(document).mousemove(function(event) { dragLog(event); });
+$(document).mouseup(function() { stopDrag(); });
 
 document.body.appendChild(explog);
 setTimeout(function(){startBot()}, 0);
