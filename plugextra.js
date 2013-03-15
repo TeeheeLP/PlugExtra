@@ -68,9 +68,9 @@ function dragLog(e)
 		but3.style.left = (parseFloat(but3.style.left) + movex / 2) + "px";
 		
 		log.style.height = (parseFloat(log.style.height) + movey) + "px";
-		but1.style.top = (parseFloat(but1.style.top) + movey / 2) + "px";
-		but2.style.top = (parseFloat(but2.style.top) + movey / 2) + "px";
-		but3.style.top = (parseFloat(but3.style.top) + movey / 2) + "px";
+		but1.style.top = (parseFloat(but1.style.top) + movey) + "px";
+		but2.style.top = (parseFloat(but2.style.top) + movey) + "px";
+		but3.style.top = (parseFloat(but3.style.top) + movey) + "px";
 	}
 }
 
