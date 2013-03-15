@@ -74,9 +74,9 @@ function dragLog(e)
 		if (parseFloat(log.style.height) > 50 || movey > 0)
 		{
 			log.style.height = (parseFloat(log.style.height) + movey) + "px";
-			but1.style.top = (parseFloat(but1.style.top) + movey / 16) + "px";
-			but2.style.top = (parseFloat(but2.style.top) + movey / 16) + "px";
-			but3.style.top = (parseFloat(but3.style.top) + movey / 16) + "px";
+			but1.style.top = (parseFloat(but1.style.top) + movey / 64) + "px";
+			but2.style.top = (parseFloat(but2.style.top) + movey / 64) + "px";
+			but3.style.top = (parseFloat(but3.style.top) + movey / 64) + "px";
 		}
 		else log.style.height = "50px";
 	}
