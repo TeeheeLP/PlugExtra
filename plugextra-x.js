@@ -817,8 +817,10 @@ function checkOwnIn(e, chatin)
 				printChat("Reset the log position.");
 				break;
 			case "$back":
-				isaway = false;
-				$("#awaybutx").click();
+				if (isaway)
+				{
+					$("#awaybutx").click();
+				}
 				break;
 			case "$away":
 				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
