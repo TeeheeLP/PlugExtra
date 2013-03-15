@@ -41,7 +41,6 @@ function dragLog(e)
 		
 		log.style.top = (parseInt(log.style.top) + movey) + "px";
 		log.style.right = (parseInt(log.style.right) - movex) + "px";
-		log.style.zIndex = "15";
 		but1.style.top = (parseInt(but1.style.top) + movey) + "px";
 		but1.style.left = (parseInt(but1.style.left) + movex) + "px";
 		but2.style.top = (parseInt(but2.style.top) + movey) + "px";
@@ -51,6 +50,9 @@ function dragLog(e)
 	}
 	if (doresize)
 	{
+		var but1 = document.getElementById("togg");
+		var but2 = document.getElementById("expwoot");
+		var but3 = document.getElementById("expjoin");
 		log.style.transition = "";
 		log.style.webkitTransition = "";
 
@@ -61,6 +63,12 @@ function dragLog(e)
 		
 		log.style.width = (parseInt(log.style.width) + movex) + "px";
 		log.style.height = (parseInt(log.style.height) + movey) + "px";
+		but1.style.top = (parseInt(but1.style.top) + movey) + "px";
+		but1.style.left = (parseInt(but1.style.left) + movex) + "px";
+		but2.style.top = (parseInt(but2.style.top) + movey) + "px";
+		but2.style.left = (parseInt(but2.style.left) + movex) + "px";
+		but3.style.top = (parseInt(but3.style.top) + movey) + "px";
+		but3.style.left = (parseInt(but3.style.left) + movex) + "px";
 	}
 }
 
@@ -71,7 +79,6 @@ function resetLayout()
 	log.style.right = "177px";
 	log.style.width = "837px";
 	log.style.height = "271px";
-	log.style.zIndex = "8";
 	var but1 = document.getElementById("togg");
 	but1.style.top = "280px";
 	but1.style.left = "225px";
@@ -104,7 +111,7 @@ elem.style.color = "lightgray";
 elem.style.position = "relative";
 elem.style.top = "288px";
 elem.style.display = "block";
-elem.style.zIndex = "8";
+elem.style.zIndex = "15";
 elem.style.textShadow ="0px 0px 2px black";
 elem.style.height = "271px";
 elem.style.width = "837px";
