@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.6";
+var version = "1.2.7";
 
 var playcount = 1; 
 var autowoot = false;
@@ -760,7 +760,9 @@ function checkOwnIn(e, chatin)
 					$version - Displays the current version<br> \
 					$changes - Shows the newest changes<br> \
 					$reset - Resets the log position<br> \
-					$away - &ltmessage&gt: Activates or deactivates the awaybot<br> \
+					$back - Deactivates the awaybot<br> \
+					$away &ltmessage&gt - Activates or deactivates the awaybot<br> \
+					$status [status] - Changes your status<br> \
 					$whois [name] - Shows information about a user");
 				break;
 			case "$version":
@@ -796,8 +798,7 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("Now displays unavailable users differently in the userlist. Also made \
-					the log resizable by dragging the bottom bar.");
+				printChat("Added new commands: $back, $status");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
@@ -815,6 +816,16 @@ function checkOwnIn(e, chatin)
 				but3.style.left = "171px";
 				printChat("Reset the log position.");
 				break;
+			case "$back":
+				Models.user.changeStatus(0);
+				printChat("You are no longer away!");
+				isaway = false;
+				willprintmsg = false;
+				var awaybutx = document.getElementById("awaybutx");
+				awaybutx.innerHTML = "Away";
+				awaybutx.style.backgroundColor = "#333333";
+				document.getElementById("dialog-menu-userstatus").value = 0;
+				break;
 			case "$away":
 				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
 				{
@@ -829,6 +840,46 @@ function checkOwnIn(e, chatin)
 					document.getElementById("awaymsginx").value = awaymsg;
 				}
 				document.getElementById("awaybutx").click();
+				break;
+			case "$status":
+				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
+				{
+					var stat = "";
+					var statint;
+					for (i in commandinfo)
+					{
+						if (i > 0)
+						{
+							stat += commandinfo[i] + " ";
+						}
+					}
+					switch(stat.toLowerCase())
+					{
+						case "available":
+							statint = 0;
+							break;
+						case "afk":
+							statint = 1;
+							break;
+						case "working":
+							statint = 2;
+							break;
+						case "sleeping":
+							statint = 3;
+							break;
+						case "idle":
+							statint = 4;
+							break;
+						default:
+							break;
+					}
+					if (statint != "" && statint != null)
+					{
+						Models.user.changeStatus(statint);
+					}
+					else printChat("This is no valid status: " + stat);
+				}
+				else printChat("No status specified.");
 				break;
 			case "$whois":
 				if (commandinfo.length > 1 && commandinfo[1] != null 
