@@ -247,6 +247,7 @@ function refreshUserlist()
 		user.style.marginTop = "5px";
 		user.style.color = "#FF3A97";
 		user.style.cursor = "pointer";
+		if (admins[i].status > 0) user.style.fontStyle = "italic";
 		user.setAttribute("onclick", "mentionUser('" + admins[i].id + "');");
 		user.innerHTML = admins[i].username + " <span style='font-size:0.7em'>(Admin)</span>";		
 		
@@ -262,6 +263,7 @@ function refreshUserlist()
 		user.style.marginTop = "5px";
 		user.style.color = "#FF3A97";
 		user.style.cursor = "pointer";
+		if (ambs[i].status > 0) user.style.fontStyle = "italic";
 		user.setAttribute("onclick", "mentionUser('" + ambs[i].id + "');");
 		user.innerHTML = ambs[i].username + " <span style='font-size:0.7em'>(Ambassador)</span>";		
 		
@@ -278,6 +280,7 @@ function refreshUserlist()
 		if (staff[i].permission > 1) user.style.color = "#D90066";
 		else user.style.color = "#5469FF";
 		user.style.cursor = "pointer";
+		if (staff[i].status > 0) user.style.fontStyle = "italic";
 		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
 		user.innerHTML = staff[i].username + " <span style='font-size:0.7em'>(" + suffix[staff[i].permission] + ")</span>";		
 		
@@ -302,6 +305,7 @@ function refreshUserlist()
 			user.style.width = "100%";
 			user.style.marginTop = "5px";
 			user.style.cursor = "pointer";
+			if (users[i].status > 0) user.style.fontStyle = "italic";
 			user.setAttribute("onclick", "mentionUser('" + users[i].id + "');");
 			user.innerHTML = users[i].username;
 		
