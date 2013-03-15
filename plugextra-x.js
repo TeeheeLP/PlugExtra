@@ -948,7 +948,9 @@ function checkOwnIn(e, chatin)
 				{
 					if (i.title == history[i].media.title 
 						&& i.author == history[i].media.author)
+					{
 						inhistory = true;
+					}
 				}
 				if (inhistory)
 				{
