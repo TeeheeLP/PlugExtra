@@ -1,7 +1,7 @@
 function startBot()
 {
 var scr = document.createElement("script");
-scr.src = ('https://raw.github.com/TeeheeLP/PlugExtra/master/plugextra-x.js');
+scr.src = ('https://raw.github.com/TeeheeLP/PlugExtra/dev/plugextra-x.js');
 document.body.appendChild(scr);
 }
 
@@ -112,6 +112,7 @@ elem.style.backgroundColor = "#050505";
 elem.style.opacity = "0.8";
 //elem.style.boxShadow = "1px 1px 2px 1px #444444 inset";
 elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
+elem.style.webkitTransition = "background 0.5s, opacity 0.5s, height 0.5s";
 elem.style.right = "177px";
 //elem.style.resize = "both";
 elem.setAttribute("onmousedown", "isclicked = true;");
