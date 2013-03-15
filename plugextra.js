@@ -64,10 +64,10 @@ function dragLog(e)
 		
 		if (parseFloat(log.style.width) > 93 || movex > 0)
 		{
-			log.style.width = (parseFloat(log.style.width) + movex) + "px";
-			but1.style.left = (parseFloat(but1.style.left) + movex / 2) + "px";
-			but2.style.left = (parseFloat(but2.style.left) + movex / 2) + "px";
-			but3.style.left = (parseFloat(but3.style.left) + movex / 2) + "px";
+			log.style.width = (parseFloat(log.style.width) + movex / 2) + "px";
+			but1.style.left = (parseFloat(but1.style.left) + movex / 4) + "px";
+			but2.style.left = (parseFloat(but2.style.left) + movex / 4) + "px";
+			but3.style.left = (parseFloat(but3.style.left) + movex / 4) + "px";
 		}
 		else log.style.width = "93px";
 		
