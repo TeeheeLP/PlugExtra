@@ -19,7 +19,7 @@ function dragLog(e)
 	}
 	if (dodrag)
 	{
-		$(document).css.mozUserSelect = "none";
+		$(document).css.userSelect = "none";
 		if (oldcx == "" || oldcx == null)
 		{
 			oldcx = e.pageX;
@@ -82,7 +82,7 @@ function stopDrag()
 {
 	isclicked = false;
 	dodrag = false;
-	$(document).css.mozUserSelect = "all";
+	$(document).css.userSelect = "all";
 	//elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
 	oldcx = ''; 
 	oldcy = ''; 
