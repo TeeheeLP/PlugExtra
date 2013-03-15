@@ -853,7 +853,8 @@ function checkOwnIn(e, chatin)
 							stat += commandinfo[i] + " ";
 						}
 					}
-					switch(stat.toLowerCase())
+					stat = stat.toLowerCase();
+					switch(stat)
 					{
 						case "available":
 							statint = 0;
