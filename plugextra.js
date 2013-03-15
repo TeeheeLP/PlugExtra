@@ -51,6 +51,9 @@ function dragLog(e)
 	}
 	if (doresize)
 	{
+		log.style.transition = "";
+		log.style.webkitTransition = "";
+
 		var movex = e.pageX - oldcx;
 		var movey = e.pageY - oldcy;
 		oldcx = e.pageX;
@@ -67,8 +70,10 @@ function resetLayout()
 	log.style.top = "288px";
 	log.style.right = "177px";
 	log.style.width = "837px";
-	log.style.height = "276px";
+	log.style.height = "271px";
 	log.style.zIndex = "8";
+	log.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
+	log.style.webkitTransition = "background 0.5s, opacity 0.5s, height 0.5s";
 	var but1 = document.getElementById("togg");
 	but1.style.top = "280px";
 	but1.style.left = "225px";
@@ -101,7 +106,7 @@ elem.style.top = "288px";
 elem.style.display = "block";
 elem.style.zIndex = "8";
 elem.style.textShadow ="0px 0px 2px black";
-elem.style.height = "276px";
+elem.style.height = "271px";
 elem.style.width = "837px";
 elem.style.minHeight = "50px";
 elem.style.minWidth = "50px";
