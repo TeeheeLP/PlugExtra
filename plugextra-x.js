@@ -287,8 +287,8 @@ function refreshUserlist()
 		user.style.marginTop = "5px";
 		if (staff[i].permission > 1)
 		{
-			user.style.color = "#B72E6E";
-			if (staff[i].status > 0) user.style.color = "#";
+			user.style.color = "#D90066";
+			if (staff[i].status > 0) user.style.color = "#B72E6E";
 		}
 		else
 		{
