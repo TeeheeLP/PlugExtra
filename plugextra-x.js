@@ -954,7 +954,7 @@ function checkOwnIn(e, chatin)
 				{
 					printChat(media.title + " by " + media.author + " is in the current history.");
 				}
-				else printChat("Couldn't find " + media.title + " by " + media.author " in history.");
+				else printChat("Couldn't find " + media.title + " by " + media.author + " in history.");
 				break;
 			default:
 				iscommand = false;
