@@ -30,18 +30,18 @@ function dragLog(e)
   		}
 		if (oldcx == "" || oldcx == null)
 		{
-			oldcx = e.pageX;
-			oldcy = e.pageY;
+			oldcx = e.clientX;
+			oldcy = e.clientY;
 		}
 		else
 		{
 			var but1 = document.getElementById("togg");
 			var but2 = document.getElementById("expwoot");
 			var but3 = document.getElementById("expjoin");
-			var movex = e.pageX - oldcx;
-			var movey = e.pageY - oldcy;
-			oldcx = e.pageX;
-			oldcy = e.pageY;
+			var movex = e.clientX - oldcx;
+			var movey = e.clientY - oldcy;
+			oldcx = e.clientX;
+			oldcy = e.clientY;
 			
 			log.style.top = (parseInt(log.style.top) + movey) + "px";
 			log.style.right = (parseInt(log.style.right) - movex) + "px";
