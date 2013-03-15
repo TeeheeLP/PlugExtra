@@ -62,14 +62,14 @@ function dragLog(e)
 		oldcx = e.pageX;
 		oldcy = e.pageY;
 		
-		if (parseFloat(log.style.width) > 50 || movex > 0)
+		if (parseFloat(log.style.width) > 93 || movex > 0)
 		{
 			log.style.width = (parseFloat(log.style.width) + movex) + "px";
 			but1.style.left = (parseFloat(but1.style.left) + movex / 2) + "px";
 			but2.style.left = (parseFloat(but2.style.left) + movex / 2) + "px";
 			but3.style.left = (parseFloat(but3.style.left) + movex / 2) + "px";
 		}
-		else log.style.width = "50px";
+		else log.style.width = "93px";
 		
 		if (parseFloat(log.style.height) > 50 || movey > 0)
 		{
