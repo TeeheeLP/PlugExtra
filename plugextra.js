@@ -19,14 +19,7 @@ function dragLog(e)
 	}
 	if (dodrag)
 	{
-		if (window.getSelection().empty) 
-		{  // Chrome
-    			window.getSelection().empty();
-  		} 
-  		else if (window.getSelection().removeAllRanges) 
-  		{  // Firefox
-  			window.getSelection().removeAllRanges();
-  		}
+		$(document).style.userSelect = "none";
 		if (oldcx == "" || oldcx == null)
 		{
 			oldcx = e.pageX;
@@ -89,6 +82,7 @@ function stopDrag()
 {
 	isclicked = false;
 	dodrag = false;
+	$(document).style.userSelect = "all";
 	//elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
 	oldcx = ''; 
 	oldcy = ''; 
