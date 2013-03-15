@@ -19,7 +19,8 @@ function dragLog(e)
 	}
 	if (dodrag)
 	{
-   		$(document).mousedown(function(){return false;});
+   		document.getSelection().removeAllRanges();
+   		document.getSelection().empty();
 		if (oldcx == "" || oldcx == null)
 		{
 			oldcx = e.pageX;
