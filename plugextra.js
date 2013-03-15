@@ -117,7 +117,7 @@ elem.style.right = "177px";
 //elem.style.resize = "both";
 elem.setAttribute("onmousedown", "isclicked = true;");
 elem.setAttribute("ondblclick", "resetLayout();");
-elem.setAttribute("onmousemove", "dragLog(event);");
+//elem.setAttribute("onmousemove", "dragLog(event);");
 elem.setAttribute("onmouseup", "stopDrag();");
 document.body.appendChild(elem);
 
@@ -169,6 +169,8 @@ explog.style.display = "block";
 explog.onclick = function () { toggleLog(); };
 explog.style.textDecoration = "none";
 explog.title = "Toggle Log";
+
+$(document).mousemove(function(event) { dragLog(event); });
 
 document.body.appendChild(explog);
 setTimeout(function(){startBot()}, 0);
