@@ -39,14 +39,15 @@ function dragLog(e)
 		oldcx = e.pageX;
 		oldcy = e.pageY;
 		
-		log.style.top = (parseInt(log.style.top) + movey) + "px";
-		log.style.right = (parseInt(log.style.right) - movex) + "px";
-		but1.style.top = (parseInt(but1.style.top) + movey) + "px";
-		but1.style.left = (parseInt(but1.style.left) + movex) + "px";
-		but2.style.top = (parseInt(but2.style.top) + movey) + "px";
-		but2.style.left = (parseInt(but2.style.left) + movex) + "px";
-		but3.style.top = (parseInt(but3.style.top) + movey) + "px";
-		but3.style.left = (parseInt(but3.style.left) + movex) + "px";
+		log.style.right = (parseFloat(log.style.right) - movex) + "px";
+		but1.style.left = (parseFloat(but1.style.left) + movex) + "px";
+		but2.style.left = (parseFloat(but2.style.left) + movex) + "px";
+		but3.style.left = (parseFloat(but3.style.left) + movex) + "px";
+		
+		log.style.top = (parseFloat(log.style.top) + movey) + "px";
+		but1.style.top = (parseFloat(but1.style.top) + movey) + "px";
+		but2.style.top = (parseFloat(but2.style.top) + movey) + "px";
+		but3.style.top = (parseFloat(but3.style.top) + movey) + "px";
 	}
 	if (doresize)
 	{
