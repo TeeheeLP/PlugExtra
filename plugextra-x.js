@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.5";
+var version = "1.2.6";
 
 var playcount = 1; 
 var autowoot = false;
@@ -796,8 +796,7 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("Added full chrome support. Also shows ambassadors and admins differently \
-					instead of like normal users in the list now.");
+				printChat("Now displays unavailable users differently in the userlist.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
