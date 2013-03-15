@@ -247,7 +247,11 @@ function refreshUserlist()
 		user.style.marginTop = "5px";
 		user.style.color = "#FF3A97";
 		user.style.cursor = "pointer";
-		if (admins[i].status > 0) user.style.fontStyle = "italic";
+		if (admins[i].status > 0)
+		{
+			user.style.fontStyle = "italic";
+			user.style.color = "#D7498C";
+		}
 		user.setAttribute("onclick", "mentionUser('" + admins[i].id + "');");
 		user.innerHTML = admins[i].username + " <span style='font-size:0.7em'>(Admin)</span>";		
 		
@@ -263,7 +267,11 @@ function refreshUserlist()
 		user.style.marginTop = "5px";
 		user.style.color = "#FF3A97";
 		user.style.cursor = "pointer";
-		if (ambs[i].status > 0) user.style.fontStyle = "italic";
+		if (ambs[i].status > 0)
+		{
+			user.style.fontStyle = "italic";
+			user.style.color = "#D7498C";
+		}
 		user.setAttribute("onclick", "mentionUser('" + ambs[i].id + "');");
 		user.innerHTML = ambs[i].username + " <span style='font-size:0.7em'>(Ambassador)</span>";		
 		
@@ -277,8 +285,16 @@ function refreshUserlist()
 		user.id = "pgx" + staff[i].id;
 		user.style.width = "100%";
 		user.style.marginTop = "5px";
-		if (staff[i].permission > 1) user.style.color = "#D90066";
-		else user.style.color = "#5469FF";
+		if (staff[i].permission > 1)
+		{
+			user.style.color = "#B72E6E";
+			if (staff[i].status > 0) user.style.color = "#";
+		}
+		else
+		{
+			user.style.color = "#5469FF";
+			if (staff[i].status > 0) user.style.color = "#5B65AC";
+		}
 		user.style.cursor = "pointer";
 		if (staff[i].status > 0) user.style.fontStyle = "italic";
 		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
@@ -305,7 +321,11 @@ function refreshUserlist()
 			user.style.width = "100%";
 			user.style.marginTop = "5px";
 			user.style.cursor = "pointer";
-			if (users[i].status > 0) user.style.fontStyle = "italic";
+			if (users[i].status > 0)
+			{
+				user.style.fontStyle = "italic";
+				user.style.color = "#B6B6B6";
+			}
 			user.setAttribute("onclick", "mentionUser('" + users[i].id + "');");
 			user.innerHTML = users[i].username;
 		
