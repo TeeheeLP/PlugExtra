@@ -12,10 +12,11 @@ var oldcy;
 
 function dragLog(e)
 {
-	var log = document.getElementById("log");
+	var log;
 	if (isclicked)
 	{
-		if (e.clientY < parseInt(log.style.top) + 10) dodrag = true;
+		if (e.pageY < parseInt(log.style.top) + 10) dodrag = true;
+		log = document.getElementById("log");
 	}
 	if (dodrag)
 	{
@@ -169,6 +170,8 @@ explog.style.display = "block";
 explog.onclick = function () { toggleLog(); };
 explog.style.textDecoration = "none";
 explog.title = "Toggle Log";
+
+$(document).mousemove(function(event) {dragLog(event);});
 
 document.body.appendChild(explog);
 setTimeout(function(){startBot()}, 0);
