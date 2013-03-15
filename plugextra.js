@@ -72,8 +72,6 @@ function resetLayout()
 	log.style.width = "837px";
 	log.style.height = "271px";
 	log.style.zIndex = "8";
-	log.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
-	log.style.webkitTransition = "background 0.5s, opacity 0.5s, height 0.5s";
 	var but1 = document.getElementById("togg");
 	but1.style.top = "280px";
 	but1.style.left = "225px";
@@ -87,12 +85,17 @@ function resetLayout()
 
 function stopDrag()
 {
-	isclicked = false;
-	dodrag = false;
-	doresize = false;
-	//elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
-	oldcx = ''; 
-	oldcy = ''; 
+	if (isclicked || dodrag || doresize)
+	{
+		isclicked = false;
+		dodrag = false;
+		doresize = false;
+		oldcx = ''; 
+		oldcy = ''; 
+		var log = document.getElementById("log");
+		log.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
+		log.style.webkitTransition = "background 0.5s, opacity 0.5s, height 0.5s";
+	}
 }
 
 var elem = document.createElement("p");
@@ -122,7 +125,7 @@ elem.style.right = "177px";
 elem.setAttribute("onmousedown", "isclicked = true;");
 elem.setAttribute("ondblclick", "resetLayout();");
 //elem.setAttribute("onmousemove", "dragLog(event);");
-elem.setAttribute("onmouseup", "stopDrag();");
+//elem.setAttribute("onmouseup", "stopDrag();");
 document.body.appendChild(elem);
 
 var explog = document.createElement("div");
@@ -175,6 +178,7 @@ explog.style.textDecoration = "none";
 explog.title = "Toggle Log";
 
 $(document).mousemove(function(event) { dragLog(event); });
+$(document).mouseup(function() { stopDrag(); });
 
 document.body.appendChild(explog);
 setTimeout(function(){startBot()}, 0);
