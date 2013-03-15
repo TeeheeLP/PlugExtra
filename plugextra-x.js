@@ -821,6 +821,7 @@ function checkOwnIn(e, chatin)
 				{
 					$("#awaybutx").click();
 				}
+				else { }
 				break;
 			case "$away":
 				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
