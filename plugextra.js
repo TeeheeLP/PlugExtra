@@ -15,7 +15,7 @@ function dragLog(e)
 	var log;
 	if (isclicked)
 	{
-		if (e.pageY < parseInt(log.style.top) + 10) dodrag = true;
+		if (e.clientY < parseInt(log.style.top) + 10) dodrag = true;
 		log = document.getElementById("log");
 	}
 	if (dodrag)
