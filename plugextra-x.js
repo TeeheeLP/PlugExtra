@@ -819,7 +819,7 @@ function checkOwnIn(e, chatin)
 					}
 					isvalid = false;
 					var id;
-					username = username.slice(1, username.length);
+					if (username[0] == '@') username = username.slice(1, username.length);
 					
 					var users = API.getUsers();
 					for (i in users)
@@ -881,7 +881,7 @@ function checkOwnIn(e, chatin)
 						}
 						isvalid = false;
 						var id;
-						username = username.slice(1, username.length);
+						if (username[0] == '@') username = username.slice(1, username.length);
 						
 						var waitlist = API.getWaitList();
 						var djbooth = API.getDJs();
@@ -928,7 +928,7 @@ function checkOwnIn(e, chatin)
 						}
 						isvalid = false;
 						var id;
-						username = username.slice(1, username.length);
+						if (username[0] == '@') username = username.slice(1, username.length);
 						
 						var users = API.getUsers();
 						for (i in users)
@@ -985,7 +985,7 @@ function checkOwnIn(e, chatin)
 						}
 						isvalid = false;
 						var id;
-						username = username.slice(1, username.length);
+						if (username[0] == '@') username = username.slice(1, username.length);
 						
 						var users = API.getUsers();
 						for (i in users)
