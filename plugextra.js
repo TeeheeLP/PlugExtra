@@ -7,6 +7,7 @@ document.body.appendChild(scr);
 
 var isclicked = false;
 var dodrag = false;
+var doresize = false;
 var oldcx;
 var oldcy;
 
@@ -16,48 +17,48 @@ function dragLog(e)
 	if (isclicked)
 	{
 		if (e.pageY < parseInt(log.style.top) + 10) dodrag = true;
+		if (e.pageY > parseInt(log.style.top) + parseInt(log.style.height) - 10) doresize = true;
 	}
-	if (dodrag)
+	if (dodrag || doresize)
 	{
-   		document.getSelection().removeAllRanges();
+		document.getSelection().removeAllRanges();
    		if ($.browser.webkit) document.getSelection().empty();
 		if (oldcx == "" || oldcx == null)
 		{
 			oldcx = e.pageX;
 			oldcy = e.pageY;
 		}
-		else
-		{
-			var but1 = document.getElementById("togg");
-			var but2 = document.getElementById("expwoot");
-			var but3 = document.getElementById("expjoin");
-			var movex = e.pageX - oldcx;
-			var movey = e.pageY - oldcy;
-			oldcx = e.pageX;
-			oldcy = e.pageY;
-			
-			log.style.top = (parseInt(log.style.top) + movey) + "px";
-			log.style.right = (parseInt(log.style.right) - movex) + "px";
-			log.style.zIndex = "15";
-			but1.style.top = (parseInt(but1.style.top) + movey) + "px";
-			but1.style.left = (parseInt(but1.style.left) + movex) + "px";
-			but2.style.top = (parseInt(but2.style.top) + movey) + "px";
-			but2.style.left = (parseInt(but2.style.left) + movex) + "px";
-			but3.style.top = (parseInt(but3.style.top) + movey) + "px";
-			but3.style.left = (parseInt(but3.style.left) + movex) + "px";
-		}
 	}
-	/*if (isclicked && !dodrag)
+	if (dodrag)
 	{
-		log.style.transition = "";
-		log.style.zIndex = "15";
 		var but1 = document.getElementById("togg");
-		but1.style.left = (parseInt(log.style.width) / 2 - 1.1*parseInt(log.style.right)) + "px";
-		but1 = document.getElementById("expwoot");
-		but1.style.left = (parseInt(log.style.width) / 2 - 1.1*parseInt(log.style.right) - 27) + "px";
-		but1 = document.getElementById("expjoin");
-		but1.style.left = (parseInt(log.style.width) / 2 - 1.1*parseInt(log.style.right) - 54) + "px";
-	}*/
+		var but2 = document.getElementById("expwoot");
+		var but3 = document.getElementById("expjoin");
+		var movex = e.pageX - oldcx;
+		var movey = e.pageY - oldcy;
+		oldcx = e.pageX;
+		oldcy = e.pageY;
+		
+		log.style.top = (parseInt(log.style.top) + movey) + "px";
+		log.style.right = (parseInt(log.style.right) - movex) + "px";
+		log.style.zIndex = "15";
+		but1.style.top = (parseInt(but1.style.top) + movey) + "px";
+		but1.style.left = (parseInt(but1.style.left) + movex) + "px";
+		but2.style.top = (parseInt(but2.style.top) + movey) + "px";
+		but2.style.left = (parseInt(but2.style.left) + movex) + "px";
+		but3.style.top = (parseInt(but3.style.top) + movey) + "px";
+		but3.style.left = (parseInt(but3.style.left) + movex) + "px";
+	}
+	if (doresize)
+	{
+		var movex = e.pageX - oldcx;
+		var movey = e.pageY - oldcy;
+		oldcx = e.pageX;
+		oldcy = e.pageY;
+		
+		log.style.width = (parseInt(log.style.width) + movex) + "px";
+		log.style.height = (parseInt(log.style.height) + movey) + "px";
+	}
 }
 
 function resetLayout()
@@ -83,6 +84,7 @@ function stopDrag()
 {
 	isclicked = false;
 	dodrag = false;
+	doresize = false;
 	$(document).css.userSelect = "all";
 	$(document).css.webkitUserSelect = "all";
 	$(document).css.MozUserSelect = "all";
@@ -101,9 +103,12 @@ elem.style.zIndex = "8";
 elem.style.textShadow ="0px 0px 2px black";
 elem.style.height = "276px";
 elem.style.width = "837px";
+elem.style.minHeight = "50px";
+elem.style.minWidth = "50px";
 elem.style.overflowY = "scroll";
 elem.style.margin = "auto";
 elem.style.borderTop = "5px solid #333333";
+elem.style.borderBottom = "5px solid #333333";
 elem.style.padding = "5px";
 elem.style.backgroundColor = "#050505";
 elem.style.opacity = "0.8";
