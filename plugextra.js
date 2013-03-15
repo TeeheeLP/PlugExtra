@@ -12,11 +12,10 @@ var oldcy;
 
 function dragLog(e)
 {
-	var log;
+	var log = document.getElementById("log");;
 	if (isclicked)
 	{
-		if (e.clientY < parseInt(log.style.top) + 10) dodrag = true;
-		log = document.getElementById("log");
+		if (e.pageY < parseInt(log.style.top) + 10) dodrag = true;
 	}
 	if (dodrag)
 	{
@@ -30,18 +29,18 @@ function dragLog(e)
   		}
 		if (oldcx == "" || oldcx == null)
 		{
-			oldcx = e.clientX;
-			oldcy = e.clientY;
+			oldcx = e.pageX;
+			oldcy = e.pageY;
 		}
 		else
 		{
 			var but1 = document.getElementById("togg");
 			var but2 = document.getElementById("expwoot");
 			var but3 = document.getElementById("expjoin");
-			var movex = e.clientX - oldcx;
-			var movey = e.clientY - oldcy;
-			oldcx = e.clientX;
-			oldcy = e.clientY;
+			var movex = e.pageX - oldcx;
+			var movey = e.pageY - oldcy;
+			oldcx = e.pageX;
+			oldcy = e.pageY;
 			
 			log.style.top = (parseInt(log.style.top) + movey) + "px";
 			log.style.right = (parseInt(log.style.right) - movex) + "px";
