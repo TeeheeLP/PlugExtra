@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.4";
+var version = "1.2.5";
 
 var playcount = 1; 
 var autowoot = false;
@@ -771,12 +771,8 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("Recent changes: Added the $whois command and a few mod commands. You can \
-					now press enter in the away-messagebox to turn the awaybot on or off. The chatinput \
-					will now be focused after mentioning somebody through the userlist. Also it now \
-					shows if and how many users left the waitlist or dj booth during a song next \
-					to its total mehs, woots and curates in the log. The rank of every staff member \
-					will now be displayed next to their name.");
+				printChat("Added full chrome support. Also shows ambassadors and admins differently \
+					instead of like normal users in the list now.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
