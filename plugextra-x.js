@@ -817,14 +817,8 @@ function checkOwnIn(e, chatin)
 				printChat("Reset the log position.");
 				break;
 			case "$back":
-				Models.user.changeStatus(0);
-				printChat("You are no longer away!");
 				isaway = false;
-				willprintmsg = false;
-				var awaybutx = document.getElementById("awaybutx");
-				awaybutx.innerHTML = "Away";
-				awaybutx.style.backgroundColor = "#333333";
-				document.getElementById("dialog-menu-userstatus").value = 0;
+				$("#awaybutx").click();
 				break;
 			case "$away":
 				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
