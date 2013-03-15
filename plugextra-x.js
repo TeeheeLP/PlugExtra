@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.4";
+var version = "1.2.5";
 
 var playcount = 1; 
 var autowoot = false;
@@ -48,6 +48,7 @@ userlist.style.backgroundColor = "#070707";
 userlist.style.top = "0px";
 userlist.style.left = "0px";
 userlist.style.transition = "left 0.5s, box-shadow 0.5s, opacity 0.3s";
+userlist.style.webkitTransition = "left 0.5s, box-shadow 0.5s, opacity 0.3s";
 userlist.style.color = "#FFFFFF";
 userlist.style.zIndex = "9001";
 userlist.style.padding = "10px";
@@ -73,7 +74,7 @@ var hidelistbut = document.createElement("div");
 hidelistbut.style.backgroundColor = "#333333";
 hidelistbut.style.borderRadius = "7px";
 hidelistbut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
-hidelistbut.style.width = "100%";
+hidelistbut.style.width = "133px";
 hidelistbut.style.textAlign = "center";
 hidelistbut.style.height = "1.5em";
 hidelistbut.style.display = "block";
@@ -142,7 +143,7 @@ awaybut.id = "awaybutx";
 awaybut.style.backgroundColor = "#333333";
 awaybut.style.borderRadius = "7px";
 awaybut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
-awaybut.style.width = "100%";
+awaybut.style.width = "133px";
 awaybut.style.textAlign = "center";
 awaybut.style.height = "1.5em";
 awaybut.style.display = "block";
@@ -198,6 +199,7 @@ curwaitlist.id = "waitlistx";
 curwaitlist.style.margin = "0px 0px 5px 0px";
 curwaitlist.style.padding = "10px 0px 0px 27px";
 curwaitlist.style.transition = "max-height 0.5s, background-color 0.5s";
+curwaitlist.style.webkitTransition = "max-height 0.5s, background-color 0.5s";
 curwaitlist.style.maxHeight = "500px";
 curwaitlist.style.overflowX = "visible";
 curwaitlist.setAttribute("onclick", "toggleCurWaitList(this);");
@@ -451,7 +453,7 @@ function callback(obj)
 		+ ")'>Track: <span style='color:white'>" + playcount + "</span> - <span style='color:white'>" + obj.dj.username 
 		+ "</span> is playing <span style='color:white;font-weight:bold;'>" + obj.media.title 
 		+ "</span> by <span style='color:white'>" + obj.media.author + "</span>.</div><div id='trackfeed" + playcount 
-		+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
+		+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;-webkit-transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
 	if (doscroll) log.scrollTop = log.scrollHeight; 
 } 
 
@@ -496,6 +498,7 @@ function toggleFeedback(track)
 	if (trackfeed.style.maxHeight != "0px") 
 	{ 
 		trackfeed.style.transition = "max-height 0.25s ease 0.25s, opacity 0.25s"; 
+		trackfeed.style.webkitTransition = "max-height 0.25s ease 0.25s, opacity 0.25s"; 
 		trackfeed.style.maxHeight = "0px"; 
 		trackfeed.style.opacity = "0"; 
 		prevtrack.style.textDecoration = "none"; 
@@ -503,6 +506,7 @@ function toggleFeedback(track)
 	else 
 	{ 
 		trackfeed.style.transition = "max-height 0.25s, opacity 0.25s ease 0.25s"; 
+		trackfeed.style.webkitTransition = "max-height 0.25s, opacity 0.25s ease 0.25s"; 
 		var log = document.getElementById("log"); 
 		var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
 		trackfeed.style.maxHeight = "1000px"; 
@@ -516,7 +520,7 @@ document.getElementById("log").innerHTML += "<div id='track" + (playcount) + "' 
 	+ (playcount) + ")'>Track: <span style='color:white'>" + (playcount) + "</span> - <span style='color:white'>" + API.getDJs()[0].username 
 	+ "</span> is playing <span style='color:white;font-weight:bold;'>" + API.getMedia().title
 	+ "</span> by <span style='color:white'>" + API.getMedia().author + "</span>.</div><div id='trackfeed" + (playcount) 
-	+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
+	+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;-webkit-transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
 
 var expwoot = document.createElement("div");
 
@@ -767,12 +771,8 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("Recent changes: Added the $whois command and a few mod commands. You can \
-					now press enter in the away-messagebox to turn the awaybot on or off. The chatinput \
-					will now be focused after mentioning somebody through the userlist. Also it now \
-					shows if and how many users left the waitlist or dj booth during a song next \
-					to its total mehs, woots and curates in the log. The rank of every staff member \
-					will now be displayed next to their name.");
+				printChat("Added full chrome support. Also shows ambassadors and admins differently \
+					instead of like normal users in the list now.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
