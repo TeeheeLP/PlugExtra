@@ -784,7 +784,7 @@ function checkOwnIn(e, chatin)
 					You can move the log in the middle of the screen by dragging it \
 					with the top bar. Double click it or enter $reset to move the log back to \
 					it's original position. Use the black button at its bottom right hand corner to hide \
-					or show the log.");
+					or show the log. You can also drag the bottom bar to resize the log.");
 				break;
 			case "$buttons":
 				printChat("When a log button is pressed it begins to glow slightly. The blue button \
@@ -796,7 +796,8 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("Now displays unavailable users differently in the userlist.");
+				printChat("Now displays unavailable users differently in the userlist. Also made \
+					the log resizable by dragging the bottom bar.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
