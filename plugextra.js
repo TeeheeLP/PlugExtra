@@ -19,8 +19,7 @@ function dragLog(e)
 	}
 	if (dodrag)
 	{
-   		try { document.getSelection().removeAllRanges(); } catch{}
-   		try { document.selection.empty(); } catch{}
+   		document.getSelection().removeAllRanges();
 		if (oldcx == "" || oldcx == null)
 		{
 			oldcx = e.pageX;
