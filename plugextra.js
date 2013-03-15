@@ -19,9 +19,8 @@ function dragLog(e)
 	}
 	if (dodrag)
 	{
-		$(document).css.userSelect = "none";
-		$(document).css.webkitUserSelect = "none";
-		$(document).css.MozUserSelect = "none";
+		if (document.getSelection().removeAllRanges)
+   			 document.getSelection().removeAllRanges();
 		if (oldcx == "" || oldcx == null)
 		{
 			oldcx = e.pageX;
