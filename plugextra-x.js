@@ -580,6 +580,7 @@ function toggleWoot()
 		var expw = document.getElementById("expwoot");
 		expw.style.backgroundColor = "#002200";
 		expw.style.boxShadow = "1px 1px 1px #55FF55 inset, 0px 0px 0px white";
+		printChat("Activated the autowoot bot.");
 	}
 	else
 	{
@@ -588,6 +589,7 @@ function toggleWoot()
 		var expw = document.getElementById("expwoot");
 		expw.style.backgroundColor = "#005500";
 		expw.style.boxShadow = "1px 1px 1px #55FF55 inset, 0px 0px 2px white";
+		printChat("Deactivated the autowoot bot.");
 	}
 }
 
@@ -624,6 +626,7 @@ function toggleJoin()
 		var expj = document.getElementById("expjoin");
 		expj.style.backgroundColor = "#000022";
 		expj.style.boxShadow = "1px 1px 1px #5555FF inset, 0px 0px 0px white";
+		printChat("Activated the autojoin bot.");
 	}
 	else
 	{
@@ -632,6 +635,7 @@ function toggleJoin()
 		var expj = document.getElementById("expjoin");
 		expj.style.backgroundColor = "#000055";
 		expj.style.boxShadow = "1px 1px 1px #5555FF inset, 0px 0px 2px white";
+		printChat("Deactivated the autojoin bot.");
 	}
 }
 
@@ -660,80 +664,7 @@ document.body.appendChild(expjoin);
 
 //	Realtime management
 
-/*function sortList(list)
-{
-	var templist = new Array;
-	for (var i in list.childNodes)
-	{
-		if (list.childNodes[i].nodeType == 1)
-			templist[i] = list.childNodes[i].innerHTML + "|" + list.childNodes[i].id;
-	}
-	for (var i in templist)
-	{
-		templist[i] = templist[i][0].toUpperCase() + templist[i];
-	}
-	templist.sort();
-	for (var i in templist)
-	{
-		var str = "";
-		for (var n = 1; n < templist[i].length; n++)
-		{
-			str += templist[i][n];
-		}
-		templist[i] = str;
-	}
-	for (var i in templist)
-	{
-		list.childNodes[i].innerHTML = templist[i].split("|")[0];
-		list.childNodes[i].id = templist[i].split("|")[1];
-		list.childNodes[i].setAttribute("onclick", "mentionUser('" + templist[i].split("|")[1].slice(3, templist[i].split("|")[1].length) + "');");
-	}
-}
-
-function addToList(user)
-{
-	var isstaff = false;
-	
-	var userit = document.createElement("li");
-	userit.id = "pgx" + user.id;
-	userit.style.width = "100%";
-	userit.style.marginTop = "5px";
-	user.style.cursor = "pointer";
-	user.setAttribute("onclick", "mentionUser('" + user.id + "');");
-	userit.innerHTML = user.username;
-	
-	var staff = API.getStaff();
-	for (var i in staff)
-	{
-		if (user.id == staff[i].id)
-			isstaff = true;
-	}
-	
-	if (isstaff)
-	{
-		userit.style.color = "#D90066";
-		var list = document.getElementById("stafflistx");
-		list.appendChild(userit);
-		sortList(list);
-	}
-	else
-	{
-		var list = document.getElementById("usersulx");
-		list.appendChild(userit);
-		sortList(list);
-	}
-	document.getElementById("cusercount").innerHTML = API.getUsers().length + " users online";
-}
-*/
 API.addEventListener(API.USER_JOIN, refreshUserlist);
-/*
-function removeFromList(user)
-{
-	var userit = document.getElementById("pgx" + user.id);
-	userit.parentNode.removeChild(userit);
-	document.getElementById("cusercount").innerHTML = API.getUsers().length + " users online";
-}
-*/
 API.addEventListener(API.USER_LEAVE, refreshUserlist);
 
 //	---------------
@@ -749,6 +680,15 @@ function checkMessage(data)
 			API.sendChat("@" + data.from + " " + awaymsg);
 			willprintmsg = false;
 			setTimeout(function() { willprintmsg = true; }, "30000");
+		}
+	}
+	if (API.getUser(data.fromID).permission > 1)
+	{
+		var commandinfo = data.message.split(' ');
+		if (commandinfo[0] == "@" + API.getSelf().username)
+		{
+			if (commandinfo[1] == "!disable" && autojoin) toggleJoin();
+			API.sendChat("@" + data.from + " Deactivated autojoin!");
 		}
 	}
 }
@@ -784,6 +724,8 @@ function checkOwnIn(e, chatin)
 					$changes - Shows the newest changes<br> \
 					$reset - Resets the log position<br> \
 					$nick [name] - Changes your nick<br> \
+					$autowoot - Toggles the autowoot bot<br> \
+					$autojoin - Toggles the autojoin bot<br> \
 					$back - Deactivates the awaybot<br> \
 					$away &ltmessage&gt - Activates or deactivates the awaybot<br> \
 					$status [status] - Changes your status<br> \
@@ -824,7 +766,9 @@ function checkOwnIn(e, chatin)
 				break;
 			case "$changes":
 				printChat("Changed the $inhistory command to a toggle. Also changed the cursor \
-					interaction with the log.");
+					interaction with the log.<br>New commands: $autowoot, $autojoin<br> \
+					Additionally bouncers or higher can now disable autojoin with \"@username \
+					!disable\".");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
@@ -861,6 +805,12 @@ function checkOwnIn(e, chatin)
 					else printChat("No nick specified.");
 				}
 				else printChat("No nick specified.");
+				break;
+			case "$autowoot":
+				toggleWoot();
+				break;
+			case "$autojoin":
+				toggleJoin();
 				break;
 			case "$back":
 				if (isaway)
