@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.8";
+var version = "1.2.9";
 
 var playcount = 1; 
 var autowoot = false;
@@ -379,9 +379,12 @@ function checkWaitList(users)
 		}
 		if (notinlist)
 		{
+			var log = document.getElementById("log");
+			var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
 			document.getElementById("trackfeed" + playcount).innerHTML += "<span style='color:white'>"
 				+ oldwaitlist[i].username + "</span> <span style='color:#AA44FF'>left</span> the waitlist at place <span style='color:#AA44FF'>"
 				+ (parseInt(i) + 1) + "</span>.<br>";
+			if (doscroll) log.scrollTop = log.scrollHeight;
 			leftwait++;
 		}
 	}
@@ -416,9 +419,12 @@ function checkDJBooth()
 		}
 		if (notinlist)
 		{
+			var log = document.getElementById("log");
+			var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
 			document.getElementById("trackfeed" + playcount).innerHTML += "<span style='color:white'>"
 				+ olddjbooth[i].username + "</span> <span style='color:#FF00BD'>left</span> the dj booth at place <span style='color:#FF00BD'>"
 				+ (parseInt(i) + 1) + "</span>.<br>";
+			if (doscroll) log.scrollTop = log.scrollHeight;
 			leftbooth++;
 		}
 	}
@@ -474,6 +480,7 @@ function callback(obj)
 { 
 	if (autojoin) joinList(); 
 	if (autowoot) document.getElementById("button-vote-positive").click(); 
+	var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
 	if (playcount > 0) 
 	{ 
 		var prevtrack = document.getElementById("track" + playcount); 
@@ -499,8 +506,7 @@ function callback(obj)
 		checkInHistory();
 	}
 	playcount += 1;
-	log = document.getElementById("log"); 
-	var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
+	log = document.getElementById("log");
 	log.innerHTML += "<div id='track" + playcount + "' style='text-decoration:underline;display:inline;' onclick='toggleFeedback(" + playcount 
 		+ ")'>Track: <span style='color:white'>" + playcount + "</span> - <span style='color:white'>" + obj.dj.username 
 		+ "</span> is playing <span style='color:white;font-weight:bold;'>" + obj.media.title 
