@@ -20,7 +20,9 @@ function dragLog(e)
 			&& e.pageX < (parseInt(getComputedStyle(log).marginLeft) + parseInt(log.style.width) - 100)) 
 		{
 			printChat(e.pageX + "M#" + parseInt(getComputedStyle(log).marginLeft) + "mL#"
-				+ parseInt(log.style.width) + "W#" + parseInt(log.style.right) + "R#");
+				+ parseInt(log.style.width) + "W#" + parseInt(log.style.right) + "R#"
+				+ parseInt(getComputedStyle(log).marginLeft) + parseInt(log.style.width)
+				+ parseInt(log.style.right) + "T#");
 			dodrag = true;
 		}
 		if (e.pageY > parseInt(log.style.top) + parseInt(log.style.height) - 10) doresize = true;
