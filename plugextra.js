@@ -25,6 +25,7 @@ function dragLog(e)
 			}
 			if (e.pageY > parseInt(log.style.top) + parseInt(log.style.height) - 10) doresize = true;
 		}
+		else isclicked = false;
 	}
 	if (dodrag || doresize)
 	{
