@@ -16,17 +16,15 @@ function dragLog(e)
 	var log = document.getElementById("log");
 	if (isclicked)
 	{
-		if (e.pageY < parseInt(log.style.top) + 10 
-			&& e.pageX < (parseInt(getComputedStyle(log).marginLeft) + parseInt(log.style.width)
-				- parseInt(log.style.right) - 20)) 
+		if (e.pageX < (parseInt(getComputedStyle(log).marginLeft) + parseInt(log.style.width)
+				- parseInt(log.style.right) - 20))
 		{
-			printChat(e.pageX + "M#" + parseInt(getComputedStyle(log).marginLeft) + "mL#"
-				+ parseInt(log.style.width) + "W#" + parseInt(log.style.right) + "R#"
-				+ (parseInt(getComputedStyle(log).marginLeft) + parseInt(log.style.width)
-				- parseInt(log.style.right)) + "T#");
-			dodrag = true;
+			if (e.pageY < parseInt(log.style.top) + 10) 
+			{
+				dodrag = true;
+			}
+			if (e.pageY > parseInt(log.style.top) + parseInt(log.style.height) - 10) doresize = true;
 		}
-		if (e.pageY > parseInt(log.style.top) + parseInt(log.style.height) - 10) doresize = true;
 	}
 	if (dodrag || doresize)
 	{
