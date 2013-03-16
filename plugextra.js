@@ -13,7 +13,7 @@ var oldcy;
 
 function dragLog(e)
 {
-	var log = document.getElementById("log");;
+	var log = document.getElementById("log");
 	if (isclicked)
 	{
 		if (e.pageY < parseInt(log.style.top) + 10 
