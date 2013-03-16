@@ -844,9 +844,12 @@ function checkOwnIn(e, chatin)
 				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
 				{
 					var stat = commandinfo[1].toLowerCase();
-					var statint = null;
+					var statint;
 					switch(stat)
 					{
+						case "idle":
+							statint = -1;
+							break;
 						case "available":
 							statint = 0;
 							break;
@@ -858,9 +861,6 @@ function checkOwnIn(e, chatin)
 							break;
 						case "sleeping":
 							statint = 3;
-							break;
-						case "idle":
-							statint = -1;
 							break;
 					}
 					if (statint != "" && statint != null)
