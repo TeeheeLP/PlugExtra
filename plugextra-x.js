@@ -580,7 +580,7 @@ function toggleWoot()
 		var expw = document.getElementById("expwoot");
 		expw.style.backgroundColor = "#002200";
 		expw.style.boxShadow = "1px 1px 1px #55FF55 inset, 0px 0px 0px white";
-		printChat("Activated the autowoot bot.");
+		printChat("Deactivated the autowoot bot.");
 	}
 	else
 	{
@@ -589,7 +589,7 @@ function toggleWoot()
 		var expw = document.getElementById("expwoot");
 		expw.style.backgroundColor = "#005500";
 		expw.style.boxShadow = "1px 1px 1px #55FF55 inset, 0px 0px 2px white";
-		printChat("Deactivated the autowoot bot.");
+		printChat("Activated the autowoot bot.");
 	}
 }
 
@@ -626,7 +626,7 @@ function toggleJoin()
 		var expj = document.getElementById("expjoin");
 		expj.style.backgroundColor = "#000022";
 		expj.style.boxShadow = "1px 1px 1px #5555FF inset, 0px 0px 0px white";
-		printChat("Activated the autojoin bot.");
+		printChat("Deactivated the autojoin bot.");
 	}
 	else
 	{
@@ -635,7 +635,7 @@ function toggleJoin()
 		var expj = document.getElementById("expjoin");
 		expj.style.backgroundColor = "#000055";
 		expj.style.boxShadow = "1px 1px 1px #5555FF inset, 0px 0px 2px white";
-		printChat("Deactivated the autojoin bot.");
+		printChat("Activated the autojoin bot.");
 	}
 }
 
