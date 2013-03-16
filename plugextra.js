@@ -16,7 +16,11 @@ function dragLog(e)
 	var log = document.getElementById("log");;
 	if (isclicked)
 	{
-		if (e.pageY < parseInt(log.style.top) + 10) dodrag = true;
+		if (e.pageY < parseInt(log.style.top) + 10 
+			&& e.pageX < parseInt(log.style.width) - parseInt(log.style.right) / 2 - 20) 
+		{
+			dodrag = true;
+		}
 		if (e.pageY > parseInt(log.style.top) + parseInt(log.style.height) - 10) doresize = true;
 	}
 	if (dodrag || doresize)
