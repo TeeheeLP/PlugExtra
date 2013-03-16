@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.8";
+var version = "1.3";
 
 var playcount = 1; 
 var autowoot = false;
@@ -770,7 +770,8 @@ function checkOwnIn(e, chatin)
 				printChat("Changed the $inhistory command to a toggle. Also changed the cursor \
 					interaction with the log.<br>New commands: $autowoot, $autojoin<br> \
 					Additionally bouncers or higher can now disable autojoin with \"@username \
-					!disable\".");
+					!disable\". You can't use the autojoin bot without an active playlist \
+					anymore.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
