@@ -843,16 +843,7 @@ function checkOwnIn(e, chatin)
 			case "$status":
 				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
 				{
-					var stat = "";
-					var statint;
-					for (i in commandinfo)
-					{
-						if (i > 0)
-						{
-							stat += commandinfo[i] + " ";
-						}
-					}
-					stat = stat.toLowerCase();
+					var stat = commandinfo[1].toLowerCase();
 					switch(stat)
 					{
 						case "available":
@@ -868,7 +859,7 @@ function checkOwnIn(e, chatin)
 							statint = 3;
 							break;
 						case "idle":
-							statint = 4;
+							statint = -1;
 							break;
 						default:
 							break;
