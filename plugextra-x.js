@@ -868,7 +868,6 @@ function checkOwnIn(e, chatin)
 					if (statint >= -1)
 					{
 						Models.user.changeStatus(statint);
-						document.getElementById("dialog-menu-userstatus").value = statint;
 					}
 					else printChat("This is no valid status: " + stat);
 				}
