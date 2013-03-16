@@ -17,7 +17,8 @@ function dragLog(e)
 	if (isclicked)
 	{
 		if (e.pageY < parseInt(log.style.top) + 10 
-			&& e.pageX < (parseInt(getComputedStyle(log).marginLeft) + parseInt(log.style.width) - 100)) 
+			&& e.pageX < (parseInt(getComputedStyle(log).marginLeft) + parseInt(log.style.width)
+				- parseInt(log.style.right) - 20)) 
 		{
 			printChat(e.pageX + "M#" + parseInt(getComputedStyle(log).marginLeft) + "mL#"
 				+ parseInt(log.style.width) + "W#" + parseInt(log.style.right) + "R#"
