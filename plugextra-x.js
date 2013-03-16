@@ -628,7 +628,8 @@ function toggleJoin()
 		expj.style.boxShadow = "1px 1px 1px #5555FF inset, 0px 0px 0px white";
 		printChat("Deactivated the autojoin bot.");
 	}
-	else
+	else if (Models.playlist.selectedPlaylistID != 0 && Models.playlist.selectedPlaylistID != ""
+		&& Models.playlist.selectedPlaylistID != null)
 	{
 		autojoin = true;
 		joinList();
@@ -637,6 +638,7 @@ function toggleJoin()
 		expj.style.boxShadow = "1px 1px 1px #5555FF inset, 0px 0px 2px white";
 		printChat("Activated the autojoin bot.");
 	}
+	else printChat("You need an active playlist to use autojoin.");
 }
 
 expjoin.style.position = "relative";
