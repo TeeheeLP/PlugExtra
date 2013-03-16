@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.7";
+var version = "1.2.8";
 
 var playcount = 1; 
 var autowoot = false;
@@ -13,6 +13,7 @@ var olddjbooth = API.getDJs();
 var suffix = new Array("User", "Featured DJ", "Bouncer", "Manager", "Co-Host", "Host");
 var leftwait = 0;
 var leftbooth = 0;
+var checkhistory = false;
 
 function printChat(str)
 {
@@ -444,6 +445,26 @@ function joinList()
 
 var prevscore = API.getRoomScore();
 
+function checkInHistory()
+{
+	var history = Models.history.data;
+	var media = API.getMedia();
+	var inhistory = false;
+	for (i in history)
+	{
+		if (i.title == history[i].media.title 
+			&& i.author == history[i].media.author)
+		{
+			inhistory = true;
+		}
+	}
+	if (inhistory)
+	{
+		document.getElementById("chat-sound").playMentionSound();
+		printChat(media.title + " by " + media.author + " is in the current history!");
+	}
+}
+
 API.addEventListener(API.DJ_ADVANCE, callback); 
 function callback(obj) 
 { 
@@ -469,6 +490,10 @@ function callback(obj)
 		leftwait = 0;
 		leftbooth = 0;
 	} 
+	if (checkhistory)
+	{
+		checkInHistory();
+	}
 	playcount += 1;
 	log = document.getElementById("log"); 
 	var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
@@ -555,6 +580,7 @@ function toggleWoot()
 		var expw = document.getElementById("expwoot");
 		expw.style.backgroundColor = "#002200";
 		expw.style.boxShadow = "1px 1px 1px #55FF55 inset, 0px 0px 0px white";
+		printChat("Deactivated the autowoot bot.");
 	}
 	else
 	{
@@ -563,6 +589,7 @@ function toggleWoot()
 		var expw = document.getElementById("expwoot");
 		expw.style.backgroundColor = "#005500";
 		expw.style.boxShadow = "1px 1px 1px #55FF55 inset, 0px 0px 2px white";
+		printChat("Activated the autowoot bot.");
 	}
 }
 
@@ -599,15 +626,19 @@ function toggleJoin()
 		var expj = document.getElementById("expjoin");
 		expj.style.backgroundColor = "#000022";
 		expj.style.boxShadow = "1px 1px 1px #5555FF inset, 0px 0px 0px white";
+		printChat("Deactivated the autojoin bot.");
 	}
-	else
+	else if (Models.playlist.selectedPlaylistID != 0 && Models.playlist.selectedPlaylistID != ""
+		&& Models.playlist.selectedPlaylistID != null)
 	{
 		autojoin = true;
 		joinList();
 		var expj = document.getElementById("expjoin");
 		expj.style.backgroundColor = "#000055";
 		expj.style.boxShadow = "1px 1px 1px #5555FF inset, 0px 0px 2px white";
+		printChat("Activated the autojoin bot.");
 	}
+	else printChat("You need an active playlist to use autojoin.");
 }
 
 expjoin.style.position = "relative";
@@ -635,80 +666,7 @@ document.body.appendChild(expjoin);
 
 //	Realtime management
 
-/*function sortList(list)
-{
-	var templist = new Array;
-	for (var i in list.childNodes)
-	{
-		if (list.childNodes[i].nodeType == 1)
-			templist[i] = list.childNodes[i].innerHTML + "|" + list.childNodes[i].id;
-	}
-	for (var i in templist)
-	{
-		templist[i] = templist[i][0].toUpperCase() + templist[i];
-	}
-	templist.sort();
-	for (var i in templist)
-	{
-		var str = "";
-		for (var n = 1; n < templist[i].length; n++)
-		{
-			str += templist[i][n];
-		}
-		templist[i] = str;
-	}
-	for (var i in templist)
-	{
-		list.childNodes[i].innerHTML = templist[i].split("|")[0];
-		list.childNodes[i].id = templist[i].split("|")[1];
-		list.childNodes[i].setAttribute("onclick", "mentionUser('" + templist[i].split("|")[1].slice(3, templist[i].split("|")[1].length) + "');");
-	}
-}
-
-function addToList(user)
-{
-	var isstaff = false;
-	
-	var userit = document.createElement("li");
-	userit.id = "pgx" + user.id;
-	userit.style.width = "100%";
-	userit.style.marginTop = "5px";
-	user.style.cursor = "pointer";
-	user.setAttribute("onclick", "mentionUser('" + user.id + "');");
-	userit.innerHTML = user.username;
-	
-	var staff = API.getStaff();
-	for (var i in staff)
-	{
-		if (user.id == staff[i].id)
-			isstaff = true;
-	}
-	
-	if (isstaff)
-	{
-		userit.style.color = "#D90066";
-		var list = document.getElementById("stafflistx");
-		list.appendChild(userit);
-		sortList(list);
-	}
-	else
-	{
-		var list = document.getElementById("usersulx");
-		list.appendChild(userit);
-		sortList(list);
-	}
-	document.getElementById("cusercount").innerHTML = API.getUsers().length + " users online";
-}
-*/
 API.addEventListener(API.USER_JOIN, refreshUserlist);
-/*
-function removeFromList(user)
-{
-	var userit = document.getElementById("pgx" + user.id);
-	userit.parentNode.removeChild(userit);
-	document.getElementById("cusercount").innerHTML = API.getUsers().length + " users online";
-}
-*/
 API.addEventListener(API.USER_LEAVE, refreshUserlist);
 
 //	---------------
@@ -724,6 +682,15 @@ function checkMessage(data)
 			API.sendChat("@" + data.from + " " + awaymsg);
 			willprintmsg = false;
 			setTimeout(function() { willprintmsg = true; }, "30000");
+		}
+	}
+	if (API.getUser(data.fromID).permission > 1)
+	{
+		var commandinfo = data.message.split(' ');
+		if (commandinfo[0] == "@" + API.getSelf().username)
+		{
+			if (commandinfo[1] == "!disable" && autojoin) toggleJoin();
+			API.sendChat("@" + data.from + " Deactivated autojoin!");
 		}
 	}
 }
@@ -759,11 +726,13 @@ function checkOwnIn(e, chatin)
 					$changes - Shows the newest changes<br> \
 					$reset - Resets the log position<br> \
 					$nick [name] - Changes your nick<br> \
+					$autowoot - Toggles the autowoot bot<br> \
+					$autojoin - Toggles the autojoin bot<br> \
 					$back - Deactivates the awaybot<br> \
 					$away &ltmessage&gt - Activates or deactivates the awaybot<br> \
 					$status [status] - Changes your status<br> \
 					$whois [name] - Shows information about a user<br> \
-					$inhistory - Displays if the current song is in the history");
+					$inhistory [on/off] - Displays if the current song is in the history");
 				break;
 			case "$version":
 				printChat("Running on version " + version);
@@ -798,7 +767,11 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("Added new commands: $back, $status, $nick, $inhistory");
+				printChat("Changed the $inhistory command to a toggle. Also changed the cursor \
+					interaction with the log.<br>New commands: $autowoot, $autojoin<br> \
+					Additionally bouncers or higher can now disable autojoin with \"@username \
+					!disable\". You can't use the autojoin bot without an active playlist \
+					anymore.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
@@ -835,6 +808,12 @@ function checkOwnIn(e, chatin)
 					else printChat("No nick specified.");
 				}
 				else printChat("No nick specified.");
+				break;
+			case "$autowoot":
+				toggleWoot();
+				break;
+			case "$autojoin":
+				toggleJoin();
 				break;
 			case "$back":
 				if (isaway)
@@ -941,22 +920,25 @@ function checkOwnIn(e, chatin)
 				}
 				break;
 			case "$inhistory":
-				var history = Models.history.data;
-				var media = API.getMedia();
-				var inhistory = false;
-				for (i in history)
+				if (commandinfo.length > 1 && commandinfo[1] != null 
+					&& commandinfo[1] != "")
 				{
-					if (i.title == history[i].media.title 
-						&& i.author == history[i].media.author)
+					if (commandinfo[1] == "on")
 					{
-						inhistory = true;
+						printChat("You will now be notified when the current song is in \
+							the history.");
+						checkhistory = true;
+						checkInHistory();
 					}
+					else if (commandinfo[1] == "off")
+					{
+						printChat("You will not be notified when the current song is in \
+							the history anymore.");
+						checkhistory = false;
+					}
+					else printChat("Please choose on or off.");
 				}
-				if (inhistory)
-				{
-					printChat(media.title + " by " + media.author + " is in the current history.");
-				}
-				else printChat("Couldn't find " + media.title + " by " + media.author + " in history.");
+				else printChat("Please choose on or off.");
 				break;
 			default:
 				iscommand = false;
