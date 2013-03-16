@@ -17,7 +17,7 @@ function dragLog(e)
 	if (isclicked)
 	{
 		if (e.pageY < parseInt(log.style.top) + 10 
-			&& e.pageX < parseInt(log.style.width) - parseInt(log.style.right) / 2 - 20) 
+			&& e.pageX < parseInt(log.style.width) + parseInt(log.style.right) / 2 - 20) 
 		{
 			dodrag = true;
 		}
