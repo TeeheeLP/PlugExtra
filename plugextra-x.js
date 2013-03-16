@@ -119,7 +119,6 @@ function awayBot()
 		var awaybutx = document.getElementById("awaybutx");
 		awaybutx.innerHTML = "Back";
 		awaybutx.style.backgroundColor = "#333388";
-		document.getElementById("dialog-menu-userstatus").value = 1;
 	}
 	else
 	{
@@ -130,7 +129,6 @@ function awayBot()
 		var awaybutx = document.getElementById("awaybutx");
 		awaybutx.innerHTML = "Away";
 		awaybutx.style.backgroundColor = "#333333";
-		document.getElementById("dialog-menu-userstatus").value = 0;
 	}
 }
 
