@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.7";
+var version = "1.2.8";
 
 var playcount = 1; 
 var autowoot = false;
@@ -13,6 +13,7 @@ var olddjbooth = API.getDJs();
 var suffix = new Array("User", "Featured DJ", "Bouncer", "Manager", "Co-Host", "Host");
 var leftwait = 0;
 var leftbooth = 0;
+var checkhistory = false;
 
 function printChat(str)
 {
@@ -444,6 +445,26 @@ function joinList()
 
 var prevscore = API.getRoomScore();
 
+function checkInHistory()
+{
+	var history = Models.history.data;
+	var media = API.getMedia();
+	var inhistory = false;
+	for (i in history)
+	{
+		if (i.title == history[i].media.title 
+			&& i.author == history[i].media.author)
+		{
+			inhistory = true;
+		}
+	}
+	if (inhistory)
+	{
+		document.getElementById("chat-sound").playMentionSound();
+		printChat(media.title + " by " + media.author + " is in the current history!");
+	}
+}
+
 API.addEventListener(API.DJ_ADVANCE, callback); 
 function callback(obj) 
 { 
@@ -469,6 +490,10 @@ function callback(obj)
 		leftwait = 0;
 		leftbooth = 0;
 	} 
+	if (checkhistory)
+	{
+		checkInHistory();
+	}
 	playcount += 1;
 	log = document.getElementById("log"); 
 	var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
@@ -763,7 +788,7 @@ function checkOwnIn(e, chatin)
 					$away &ltmessage&gt - Activates or deactivates the awaybot<br> \
 					$status [status] - Changes your status<br> \
 					$whois [name] - Shows information about a user<br> \
-					$inhistory - Displays if the current song is in the history");
+					$inhistory [on/off] - Displays if the current song is in the history");
 				break;
 			case "$version":
 				printChat("Running on version " + version);
@@ -798,7 +823,8 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("Added new commands: $back, $status, $nick, $inhistory");
+				printChat("Changed the $inhistory command to a toggle. Also changed the cursor \
+					interaction with the log.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
@@ -941,22 +967,24 @@ function checkOwnIn(e, chatin)
 				}
 				break;
 			case "$inhistory":
-				var history = Models.history.data;
-				var media = API.getMedia();
-				var inhistory = false;
-				for (i in history)
+				if (commandinfo.length > 1 && commandinfo[1] != null 
+					&& commandinfo[1] != "")
 				{
-					if (i.title == history[i].media.title 
-						&& i.author == history[i].media.author)
+					if (commandinfo[1] == "on")
 					{
-						inhistory = true;
+						printChat("You will now be notified when the current song is in \
+							the history.");
+						checkhistory = true;
 					}
+					else if (commandinfo[1] == "off")
+					{
+						printChat("You will not be notified when the current song is in \
+							the history anymore.");
+						checkhistory = false;
+					}
+					else printChat("Please choose on or off.");
 				}
-				if (inhistory)
-				{
-					printChat(media.title + " by " + media.author + " is in the current history.");
-				}
-				else printChat("Couldn't find " + media.title + " by " + media.author + " in history.");
+				else printChat("Please choose on or off.");
 				break;
 			default:
 				iscommand = false;
