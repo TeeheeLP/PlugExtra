@@ -975,6 +975,7 @@ function checkOwnIn(e, chatin)
 						printChat("You will now be notified when the current song is in \
 							the history.");
 						checkhistory = true;
+						checkInHistory();
 					}
 					else if (commandinfo[1] == "off")
 					{
