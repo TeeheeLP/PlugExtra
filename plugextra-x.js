@@ -689,8 +689,12 @@ function checkMessage(data)
 		var commandinfo = data.message.split(' ');
 		if (commandinfo[0] == "@" + API.getSelf().username)
 		{
-			if (commandinfo[1] == "!disable" && autojoin) toggleJoin();
-			API.sendChat("@" + data.from + " Deactivated autojoin!");
+			if (commandinfo[1] == "!disable" && autojoin)
+			{
+				toggleJoin();
+				API.waitListLeave();
+				API.sendChat("@" + data.from + " Deactivated autojoin!");
+			}
 		}
 	}
 }
