@@ -119,6 +119,7 @@ function awayBot()
 		var awaybutx = document.getElementById("awaybutx");
 		awaybutx.innerHTML = "Back";
 		awaybutx.style.backgroundColor = "#333388";
+		document.getElementById("dialog-menu-userstatus").value = 1;
 	}
 	else
 	{
@@ -129,6 +130,7 @@ function awayBot()
 		var awaybutx = document.getElementById("awaybutx");
 		awaybutx.innerHTML = "Away";
 		awaybutx.style.backgroundColor = "#333333";
+		document.getElementById("dialog-menu-userstatus").value = 0;
 	}
 }
 
@@ -843,18 +845,13 @@ function checkOwnIn(e, chatin)
 			case "$status":
 				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
 				{
-					var stat = "";
+					var stat = commandinfo[1].toLowerCase();
 					var statint;
-					for (i in commandinfo)
-					{
-						if (i > 0)
-						{
-							stat += commandinfo[i] + " ";
-						}
-					}
-					stat = stat.toLowerCase();
 					switch(stat)
 					{
+						case "idle":
+							statint = -1;
+							break;
 						case "available":
 							statint = 0;
 							break;
@@ -867,13 +864,8 @@ function checkOwnIn(e, chatin)
 						case "sleeping":
 							statint = 3;
 							break;
-						case "idle":
-							statint = 4;
-							break;
-						default:
-							break;
 					}
-					if (statint != "" && statint != null)
+					if (statint >= -1)
 					{
 						Models.user.changeStatus(statint);
 					}
