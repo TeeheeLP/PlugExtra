@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.9";
+var version = "1.2.8.1";
 
 var playcount = 1; 
 var autowoot = false;
@@ -463,9 +463,9 @@ function checkInHistory()
 	var inhistory = false;
 	for (i in history)
 	{
-		if ((i.title == history[i].author
+		if ((i.title == history[i].media.author
 			&& i.author == history[i].media.title) ||
-			(i.title == history[i].title
+			(i.title == history[i].media.title
 			&& i.author == history[i].media.author))
 		{
 			inhistory = true;
