@@ -463,10 +463,10 @@ function checkInHistory()
 	var inhistory = false;
 	for (i in history)
 	{
-		if ((i.title == history[i].media.author
-			&& i.author == history[i].media.title) ||
-			(i.title == history[i].media.title
-			&& i.author == history[i].media.author))
+		if ((media.title == history[i].media.author
+			&& media.author == history[i].media.title) ||
+			(media.title == history[i].media.title
+			&& media.author == history[i].media.author))
 		{
 			inhistory = true;
 		}
