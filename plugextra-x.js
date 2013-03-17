@@ -835,7 +835,7 @@ function checkOwnIn(e, chatin)
 			case "$back":
 				if (isaway)
 				{
-					$("#awaybutx").click();
+					document.getElementById("awaybutx").click();
 				}
 				break;
 			case "$away":
