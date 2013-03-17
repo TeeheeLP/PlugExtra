@@ -204,6 +204,7 @@ curwaitlist.style.transition = "max-height 0.5s, background-color 0.5s";
 curwaitlist.style.webkitTransition = "max-height 0.5s, background-color 0.5s";
 curwaitlist.style.maxHeight = "500px";
 curwaitlist.style.overflowX = "visible";
+curwaitlist.style.overflowY = "auto";
 curwaitlist.setAttribute("onclick", "toggleCurWaitList(this);");
 
 userlist.appendChild(curwaitlist);
