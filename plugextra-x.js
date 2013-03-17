@@ -186,11 +186,13 @@ function toggleCurWaitList(list)
 	{
 		list.style.maxHeight = "3px";
 		list.style.overflowY = "hidden";
+		list.style.color = "#333333";
 		list.style.backgroundColor = "#333333";
 	}
 	else 
 	{
 		list.style.maxHeight = "500px";
+		list.style.color = "#FFFFFF";
 		setTimeout(function() {list.style.overflowY = "auto";}, "500");
 		list.style.backgroundColor = "transparent";
 	}
@@ -200,8 +202,8 @@ var curwaitlist = document.createElement("ol");
 curwaitlist.id = "waitlistx";
 curwaitlist.style.margin = "0px 0px 5px 0px";
 curwaitlist.style.padding = "10px 0px 0px 27px";
-curwaitlist.style.transition = "max-height 0.5s, background-color 0.5s";
-curwaitlist.style.webkitTransition = "max-height 0.5s, background-color 0.5s";
+curwaitlist.style.transition = "max-height 0.5s, background-color 0.5s, color 0.5s";
+curwaitlist.style.webkitTransition = "max-height 0.5s, background-color 0.5s, color 0.5s";
 curwaitlist.style.maxHeight = "500px";
 curwaitlist.style.overflowX = "visible";
 curwaitlist.style.overflowY = "auto";
