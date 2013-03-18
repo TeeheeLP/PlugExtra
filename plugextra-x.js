@@ -459,12 +459,12 @@ var prevscore = API.getRoomScore();
 
 function checkInHistory()
 {
-	try {
 	var history = Models.history.data;
 	var media = API.getMedia();
 	var inhistory = false;
 	for (i in history)
 	{
+		if (i == 0) i++;
 		if ((media.title == history[i].media.author
 			&& media.author == history[i].media.title) ||
 			(media.title == history[i].media.title
@@ -483,8 +483,6 @@ function checkInHistory()
 			new ModerationForceSkipService(Models.room.data.historyID);
 		}
 	}
-	}
-	catch (err) { printChat(err.message); }
 }
 
 API.addEventListener(API.DJ_ADVANCE, callback); 
