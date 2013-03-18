@@ -459,6 +459,7 @@ var prevscore = API.getRoomScore();
 
 function checkInHistory()
 {
+	try {
 	var history = Models.history.data;
 	var media = API.getMedia();
 	var inhistory = false;
@@ -474,8 +475,6 @@ function checkInHistory()
 	}
 	if (inhistory)
 	{
-		try
-		{
 		if (!autoskip) document.getElementById("chat-sound").playMentionSound();
 		printChat(media.title + " by " + media.author + " is in the current history!");
 		if (autoskip && (API.getSelf().permission > 1 || API.getDJs()[0].id == API.getSelf().id))
@@ -483,9 +482,9 @@ function checkInHistory()
 			API.sendChat("/me skips the current song because it is in the history.");
 			new ModerationForceSkipService(Models.room.data.historyID);
 		}
-		}
-		catch (err) { printChat(err.message); }
 	}
+	}
+	catch (err) { printChat(err.message); }
 }
 
 API.addEventListener(API.DJ_ADVANCE, callback); 
