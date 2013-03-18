@@ -17,7 +17,7 @@ function dragLog(e)
 	if (isclicked)
 	{
 		if (e.pageX < (parseInt(getComputedStyle(log).marginLeft) + parseInt(log.style.width) 
-			* ($.browser.webkit ? 1 : 1.5) - parseInt(log.style.right) - 20))
+			* ($.browser.webkit ? 1 : 1) - parseInt(log.style.right) - 20))
 		{
 			if (e.pageY < parseInt(log.style.top) + 10) 
 			{
