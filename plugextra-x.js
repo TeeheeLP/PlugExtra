@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.8.1";
+var version = "1.2.9";
 
 var playcount = 1; 
 var autowoot = false;
@@ -479,7 +479,7 @@ function checkInHistory()
 		if (autoskip && (API.getSelf().permission > 1 || API.getDJs()[0].id == API.getSelf().id))
 		{
 			API.sendChat("/me skips the current song because it is in the history.");
-			API.moderateForceSkip();
+			new ModerationForceSkipService(Models.room.data.historyID);
 		}
 	}
 }
