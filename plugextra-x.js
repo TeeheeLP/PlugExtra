@@ -14,6 +14,7 @@ var suffix = new Array("User", "Featured DJ", "Bouncer", "Manager", "Co-Host", "
 var leftwait = 0;
 var leftbooth = 0;
 var checkhistory = false;
+var autoskip = false;
 
 function printChat(str)
 {
@@ -473,8 +474,13 @@ function checkInHistory()
 	}
 	if (inhistory)
 	{
-		document.getElementById("chat-sound").playMentionSound();
+		if (!autoskip) document.getElementById("chat-sound").playMentionSound();
 		printChat(media.title + " by " + media.author + " is in the current history!");
+		if (autoskip && (API.getSelf().permission > 1 || API.getDJs()[0].id == API.getSelf().id))
+		{
+			API.sendChat("/me skips the current song because it is in the history.");
+			API.moderateForceSkip();
+		}
 	}
 }
 
@@ -749,7 +755,8 @@ function checkOwnIn(e, chatin)
 					$away &ltmessage&gt - Activates or deactivates the awaybot<br> \
 					$status [status] - Changes your status<br> \
 					$whois [name] - Shows information about a user<br> \
-					$inhistory [on/off] - Displays if the current song is in the history");
+					$inhistory [on/skip/off] - Displays if the current song is in the history and \
+						skips it if set to 'skip'");
 				break;
 			case "$version":
 				printChat("Running on version " + version);
@@ -935,6 +942,13 @@ function checkOwnIn(e, chatin)
 						printChat("You will now be notified when the current song is in \
 							the history.");
 						checkhistory = true;
+						checkInHistory();
+					}
+					else if (commandinfo[1] == "skip")
+					{
+						printChat("Songs that are in history will now be skipped automatically.");
+						checkhistory = true;
+						autoskip = true;
 						checkInHistory();
 					}
 					else if (commandinfo[1] == "off")
