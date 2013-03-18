@@ -512,7 +512,7 @@ function callback(obj)
 	} 
 	if (checkhistory)
 	{
-		checkInHistory();
+		setTimeout(function() { checkInHistory(); }, "5000");
 	}
 	playcount += 1;
 	log = document.getElementById("log");
