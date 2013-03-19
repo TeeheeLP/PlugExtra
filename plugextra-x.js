@@ -472,7 +472,7 @@ function checkInHistory()
 	for (i in history)
 	{
 		if (i == 0) i++;
-		if (API.getDJs()[0].id != history[i].user.id &&
+		if (API.getDJs()[0].id != history[0].user.id &&
 			((media.title == history[i].media.author
 			&& media.author == history[i].media.title) ||
 			(media.title == history[i].media.title
