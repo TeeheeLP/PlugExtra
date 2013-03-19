@@ -464,7 +464,7 @@ function checkInHistory()
 	printChat("checkhistory: " + checkhistory);
 	var history = Models.history.data;
 	var media = API.getMedia();
-	printChat("History: " + history.length + history[0].title + " " + history[0].author);
+	printChat("History: " + history.length + history[0].media.title + " " + history[0].media.author);
 	printChat("Media: " + media.title + " " + media.author);
 	var inhistory = false;
 	for (i in history)
