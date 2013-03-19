@@ -504,7 +504,7 @@ function doCheckHistory()
 
 function checkInHistory()
 {
-	if (Models.history.hasLoaded)
+	if (Models.history.hasLoaded && Models.history.data[0] != null)
 	{
 		doCheckHistory();
 	}
