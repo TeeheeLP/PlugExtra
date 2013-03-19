@@ -459,6 +459,8 @@ var prevscore = API.getRoomScore();
 
 function checkInHistory()
 {
+	printChat("Started...");
+	printChat("autoskip:" + autoskip);
 	var history = Models.history.data;
 	var media = API.getMedia();
 	var inhistory = false;
@@ -473,16 +475,26 @@ function checkInHistory()
 			inhistory = true;
 		}
 	}
+	printChat("inhistory: " + inhistory);
 	if (inhistory)
 	{
-		if (!autoskip) document.getElementById("chat-sound").playMentionSound();
+		printChat("Success...?");
+		if (!autoskip)
+		{
+			document.getElementById("chat-sound").playMentionSound();
+			printChat("Playing sound.");
+		}
+		printChat("Is in history!");
 		printChat(media.title + " by " + media.author + " is in the current history!");
 		if (autoskip && (API.getSelf().permission > 1 || API.getDJs()[0].id == API.getSelf().id))
 		{
+			printChat("Got permission!");
 			API.sendChat("/me skips the current song because it is in the history.");
 			new ModerationForceSkipService(Models.room.data.historyID);
+			printChat("Fired skip!");
 		}
 	}
+	printChat("Done!");
 }
 
 API.addEventListener(API.DJ_ADVANCE, callback); 
