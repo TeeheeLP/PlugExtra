@@ -462,7 +462,6 @@ function checkInHistory()
 	printChat("Started...");
 	printChat("autoskip: " + autoskip);
 	printChat("checkhistory: " + checkhistory);
-	Models.history.load();
 	var history = Models.history.data;
 	var media = API.getMedia();
 	printChat("History: " + history.length + history[0].media.title + " " + history[0].media.author);
@@ -472,7 +471,7 @@ function checkInHistory()
 	for (i in history)
 	{
 		if (i == 0) i++;
-		if (API.getDJs()[0].id != history[0].user.id &&
+		if ((i > 0 && API.getDJs()[0].id != history[i].user.id) &&
 			((media.title == history[i].media.author
 			&& media.author == history[i].media.title) ||
 			(media.title == history[i].media.title
@@ -496,7 +495,7 @@ function checkInHistory()
 		{
 			printChat("Got permission!");
 			API.sendChat("/me skips the current song because it is in the history.");
-			new ModerationForceSkipService(Models.room.data.historyID);
+			//new ModerationForceSkipService(Models.room.data.historyID);
 			printChat("Fired skip!");
 		}
 	}
@@ -531,7 +530,7 @@ function callback(obj)
 	} 
 	if (checkhistory)
 	{
-		Models.history.load();
+		Models.history.updateCallback();
 		checkInHistory();
 	}
 	playcount += 1;
@@ -747,7 +746,7 @@ function firstRun()
 		on how to use the plugin.");
 	if (API.getSelf().permission > 1)
 		printChat("Use $modhelp to view commands only available to mods.");
-	Models.history.load();
+	Models.history.updateCallback();
 }
 
 firstRun();
@@ -963,7 +962,7 @@ function checkOwnIn(e, chatin)
 						printChat("You will now be notified when the current song is in \
 							the history.");
 						checkhistory = true;
-						Models.history.load();
+						Models.history.updateCallback();
 						checkInHistory();
 					}
 					else if (commandinfo[1] == "skip")
@@ -971,7 +970,7 @@ function checkOwnIn(e, chatin)
 						printChat("Songs that are in history will now be skipped automatically.");
 						checkhistory = true;
 						autoskip = true;
-						Models.history.load();
+						Models.history.updateCallback();
 						checkInHistory();
 					}
 					else if (commandinfo[1] == "off")
