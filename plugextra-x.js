@@ -466,11 +466,12 @@ function checkInHistory()
 	var history = Models.history.data;
 	var media = API.getMedia();
 	printChat("History: " + history.length + history[0].media.title + " " + history[0].media.author);
+	printChat("Old/New DJ: " + history[0].user.id + " | " + API.getDJs()[0].id);
 	printChat("Media: " + media.title + " " + media.author);
 	var inhistory = false;
 	for (i in history)
 	{
-		if (i == 0) i++;
+		if (i == 0 && API.getDJs()[0].id != history[i].user.id) i++;
 		if ((media.title == history[i].media.author
 			&& media.author == history[i].media.title) ||
 			(media.title == history[i].media.title
