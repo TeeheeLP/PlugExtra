@@ -529,6 +529,7 @@ function callback(obj)
 	} 
 	if (checkhistory)
 	{
+		Models.history.load();
 		checkInHistory();
 	}
 	playcount += 1;
@@ -959,6 +960,7 @@ function checkOwnIn(e, chatin)
 						printChat("You will now be notified when the current song is in \
 							the history.");
 						checkhistory = true;
+						Models.history.load();
 						checkInHistory();
 					}
 					else if (commandinfo[1] == "skip")
@@ -966,6 +968,7 @@ function checkOwnIn(e, chatin)
 						printChat("Songs that are in history will now be skipped automatically.");
 						checkhistory = true;
 						autoskip = true;
+						Models.history.load();
 						checkInHistory();
 					}
 					else if (commandinfo[1] == "off")
