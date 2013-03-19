@@ -511,7 +511,7 @@ function checkInHistory()
 	{
 		doCheckHistory();
 	}
-	else setTimeout(function() { Models.history.load(); checkInHistory(); }, "10000");
+	else setTimeout(function() { Models.history.load(); checkInHistory(); }, "2000");
 }
 
 API.addEventListener(API.DJ_ADVANCE, callback); 
