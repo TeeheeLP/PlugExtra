@@ -462,7 +462,7 @@ function doCheckHistory()
 	printChat("Started...");
 	printChat("autoskip: " + autoskip);
 	printChat("checkhistory: " + checkhistory);
-	printChat(Models.history.data);
+	printChat(Models.history.data[0]);
 	var history = Models.history.data;
 	var media = API.getMedia();
 	printChat("History: " + history.length + history[0].media.title + " " + history[0].media.author);
