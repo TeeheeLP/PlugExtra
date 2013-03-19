@@ -500,6 +500,7 @@ function doCheckHistory()
 			printChat("Fired skip!");
 		}
 	}
+	Models.history = [];
 	printChat("Done!");
 }
 
@@ -509,7 +510,7 @@ function checkInHistory()
 	{
 		doCheckHistory();
 	}
-	else setTimeout(function() { checkInHistory(); }, "1000");
+	else setTimeout(function() { Models.history.load(); checkInHistory(); }, "1000");
 	printChat("Cycling...");
 }
 
