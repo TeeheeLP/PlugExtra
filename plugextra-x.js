@@ -745,6 +745,7 @@ function firstRun()
 		on how to use the plugin.");
 	if (API.getSelf().permission > 1)
 		printChat("Use $modhelp to view commands only available to mods.");
+	Models.history.load();
 }
 
 firstRun();
