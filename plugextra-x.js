@@ -506,12 +506,12 @@ function doCheckHistory()
 
 function checkInHistory()
 {
+	printChat("Cycling...");
 	if (Models.history.hasLoaded && Models.history.data != null && Models.history.data != undefined && Models.history.data != "")
 	{
 		doCheckHistory();
 	}
-	else setTimeout(function() { Models.history.load(); checkInHistory(); }, "1000");
-	printChat("Cycling...");
+	else setTimeout(function() { Models.history.load(); checkInHistory(); }, "10000");
 }
 
 API.addEventListener(API.DJ_ADVANCE, callback); 
