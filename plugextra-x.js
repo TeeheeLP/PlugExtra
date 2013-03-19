@@ -509,7 +509,7 @@ function checkInHistory()
 	{
 		doCheckHistory();
 	}
-	else setTimeout(function() { doCheckHistory(); }, "1000");
+	else setTimeout(function() { checkInHistory(); }, "1000");
 	printChat("Cycling...");
 }
 
