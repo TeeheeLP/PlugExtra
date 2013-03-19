@@ -457,7 +457,7 @@ function joinList()
 
 var prevscore = API.getRoomScore();
 
-function checkInHistory()
+function doCheckHistory()
 {
 	printChat("Started...");
 	printChat("autoskip: " + autoskip);
@@ -502,6 +502,16 @@ function checkInHistory()
 	printChat("Done!");
 }
 
+function checkInHistory()
+{
+	if (Models.history.hasLoaded)
+	{
+		doCheckHistory();
+	}
+	else setTimeout(function() { doCheckHistory(); }, "1000");
+	printChat("Cycling...");
+}
+
 API.addEventListener(API.DJ_ADVANCE, callback); 
 function callback(obj) 
 { 
@@ -530,7 +540,6 @@ function callback(obj)
 	} 
 	if (checkhistory)
 	{
-		Models.history.updateCallback();
 		checkInHistory();
 	}
 	playcount += 1;
@@ -746,7 +755,6 @@ function firstRun()
 		on how to use the plugin.");
 	if (API.getSelf().permission > 1)
 		printChat("Use $modhelp to view commands only available to mods.");
-	Models.history.updateCallback();
 }
 
 firstRun();
@@ -962,7 +970,6 @@ function checkOwnIn(e, chatin)
 						printChat("You will now be notified when the current song is in \
 							the history.");
 						checkhistory = true;
-						Models.history.updateCallback();
 						checkInHistory();
 					}
 					else if (commandinfo[1] == "skip")
@@ -970,7 +977,6 @@ function checkOwnIn(e, chatin)
 						printChat("Songs that are in history will now be skipped automatically.");
 						checkhistory = true;
 						autoskip = true;
-						Models.history.updateCallback();
 						checkInHistory();
 					}
 					else if (commandinfo[1] == "off")
