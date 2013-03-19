@@ -471,11 +471,12 @@ function checkInHistory()
 	var inhistory = false;
 	for (i in history)
 	{
-		if (i == 0 && API.getDJs()[0].id != history[i].user.id) i++;
-		if ((media.title == history[i].media.author
+		if (i == 0) i++;
+		if (API.getDJs()[0].id != history[i].user.id &&
+			((media.title == history[i].media.author
 			&& media.author == history[i].media.title) ||
 			(media.title == history[i].media.title
-			&& media.author == history[i].media.author))
+			&& media.author == history[i].media.author)))
 		{
 			inhistory = true;
 		}
