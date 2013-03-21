@@ -95,14 +95,14 @@ function resetLayout()
 	log.style.width = "837px";
 	log.style.height = "271px";
 	var but1 = document.getElementById("togg");
-	but1.style.top = "280px";
+	but1.style.top = "275px";
 	but1.style.left = "225px";
 	var but2 = document.getElementById("expwoot");
-	but2.style.top = "255px";
-	but2.style.left = "198px";
+	but2.style.top = "245px";
+	but2.style.left = "195px";
 	var but3 = document.getElementById("expjoin");
-	but3.style.top = "230px";
-	but3.style.left = "171px";
+	but3.style.top = "215px";
+	but3.style.left = "165px";
 }
 
 function stopDrag()
