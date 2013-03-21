@@ -27,7 +27,7 @@ Lang.ui.buttonVoteNegativeDisabled = "http://2dforts.dyndns.org/plug/ButtonVoteN
 Lang.ui.buttonVotePositive = "http://2dforts.dyndns.org/plug/ButtonVotePositive.png";
 Lang.ui.buttonVotePositiveSelected = "http://2dforts.dyndns.org/plug/ButtonVotePositiveSelected.png";
 Lang.ui.buttonVotePositiveDisabled = "http://2dforts.dyndns.org/plug/ButtonVotePositiveDisabled.png";
-document.getElementById("dj-console").style.backgroundImage = "url(http://i.imagebanana.com/img/1wwybiic/DJConsole2.png)";
+document.getElementById("dj-console").style.backgroundImage = "url(http://2dforts.dyndns.org/plug/DJConsole2.png)";
 
 //	-------------------
 //	Userlist management
