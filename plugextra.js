@@ -161,6 +161,7 @@ function toggleLog()
 		elem.style.height = "276px";
 		elem.style.opacity = "0.8";
 		elem.scrollTop = elem.scrollHeight;
+		explog.src = "http://2dforts.dyndns.org/plug/logon.png";
 		//explog.style.backgroundColor = "#111111";
 		//explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 2px white";
 	}
@@ -171,6 +172,7 @@ function toggleLog()
 		elem.style.height = "5px";
 		elem.style.opacity = "0";
 		elem.scrollTop = elem.scrollHeight;
+		explog.src = "http://2dforts.dyndns.org/plug/logoff.png";
 		//explog.style.backgroundColor = "black";
 		//explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 0px white";
 	}
@@ -178,14 +180,14 @@ function toggleLog()
 
 explog.style.position = "relative";
 explog.id = "togg";
-explog.style.top = "280px";
-explog.style.width = "25px";
+explog.style.top = "275px";
+explog.style.width = "30px";
 //explog.style.color = "white";
 //explog.style.backgroundColor = "#111111";
 //explog.style.border = "0px solid black";
 //explog.style.borderRadius = "15px";
 //explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 2px white";
-explog.style.height = "25px";
+explog.style.height = "30px";
 //explog.style.lineHeight = "25px";
 explog.style.margin = "auto";
 explog.style.zIndex = "15";
