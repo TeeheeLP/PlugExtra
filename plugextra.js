@@ -161,8 +161,8 @@ function toggleLog()
 		elem.style.height = "276px";
 		elem.style.opacity = "0.8";
 		elem.scrollTop = elem.scrollHeight;
-		explog.style.backgroundColor = "#111111";
-		explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 2px white";
+		//explog.style.backgroundColor = "#111111";
+		//explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 2px white";
 	}
 	else 
 	{
@@ -171,8 +171,8 @@ function toggleLog()
 		elem.style.height = "5px";
 		elem.style.opacity = "0";
 		elem.scrollTop = elem.scrollHeight;
-		explog.style.backgroundColor = "black";
-		explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 0px white";
+		//explog.style.backgroundColor = "black";
+		//explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 0px white";
 	}
 }
 
