@@ -148,7 +148,7 @@ elem.setAttribute("ondblclick", "resetLayout();");
 //elem.setAttribute("onmouseup", "stopDrag();");
 document.body.appendChild(elem);
 
-var explog = document.createElement("div");
+var explog = document.createElement("img");
 
 function toggleLog()
 {
@@ -180,22 +180,23 @@ explog.style.position = "relative";
 explog.id = "togg";
 explog.style.top = "280px";
 explog.style.width = "25px";
-explog.style.color = "white";
-explog.style.backgroundColor = "#111111";
-explog.style.border = "0px solid black";
-explog.style.borderRadius = "15px";
-explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 2px white";
+//explog.style.color = "white";
+//explog.style.backgroundColor = "#111111";
+//explog.style.border = "0px solid black";
+//explog.style.borderRadius = "15px";
+//explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 2px white";
 explog.style.height = "25px";
-explog.style.lineHeight = "25px";
+//explog.style.lineHeight = "25px";
 explog.style.margin = "auto";
 explog.style.zIndex = "15";
-explog.style.textAlign = "center";
+//explog.style.textAlign = "center";
 explog.style.left = "225px";
 explog.style.cursor = "pointer";
 explog.style.display = "block";
 explog.onclick = function () { toggleLog(); };
-explog.style.textDecoration = "none";
+//explog.style.textDecoration = "none";
 explog.title = "Toggle Log";
+explog.src = "http://2dforts.dyndns.org/plug/logon.png";
 
 $(document).mousemove(function(event) { dragLog(event); });
 $(document).mouseup(function() { stopDrag(); });
