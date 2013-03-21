@@ -618,7 +618,7 @@ document.getElementById("log").innerHTML += "<div id='track" + (playcount) + "' 
 	+ "</span> by <span style='color:white'>" + API.getMedia().author + "</span>.</div><div id='trackfeed" + (playcount) 
 	+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;-webkit-transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
 
-var expwoot = document.createElement("div");
+var expwoot = document.createElement("img");
 
 function toggleWoot()
 {
@@ -626,8 +626,7 @@ function toggleWoot()
 	{
 		autowoot = false;
 		var expw = document.getElementById("expwoot");
-		expw.style.backgroundColor = "#002200";
-		expw.style.boxShadow = "1px 1px 1px #55FF55 inset, 0px 0px 0px white";
+		expw.src = "http://2dforts.dyndns.org/plug/autowootoff.png";
 		printChat("Deactivated the autowoot bot.");
 	}
 	else
@@ -635,23 +634,16 @@ function toggleWoot()
 		autowoot = true;
 		document.getElementById("button-vote-positive").click();
 		var expw = document.getElementById("expwoot");
-		expw.style.backgroundColor = "#005500";
-		expw.style.boxShadow = "1px 1px 1px #55FF55 inset, 0px 0px 2px white";
+		expw.src = "http://2dforts.dyndns.org/plug/autowooton.png";
 		printChat("Activated the autowoot bot.");
 	}
 }
 
 expwoot.style.position = "relative";
 expwoot.id = "expwoot";
-expwoot.style.top = "255px";
-expwoot.style.width = "25px";
-expwoot.style.color = "white";
-expwoot.style.backgroundColor = "#002200";
-expwoot.style.border = "0px solid black";
-expwoot.style.borderRadius = "15px";
-expwoot.style.boxShadow = "1px 1px 1px #55FF55 inset";
-expwoot.style.height = "25px";
-expwoot.style.lineHeight = "25px";
+expwoot.style.top = "250px";
+expwoot.style.width = "30px";
+expwoot.style.height = "30px";
 expwoot.style.margin = "auto";
 expwoot.style.zIndex = "15";
 expwoot.style.textAlign = "center";
@@ -659,12 +651,12 @@ expwoot.style.left = "198px";
 expwoot.style.cursor = "pointer";
 expwoot.style.display = "block";
 expwoot.onclick = function () { toggleWoot(); };
-expwoot.style.textDecoration = "none";
 expwoot.title = "Toggle Auto-Woot";
+expwoot.src = "http://2dforts.dyndns.org/plug/autowootoff.png";
 
 document.body.appendChild(expwoot);
 
-var expjoin = document.createElement("div");
+var expjoin = document.createElement("img");
 
 function toggleJoin()
 {
@@ -689,12 +681,10 @@ function toggleJoin()
 
 expjoin.style.position = "relative";
 expjoin.id = "expjoin";
-expjoin.style.top = "230px";
-expjoin.style.width = "25px";
-expjoin.style.color = "white";
+expjoin.style.top = "225px";
+expjoin.style.width = "30px";
 expjoin.src = "http://2dforts.dyndns.org/plug/autojoinoff.png";
-expjoin.style.height = "25px";
-expjoin.style.lineHeight = "25px";
+expjoin.style.height = "30px";
 expjoin.style.margin = "auto";
 expjoin.style.zIndex = "15";
 expjoin.style.textAlign = "center";
@@ -702,7 +692,6 @@ expjoin.style.left = "171px";
 expjoin.style.cursor = "pointer";
 expjoin.style.display = "block";
 expjoin.onclick = function () { toggleJoin(); };
-expjoin.style.textDecoration = "none";
 expjoin.title = "Toggle Auto-Join";
 
 document.body.appendChild(expjoin);
