@@ -641,13 +641,12 @@ function toggleWoot()
 
 expwoot.style.position = "relative";
 expwoot.id = "expwoot";
-expwoot.style.top = "250px";
+expwoot.style.top = "245px";
 expwoot.style.width = "30px";
 expwoot.style.height = "30px";
 expwoot.style.margin = "auto";
 expwoot.style.zIndex = "15";
-expwoot.style.textAlign = "center";
-expwoot.style.left = "198px";
+expwoot.style.left = "195px";
 expwoot.style.cursor = "pointer";
 expwoot.style.display = "block";
 expwoot.onclick = function () { toggleWoot(); };
@@ -681,14 +680,13 @@ function toggleJoin()
 
 expjoin.style.position = "relative";
 expjoin.id = "expjoin";
-expjoin.style.top = "225px";
+expjoin.style.top = "215px";
 expjoin.style.width = "30px";
 expjoin.src = "http://2dforts.dyndns.org/plug/autojoinoff.png";
 expjoin.style.height = "30px";
 expjoin.style.margin = "auto";
 expjoin.style.zIndex = "15";
-expjoin.style.textAlign = "center";
-expjoin.style.left = "171px";
+expjoin.style.left = "165px";
 expjoin.style.cursor = "pointer";
 expjoin.style.display = "block";
 expjoin.onclick = function () { toggleJoin(); };
