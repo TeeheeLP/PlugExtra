@@ -467,15 +467,15 @@ var prevscore = API.getRoomScore();
 
 function doCheckHistory()
 {
-	printChat("Started...");
-	printChat("autoskip: " + autoskip);
-	printChat("checkhistory: " + checkhistory);
-	printChat(Models.history.data[0]);
+	//printChat("Started...");
+	//printChat("autoskip: " + autoskip);
+	//printChat("checkhistory: " + checkhistory);
+	//printChat(Models.history.data[0]);
 	var history = Models.history.data;
 	var media = API.getMedia();
-	printChat("History: " + history.length + history[0].media.title + " " + history[0].media.author);
-	printChat("Old/New DJ: " + history[0].user.id + " | " + API.getDJs()[0].id);
-	printChat("Media: " + media.title + " " + media.author);
+	//printChat("History: " + history.length + history[0].media.title + " " + history[0].media.author);
+	//printChat("Old/New DJ: " + history[0].user.id + " | " + API.getDJs()[0].id);
+	//printChat("Media: " + media.title + " " + media.author);
 	var inhistory = false;
 	for (i in history)
 	{
@@ -489,36 +489,40 @@ function doCheckHistory()
 			inhistory = true;
 		}
 	}
-	printChat("inhistory: " + inhistory);
+	//printChat("inhistory: " + inhistory);
 	if (inhistory)
 	{
-		printChat("Success...?");
+		//printChat("Success...?");
 		if (!autoskip)
 		{
 			document.getElementById("chat-sound").playMentionSound();
-			printChat("Playing sound.");
+			//printChat("Playing sound.");
 		}
-		printChat("Is in history!");
-		printChat(media.title + " by " + media.author + " is in the current history!");
+		//printChat("Is in history!");
+		//printChat(media.title + " by " + media.author + " is in the current history!");
 		if (autoskip && (API.getSelf().permission > 1 || API.getDJs()[0].id == API.getSelf().id))
 		{
-			printChat("Got permission!");
-			//API.sendChat("/me skips the current song because it is in the history.");
-			//new ModerationForceSkipService(Models.room.data.historyID);
-			printChat("Fired skip!");
+			//printChat("Got permission!");
+			API.sendChat("/me skips the current song because it is in the history.");
+			new ModerationForceSkipService(Models.room.data.historyID);
+			//printChat("Fired skip!");
 		}
 	}
-	printChat("Done!");
+	//printChat("Done!");
 }
 
 function checkInHistory()
 {
-	printChat("Cycling...");
-	if (Models.history.hasLoaded && Models.history.data != null && Models.history.data != undefined && Models.history.data != "")
+	//printChat("Cycling...");
+	if (autoskip)
 	{
-		doCheckHistory();
+		if (Models.history.hasLoaded && Models.history.data != null && Models.history.data != undefined && Models.history.data != "")
+		{
+			doCheckHistory();
+		}
+		else setTimeout(function() { Models.history.load(); checkInHistory(); Models.history.reset(); }, "5000");
 	}
-	else setTimeout(function() { Models.history.load(); checkInHistory(); Models.history.reset(); }, "5000");
+	else doCheckHistory();
 }
 
 API.addEventListener(API.DJ_ADVANCE, callback); 
