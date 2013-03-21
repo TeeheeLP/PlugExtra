@@ -672,8 +672,7 @@ function toggleJoin()
 	{
 		autojoin = false;
 		var expj = document.getElementById("expjoin");
-		expj.style.backgroundColor = "#000022";
-		expj.style.boxShadow = "1px 1px 1px #5555FF inset, 0px 0px 0px white";
+		expj.src = "http://2dforts.dyndns.org/plug/autojoinoff.png";
 		printChat("Deactivated the autojoin bot.");
 	}
 	else if (Models.playlist.selectedPlaylistID != 0 && Models.playlist.selectedPlaylistID != ""
@@ -682,8 +681,7 @@ function toggleJoin()
 		autojoin = true;
 		joinList();
 		var expj = document.getElementById("expjoin");
-		expj.style.backgroundColor = "#000055";
-		expj.style.boxShadow = "1px 1px 1px #5555FF inset, 0px 0px 2px white";
+		expj.src = "http://2dforts.dyndns.org/plug/autojoinon.png";
 		printChat("Activated the autojoin bot.");
 	}
 	else printChat("You need an active playlist to use autojoin.");
@@ -694,10 +692,7 @@ expjoin.id = "expjoin";
 expjoin.style.top = "230px";
 expjoin.style.width = "25px";
 expjoin.style.color = "white";
-expjoin.style.backgroundColor = "#000022";
-expjoin.style.border = "0px solid black";
-expjoin.style.borderRadius = "15px";
-expjoin.style.boxShadow = "1px 1px 1px #5555FF inset";
+expjoin.src = "http://2dforts.dyndns.org/plug/autojoinoff.png";
 expjoin.style.height = "25px";
 expjoin.style.lineHeight = "25px";
 expjoin.style.margin = "auto";
