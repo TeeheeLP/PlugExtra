@@ -495,7 +495,7 @@ function doCheckHistory()
 		if (autoskip && (API.getSelf().permission > 1 || API.getDJs()[0].id == API.getSelf().id))
 		{
 			printChat("Got permission!");
-			API.sendChat("/me skips the current song because it is in the history.");
+			//API.sendChat("/me skips the current song because it is in the history.");
 			//new ModerationForceSkipService(Models.room.data.historyID);
 			printChat("Fired skip!");
 		}
@@ -511,7 +511,7 @@ function checkInHistory()
 	{
 		doCheckHistory();
 	}
-	else setTimeout(function() { Models.history.load(); checkInHistory(); }, "5000");
+	else setTimeout(function() { checkInHistory(); }, "1000");
 }
 
 API.addEventListener(API.DJ_ADVANCE, callback); 
