@@ -21,6 +21,13 @@ function printChat(str)
 	Models.chat.receive({type:"update", message:("<span style='color:#00ACFF;'>" + str + "</span>")})
 }
 
+Lang.ui.buttonVoteNegative = "http://2dforts.dyndns.org/plug/ButtonVoteNegative.png";
+Lang.ui.buttonVoteNegativeSelected = "http://2dforts.dyndns.org/plug/ButtonVoteNegativeSelected.png";
+Lang.ui.buttonVoteNegativeDisabled = "http://2dforts.dyndns.org/plug/ButtonVoteNegativeDisabled.png";
+Lang.ui.buttonVotePositive = "http://2dforts.dyndns.org/plug/ButtonVotePositive.png";
+Lang.ui.buttonVotePositiveSelected = "http://2dforts.dyndns.org/plug/ButtonVotePositiveSelected.png";
+Lang.ui.buttonVotePositiveDisabled = "http://2dforts.dyndns.org/plug/ButtonVotePositiveDisabled.png";
+
 //	-------------------
 //	Userlist management
 //	-------------------
