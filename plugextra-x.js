@@ -1212,4 +1212,4 @@ function checkOwnIn(e, chatin)
 var chatinput = document.getElementById("chat-input-field");
 chatinput.setAttribute('onkeydown', 'checkOwnIn(event, this);');
 document.getElementById("button-chat-popout").setAttribute("onkeyclick", 
-	"function() { setTimeout(function() { Popout.Chat.chatInput.setAttribute('onkeydown', 'alert(event + this.value);'); }, '5000'); }");
+	"function() { setTimeout(function() { Popout.Chat.chatInput.setAttribute('onkeydown', 'checkOwnIn(event, this);'); }, '5000'); }");
