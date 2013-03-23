@@ -21,13 +21,39 @@ function printChat(str)
 	Models.chat.receive({type:"update", message:("<span style='color:#00ACFF;'>" + str + "</span>")})
 }
 
-Lang.ui.buttonVoteNegative = "http://2dforts.dyndns.org/plug/ButtonVoteNegative.png";
-Lang.ui.buttonVoteNegativeSelected = "http://2dforts.dyndns.org/plug/ButtonVoteNegativeSelected.png";
-Lang.ui.buttonVoteNegativeDisabled = "http://2dforts.dyndns.org/plug/ButtonVoteNegativeDisabled.png";
-Lang.ui.buttonVotePositive = "http://2dforts.dyndns.org/plug/ButtonVotePositive.png";
-Lang.ui.buttonVotePositiveSelected = "http://2dforts.dyndns.org/plug/ButtonVotePositiveSelected.png";
-Lang.ui.buttonVotePositiveDisabled = "http://2dforts.dyndns.org/plug/ButtonVotePositiveDisabled.png";
-document.getElementById("dj-console").style.backgroundImage = "url(http://2dforts.dyndns.org/plug/DJConsole2.png)";
+var UIskinVN = Lang.ui.buttonVoteNegative;
+var UIskinVNS = Lang.ui.buttonVoteNegativeSelected;
+var UIskinVND = Lang.ui.buttonVoteNegativeDisabled;
+var UIskinVP = Lang.ui.buttonVotePositive;
+var UIskinVPS = Lang.ui.buttonVotePositiveSelected;
+var UIskinVPD = Lang.ui.buttonVotePositiveDisabled;
+var UIbooth = document.getElementById("dj-console").style.backgroundImage;
+
+function loadSkin(skinname)
+{
+	switch (skinname)
+	{
+		case "original":
+			Lang.ui.buttonVoteNegative = UIskinVN;
+			Lang.ui.buttonVoteNegativeSelected = UIskinVNS;
+			Lang.ui.buttonVoteNegativeDisabled = UIskinVND
+			Lang.ui.buttonVotePositive = UIskinVP;
+			Lang.ui.buttonVotePositiveSelected = UIskinVPS;
+			Lang.ui.buttonVotePositiveDisabled = UIskinVPD;
+			document.getElementById("dj-console").style.backgroundImage = UIbooth;
+			break;
+		case "plugextra":
+			Lang.ui.buttonVoteNegative = "http://2dforts.dyndns.org/plug/ButtonVoteNegative.png";
+			Lang.ui.buttonVoteNegativeSelected = "http://2dforts.dyndns.org/plug/ButtonVoteNegativeSelected.png";
+			Lang.ui.buttonVoteNegativeDisabled = "http://2dforts.dyndns.org/plug/ButtonVoteNegativeDisabled.png";
+			Lang.ui.buttonVotePositive = "http://2dforts.dyndns.org/plug/ButtonVotePositive.png";
+			Lang.ui.buttonVotePositiveSelected = "http://2dforts.dyndns.org/plug/ButtonVotePositiveSelected.png";
+			Lang.ui.buttonVotePositiveDisabled = "http://2dforts.dyndns.org/plug/ButtonVotePositiveDisabled.png";
+			document.getElementById("dj-console").style.backgroundImage = "url(http://2dforts.dyndns.org/plug/DJConsole2.png)";
+			break;
+	}
+	if (skinname != "" && skinname != null) printChat("Loaded skin " + skinname + ".");
+}
 
 //	-------------------
 //	Userlist management
@@ -779,7 +805,8 @@ function checkOwnIn(e, chatin)
 					$status [status] - Changes your status<br> \
 					$whois [name] - Shows information about a user<br> \
 					$inhistory [on/skip/off] - Displays if the current song is in the history and \
-						skips it if set to 'skip'");
+						skips it if set to 'skip' ('skip' may glitch visuals for a few songs) \
+					$skin [original/plugextra] - Chooses a skin");
 				break;
 			case "$version":
 				printChat("Running on version " + version);
@@ -983,6 +1010,14 @@ function checkOwnIn(e, chatin)
 					else printChat("Please choose on or off.");
 				}
 				else printChat("Please choose on or off.");
+				break;
+			case "$skin":
+				if (commandinfo.length > 1 && commandinfo[1] != null 
+					&& commandinfo[1] != "")
+				{
+					loadSkin(commandinfo[1]);
+				}
+				else printChat("Please choose a skin: original, plugextra");
 				break;
 			default:
 				iscommand = false;
