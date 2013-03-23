@@ -773,7 +773,7 @@ function firstRun()
 {
 	printChat("Succesfully started PlugExtra! Using version " + version + "<br> \
 		Enter $help to view a list of available commands or $manual to see an instruction \
-		on how to use the plugin.");
+		on how to use the plugin.<br> Use $skin to choose between the original or the plugextra skin.");
 	if (API.getSelf().permission > 1)
 		printChat("Use $modhelp to view commands only available to mods.");
 }
@@ -805,7 +805,7 @@ function checkOwnIn(e, chatin)
 					$status [status] - Changes your status<br> \
 					$whois [name] - Shows information about a user<br> \
 					$inhistory [on/skip/off] - Displays if the current song is in the history and \
-						skips it if set to 'skip' ('skip' may glitch visuals for a few songs) \
+						skips it if set to 'skip' ('skip' may glitch visuals for a few songs)<br> \
 					$skin [original/plugextra] - Chooses a skin");
 				break;
 			case "$version":
@@ -841,11 +841,9 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("Changed the $inhistory command to a toggle. Also changed the cursor \
-					interaction with the log.<br>New commands: $autowoot, $autojoin<br> \
-					Additionally bouncers or higher can now disable autojoin with \"@username \
-					!disable\". You can't use the autojoin bot without an active playlist \
-					anymore.");
+				printChat("Added a new skin and the option to switch between skins. Also fixed \
+					a few small bugs. Enabled $inhistory skip, though it still glitches the \
+					booth sometimes.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
