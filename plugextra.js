@@ -16,8 +16,8 @@ function dragLog(e)
 	var log = document.getElementById("log");
 	if (isclicked)
 	{
-		if (e.pageX < (parseInt(getComputedStyle(log).marginLeft) + parseInt(log.style.width)
-				- parseInt(log.style.right) - 20))
+		if (e.pageX < (parseInt(getComputedStyle(log).marginLeft) + parseInt(log.style.width) 
+			- parseInt(log.style.right) * ($.browser.webkit ? 1 : -1) - 20))
 		{
 			if (e.pageY < parseInt(log.style.top) + 10) 
 			{
@@ -95,14 +95,14 @@ function resetLayout()
 	log.style.width = "837px";
 	log.style.height = "271px";
 	var but1 = document.getElementById("togg");
-	but1.style.top = "280px";
+	but1.style.top = "275px";
 	but1.style.left = "225px";
 	var but2 = document.getElementById("expwoot");
-	but2.style.top = "255px";
-	but2.style.left = "198px";
+	but2.style.top = "245px";
+	but2.style.left = "195px";
 	var but3 = document.getElementById("expjoin");
-	but3.style.top = "230px";
-	but3.style.left = "171px";
+	but3.style.top = "215px";
+	but3.style.left = "165px";
 }
 
 function stopDrag()
@@ -148,7 +148,7 @@ elem.setAttribute("ondblclick", "resetLayout();");
 //elem.setAttribute("onmouseup", "stopDrag();");
 document.body.appendChild(elem);
 
-var explog = document.createElement("div");
+var explog = document.createElement("img");
 
 function toggleLog()
 {
@@ -161,8 +161,9 @@ function toggleLog()
 		elem.style.height = "276px";
 		elem.style.opacity = "0.8";
 		elem.scrollTop = elem.scrollHeight;
-		explog.style.backgroundColor = "#111111";
-		explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 2px white";
+		explog.src = "http://2dforts.dyndns.org/plug/logon.png";
+		//explog.style.backgroundColor = "#111111";
+		//explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 2px white";
 	}
 	else 
 	{
@@ -171,31 +172,33 @@ function toggleLog()
 		elem.style.height = "5px";
 		elem.style.opacity = "0";
 		elem.scrollTop = elem.scrollHeight;
-		explog.style.backgroundColor = "black";
-		explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 0px white";
+		explog.src = "http://2dforts.dyndns.org/plug/logoff.png";
+		//explog.style.backgroundColor = "black";
+		//explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 0px white";
 	}
 }
 
 explog.style.position = "relative";
 explog.id = "togg";
-explog.style.top = "280px";
-explog.style.width = "25px";
-explog.style.color = "white";
-explog.style.backgroundColor = "#111111";
-explog.style.border = "0px solid black";
-explog.style.borderRadius = "15px";
-explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 2px white";
-explog.style.height = "25px";
-explog.style.lineHeight = "25px";
+explog.style.top = "275px";
+explog.style.width = "30px";
+//explog.style.color = "white";
+//explog.style.backgroundColor = "#111111";
+//explog.style.border = "0px solid black";
+//explog.style.borderRadius = "15px";
+//explog.style.boxShadow = "1px 1px 1px white inset, 0px 0px 2px white";
+explog.style.height = "30px";
+//explog.style.lineHeight = "25px";
 explog.style.margin = "auto";
 explog.style.zIndex = "15";
-explog.style.textAlign = "center";
+//explog.style.textAlign = "center";
 explog.style.left = "225px";
 explog.style.cursor = "pointer";
 explog.style.display = "block";
 explog.onclick = function () { toggleLog(); };
-explog.style.textDecoration = "none";
+//explog.style.textDecoration = "none";
 explog.title = "Toggle Log";
+explog.src = "http://2dforts.dyndns.org/plug/logon.png";
 
 $(document).mousemove(function(event) { dragLog(event); });
 $(document).mouseup(function() { stopDrag(); });
