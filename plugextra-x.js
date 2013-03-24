@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.8";
+var version = "1.2.9";
 
 var playcount = 1; 
 var autowoot = false;
@@ -14,10 +14,45 @@ var suffix = new Array("User", "Featured DJ", "Bouncer", "Manager", "Co-Host", "
 var leftwait = 0;
 var leftbooth = 0;
 var checkhistory = false;
+var autoskip = false;
 
 function printChat(str)
 {
 	Models.chat.receive({type:"update", message:("<span style='color:#00ACFF;'>" + str + "</span>")})
+}
+
+var UIskinVN = Lang.ui.buttonVoteNegative;
+var UIskinVNS = Lang.ui.buttonVoteNegativeSelected;
+var UIskinVND = Lang.ui.buttonVoteNegativeDisabled;
+var UIskinVP = Lang.ui.buttonVotePositive;
+var UIskinVPS = Lang.ui.buttonVotePositiveSelected;
+var UIskinVPD = Lang.ui.buttonVotePositiveDisabled;
+var UIbooth = document.getElementById("dj-console").style.backgroundImage;
+
+function loadSkin(skinname)
+{
+	switch (skinname)
+	{
+		case "original":
+			Lang.ui.buttonVoteNegative = UIskinVN;
+			Lang.ui.buttonVoteNegativeSelected = UIskinVNS;
+			Lang.ui.buttonVoteNegativeDisabled = UIskinVND
+			Lang.ui.buttonVotePositive = UIskinVP;
+			Lang.ui.buttonVotePositiveSelected = UIskinVPS;
+			Lang.ui.buttonVotePositiveDisabled = UIskinVPD;
+			document.getElementById("dj-console").style.backgroundImage = UIbooth;
+			break;
+		case "plugextra":
+			Lang.ui.buttonVoteNegative = "http://2dforts.dyndns.org/plug/ButtonVoteNegative.png";
+			Lang.ui.buttonVoteNegativeSelected = "http://2dforts.dyndns.org/plug/ButtonVoteNegativeSelected.png";
+			Lang.ui.buttonVoteNegativeDisabled = "http://2dforts.dyndns.org/plug/ButtonVoteNegativeDisabled.png";
+			Lang.ui.buttonVotePositive = "http://2dforts.dyndns.org/plug/ButtonVotePositive.png";
+			Lang.ui.buttonVotePositiveSelected = "http://2dforts.dyndns.org/plug/ButtonVotePositiveSelected.png";
+			Lang.ui.buttonVotePositiveDisabled = "http://2dforts.dyndns.org/plug/ButtonVotePositiveDisabled.png";
+			document.getElementById("dj-console").style.backgroundImage = "url(http://2dforts.dyndns.org/plug/DJConsole2.png)";
+			break;
+	}
+	if (skinname != "" && skinname != null) printChat("Loaded skin " + skinname + ".");
 }
 
 //	-------------------
@@ -184,11 +219,13 @@ function toggleCurWaitList(list)
 	{
 		list.style.maxHeight = "3px";
 		list.style.overflowY = "hidden";
+		list.style.color = "#333333";
 		list.style.backgroundColor = "#333333";
 	}
 	else 
 	{
 		list.style.maxHeight = "500px";
+		list.style.color = "#FFFFFF";
 		setTimeout(function() {list.style.overflowY = "auto";}, "500");
 		list.style.backgroundColor = "transparent";
 	}
@@ -198,10 +235,11 @@ var curwaitlist = document.createElement("ol");
 curwaitlist.id = "waitlistx";
 curwaitlist.style.margin = "0px 0px 5px 0px";
 curwaitlist.style.padding = "10px 0px 0px 27px";
-curwaitlist.style.transition = "max-height 0.5s, background-color 0.5s";
-curwaitlist.style.webkitTransition = "max-height 0.5s, background-color 0.5s";
+curwaitlist.style.transition = "max-height 0.5s, background-color 0.5s, color 0.5s";
+curwaitlist.style.webkitTransition = "max-height 0.5s, background-color 0.5s, color 0.5s";
 curwaitlist.style.maxHeight = "500px";
 curwaitlist.style.overflowX = "visible";
+curwaitlist.style.overflowY = "auto";
 curwaitlist.setAttribute("onclick", "toggleCurWaitList(this);");
 
 userlist.appendChild(curwaitlist);
@@ -377,9 +415,12 @@ function checkWaitList(users)
 		}
 		if (notinlist)
 		{
+			var log = document.getElementById("log");
+			var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
 			document.getElementById("trackfeed" + playcount).innerHTML += "<span style='color:white'>"
 				+ oldwaitlist[i].username + "</span> <span style='color:#AA44FF'>left</span> the waitlist at place <span style='color:#AA44FF'>"
 				+ (parseInt(i) + 1) + "</span>.<br>";
+			if (doscroll) log.scrollTop = log.scrollHeight;
 			leftwait++;
 		}
 	}
@@ -414,9 +455,12 @@ function checkDJBooth()
 		}
 		if (notinlist)
 		{
+			var log = document.getElementById("log");
+			var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
 			document.getElementById("trackfeed" + playcount).innerHTML += "<span style='color:white'>"
 				+ olddjbooth[i].username + "</span> <span style='color:#FF00BD'>left</span> the dj booth at place <span style='color:#FF00BD'>"
 				+ (parseInt(i) + 1) + "</span>.<br>";
+			if (doscroll) log.scrollTop = log.scrollHeight;
 			leftbooth++;
 		}
 	}
@@ -445,26 +489,64 @@ function joinList()
 
 var prevscore = API.getRoomScore();
 
-function checkInHistory()
+function doCheckHistory()
 {
+	//printChat("Started...");
+	//printChat("autoskip: " + autoskip);
+	//printChat("checkhistory: " + checkhistory);
+	//printChat(Models.history.data[0]);
 	var history = Models.history.data;
 	var media = API.getMedia();
+	//printChat("History: " + history.length + history[0].media.title + " " + history[0].media.author);
+	//printChat("Old/New DJ: " + history[0].user.id + " | " + API.getDJs()[0].id);
+	//printChat("Media: " + media.title + " " + media.author);
 	var inhistory = false;
 	for (i in history)
 	{
-		if ((i.title == history[i].author
-			&& i.author == history[i].media.title) ||
-			(i.title == history[i].title
-			&& i.author == history[i].media.author))
+		if (i == 0) i++;
+		if ((i > 0 || API.getDJs()[0].id != history[i].user.id) &&
+			((media.title == history[i].media.author
+			&& media.author == history[i].media.title) ||
+			(media.title == history[i].media.title
+			&& media.author == history[i].media.author)))
 		{
 			inhistory = true;
 		}
 	}
+	//printChat("inhistory: " + inhistory);
 	if (inhistory)
 	{
-		document.getElementById("chat-sound").playMentionSound();
-		printChat(media.title + " by " + media.author + " is in the current history!");
+		//printChat("Success...?");
+		if (!autoskip)
+		{
+			document.getElementById("chat-sound").playMentionSound();
+			//printChat("Playing sound.");
+		}
+		//printChat("Is in history!");
+		//printChat(media.title + " by " + media.author + " is in the current history!");
+		if (autoskip && (API.getSelf().permission > 1 || API.getDJs()[0].id == API.getSelf().id))
+		{
+			//printChat("Got permission!");
+			API.sendChat("/me skips the current song because it is in the history.");
+			new ModerationForceSkipService(Models.room.data.historyID);
+			//printChat("Fired skip!");
+		}
 	}
+	//printChat("Done!");
+}
+
+function checkInHistory()
+{
+	//printChat("Cycling...");
+	if (autoskip)
+	{
+		if (Models.history.hasLoaded && Models.history.data != null && Models.history.data != undefined && Models.history.data != "")
+		{
+			doCheckHistory();
+		}
+		else setTimeout(function() { Models.history.load(); checkInHistory(); Models.history.reset(); }, "5000");
+	}
+	else doCheckHistory();
 }
 
 API.addEventListener(API.DJ_ADVANCE, callback); 
@@ -472,6 +554,7 @@ function callback(obj)
 { 
 	if (autojoin) joinList(); 
 	if (autowoot) document.getElementById("button-vote-positive").click(); 
+	var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
 	if (playcount > 0) 
 	{ 
 		var prevtrack = document.getElementById("track" + playcount); 
@@ -497,8 +580,7 @@ function callback(obj)
 		checkInHistory();
 	}
 	playcount += 1;
-	log = document.getElementById("log"); 
-	var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
+	log = document.getElementById("log");
 	log.innerHTML += "<div id='track" + playcount + "' style='text-decoration:underline;display:inline;' onclick='toggleFeedback(" + playcount 
 		+ ")'>Track: <span style='color:white'>" + playcount + "</span> - <span style='color:white'>" + obj.dj.username 
 		+ "</span> is playing <span style='color:white;font-weight:bold;'>" + obj.media.title 
@@ -572,7 +654,7 @@ document.getElementById("log").innerHTML += "<div id='track" + (playcount) + "' 
 	+ "</span> by <span style='color:white'>" + API.getMedia().author + "</span>.</div><div id='trackfeed" + (playcount) 
 	+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;-webkit-transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
 
-var expwoot = document.createElement("div");
+var expwoot = document.createElement("img");
 
 function toggleWoot()
 {
@@ -580,8 +662,7 @@ function toggleWoot()
 	{
 		autowoot = false;
 		var expw = document.getElementById("expwoot");
-		expw.style.backgroundColor = "#002200";
-		expw.style.boxShadow = "1px 1px 1px #55FF55 inset, 0px 0px 0px white";
+		expw.src = "http://2dforts.dyndns.org/plug/autowootoff.png";
 		printChat("Deactivated the autowoot bot.");
 	}
 	else
@@ -589,36 +670,28 @@ function toggleWoot()
 		autowoot = true;
 		document.getElementById("button-vote-positive").click();
 		var expw = document.getElementById("expwoot");
-		expw.style.backgroundColor = "#005500";
-		expw.style.boxShadow = "1px 1px 1px #55FF55 inset, 0px 0px 2px white";
+		expw.src = "http://2dforts.dyndns.org/plug/autowooton.png";
 		printChat("Activated the autowoot bot.");
 	}
 }
 
 expwoot.style.position = "relative";
 expwoot.id = "expwoot";
-expwoot.style.top = "255px";
-expwoot.style.width = "25px";
-expwoot.style.color = "white";
-expwoot.style.backgroundColor = "#002200";
-expwoot.style.border = "0px solid black";
-expwoot.style.borderRadius = "15px";
-expwoot.style.boxShadow = "1px 1px 1px #55FF55 inset";
-expwoot.style.height = "25px";
-expwoot.style.lineHeight = "25px";
+expwoot.style.top = "245px";
+expwoot.style.width = "30px";
+expwoot.style.height = "30px";
 expwoot.style.margin = "auto";
 expwoot.style.zIndex = "15";
-expwoot.style.textAlign = "center";
-expwoot.style.left = "198px";
+expwoot.style.left = "195px";
 expwoot.style.cursor = "pointer";
 expwoot.style.display = "block";
 expwoot.onclick = function () { toggleWoot(); };
-expwoot.style.textDecoration = "none";
 expwoot.title = "Toggle Auto-Woot";
+expwoot.src = "http://2dforts.dyndns.org/plug/autowootoff.png";
 
 document.body.appendChild(expwoot);
 
-var expjoin = document.createElement("div");
+var expjoin = document.createElement("img");
 
 function toggleJoin()
 {
@@ -626,8 +699,7 @@ function toggleJoin()
 	{
 		autojoin = false;
 		var expj = document.getElementById("expjoin");
-		expj.style.backgroundColor = "#000022";
-		expj.style.boxShadow = "1px 1px 1px #5555FF inset, 0px 0px 0px white";
+		expj.src = "http://2dforts.dyndns.org/plug/autojoinoff.png";
 		printChat("Deactivated the autojoin bot.");
 	}
 	else if (Models.playlist.selectedPlaylistID != 0 && Models.playlist.selectedPlaylistID != ""
@@ -636,8 +708,7 @@ function toggleJoin()
 		autojoin = true;
 		joinList();
 		var expj = document.getElementById("expjoin");
-		expj.style.backgroundColor = "#000055";
-		expj.style.boxShadow = "1px 1px 1px #5555FF inset, 0px 0px 2px white";
+		expj.src = "http://2dforts.dyndns.org/plug/autojoinon.png";
 		printChat("Activated the autojoin bot.");
 	}
 	else printChat("You need an active playlist to use autojoin.");
@@ -645,23 +716,16 @@ function toggleJoin()
 
 expjoin.style.position = "relative";
 expjoin.id = "expjoin";
-expjoin.style.top = "230px";
-expjoin.style.width = "25px";
-expjoin.style.color = "white";
-expjoin.style.backgroundColor = "#000022";
-expjoin.style.border = "0px solid black";
-expjoin.style.borderRadius = "15px";
-expjoin.style.boxShadow = "1px 1px 1px #5555FF inset";
-expjoin.style.height = "25px";
-expjoin.style.lineHeight = "25px";
+expjoin.style.top = "215px";
+expjoin.style.width = "30px";
+expjoin.src = "http://2dforts.dyndns.org/plug/autojoinoff.png";
+expjoin.style.height = "30px";
 expjoin.style.margin = "auto";
 expjoin.style.zIndex = "15";
-expjoin.style.textAlign = "center";
-expjoin.style.left = "171px";
+expjoin.style.left = "165px";
 expjoin.style.cursor = "pointer";
 expjoin.style.display = "block";
 expjoin.onclick = function () { toggleJoin(); };
-expjoin.style.textDecoration = "none";
 expjoin.title = "Toggle Auto-Join";
 
 document.body.appendChild(expjoin);
@@ -707,7 +771,7 @@ function firstRun()
 {
 	printChat("Succesfully started PlugExtra! Using version " + version + "<br> \
 		Enter $help to view a list of available commands or $manual to see an instruction \
-		on how to use the plugin.");
+		on how to use the plugin.<br> Use $skin to choose between the original or the plugextra skin.");
 	if (API.getSelf().permission > 1)
 		printChat("Use $modhelp to view commands only available to mods.");
 }
@@ -738,7 +802,9 @@ function checkOwnIn(e, chatin)
 					$away &ltmessage&gt - Activates or deactivates the awaybot<br> \
 					$status [status] - Changes your status<br> \
 					$whois [name] - Shows information about a user<br> \
-					$inhistory [on/off] - Displays if the current song is in the history");
+					$inhistory [on/skip/off] - Displays if the current song is in the history and \
+						skips it if set to 'skip' ('skip' may glitch visuals for a few songs)<br> \
+					$skin [original/plugextra] - Chooses a skin");
 				break;
 			case "$version":
 				printChat("Running on version " + version);
@@ -773,11 +839,9 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("Changed the $inhistory command to a toggle. Also changed the cursor \
-					interaction with the log.<br>New commands: $autowoot, $autojoin<br> \
-					Additionally bouncers or higher can now disable autojoin with \"@username \
-					!disable\". You can't use the autojoin bot without an active playlist \
-					anymore.");
+				printChat("Added a new skin and the option to switch between skins. Also fixed \
+					a few small bugs. Enabled $inhistory skip, though it still glitches the \
+					booth sometimes.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
@@ -824,7 +888,7 @@ function checkOwnIn(e, chatin)
 			case "$back":
 				if (isaway)
 				{
-					$("#awaybutx").click();
+					document.getElementById("awaybutx").click();
 				}
 				break;
 			case "$away":
@@ -926,6 +990,13 @@ function checkOwnIn(e, chatin)
 						checkhistory = true;
 						checkInHistory();
 					}
+					else if (commandinfo[1] == "skip")
+					{
+						printChat("Songs that are in history will now be skipped automatically.");
+						checkhistory = true;
+						autoskip = true;
+						checkInHistory();
+					}
 					else if (commandinfo[1] == "off")
 					{
 						printChat("You will not be notified when the current song is in \
@@ -935,6 +1006,14 @@ function checkOwnIn(e, chatin)
 					else printChat("Please choose on or off.");
 				}
 				else printChat("Please choose on or off.");
+				break;
+			case "$skin":
+				if (commandinfo.length > 1 && commandinfo[1] != null 
+					&& commandinfo[1] != "")
+				{
+					loadSkin(commandinfo[1]);
+				}
+				else printChat("Please choose a skin: original, plugextra");
 				break;
 			default:
 				iscommand = false;
