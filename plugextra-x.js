@@ -799,7 +799,7 @@ function checkOwnIn(e, chatin)
 					$status [status] - Changes your status<br> \
 					$whois [name] - Shows information about a user<br> \
 					$inhistory [on/skip/off] - Displays if the current song is in the history and \
-						skips it if set to 'skip' ('skip' may glitch visuals for a few songs)<br> \
+						skips it if set to 'skip' (may glitch visuals for a few songs)<br> \
 					$skin [original/plugextra] - Chooses a skin");
 				break;
 			case "$version":
