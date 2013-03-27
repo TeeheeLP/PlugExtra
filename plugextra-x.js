@@ -538,15 +538,11 @@ function doCheckHistory()
 function checkInHistory()
 {
 	//printChat("Cycling...");
-	if (autoskip)
+	if (Models.history.hasLoaded && Models.history.data != null && Models.history.data != undefined && Models.history.data != "")
 	{
-		if (Models.history.hasLoaded && Models.history.data != null && Models.history.data != undefined && Models.history.data != "")
-		{
-			doCheckHistory();
-		}
-		else setTimeout(function() { Models.history.load(); checkInHistory(); Models.history.reset(); }, "5000");
+		doCheckHistory();
 	}
-	else doCheckHistory();
+	else setTimeout(function() { Models.history.load(); checkInHistory(); Models.history.reset(); }, "5000");
 }
 
 API.addEventListener(API.DJ_ADVANCE, callback); 
@@ -988,6 +984,7 @@ function checkOwnIn(e, chatin)
 						printChat("You will now be notified when the current song is in \
 							the history.");
 						checkhistory = true;
+						autoskip = false;
 						checkInHistory();
 					}
 					else if (commandinfo[1] == "skip")
@@ -1002,6 +999,7 @@ function checkOwnIn(e, chatin)
 						printChat("You will not be notified when the current song is in \
 							the history anymore.");
 						checkhistory = false;
+						autoskip = false;
 					}
 					else printChat("Please choose on or off.");
 				}
