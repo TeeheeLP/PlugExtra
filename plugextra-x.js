@@ -154,7 +154,6 @@ function awayBot()
 		var awaybutx = document.getElementById("awaybutx");
 		awaybutx.innerHTML = "Back";
 		awaybutx.style.backgroundColor = "#333388";
-		document.getElementById("dialog-menu-userstatus").value = 1;
 	}
 	else
 	{
@@ -165,7 +164,6 @@ function awayBot()
 		var awaybutx = document.getElementById("awaybutx");
 		awaybutx.innerHTML = "Away";
 		awaybutx.style.backgroundColor = "#333333";
-		document.getElementById("dialog-menu-userstatus").value = 0;
 	}
 }
 
@@ -540,15 +538,11 @@ function doCheckHistory()
 function checkInHistory()
 {
 	//printChat("Cycling...");
-	if (autoskip)
+	if (Models.history.hasLoaded && Models.history.data != null && Models.history.data != undefined && Models.history.data != "")
 	{
-		if (Models.history.hasLoaded && Models.history.data != null && Models.history.data != undefined && Models.history.data != "")
-		{
-			doCheckHistory();
-		}
-		else setTimeout(function() { Models.history.load(); checkInHistory(); Models.history.reset(); }, "5000");
+		doCheckHistory();
 	}
-	else doCheckHistory();
+	else setTimeout(function() { Models.history.load(); checkInHistory(); Models.history.reset(); }, "5000");
 }
 
 API.addEventListener(API.DJ_ADVANCE, callback); 
@@ -805,7 +799,7 @@ function checkOwnIn(e, chatin)
 					$status [status] - Changes your status<br> \
 					$whois [name] - Shows information about a user<br> \
 					$inhistory [on/skip/off] - Displays if the current song is in the history and \
-						skips it if set to 'skip' ('skip' may glitch visuals for a few songs)<br> \
+						skips it if set to 'skip' (may glitch visuals for a few songs)<br> \
 					$skin [original/plugextra] - Chooses a skin");
 				break;
 			case "$version":
@@ -990,6 +984,7 @@ function checkOwnIn(e, chatin)
 						printChat("You will now be notified when the current song is in \
 							the history.");
 						checkhistory = true;
+						autoskip = false;
 						checkInHistory();
 					}
 					else if (commandinfo[1] == "skip")
@@ -1004,6 +999,7 @@ function checkOwnIn(e, chatin)
 						printChat("You will not be notified when the current song is in \
 							the history anymore.");
 						checkhistory = false;
+						autoskip = false;
 					}
 					else printChat("Please choose on or off.");
 				}
