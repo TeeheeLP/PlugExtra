@@ -1024,7 +1024,7 @@ function checkOwnIn(e, chatin)
 					}
 					else printChat("Please choose on, skip or off.");
 				}
-				else printChat("Please choose on, skipp oroff.");
+				else printChat("Please choose on, skip or off.");
 				break;
 			case "$skin":
 				if (commandinfo.length > 1 && commandinfo[1] != null 
