@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.9";
+var version = "1.2.9b";
 
 var playcount = 1; 
 var autowoot = false;
@@ -15,10 +15,11 @@ var leftwait = 0;
 var leftbooth = 0;
 var checkhistory = false;
 var autoskip = false;
+var showannot = false;
 
 function printChat(str)
 {
-	Models.chat.receive({type:"update", message:("<span style='color:#00ACFF;'>" + str + "</span>")})
+	Models.chat.receive({type:"update", message:("<span style='color:#00ACFF;'>" + str + "</span>")});
 }
 
 var UIskinVN = Lang.ui.buttonVoteNegative;
@@ -728,8 +729,27 @@ document.body.appendChild(expjoin);
 
 //	Realtime management
 
-API.addEventListener(API.USER_JOIN, refreshUserlist);
-API.addEventListener(API.USER_LEAVE, refreshUserlist);
+function onUserJoined(user)
+{
+	if (showannot)
+	{
+		Models.chat.receive({type:"update", message:(user.username + " joined the room.")});
+	}
+	refreshUserlist();
+}
+
+API.addEventListener(API.USER_JOIN, onUserJoined);
+
+function onUserLeft(user)
+{
+	if (showannot)
+	{
+		Models.chat.receive({type:"update", message:(user.username + " left the room.")});
+	}
+	refreshUserlist();
+}
+
+API.addEventListener(API.USER_LEAVE, onUserLeft);
 
 //	---------------
 //	Chat management
@@ -800,7 +820,8 @@ function checkOwnIn(e, chatin)
 					$whois [name] - Shows information about a user<br> \
 					$inhistory [on/skip/off] - Displays if the current song is in the history and \
 						skips it if set to 'skip' (may glitch visuals for a few songs)<br> \
-					$skin [original/plugextra] - Chooses a skin");
+					$skin [original/plugextra] - Chooses a skin<br> \
+					$annotations [on/off] - Turns annotations on or off");
 				break;
 			case "$version":
 				printChat("Running on version " + version);
@@ -835,9 +856,9 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("Added a new skin and the option to switch between skins. Also fixed \
-					a few small bugs. Enabled $inhistory skip, though it still glitches the \
-					booth sometimes.");
+				printChat("New:<br>Added optional annotations. ($annotations)<br>Using $ at the beginning will \
+					always prevent the message from being send.<br>Fixed:<br>\"$inhistory on\" \
+					now works properly.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
@@ -1001,9 +1022,9 @@ function checkOwnIn(e, chatin)
 						checkhistory = false;
 						autoskip = false;
 					}
-					else printChat("Please choose on or off.");
+					else printChat("Please choose on, skip or off.");
 				}
-				else printChat("Please choose on or off.");
+				else printChat("Please choose on, skip or off.");
 				break;
 			case "$skin":
 				if (commandinfo.length > 1 && commandinfo[1] != null 
@@ -1012,6 +1033,24 @@ function checkOwnIn(e, chatin)
 					loadSkin(commandinfo[1]);
 				}
 				else printChat("Please choose a skin: original, plugextra");
+				break;
+			case "$annotations":
+				if (commandinfo.length > 1 && commandinfo[1] != null 
+					&& commandinfo[1] != "")
+				{
+					if (commandinfo[1] == "on")
+					{
+						showannot = true;
+						printChat("You will now be notified when somebody joins or leaves the room.");
+					}
+					else if (commandinfo[1] == "off")
+					{
+						showannot = false;
+						printChat("You will not be notified when somebody joins or leaves the room.");
+					}
+					else printChat("Please choose on or off.");
+				}
+				else printChat("Please choose on or off.");
 				break;
 			default:
 				iscommand = false;
@@ -1198,10 +1237,11 @@ function checkOwnIn(e, chatin)
 			}
 		}
 		
-		if (iscommand || ismodcommand)
+		if (!(iscommand || ismodcommand))
 		{
-			chatin.value = "";
+			if (chatin.value[0] == "$") chatin.value = "";
 		}
+		else chatin.value = "";
 	}
 }
 
