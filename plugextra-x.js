@@ -15,10 +15,11 @@ var leftwait = 0;
 var leftbooth = 0;
 var checkhistory = false;
 var autoskip = false;
+var showannot = true;
 
 function printChat(str)
 {
-	Models.chat.receive({type:"update", message:("<span style='color:#00ACFF;'>" + str + "</span>")})
+	Models.chat.receive({type:"update", message:("<span style='color:#00ACFF;'>" + str + "</span>")});
 }
 
 var UIskinVN = Lang.ui.buttonVoteNegative;
@@ -728,8 +729,21 @@ document.body.appendChild(expjoin);
 
 //	Realtime management
 
-API.addEventListener(API.USER_JOIN, refreshUserlist);
-API.addEventListener(API.USER_LEAVE, refreshUserlist);
+function onUserJoined(user)
+{
+	Models.chat.receive({type:"update", message:(user.username + " joined the room.")});
+	refreshUserlist();
+}
+
+API.addEventListener(API.USER_JOIN, onUserJoined);
+
+function onUserLeft(user)
+{
+	Models.chat.receive({type:"update", message:(user.username + " left the room.")});
+	refreshUserlist();
+}
+
+API.addEventListener(API.USER_LEAVE, onUserLeft);
 
 //	---------------
 //	Chat management
