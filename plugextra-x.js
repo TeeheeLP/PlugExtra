@@ -820,7 +820,8 @@ function checkOwnIn(e, chatin)
 					$whois [name] - Shows information about a user<br> \
 					$inhistory [on/skip/off] - Displays if the current song is in the history and \
 						skips it if set to 'skip' (may glitch visuals for a few songs)<br> \
-					$skin [original/plugextra] - Chooses a skin");
+					$skin [original/plugextra] - Chooses a skin<br> \
+					$annotations [on/off] - Turns annotations on or off");
 				break;
 			case "$version":
 				printChat("Running on version " + version);
@@ -1021,9 +1022,9 @@ function checkOwnIn(e, chatin)
 						checkhistory = false;
 						autoskip = false;
 					}
-					else printChat("Please choose on or off.");
+					else printChat("Please choose on, skip or off.");
 				}
-				else printChat("Please choose on or off.");
+				else printChat("Please choose on, skipp oroff.");
 				break;
 			case "$skin":
 				if (commandinfo.length > 1 && commandinfo[1] != null 
@@ -1236,10 +1237,11 @@ function checkOwnIn(e, chatin)
 			}
 		}
 		
-		if (iscommand || ismodcommand)
+		if (!(iscommand || ismodcommand))
 		{
-			chatin.value = "";
+			if (chatin.value[0] == "$") chatin.value = "";
 		}
+		else chatin.value = "";
 	}
 }
 
