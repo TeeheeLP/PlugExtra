@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.9";
+var version = "1.3";
 
 var playcount = 1; 
 var autowoot = false;
@@ -15,7 +15,7 @@ var leftwait = 0;
 var leftbooth = 0;
 var checkhistory = false;
 var autoskip = false;
-var showannot = true;
+var showannot = false;
 
 function printChat(str)
 {
@@ -739,7 +739,7 @@ API.addEventListener(API.USER_JOIN, onUserJoined);
 
 function onUserLeft(user)
 {
-	Models.chat.receive({type:"update", message:(user.username + " left the room.")});
+	Models.chat.receive({type:"update", message:(" left the room.")});
 	refreshUserlist();
 }
 
