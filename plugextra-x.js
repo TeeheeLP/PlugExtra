@@ -739,7 +739,7 @@ API.addEventListener(API.USER_JOIN, onUserJoined);
 
 function onUserLeft(user)
 {
-	Models.chat.receive({type:"update", message:(" left the room.")});
+	Models.chat.receive({type:"update", message:(user.username + " left the room.")});
 	refreshUserlist();
 }
 
