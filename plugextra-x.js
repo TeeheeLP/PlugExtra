@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.3";
+var version = "1.2.9b";
 
 var playcount = 1; 
 var autowoot = false;
@@ -731,7 +731,10 @@ document.body.appendChild(expjoin);
 
 function onUserJoined(user)
 {
-	Models.chat.receive({type:"update", message:(user.username + " joined the room.")});
+	if (showannot)
+	{
+		Models.chat.receive({type:"update", message:(user.username + " joined the room.")});
+	}
 	refreshUserlist();
 }
 
@@ -739,7 +742,10 @@ API.addEventListener(API.USER_JOIN, onUserJoined);
 
 function onUserLeft(user)
 {
-	Models.chat.receive({type:"update", message:(user.username + " left the room.")});
+	if (showannot)
+	{
+		Models.chat.receive({type:"update", message:(user.username + " left the room.")});
+	}
 	refreshUserlist();
 }
 
@@ -849,9 +855,9 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("Added a new skin and the option to switch between skins. Also fixed \
-					a few small bugs. Enabled $inhistory skip, though it still glitches the \
-					booth sometimes.");
+				printChat("New:<br>Added optional annotations. ($annotations)<br>Using $ at the beginning will \
+					always prevent the message from being send.<br>Fixed:<br>\"$inhistory on\" \
+					now works properly.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
@@ -1026,6 +1032,24 @@ function checkOwnIn(e, chatin)
 					loadSkin(commandinfo[1]);
 				}
 				else printChat("Please choose a skin: original, plugextra");
+				break;
+			case "$annotations":
+				if (commandinfo.length > 1 && commandinfo[1] != null 
+					&& commandinfo[1] != "")
+				{
+					if (commandinfo[1] == "on")
+					{
+						showannot = true;
+						printChat("You will now be notified when somebody joins or leaves the room.");
+					}
+					else if (commandinfo[1] == "off")
+					{
+						showannot = false;
+						printChat("You will not be notified when somebody joins or leaves the room.");
+					}
+					else printChat("Please choose on or off.");
+				}
+				else printChat("Please choose on or off.");
 				break;
 			default:
 				iscommand = false;
