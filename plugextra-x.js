@@ -742,7 +742,7 @@ API.addEventListener(API.USER_JOIN, onUserJoined);
 
 function onUserLeft(user)
 {
-	if (showannot && !Models.user.following[user.id] && !Models.user.followers[user.id])
+	if (showannot)
 	{
 		Models.chat.receive({type:"update", message:(user.username + " left the room.")});
 	}
@@ -859,7 +859,7 @@ function checkOwnIn(e, chatin)
 				printChat("1.2.9b:<br>New:<br>Added optional annotations. ($annotations)<br>Using $ at the beginning will \
 					always prevent the message from being send.<br>Fixed:<br>\"$inhistory on\" \
 					now works properly.<br>1.2.9c:<br>New:<br>Annotations are on by default.<br> \
-					Fixed:<br>You won't be notified twice if a fan or friend leaves or joins.");
+					Fixed:<br>You won't be notified twice if a fan or friend joins the room.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
