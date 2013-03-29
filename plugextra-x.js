@@ -1238,11 +1238,7 @@ function checkOwnIn(e, chatin)
 			}
 		}
 		
-		if (!(iscommand || ismodcommand))
-		{
-			if (chatin.value[0] == "$") chatin.value = "";
-		}
-		else chatin.value = "";
+		if (chatin.value[0] == "$") chatin.value = "";
 	}
 }
 
