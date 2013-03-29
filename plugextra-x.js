@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.9b";
+var version = "1.2.9c";
 
 var playcount = 1; 
 var autowoot = false;
@@ -15,7 +15,7 @@ var leftwait = 0;
 var leftbooth = 0;
 var checkhistory = false;
 var autoskip = false;
-var showannot = false;
+var showannot = true;
 
 function printChat(str)
 {
@@ -731,7 +731,7 @@ document.body.appendChild(expjoin);
 
 function onUserJoined(user)
 {
-	if (showannot)
+	if (showannot && !Models.user.following[user.id] && !Models.user.followers[user.id])
 	{
 		Models.chat.receive({type:"update", message:(user.username + " joined the room.")});
 	}
@@ -856,9 +856,10 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("New:<br>Added optional annotations. ($annotations)<br>Using $ at the beginning will \
+				printChat("1.2.9b:<br>New:<br>Added optional annotations. ($annotations)<br>Using $ at the beginning will \
 					always prevent the message from being send.<br>Fixed:<br>\"$inhistory on\" \
-					now works properly.");
+					now works properly.<br>1.2.9c:<br>New:<br>Annotations are on by default.<br> \
+					Fixed:<br>You won't be notified twice if a fan or friend joins the room.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
@@ -1237,11 +1238,7 @@ function checkOwnIn(e, chatin)
 			}
 		}
 		
-		if (!(iscommand || ismodcommand))
-		{
-			if (chatin.value[0] == "$") chatin.value = "";
-		}
-		else chatin.value = "";
+		if (chatin.value[0] == "$") chatin.value = "";
 	}
 }
 
