@@ -151,12 +151,12 @@ streamx.onclick = function()
 {
 	if (!DB.settings.streamDisabled)
 	{
-		DB.settings.streamDisabled = true;
+		API.sendChat("/stream off");
 		this.style.color = "red";
 	}
 	else
 	{
-		DB.settings.streamDisabled = false;
+		API.sendChat("/stream on");
 		this.style.color = "lime";
 	}
 	DB.saveSettings();
