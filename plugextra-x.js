@@ -150,7 +150,7 @@ streamx.style.cursor = "pointer";
 if (!DB.settings.streamDisabled) streamx.style.color = "lime";
 else streamx.style.color = "red";
 streamx.innerHTML = "Stream";
-streamx.setAttribute("click", 'function() \
+streamx.setAttribute("onclick", 'function() \
 { \
 	if (!DB.settings.streamDisabled) \
 	{ \
