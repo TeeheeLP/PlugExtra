@@ -584,7 +584,7 @@ function callback(obj)
 	trackyid[playcount - 1] = obj.media.cid;
 	log = document.getElementById("log");
 	log.innerHTML += "<div id='track" + playcount 
-		+ "' style='text-decoration:underline;display:inline;' onmousedown='return toggleFeedback(event, " 
+		+ "' style='display:inline;' onmousedown='return toggleFeedback(event, " 
 		+ playcount + ")'>Track: <span style='color:white'>" + playcount 
 		+ "</span> - <span style='color:white'>" + obj.dj.username 
 		+ "</span> is playing <a href='http://youtu.be/" + obj.media.cid 
@@ -659,7 +659,7 @@ function toggleFeedback(event, track)
 }
 
 document.getElementById("log").innerHTML += "<div id='track" + (playcount) + 
-	"' style='text-decoration:underline;display:inline;' onmousedown='return toggleFeedback(event, " 
+	"' style='display:inline;' onmousedown='return toggleFeedback(event, " 
 	+ (playcount) + ")'>Track: <span style='color:white'>" + (playcount) + "</span> - <span style='color:white'>" 
 	+ API.getDJs()[0].username + "</span> is playing <a href='http://youtu.be/" + API.getMedia().cid 
 	+ "' target='_blank'><span style='color:white;font-weight:bold;'>" + API.getMedia().title
