@@ -572,10 +572,10 @@ function refreshUserlist()
 			}
 			user.setAttribute("onclick", "mentionUser('" + users[i].id + "');");
 			user.innerHTML = users[i].username;
-			var vote;
+			var vote = "";
 			if (users[i].vote == 1) vote = UIminiVP;
 			else if (users[i].vote == -1) vote = UIminiVN;
-			if (vote != null) user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
+			if (vote != null && vote != "") user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
 			if (users[i].curated != false) user.innerHTML += " <img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
 		
 			usersul.appendChild(user);
