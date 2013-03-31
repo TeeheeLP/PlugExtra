@@ -141,6 +141,15 @@ hidemenubut.innerHTML = "Hide";
 hidemenubut.onclick = function() { hideOptionsMenu(); };
 
 optionsmenu.appendChild(hidemenubut);
+
+var streamx = document.createElement("div");
+streamx.style.textAlign = "center";
+if (!DB.settings.streamDisabled) streamx.style.color = "lime";
+else streamx.style.color = "red";
+streamx.innerHTML = "Stream";
+
+optionsmenu.appendChild(streamx);
+
 optcontainer.appendChild(optionsmenu);
 
 document.body.appendChild(optcontainer);
