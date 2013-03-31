@@ -109,6 +109,7 @@ optionsmenu.style.padding = "10px";
 optionsmenu.style.overflowX = "hidden";
 optionsmenu.style.overflowY = "auto";
 optionsmenu.style.margin = "0px";
+optionsmenu.setAttribute("onclick", "showOptionsMenu();");
 
 var hidemenubut = document.createElement("div");
 
