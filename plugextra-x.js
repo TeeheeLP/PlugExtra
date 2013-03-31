@@ -558,7 +558,7 @@ function callback(obj)
 	if (playcount > 0) 
 	{ 
 		var prevtrack = document.getElementById("track" + playcount); 
-		if (prevtrack.style.fontStyle != "italic") prevtrack.click(); 
+		if (prevtrack.style.fontStyle != "italic") toggleFeedback(null, playcount);
 		prevtrack.innerHTML += " <img style='height:0.7em;width:0.7em' alt='Woots' src='" + UIminiVP + "'> <span style='color:white'>" 
 			+ prevscore.positive + "</span> <img style='height:0.7em;width:0.7em' alt='Mehs' src='" + UIminiVN + "'> <span style='color:white'>" 
 			+ prevscore.negative + "</span> <img style='height:0.7em;width:0.7em' alt='Curates' src='" + UIminiCur + "'> <span style='color:white'>" 
@@ -630,7 +630,7 @@ function showvoter(obj)
 function toggleFeedback(event, track) 
 { 
 	var prevtrack = document.getElementById("track" + track);
-	if (event.button == 0)
+	if (event.button == 0 && event == null)
 	{
 		var trackfeed = document.getElementById("trackfeed" + track); 
 		if (trackfeed.style.maxHeight != "0px") 
