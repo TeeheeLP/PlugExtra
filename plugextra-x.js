@@ -150,7 +150,7 @@ streamx.style.cursor = "pointer";
 if (!DB.settings.streamDisabled) streamx.style.color = "lime";
 else streamx.style.color = "red";
 streamx.innerHTML = "Stream";
-streamx.onclick = function()
+streamx.onmousedown = function()
 {
 	if (!DB.settings.streamDisabled)
 	{
@@ -171,7 +171,7 @@ annotx.style.textAlign = "center";
 annotx.style.cursor = "pointer";
 annotx.style.color = "lime";
 annotx.innerHTML = "Annotations";
-annotx.onclick = function()
+annotx.onmousedown = function()
 {
 	if (showannot)
 	{
