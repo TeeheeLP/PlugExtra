@@ -80,14 +80,13 @@ function showOptionsMenu()
 }
 
 optcontainer.style.position = "absolute";
-optcontainer.style.height = "97%";
-optcontainer.style.width = "150px";
+optcontainer.style.height = "100%";
+optcontainer.style.width = "170px";
 optcontainer.style.top = "0px";
 optcontainer.style.right = "0px";
 optcontainer.style.overflowX = "hidden";
 optcontainer.style.overflowY = "hidden";
 optcontainer.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
-optcontainer.style.borderLeft = "1px solid transparent";
 optcontainer.style.transition = "width 0.5s";
 optcontainer.style.webkitTransition = "width 0.5s";
 optcontainer.style.padding = "-10px";
