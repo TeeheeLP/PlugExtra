@@ -104,7 +104,7 @@ function hideOptionsMenu()
 	if (optmisopen)
 	{
 		var optmenu = document.getElementById("optionsx");
-		optmenu.style.left = "-160px";
+		optmenu.style.right = "-160px";
 		optmenu.style.boxShadow = "0px 0px 0px #000000";
 		optmenu.style.opacity = "0";
 		setTimeout(function() { optmisopen = false; }, "500");
