@@ -14,7 +14,7 @@ var oldcy;
 function dragLog(e)
 {
 	var log = document.getElementById("log");
-	if (isclicked)
+	if (isclicked && e.button == 0)
 	{
 		if (e.pageX < (parseInt(getComputedStyle(log).marginLeft) + parseInt(log.style.width) 
 			- parseInt(log.style.right) * ($.browser.webkit ? 1 : -1) - 20))
