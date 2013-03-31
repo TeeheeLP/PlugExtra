@@ -150,19 +150,19 @@ streamx.style.cursor = "pointer";
 if (!DB.settings.streamDisabled) streamx.style.color = "lime";
 else streamx.style.color = "red";
 streamx.innerHTML = "Stream";
-streamx.onmousedown = function()
-{
-	if (!DB.settings.streamDisabled)
-	{
-		API.sendChat("/stream off");
-		this.style.color = "red";
-	}
-	else
-	{
-		API.sendChat("/stream on");
-		this.style.color = "lime";
-	}
-}
+streamx.setAttribute("click", 'function() \
+{ \
+	if (!DB.settings.streamDisabled) \
+	{ \
+		API.sendChat("/stream off"); \
+		this.style.color = "red"; \
+	} \
+	else \
+	{ \
+		API.sendChat("/stream on"); \
+		this.style.color = "lime"; \
+	} \
+}');
 
 optionsmenu.appendChild(streamx);
 
