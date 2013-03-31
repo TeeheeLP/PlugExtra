@@ -64,6 +64,18 @@ function loadSkin(skinname)
 //	------------
 
 var optmisopen = true;
+var optcontainer = document.createElement("div");
+optcontainer.style.position = "absolute";
+optcontainer.style.height = "97%";
+optcontainer.style.width = "150px";
+optcontainer.style.top = "0px";
+optcontainer.style.right = "0px";
+optcontainer.style.overflowX = "hidden";
+optcontainer.style.overflowY = "hidden";
+optcontainer.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
+optcontainer.style.borderLeft = "1px solid transparent";
+optcontainer.style.padding = "0px";
+
 var optionsmenu = document.createElement("div");
 
 function showOptionsMenu()
@@ -73,7 +85,7 @@ function showOptionsMenu()
 		var optmenu = document.getElementById("optionsx");
 		optmenu.style.right = "0px";
 		optmenu.style.opacity = "1";
-		optmenu.style.boxShadow = "0px 0px 10px #000000, -1px 0px #000000 inset";
+		optmenu.parentNode.style.boxShadow = "0px 0px 10px #000000, -1px 0px #000000 inset";
 		setTimeout(function() { optmisopen = true; }, "500");
 	}
 }
@@ -92,9 +104,8 @@ optionsmenu.style.color = "#FFFFFF";
 optionsmenu.style.zIndex = "9001";
 optionsmenu.style.padding = "10px";
 optionsmenu.style.overflowX = "hidden";
-optionsmenu.style.overflowY = "hidden";
-optionsmenu.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
-optionsmenu.style.borderRight = "1px solid transparent";
+optionsmenu.style.overflowY = "auto";
+optionsmenu.style.margin = "0px";
 optionsmenu.onclick = function() { showOptionsMenu(); };
 
 var hidemenubut = document.createElement("div");
@@ -105,7 +116,7 @@ function hideOptionsMenu()
 	{
 		var optmenu = document.getElementById("optionsx");
 		optmenu.style.right = "-160px";
-		optmenu.style.boxShadow = "0px 0px 0px #000000";
+		optmenu.parentNode.style.boxShadow = "0px 0px 0px #000000";
 		optmenu.style.opacity = "0";
 		setTimeout(function() { optmisopen = false; }, "500");
 	}
@@ -114,7 +125,7 @@ function hideOptionsMenu()
 hidemenubut.style.backgroundColor = "#333333";
 hidemenubut.style.borderRadius = "7px";
 hidemenubut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
-hidemenubut.style.width = "133px";
+hidemenubut.style.width = "153px";
 hidemenubut.style.textAlign = "center";
 hidemenubut.style.height = "1.5em";
 hidemenubut.style.display = "block";
@@ -127,8 +138,9 @@ hidemenubut.innerHTML = "Hide";
 hidemenubut.onclick = function() { hideOptionsMenu(); };
 
 optionsmenu.appendChild(hidemenubut);
+optcontainer.appendChild(optionsmenu);
 
-document.body.appendChild(optionsmenu);
+document.body.appendChild(optcontainer);
 
 //	-------------------
 //	Userlist management
