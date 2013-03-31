@@ -1058,9 +1058,13 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("1.2.9b:<br>New:<br>Added optional annotations. ($annotations)<br>Using $ at the beginning will \
-					always prevent the message from being send.<br>Fixed:<br>\"$inhistory on\" \
-					now works properly.<br>1.2.9c:<br>New:<br>Annotations are on by default.<br> \
+				printChat("1.3.1:<br>New:<br>\
+					Exchanged the colored text in the track stats with the respective images.<br>\
+					Added an options menu.<br>\
+					Slightly changed the design.<br>\
+					Fixed:<br>\
+					Now only toggle feedback on next track when it was open.<br>\
+					1.2.9c:<br>New:<br>Annotations are on by default.<br> \
 					Fixed:<br>You won't be notified twice if a fan or friend joins the room.");
 				break;
 			case "$reset":
