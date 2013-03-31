@@ -74,7 +74,7 @@ function showOptionsMenu()
 		optmenu.style.right = "0px";
 		optmenu.style.opacity = "1";
 		optmenu.parentNode.style.boxShadow = "0px 0px 10px #000000, -1px 0px #000000 inset";
-		optmenu.parentNode.style.width = "150px";
+		optmenu.parentNode.style.width = "170px";
 		setTimeout(function() { optmisopen = true; }, "500");
 	}
 }
@@ -120,7 +120,7 @@ function hideOptionsMenu()
 		var optmenu = document.getElementById("optionsx");
 		optmenu.style.right = "-160px";
 		optmenu.parentNode.style.boxShadow = "0px 0px 0px #000000";
-		optmenu.parentNode.style.width = "1px";
+		optmenu.parentNode.style.width = "0px";
 		optmenu.style.opacity = "0";
 		setTimeout(function() { optmisopen = false; }, "500");
 	}
