@@ -190,6 +190,7 @@ annotx.onmousedown = function()
 optionsmenu.appendChild(annotx);
 
 var skinx = document.createElement("div");
+skinx.style.marginTop = "10px";
 skinx.innerHTML = "Skins:";
 
 optionsmenu.appendChild(skinx);
