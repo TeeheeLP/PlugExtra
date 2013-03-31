@@ -103,7 +103,7 @@ function hideOptionsMenu()
 {
 	if (optmisopen)
 	{
-		var userlist = document.getElementById("optionsx");
+		var optmenu = document.getElementById("optionsx");
 		optmenu.style.left = "-160px";
 		optmenu.style.boxShadow = "0px 0px 0px #000000";
 		optmenu.style.opacity = "0";
