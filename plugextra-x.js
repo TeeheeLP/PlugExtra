@@ -152,7 +152,8 @@ else streamx.style.color = "red";
 streamx.innerHTML = "Stream";
 streamx.onclick = function()
 {
-	if (!DB.settings.streamDisabled)
+	alert("TEST");
+	/*if (!DB.settings.streamDisabled)
 	{
 		API.sendChat("/stream off");
 		this.style.color = "red";
@@ -161,7 +162,7 @@ streamx.onclick = function()
 	{
 		API.sendChat("/stream on");
 		this.style.color = "lime";
-	}
+	}*/
 };
 
 optionsmenu.appendChild(streamx);
