@@ -150,19 +150,19 @@ streamx.style.cursor = "pointer";
 if (!DB.settings.streamDisabled) streamx.style.color = "lime";
 else streamx.style.color = "red";
 streamx.innerHTML = "Stream";
-streamx.setAttribute("onclick", 'function() \
-{ \
-	if (!DB.settings.streamDisabled) \
-	{ \
-		API.sendChat("/stream off"); \
-		this.style.color = "red"; \
-	} \
-	else \
-	{ \
-		API.sendChat("/stream on"); \
-		this.style.color = "lime"; \
-	} \
-}');
+streamx.onclick = function()
+{
+	if (!DB.settings.streamDisabled)
+	{
+		API.sendChat("/stream off");
+		this.style.color = "red";
+	}
+	else
+	{
+		API.sendChat("/stream on");
+		this.style.color = "lime";
+	}
+};
 
 optionsmenu.appendChild(streamx);
 
@@ -185,11 +185,11 @@ annotx.onmousedown = function()
 		printChat("You will now be notified when somebody joins or leaves the room.");
 		this.style.color = "lime";
 	}
-}
+};
 
 optionsmenu.appendChild(annotx);
 
-optionsmenu.innerHTML += "<p>Skins:</p>";
+optionsmenu.innerHTML += "<div>Skins:</div>";
 
 var originalx = document.createElement("div");
 originalx.style.textAlign = "center";
@@ -205,7 +205,7 @@ originalx.onclick = function()
 		skinelem = this;
 		loadSkin("original");
 	}
-}
+};
 
 var skinelem = originalx;
 
@@ -225,7 +225,7 @@ plugextrax.onclick = function()
 		skinelem = this;
 		loadSkin("plugextra");
 	}
-}
+};
 
 optionsmenu.appendChild(plugextrax);
 
