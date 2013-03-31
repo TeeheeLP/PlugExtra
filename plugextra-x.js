@@ -290,7 +290,6 @@ function hideUserList()
 
 var hidelistbut = document.createElement("div");
 hidelistbut.style.backgroundColor = "#333333";
-hidelistbut.style.borderRadius = "7px";
 hidelistbut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
 hidelistbut.style.width = "153px";
 hidelistbut.style.textAlign = "center";
@@ -359,7 +358,6 @@ function onPressAway(e)
 var awaybut = document.createElement("div");
 awaybut.id = "awaybutx";
 awaybut.style.backgroundColor = "#333333";
-awaybut.style.borderRadius = "7px";
 awaybut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
 awaybut.style.width = "153px";
 awaybut.style.textAlign = "center";
