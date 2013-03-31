@@ -118,7 +118,6 @@ function hideOptionsMenu()
 	if (optmisopen)
 	{
 		var optmenu = document.getElementById("optionsx");
-		//optmenu.style.right = "-160px";
 		optmenu.parentNode.style.boxShadow = "0px 0px 0px #000000";
 		optmenu.parentNode.style.width = "2px";
 		optmenu.style.opacity = "0";
@@ -717,7 +716,7 @@ function showvoter(obj)
 function toggleFeedback(event, track) 
 { 
 	var prevtrack = document.getElementById("track" + track);
-	if (event.button == 0 && event == null)
+	if (event == null || event.button == 0)
 	{
 		var trackfeed = document.getElementById("trackfeed" + track); 
 		if (trackfeed.style.maxHeight != "0px") 
