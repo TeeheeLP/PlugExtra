@@ -96,7 +96,7 @@ var optionsmenu = document.createElement("div");
 optionsmenu.id = "optionsx";
 optionsmenu.style.position = "relative";
 optionsmenu.style.height = "100%";
-optionsmenu.style.width = "100%";
+optionsmenu.style.width = "150px";
 optionsmenu.style.backgroundImage = "url('http://poke-helper.bplaced.net/images/noise.png')";
 optionsmenu.style.backgroundColor = "#070707";
 optionsmenu.style.top = "0px";
@@ -147,6 +147,20 @@ streamx.style.textAlign = "center";
 if (!DB.settings.streamDisabled) streamx.style.color = "lime";
 else streamx.style.color = "red";
 streamx.innerHTML = "Stream";
+streamx.onclick = function()
+{
+	if (!DB.settings.streamDisabled)
+	{
+		DB.settings.streamDisabled = true;
+		this.style.color = "red";
+	}
+	else
+	{
+		DB.settings.streamDisabled = false;
+		this.style.color = "lime";
+	}
+}
+
 
 optionsmenu.appendChild(streamx);
 
