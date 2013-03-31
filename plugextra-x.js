@@ -821,7 +821,7 @@ function showvoter(obj)
 		var trackfeed = document.getElementById("trackfeed" + playcount); 
 		trackfeed.innerHTML += "<span style='color:white'>" + obj.user.username + "</span> voted <span id=\'" + obj.user.id + playcount + "' style='color:" 
 			+ spancolor + "'>" + vote + "</span>.<br>"; 
-		if (doscroll) log.scrollTop = log.scrollHeight; 
+		if (doscroll) log.scrollTop = log.scrollHeight;
 	} 
 	else 
 	{
@@ -832,6 +832,7 @@ function showvoter(obj)
 		if (vicon != null) vicon.setAttribute("src", obj.vote == 1 ? UIminiVP : UIminiVN);
 	} 
 	prevscore = API.getRoomScore(); 
+	refreshUserlist();
 } 
 
 function toggleFeedback(event, track) 
