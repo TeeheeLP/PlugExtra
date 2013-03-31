@@ -89,7 +89,6 @@ optcontainer.style.overflowY = "hidden";
 optcontainer.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
 optcontainer.style.transition = "width 0.5s";
 optcontainer.style.webkitTransition = "width 0.5s";
-optcontainer.style.padding = "-10px";
 optcontainer.onclick = function() { showOptionsMenu(); };
 
 var optionsmenu = document.createElement("div");
