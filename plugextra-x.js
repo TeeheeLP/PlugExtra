@@ -484,10 +484,10 @@ function refreshUserlist()
 		user.setAttribute("onclick", "mentionUser('" + admins[i].id + "');");
 		user.innerHTML = admins[i].username + " <span style='font-size:0.7em'>(Admin)</span>";
 		var vote;
-		if (user.vote == 1) vote = UIminiVP;
-		else if (user.vote == -1) vote = UIminiVN;
-		if (vote != "") user.innerHTML += "<img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
-		if (user.curated != false) user.innerHTML += "<img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
+		if (admins[i].vote == 1) vote = UIminiVP;
+		else if (admins[i].vote == -1) vote = UIminiVN;
+		if (vote != "") user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
+		if (admins[i].curated == false) user.innerHTML += " <img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
 		
 		stafflist.appendChild(user);
 	}
@@ -509,10 +509,10 @@ function refreshUserlist()
 		user.setAttribute("onclick", "mentionUser('" + ambs[i].id + "');");
 		user.innerHTML = ambs[i].username + " <span style='font-size:0.7em'>(Ambassador)</span>";
 		var vote;
-		if (user.vote == 1) vote = UIminiVP;
-		else if (user.vote == -1) vote = UIminiVN;
-		if (vote != "") user.innerHTML += "<img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
-		if (user.curated != false) user.innerHTML += "<img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
+		if (ambs[i].vote == 1) vote = UIminiVP;
+		else if (ambs[i].vote == -1) vote = UIminiVN;
+		if (vote != "") user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
+		if (ambs[i].curated != false) user.innerHTML += " <img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
 		
 		stafflist.appendChild(user);
 	}
@@ -539,10 +539,10 @@ function refreshUserlist()
 		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
 		user.innerHTML = staff[i].username + " <span style='font-size:0.7em'>(" + suffix[staff[i].permission] + ")</span>";		
 		var vote;
-		if (user.vote == 1) vote = UIminiVP;
-		else if (user.vote == -1) vote = UIminiVN;
-		if (vote != "") user.innerHTML += "<img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
-		if (user.curated != false) user.innerHTML += "<img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
+		if (staff[i].vote == 1) vote = UIminiVP;
+		else if (staff[i].vote == -1) vote = UIminiVN;
+		if (vote != "") user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
+		if (staff[i].curated != false) user.innerHTML += " <img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
 		
 		stafflist.appendChild(user);
 	}
@@ -573,10 +573,10 @@ function refreshUserlist()
 			user.setAttribute("onclick", "mentionUser('" + users[i].id + "');");
 			user.innerHTML = users[i].username;
 			var vote;
-			if (user.vote == 1) vote = UIminiVP;
-			else if (user.vote == -1) vote = UIminiVN;
-			if (vote != "") user.innerHTML += "<img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
-			if (user.curated != false) user.innerHTML += "<img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
+			if (users[i].vote == 1) vote = UIminiVP;
+			else if (users[i].vote == -1) vote = UIminiVN;
+			if (vote != "") user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
+			if (users[i].curated != false) user.innerHTML += " <img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
 		
 			usersul.appendChild(user);
 		}
