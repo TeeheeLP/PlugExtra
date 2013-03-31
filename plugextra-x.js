@@ -30,6 +30,9 @@ var UIskinVP = Lang.ui.buttonVotePositive;
 var UIskinVPS = Lang.ui.buttonVotePositiveSelected;
 var UIskinVPD = Lang.ui.buttonVotePositiveDisabled;
 var UIbooth = document.getElementById("dj-console").style.backgroundImage;
+var UIminiVP = "http://plug.dj/_/static/images/score_meta_positive.d294bbf1.png";
+var UIminiVN = "http://plug.dj/_/static/images/score_meta_negative.4d264fee.png";
+var UIminiCur = "http://plug.dj/_/static/images/score_meta_curate.2d21301a.png";
 
 function loadSkin(skinname)
 {
@@ -557,9 +560,9 @@ function callback(obj)
 	{ 
 		var prevtrack = document.getElementById("track" + playcount); 
 		prevtrack.click(); 
-		prevtrack.innerHTML += " (<span style='color:white'>" + prevscore.positive + "<span> <span style='color:lime'>woots</span>, <span style='color:white'>" 
-			+ prevscore.negative + "<span> <span style='color:red'>mehs</span>, <span style='color:white'>" 
-			+ prevscore.curates + "<span> <span style='color:yellow'> curates</span>)"; 
+		prevtrack.innerHTML += " (<span style='color:white'>" + prevscore.positive + "<span> <img alt='woots' src='" + UIminiVP + "'>, <span style='color:white'>" 
+			+ prevscore.negative + "<span> <img alt='mehs' src='" + UIminiVN + "'>, <span style='color:white'>" 
+			+ prevscore.curates + "<span> <img alt='curates' src='" + UIminiCur + "'>"; 
 		if (leftwait > 0)
 		{
 			prevtrack.innerHTML += " - " + leftwait + " <span style='color:#AA44FF'>left the waitlist</span>";
