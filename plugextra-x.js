@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.3";
+var version = "1.3.1";
 
 var playcount = 1; 
 var autowoot = false;
@@ -147,20 +147,22 @@ optionsmenu.appendChild(hidemenubut);
 var streamx = document.createElement("div");
 streamx.style.textAlign = "center";
 streamx.style.cursor = "pointer";
-if (!DB.settings.streamDisabled) streamx.style.color = "lime";
-else streamx.style.color = "red";
+streamx.style.width = "173px";
+streamx.style.marginLeft = "-10px";
+if (!DB.settings.streamDisabled) streamx.style.backgroundColor = "#00DD00";
+else streamx.style.backgroundColor = "#DD0000";
 streamx.innerHTML = "Stream";
 streamx.onclick = function()
 {
 	if (!DB.settings.streamDisabled)
 	{
 		API.sendChat("/stream off");
-		this.style.color = "red";
+		this.style.backgroundColor = "#DD0000";
 	}
 	else
 	{
 		API.sendChat("/stream on");
-		this.style.color = "lime";
+		this.style.backgroundColor = "#00DD00"
 	}
 };
 
@@ -169,7 +171,9 @@ optionsmenu.appendChild(streamx);
 var annotx = document.createElement("div");
 annotx.style.textAlign = "center";
 annotx.style.cursor = "pointer";
-annotx.style.color = "lime";
+annotx.style.backgroundColor = "#00DD00";
+annotx.style.width = "173px";
+annotx.style.marginLeft = "-10px";
 annotx.innerHTML = "Annotations";
 annotx.onmousedown = function()
 {
@@ -177,13 +181,13 @@ annotx.onmousedown = function()
 	{
 		showannot = false;
 		printChat("You will not be notified when somebody joins or leaves the room.");
-		this.style.color = "red";
+		this.style.backgroundColor = "#DD0000";
 	}
 	else
 	{
 		showannot = true;
 		printChat("You will now be notified when somebody joins or leaves the room.");
-		this.style.color = "lime";
+		this.style.backgroundColor = "#00DD00"
 	}
 };
 
@@ -198,14 +202,16 @@ optionsmenu.appendChild(skinx);
 var originalx = document.createElement("div");
 originalx.style.textAlign = "center";
 originalx.style.cursor = "pointer";
-originalx.style.color = "lime";
+originalx.style.backgroundColor = "#00DD00";
+originalx.style.width = "173px";
+originalx.style.marginLeft = "-10px";
 originalx.innerHTML = "Original";
 originalx.onclick = function()
 {
 	if (skinelem != this)
 	{
-		this.style.color = "lime";
-		skinelem.style.color = "lightgray";
+		this.style.backgroundColor = "#00DD00"
+		skinelem.style.color = "gray";
 		skinelem = this;
 		loadSkin("original");
 	}
@@ -218,14 +224,16 @@ optionsmenu.appendChild(originalx);
 var plugextrax = document.createElement("div");
 plugextrax.style.textAlign = "center";
 plugextrax.style.cursor = "pointer";
-plugextrax.style.color = "lightgray";
+plugextrax.style.backgroundColor = "gray";
+plugextrax.style.width = "173px";
+plugextrax.style.marginLeft = "-10px";
 plugextrax.innerHTML = "PlugExtra";
 plugextrax.onclick = function()
 {
 	if (skinelem != this)
 	{
-		this.style.color = "lime";
-		skinelem.style.color = "lightgray";
+		this.style.backgroundColor = "#00DD00"
+		skinelem.style.color = "gray";
 		skinelem = this;
 		loadSkin("plugextra");
 	}
