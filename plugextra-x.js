@@ -186,7 +186,7 @@ annotx.onclick = function()
 	}
 }
 
-optionsmenu.appendChild(streamx);
+optionsmenu.appendChild(annotx);
 
 optionsmenu.innerHTML += "<p>Skins:</p>";
 
@@ -202,6 +202,8 @@ originalx.onclick = function()
 	loadSkin("original");
 }
 
+optionsmenu.appendChild(originalx);
+
 var plugextrax = document.createElement("div");
 plugextrax.style.textAlign = "center";
 plugextrax.style.cursor = "pointer";
@@ -214,7 +216,7 @@ plugextrax.onclick = function()
 	loadSkin("plugextra");
 }
 
-optionsmenu.appendChild();
+optionsmenu.appendChild(plugextrax);
 
 optcontainer.appendChild(optionsmenu);
 
