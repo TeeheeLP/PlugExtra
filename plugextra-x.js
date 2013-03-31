@@ -198,6 +198,7 @@ originalx.onclick = function()
 {
 	this.style.color = "lime";
 	skinelem.style.color = "lightgray";
+	skinelem = this;
 	loadSkin("original");
 }
 
@@ -214,6 +215,7 @@ plugextrax.onclick = function()
 {
 	this.style.color = "lime";
 	skinelem.style.color = "lightgray";
+	skinelem = this;
 	loadSkin("plugextra");
 }
 
