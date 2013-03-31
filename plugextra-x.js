@@ -558,7 +558,7 @@ function callback(obj)
 	if (playcount > 0) 
 	{ 
 		var prevtrack = document.getElementById("track" + playcount); 
-		prevtrack.click(); 
+		if (prevtrack.style.fontStyle != "italic") prevtrack.click(); 
 		prevtrack.innerHTML += " <img style='height:0.7em;width:0.7em' alt='Woots' src='" + UIminiVP + "'> <span style='color:white'>" 
 			+ prevscore.positive + "</span> <img style='height:0.7em;width:0.7em' alt='Mehs' src='" + UIminiVN + "'> <span style='color:white'>" 
 			+ prevscore.negative + "</span> <img style='height:0.7em;width:0.7em' alt='Curates' src='" + UIminiCur + "'> <span style='color:white'>" 
@@ -581,7 +581,6 @@ function callback(obj)
 		checkInHistory();
 	}
 	playcount += 1;
-	trackyid[playcount - 1] = obj.media.cid;
 	log = document.getElementById("log");
 	log.innerHTML += "<div id='track" + playcount 
 		+ "' style='display:inline;' onmousedown='return toggleFeedback(event, " 
