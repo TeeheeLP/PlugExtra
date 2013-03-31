@@ -152,8 +152,7 @@ else streamx.style.color = "red";
 streamx.innerHTML = "Stream";
 streamx.onclick = function()
 {
-	alert("TEST");
-	/*if (!DB.settings.streamDisabled)
+	if (!DB.settings.streamDisabled)
 	{
 		API.sendChat("/stream off");
 		this.style.color = "red";
@@ -162,7 +161,7 @@ streamx.onclick = function()
 	{
 		API.sendChat("/stream on");
 		this.style.color = "lime";
-	}*/
+	}
 };
 
 optionsmenu.appendChild(streamx);
@@ -190,7 +189,10 @@ annotx.onmousedown = function()
 
 optionsmenu.appendChild(annotx);
 
-optionsmenu.innerHTML += "<div>Skins:</div>";
+var skinx = document.createElement("div");
+skinx.innerHTML = "Skins:";
+
+optionsmenu.appendChild(skinx);
 
 var originalx = document.createElement("div");
 originalx.style.textAlign = "center";
