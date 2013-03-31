@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.2.9c";
+var version = "1.3.1";
 
 var playcount = 1; 
 var autowoot = false;
@@ -29,6 +29,9 @@ var UIskinVP = Lang.ui.buttonVotePositive;
 var UIskinVPS = Lang.ui.buttonVotePositiveSelected;
 var UIskinVPD = Lang.ui.buttonVotePositiveDisabled;
 var UIbooth = document.getElementById("dj-console").style.backgroundImage;
+var UIminiVP = "http://plug.dj/_/static/images/score_meta_positive.d294bbf1.png";
+var UIminiVN = "http://plug.dj/_/static/images/score_meta_negative.4d264fee.png";
+var UIminiCur = "http://plug.dj/_/static/images/score_meta_curate.2d21301a.png";
 
 function loadSkin(skinname)
 {
@@ -55,6 +58,192 @@ function loadSkin(skinname)
 	}
 	if (skinname != "" && skinname != null) printChat("Loaded skin " + skinname + ".");
 }
+
+//	------------
+//	Options Menu
+//	------------
+
+var optmisopen = true;
+var optcontainer = document.createElement("div");
+
+function showOptionsMenu()
+{
+	if (!optmisopen)
+	{
+		var optmenu = document.getElementById("optionsx");
+		optmenu.style.right = "0px";
+		optmenu.style.opacity = "1";
+		optmenu.parentNode.style.boxShadow = "0px 0px 10px #000000, -1px 0px #000000 inset";
+		optmenu.parentNode.style.width = "170px";
+		setTimeout(function() { optmisopen = true; }, "500");
+	}
+}
+
+optcontainer.style.position = "absolute";
+optcontainer.style.height = "100%";
+optcontainer.style.width = "170px";
+optcontainer.style.top = "0px";
+optcontainer.style.right = "0px";
+optcontainer.style.overflowX = "hidden";
+optcontainer.style.overflowY = "hidden";
+optcontainer.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
+optcontainer.style.transition = "width 0.5s";
+optcontainer.style.webkitTransition = "width 0.5s";
+optcontainer.setAttribute("onclick", "showOptionsMenu();");
+
+var optionsmenu = document.createElement("div");
+
+optionsmenu.id = "optionsx";
+optionsmenu.style.position = "relative";
+optionsmenu.style.height = "100%";
+optionsmenu.style.width = "150px";
+optionsmenu.style.backgroundImage = "url('http://poke-helper.bplaced.net/images/noise.png')";
+optionsmenu.style.backgroundColor = "#070707";
+optionsmenu.style.top = "0px";
+optionsmenu.style.right = "0px";
+optionsmenu.style.transition = "right 0.5s, box-shadow 0.5s, opacity 0.3s";
+optionsmenu.style.webkitTransition = "right 0.5s, box-shadow 0.5s, opacity 0.3s";
+optionsmenu.style.color = "#FFFFFF";
+optionsmenu.style.zIndex = "9001";
+optionsmenu.style.padding = "10px";
+optionsmenu.style.overflowX = "hidden";
+optionsmenu.style.overflowY = "auto";
+optionsmenu.style.margin = "0px";
+optionsmenu.style.fontSize = "1.2em";
+optionsmenu.style.fontWeight = "bold";
+optionsmenu.setAttribute("onclick", "showOptionsMenu();");
+
+var hidemenubut = document.createElement("div");
+
+function hideOptionsMenu()
+{
+	if (optmisopen)
+	{
+		var optmenu = document.getElementById("optionsx");
+		optmenu.parentNode.style.boxShadow = "0px 0px 0px #000000";
+		optmenu.parentNode.style.width = "2px";
+		optmenu.style.opacity = "0";
+		setTimeout(function() { optmisopen = false; }, "500");
+	}
+}
+
+hidemenubut.style.backgroundColor = "#333333";
+hidemenubut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
+hidemenubut.style.width = "173px";
+hidemenubut.style.textAlign = "center";
+hidemenubut.style.height = "1.5em";
+hidemenubut.style.display = "block";
+hidemenubut.style.cursor = "pointer";
+hidemenubut.style.lineHeight = "1.5em";
+hidemenubut.style.marginBottom = "5px";
+hidemenubut.style.marginLeft = "-10px";
+hidemenubut.style.fontSize = "1.2em";
+hidemenubut.style.fontWeight = "bold";
+hidemenubut.innerHTML = "Hide";
+hidemenubut.onclick = function() { hideOptionsMenu(); };
+
+optionsmenu.appendChild(hidemenubut);
+
+var streamx = document.createElement("div");
+streamx.style.textAlign = "center";
+streamx.style.cursor = "pointer";
+streamx.style.width = "173px";
+streamx.style.marginLeft = "-10px";
+if (!DB.settings.streamDisabled) streamx.style.backgroundColor = "#00DD00";
+else streamx.style.backgroundColor = "#DD0000";
+streamx.innerHTML = "Stream";
+streamx.onclick = function()
+{
+	if (!DB.settings.streamDisabled)
+	{
+		API.sendChat("/stream off");
+		this.style.backgroundColor = "#DD0000";
+	}
+	else
+	{
+		API.sendChat("/stream on");
+		this.style.backgroundColor = "#00DD00"
+	}
+};
+
+optionsmenu.appendChild(streamx);
+
+var annotx = document.createElement("div");
+annotx.style.textAlign = "center";
+annotx.style.cursor = "pointer";
+annotx.style.backgroundColor = "#00DD00";
+annotx.style.width = "173px";
+annotx.style.marginLeft = "-10px";
+annotx.innerHTML = "Annotations";
+annotx.onmousedown = function()
+{
+	if (showannot)
+	{
+		showannot = false;
+		printChat("You will not be notified when somebody joins or leaves the room.");
+		this.style.backgroundColor = "#DD0000";
+	}
+	else
+	{
+		showannot = true;
+		printChat("You will now be notified when somebody joins or leaves the room.");
+		this.style.backgroundColor = "#00DD00"
+	}
+};
+
+optionsmenu.appendChild(annotx);
+
+var skinx = document.createElement("div");
+skinx.style.marginTop = "10px";
+skinx.innerHTML = "Skins:";
+
+optionsmenu.appendChild(skinx);
+
+var originalx = document.createElement("div");
+originalx.style.textAlign = "center";
+originalx.style.cursor = "pointer";
+originalx.style.backgroundColor = "#00DD00";
+originalx.style.width = "173px";
+originalx.style.marginLeft = "-10px";
+originalx.innerHTML = "Original";
+originalx.onclick = function()
+{
+	if (skinelem != this)
+	{
+		this.style.backgroundColor = "#00DD00"
+		skinelem.style.backgroundColor = "gray";
+		skinelem = this;
+		loadSkin("original");
+	}
+};
+
+var skinelem = originalx;
+
+optionsmenu.appendChild(originalx);
+
+var plugextrax = document.createElement("div");
+plugextrax.style.textAlign = "center";
+plugextrax.style.cursor = "pointer";
+plugextrax.style.backgroundColor = "gray";
+plugextrax.style.width = "173px";
+plugextrax.style.marginLeft = "-10px";
+plugextrax.innerHTML = "PlugExtra";
+plugextrax.onclick = function()
+{
+	if (skinelem != this)
+	{
+		this.style.backgroundColor = "#00DD00"
+		skinelem.style.backgroundColor = "gray";
+		skinelem = this;
+		loadSkin("plugextra");
+	}
+};
+
+optionsmenu.appendChild(plugextrax);
+
+optcontainer.appendChild(optionsmenu);
+
+document.body.appendChild(optcontainer);
 
 //	-------------------
 //	Userlist management
@@ -109,15 +298,15 @@ function hideUserList()
 
 var hidelistbut = document.createElement("div");
 hidelistbut.style.backgroundColor = "#333333";
-hidelistbut.style.borderRadius = "7px";
 hidelistbut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
-hidelistbut.style.width = "133px";
+hidelistbut.style.width = "153px";
 hidelistbut.style.textAlign = "center";
 hidelistbut.style.height = "1.5em";
 hidelistbut.style.display = "block";
 hidelistbut.style.cursor = "pointer";
 hidelistbut.style.lineHeight = "1.5em";
 hidelistbut.style.marginBottom = "5px";
+hidelistbut.style.marginLeft = "-10px";
 hidelistbut.style.fontSize = "1.2em";
 hidelistbut.style.fontWeight = "bold";
 hidelistbut.innerHTML = "Hide";
@@ -129,10 +318,12 @@ var awaymsgin = document.createElement("input");
 awaymsgin.id = "awaymsginx";
 awaymsgin.style.height = "1em";
 awaymsgin.style.marginBottom = "5px";
-awaymsgin.style.width = "121px";
-awaymsgin.style.borderRadius = "5px";
+awaymsgin.style.marginLeft = "-10px";
+awaymsgin.style.width = "141px";
 awaymsgin.style.boxShadow = "1px 1px 3px #000000 inset";
 awaymsgin.style.border = "1px solid #FFFFFF";
+awaymsgin.style.borderLeft = "none";
+awaymsgin.style.borderRight = "none";
 awaymsgin.style.padding = "2px 5px";
 awaymsgin.style.backgroundColor = "#FFFFFF";
 awaymsgin.setAttribute("onkeydown", "onPressAway(event);");
@@ -177,15 +368,15 @@ function onPressAway(e)
 var awaybut = document.createElement("div");
 awaybut.id = "awaybutx";
 awaybut.style.backgroundColor = "#333333";
-awaybut.style.borderRadius = "7px";
 awaybut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
-awaybut.style.width = "133px";
+awaybut.style.width = "153px";
 awaybut.style.textAlign = "center";
 awaybut.style.height = "1.5em";
 awaybut.style.display = "block";
 awaybut.style.cursor = "pointer";
 awaybut.style.lineHeight = "1.5em";
 awaybut.style.marginBottom = "5px";
+awaybut.style.marginLeft = "-10px";
 awaybut.style.fontSize = "1.2em";
 awaybut.style.fontWeight = "bold";
 awaybut.innerHTML = "Away";
@@ -555,10 +746,11 @@ function callback(obj)
 	if (playcount > 0) 
 	{ 
 		var prevtrack = document.getElementById("track" + playcount); 
-		prevtrack.click(); 
-		prevtrack.innerHTML += " (<span style='color:white'>" + prevscore.positive + "<span> <span style='color:lime'>woots</span>, <span style='color:white'>" 
-			+ prevscore.negative + "<span> <span style='color:red'>mehs</span>, <span style='color:white'>" 
-			+ prevscore.curates + "<span> <span style='color:yellow'> curates</span>)"; 
+		if (prevtrack.style.fontStyle != "italic") toggleFeedback(null, playcount);
+		prevtrack.innerHTML += " <img style='height:0.7em;width:0.7em' alt='Woots' src='" + UIminiVP + "'> <span style='color:white'>" 
+			+ prevscore.positive + "</span> <img style='height:0.7em;width:0.7em' alt='Mehs' src='" + UIminiVN + "'> <span style='color:white'>" 
+			+ prevscore.negative + "</span> <img style='height:0.7em;width:0.7em' alt='Curates' src='" + UIminiCur + "'> <span style='color:white'>" 
+			+ prevscore.curates + "<span>"; 
 		if (leftwait > 0)
 		{
 			prevtrack.innerHTML += " - " + leftwait + " <span style='color:#AA44FF'>left the waitlist</span>";
@@ -578,10 +770,13 @@ function callback(obj)
 	}
 	playcount += 1;
 	log = document.getElementById("log");
-	log.innerHTML += "<div id='track" + playcount + "' style='text-decoration:underline;display:inline;' onclick='toggleFeedback(" + playcount 
-		+ ")'>Track: <span style='color:white'>" + playcount + "</span> - <span style='color:white'>" + obj.dj.username 
-		+ "</span> is playing <span style='color:white;font-weight:bold;'>" + obj.media.title 
-		+ "</span> by <span style='color:white'>" + obj.media.author + "</span>.</div><div id='trackfeed" + playcount 
+	log.innerHTML += "<div id='track" + playcount 
+		+ "' style='display:inline;' onmousedown='return toggleFeedback(event, " 
+		+ playcount + ")'>Track: <span style='color:white'>" + playcount 
+		+ "</span> - <span style='color:white'>" + obj.dj.username 
+		+ "</span> is playing <a href='http://youtu.be/" + obj.media.cid 
+		+ "' target='_blank'><span style='color:white;font-weight:bold;'>" + obj.media.title 
+		+ "</span> by <span style='color:white'>" + obj.media.author + "</span></a>.</div><div id='trackfeed" + playcount 
 		+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;-webkit-transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
 	if (doscroll) log.scrollTop = log.scrollHeight; 
 } 
@@ -620,35 +815,42 @@ function showvoter(obj)
 	prevscore = API.getRoomScore(); 
 } 
 
-function toggleFeedback(track) 
+function toggleFeedback(event, track) 
 { 
-	var prevtrack = document.getElementById("track" + track); 
-	var trackfeed = document.getElementById("trackfeed" + track); 
-	if (trackfeed.style.maxHeight != "0px") 
-	{ 
-		trackfeed.style.transition = "max-height 0.25s ease 0.25s, opacity 0.25s"; 
-		trackfeed.style.webkitTransition = "max-height 0.25s ease 0.25s, opacity 0.25s"; 
-		trackfeed.style.maxHeight = "0px"; 
-		trackfeed.style.opacity = "0"; 
-		prevtrack.style.textDecoration = "none"; 
-	} 
-	else 
-	{ 
-		trackfeed.style.transition = "max-height 0.25s, opacity 0.25s ease 0.25s"; 
-		trackfeed.style.webkitTransition = "max-height 0.25s, opacity 0.25s ease 0.25s"; 
-		var log = document.getElementById("log"); 
-		var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
-		trackfeed.style.maxHeight = "1000px"; 
-		trackfeed.style.opacity = "1"; 
-		if (doscroll) log.scrollTop = log.scrollHeight; 
-		prevtrack.style.textDecoration = "underline"; 
-	} 
-} 
+	var prevtrack = document.getElementById("track" + track);
+	if (event == null || event.button == 0)
+	{
+		var trackfeed = document.getElementById("trackfeed" + track); 
+		if (trackfeed.style.maxHeight != "0px") 
+		{ 
+			trackfeed.style.transition = "max-height 0.25s ease 0.25s, opacity 0.25s"; 
+			trackfeed.style.webkitTransition = "max-height 0.25s ease 0.25s, opacity 0.25s"; 
+			trackfeed.style.maxHeight = "0px"; 
+			trackfeed.style.opacity = "0"; 
+			prevtrack.style.fontStyle = "italic"; 
+		} 
+		else 
+		{ 
+			trackfeed.style.transition = "max-height 0.25s, opacity 0.25s ease 0.25s"; 
+			trackfeed.style.webkitTransition = "max-height 0.25s, opacity 0.25s ease 0.25s"; 
+			var log = document.getElementById("log"); 
+			var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
+			trackfeed.style.maxHeight = "1000px"; 
+			trackfeed.style.opacity = "1"; 
+			if (doscroll) log.scrollTop = log.scrollHeight; 
+			prevtrack.style.fontStyle = "normal"; 
+		}
+	}
+	
+	return true;
+}
 
-document.getElementById("log").innerHTML += "<div id='track" + (playcount) + "' style='text-decoration:underline;display:inline;' onclick='toggleFeedback(" 
-	+ (playcount) + ")'>Track: <span style='color:white'>" + (playcount) + "</span> - <span style='color:white'>" + API.getDJs()[0].username 
-	+ "</span> is playing <span style='color:white;font-weight:bold;'>" + API.getMedia().title
-	+ "</span> by <span style='color:white'>" + API.getMedia().author + "</span>.</div><div id='trackfeed" + (playcount) 
+document.getElementById("log").innerHTML += "<div id='track" + (playcount) + 
+	"' style='display:inline;' onmousedown='return toggleFeedback(event, " 
+	+ (playcount) + ")'>Track: <span style='color:white'>" + (playcount) + "</span> - <span style='color:white'>" 
+	+ API.getDJs()[0].username + "</span> is playing <a href='http://youtu.be/" + API.getMedia().cid 
+	+ "' target='_blank'><span style='color:white;font-weight:bold;'>" + API.getMedia().title
+	+ "</span> by <span style='color:white'>" + API.getMedia().author + "</span></a>.</div><div id='trackfeed" + (playcount) 
 	+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;-webkit-transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
 
 var expwoot = document.createElement("img");
@@ -856,9 +1058,13 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("1.2.9b:<br>New:<br>Added optional annotations. ($annotations)<br>Using $ at the beginning will \
-					always prevent the message from being send.<br>Fixed:<br>\"$inhistory on\" \
-					now works properly.<br>1.2.9c:<br>New:<br>Annotations are on by default.<br> \
+				printChat("1.3.1:<br>New:<br>\
+					Exchanged the colored text in the track stats with the respective images.<br>\
+					Added an options menu.<br>\
+					Slightly changed the design.<br>\
+					Fixed:<br>\
+					Now only toggle feedback on next track when it was open.<br>\
+					1.2.9c:<br>New:<br>Annotations are on by default.<br> \
 					Fixed:<br>You won't be notified twice if a fan or friend joins the room.");
 				break;
 			case "$reset":
