@@ -120,7 +120,7 @@ function hideOptionsMenu()
 		var optmenu = document.getElementById("optionsx");
 		optmenu.style.right = "-160px";
 		optmenu.parentNode.style.boxShadow = "0px 0px 0px #000000";
-		optmenu.parentNode.style.width = "0px";
+		optmenu.parentNode.style.width = "1px";
 		optmenu.style.opacity = "0";
 		setTimeout(function() { optmisopen = false; }, "500");
 	}
