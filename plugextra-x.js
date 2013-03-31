@@ -96,7 +96,7 @@ optcontainer.onclick = function() { showOptionsMenu(); };
 var optionsmenu = document.createElement("div");
 
 optionsmenu.id = "optionsx";
-optionsmenu.style.position = "absolute";
+optionsmenu.style.position = "relative";
 optionsmenu.style.height = "100%";
 optionsmenu.style.width = "100%";
 optionsmenu.style.backgroundImage = "url('http://poke-helper.bplaced.net/images/noise.png')";
