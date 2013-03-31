@@ -584,8 +584,8 @@ function callback(obj)
 		+ "' style='text-decoration:underline;display:inline;' onmousedown='return toggleFeedback(event, " 
 		+ playcount + ")'>Track: <span style='color:white'>" + playcount 
 		+ "</span> - <span style='color:white'>" + obj.dj.username 
-		+ "</span> is playing <a href='http://youtu.be/'" + obj.media.cid 
-		+ " target='_blank'><span style='color:white;font-weight:bold;'>" + obj.media.title 
+		+ "</span> is playing <a href='http://youtu.be/" + obj.media.cid 
+		+ "' target='_blank'><span style='color:white;font-weight:bold;'>" + obj.media.title 
 		+ "</span> by <span style='color:white'>" + obj.media.author + "</span></a>.</div><div id='trackfeed" + playcount 
 		+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;-webkit-transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
 	if (doscroll) log.scrollTop = log.scrollHeight; 
@@ -658,8 +658,8 @@ function toggleFeedback(event, track)
 document.getElementById("log").innerHTML += "<div id='track" + (playcount) + 
 	"' style='text-decoration:underline;display:inline;' onmousedown='return toggleFeedback(event, " 
 	+ (playcount) + ")'>Track: <span style='color:white'>" + (playcount) + "</span> - <span style='color:white'>" 
-	+ API.getDJs()[0].username + "</span> is playing <a href='http://youtu.be/'" + API.getMedia().cid 
-	+ " target='_blank'><span style='color:white;font-weight:bold;'>" + API.getMedia().title
+	+ API.getDJs()[0].username + "</span> is playing <a href='http://youtu.be/" + API.getMedia().cid 
+	+ "' target='_blank'><span style='color:white;font-weight:bold;'>" + API.getMedia().title
 	+ "</span> by <span style='color:white'>" + API.getMedia().author + "</span></a>.</div><div id='trackfeed" + (playcount) 
 	+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;-webkit-transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
 
