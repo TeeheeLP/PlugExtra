@@ -159,6 +159,7 @@ streamx.onclick = function()
 		DB.settings.streamDisabled = false;
 		this.style.color = "lime";
 	}
+	DB.saveSettings();
 }
 
 
