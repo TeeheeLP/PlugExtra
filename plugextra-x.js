@@ -16,6 +16,8 @@ var leftbooth = 0;
 var checkhistory = false;
 var autoskip = false;
 var showannot = true;
+var trackyid = new Array;
+trackyid[0] = API.getMedia().cid;
 
 function printChat(str)
 {
@@ -577,8 +579,9 @@ function callback(obj)
 		checkInHistory();
 	}
 	playcount += 1;
+	trackyid[playcount - 1] = obj.media.cid;
 	log = document.getElementById("log");
-	log.innerHTML += "<div id='track" + playcount + "' style='text-decoration:underline;display:inline;' onclick='toggleFeedback(" + playcount 
+	log.innerHTML += "<div id='track" + playcount + "' style='text-decoration:underline;display:inline;' onmousedown='return toggleFeedback(event, " + playcount 
 		+ ")'>Track: <span style='color:white'>" + playcount + "</span> - <span style='color:white'>" + obj.dj.username 
 		+ "</span> is playing <span style='color:white;font-weight:bold;'>" + obj.media.title 
 		+ "</span> by <span style='color:white'>" + obj.media.author + "</span>.</div><div id='trackfeed" + playcount 
@@ -620,32 +623,43 @@ function showvoter(obj)
 	prevscore = API.getRoomScore(); 
 } 
 
-function toggleFeedback(track) 
+function toggleFeedback(event, track) 
 { 
-	var prevtrack = document.getElementById("track" + track); 
-	var trackfeed = document.getElementById("trackfeed" + track); 
-	if (trackfeed.style.maxHeight != "0px") 
-	{ 
-		trackfeed.style.transition = "max-height 0.25s ease 0.25s, opacity 0.25s"; 
-		trackfeed.style.webkitTransition = "max-height 0.25s ease 0.25s, opacity 0.25s"; 
-		trackfeed.style.maxHeight = "0px"; 
-		trackfeed.style.opacity = "0"; 
-		prevtrack.style.textDecoration = "none"; 
-	} 
-	else 
-	{ 
-		trackfeed.style.transition = "max-height 0.25s, opacity 0.25s ease 0.25s"; 
-		trackfeed.style.webkitTransition = "max-height 0.25s, opacity 0.25s ease 0.25s"; 
-		var log = document.getElementById("log"); 
-		var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
-		trackfeed.style.maxHeight = "1000px"; 
-		trackfeed.style.opacity = "1"; 
-		if (doscroll) log.scrollTop = log.scrollHeight; 
-		prevtrack.style.textDecoration = "underline"; 
-	} 
-} 
+	var prevtrack = document.getElementById("track" + track);
+	if (event.button == 0)
+	{
+		var trackfeed = document.getElementById("trackfeed" + track); 
+		if (trackfeed.style.maxHeight != "0px") 
+		{ 
+			trackfeed.style.transition = "max-height 0.25s ease 0.25s, opacity 0.25s"; 
+			trackfeed.style.webkitTransition = "max-height 0.25s ease 0.25s, opacity 0.25s"; 
+			trackfeed.style.maxHeight = "0px"; 
+			trackfeed.style.opacity = "0"; 
+			prevtrack.style.textDecoration = "none"; 
+		} 
+		else 
+		{ 
+			trackfeed.style.transition = "max-height 0.25s, opacity 0.25s ease 0.25s"; 
+			trackfeed.style.webkitTransition = "max-height 0.25s, opacity 0.25s ease 0.25s"; 
+			var log = document.getElementById("log"); 
+			var doscroll = log.scrollTop >= log.scrollHeight - log.offsetHeight; 
+			trackfeed.style.maxHeight = "1000px"; 
+			trackfeed.style.opacity = "1"; 
+			if (doscroll) log.scrollTop = log.scrollHeight; 
+			prevtrack.style.textDecoration = "underline"; 
+		} 
+	}
+	else if (event.button == 2)
+	{
+		window.open("http://youtu.be/" + trackyid[playcount - 1], "_blank");
+		
+		return false;
+	}
+	
+	return true;
+}
 
-document.getElementById("log").innerHTML += "<div id='track" + (playcount) + "' style='text-decoration:underline;display:inline;' onclick='toggleFeedback(" 
+document.getElementById("log").innerHTML += "<div id='track" + (playcount) + "' style='text-decoration:underline;display:inline;' onmousedown='return toggleFeedback(event, " 
 	+ (playcount) + ")'>Track: <span style='color:white'>" + (playcount) + "</span> - <span style='color:white'>" + API.getDJs()[0].username 
 	+ "</span> is playing <span style='color:white;font-weight:bold;'>" + API.getMedia().title
 	+ "</span> by <span style='color:white'>" + API.getMedia().author + "</span>.</div><div id='trackfeed" + (playcount) 
