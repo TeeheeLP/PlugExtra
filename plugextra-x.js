@@ -16,6 +16,7 @@ var leftbooth = 0;
 var checkhistory = false;
 var autoskip = false;
 var showannot = true;
+var skinelem = null;
 
 function printChat(str)
 {
@@ -109,6 +110,8 @@ optionsmenu.style.padding = "10px";
 optionsmenu.style.overflowX = "hidden";
 optionsmenu.style.overflowY = "auto";
 optionsmenu.style.margin = "0px";
+optionsmenu.style.fontSize = "1.2em";
+optionsmenu.style.fontWeight = "bold";
 optionsmenu.setAttribute("onclick", "showOptionsMenu();");
 
 var hidemenubut = document.createElement("div");
@@ -144,6 +147,7 @@ optionsmenu.appendChild(hidemenubut);
 
 var streamx = document.createElement("div");
 streamx.style.textAlign = "center";
+streamx.style.cursor = "pointer";
 if (!DB.settings.streamDisabled) streamx.style.color = "lime";
 else streamx.style.color = "red";
 streamx.innerHTML = "Stream";
@@ -159,11 +163,58 @@ streamx.onclick = function()
 		API.sendChat("/stream on");
 		this.style.color = "lime";
 	}
-	DB.saveSettings();
 }
 
+optionsmenu.appendChild(streamx);
+
+var annotx = document.createElement("div");
+annotx.style.textAlign = "center";
+annotx.style.cursor = "pointer";
+annotx.style.color = "lime";
+annotx.innerHTML = "Annotations";
+annotx.onclick = function()
+{
+	if (showannot)
+	{
+		showannot = false;
+		this.style.color = "red";
+	}
+	else
+	{
+		showannot = true;
+		this.style.color = "lime";
+	}
+}
 
 optionsmenu.appendChild(streamx);
+
+optionsmenu.innerHTML += "<p>Skins:</p>";
+
+var originalx = document.createElement("div");
+originalx.style.textAlign = "center";
+originalx.style.cursor = "pointer";
+originalx.style.color = "lightgray";
+originalx.innerHTML = "Original";
+originalx.onclick = function()
+{
+	this.style.color = "lime";
+	skinelem.style.color = "lightgray";
+	loadSkin("original");
+}
+
+var plugextrax = document.createElement("div");
+plugextrax.style.textAlign = "center";
+plugextrax.style.cursor = "pointer";
+plugextrax.style.color = "lightgray";
+plugextrax.innerHTML = "PlugExtra";
+plugextrax.onclick = function()
+{
+	this.style.color = "lime";
+	skinelem.style.color = "lightgray";
+	loadSkin("plugextra");
+}
+
+optionsmenu.appendChild();
 
 optcontainer.appendChild(optionsmenu);
 
