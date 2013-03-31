@@ -16,7 +16,6 @@ var leftbooth = 0;
 var checkhistory = false;
 var autoskip = false;
 var showannot = true;
-var trackyid = new Array;
 
 function printChat(str)
 {
@@ -560,9 +559,10 @@ function callback(obj)
 	{ 
 		var prevtrack = document.getElementById("track" + playcount); 
 		prevtrack.click(); 
-		prevtrack.innerHTML += " (<span style='color:white'>" + prevscore.positive + "<span> <img alt='woots' src='" + UIminiVP + "'>, <span style='color:white'>" 
-			+ prevscore.negative + "<span> <img alt='mehs' src='" + UIminiVN + "'>, <span style='color:white'>" 
-			+ prevscore.curates + "<span> <img alt='curates' src='" + UIminiCur + "'>"; 
+		prevtrack.innerHTML += " (<img alt='Woots' src='" + UIminiVP + "'> <span style='color:white'>" 
+			+ prevscore.positive + "</span> <img alt='Mehs' src='" + UIminiVN + "'> <span style='color:white'>" 
+			+ prevscore.negative + "</span> <img alt='Curates' src='" + UIminiCur + "'> <span style='color:white'>" 
+			+ prevscore.curates + "<span>)"; 
 		if (leftwait > 0)
 		{
 			prevtrack.innerHTML += " - " + leftwait + " <span style='color:#AA44FF'>left the waitlist</span>";
