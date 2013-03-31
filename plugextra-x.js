@@ -89,7 +89,7 @@ optcontainer.style.overflowY = "hidden";
 optcontainer.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
 optcontainer.style.transition = "width 0.5s";
 optcontainer.style.webkitTransition = "width 0.5s";
-optcontainer.onclick = function() { showOptionsMenu(); };
+optcontainer.setAttribute("onclick", "showOptionsMenu();");
 
 var optionsmenu = document.createElement("div");
 
@@ -109,7 +109,6 @@ optionsmenu.style.padding = "10px";
 optionsmenu.style.overflowX = "hidden";
 optionsmenu.style.overflowY = "auto";
 optionsmenu.style.margin = "0px";
-optionsmenu.onclick = function() { showOptionsMenu(); };
 
 var hidemenubut = document.createElement("div");
 
