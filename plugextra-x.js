@@ -65,20 +65,6 @@ function loadSkin(skinname)
 
 var optmisopen = true;
 var optcontainer = document.createElement("div");
-optcontainer.style.position = "absolute";
-optcontainer.style.height = "97%";
-optcontainer.style.width = "170px";
-optcontainer.style.top = "0px";
-optcontainer.style.right = "0px";
-optcontainer.style.overflowX = "hidden";
-optcontainer.style.overflowY = "hidden";
-optcontainer.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
-optcontainer.style.borderLeft = "1px solid transparent";
-optcontainer.style.transition = "width 0.5s";
-optcontainer.style.webkitTransition = "width 0.5s";
-optcontainer.style.padding = "0px";
-
-var optionsmenu = document.createElement("div");
 
 function showOptionsMenu()
 {
@@ -93,10 +79,26 @@ function showOptionsMenu()
 	}
 }
 
+optcontainer.style.position = "absolute";
+optcontainer.style.height = "97%";
+optcontainer.style.width = "170px";
+optcontainer.style.top = "0px";
+optcontainer.style.right = "0px";
+optcontainer.style.overflowX = "hidden";
+optcontainer.style.overflowY = "hidden";
+optcontainer.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
+optcontainer.style.borderLeft = "1px solid transparent";
+optcontainer.style.transition = "width 0.5s";
+optcontainer.style.webkitTransition = "width 0.5s";
+optcontainer.style.padding = "0px";
+optcontainer.onclick = function() { showOptionsMenu(); };
+
+var optionsmenu = document.createElement("div");
+
 optionsmenu.id = "optionsx";
 optionsmenu.style.position = "absolute";
-optionsmenu.style.height = "97%";
-optionsmenu.style.width = "150px";
+optionsmenu.style.height = "100%";
+optionsmenu.style.width = "100%";
 optionsmenu.style.backgroundImage = "url('http://poke-helper.bplaced.net/images/noise.png')";
 optionsmenu.style.backgroundColor = "#070707";
 optionsmenu.style.top = "0px";
@@ -109,7 +111,6 @@ optionsmenu.style.padding = "10px";
 optionsmenu.style.overflowX = "hidden";
 optionsmenu.style.overflowY = "auto";
 optionsmenu.style.margin = "0px";
-optionsmenu.onclick = function() { showOptionsMenu(); };
 
 var hidemenubut = document.createElement("div");
 
