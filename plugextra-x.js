@@ -198,10 +198,13 @@ originalx.style.color = "lime";
 originalx.innerHTML = "Original";
 originalx.onclick = function()
 {
-	this.style.color = "lime";
-	skinelem.style.color = "lightgray";
-	skinelem = this;
-	loadSkin("original");
+	if (skinelem != this)
+	{
+		this.style.color = "lime";
+		skinelem.style.color = "lightgray";
+		skinelem = this;
+		loadSkin("original");
+	}
 }
 
 var skinelem = originalx;
@@ -215,10 +218,13 @@ plugextrax.style.color = "lightgray";
 plugextrax.innerHTML = "PlugExtra";
 plugextrax.onclick = function()
 {
-	this.style.color = "lime";
-	skinelem.style.color = "lightgray";
-	skinelem = this;
-	loadSkin("plugextra");
+	if (skinelem != this)
+	{
+		this.style.color = "lime";
+		skinelem.style.color = "lightgray";
+		skinelem = this;
+		loadSkin("plugextra");
+	}
 }
 
 optionsmenu.appendChild(plugextrax);
