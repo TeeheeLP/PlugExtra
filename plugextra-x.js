@@ -559,10 +559,10 @@ function callback(obj)
 	{ 
 		var prevtrack = document.getElementById("track" + playcount); 
 		prevtrack.click(); 
-		prevtrack.innerHTML += " (<img alt='Woots' src='" + UIminiVP + "'> <span style='color:white'>" 
-			+ prevscore.positive + "</span> <img alt='Mehs' src='" + UIminiVN + "'> <span style='color:white'>" 
-			+ prevscore.negative + "</span> <img alt='Curates' src='" + UIminiCur + "'> <span style='color:white'>" 
-			+ prevscore.curates + "<span>)"; 
+		prevtrack.innerHTML += " <img style='height:0.7em;width:0.7em' alt='Woots' src='" + UIminiVP + "'> <span style='color:white'>" 
+			+ prevscore.positive + "</span> <img style='height:0.7em;width:0.7em' alt='Mehs' src='" + UIminiVN + "'> <span style='color:white'>" 
+			+ prevscore.negative + "</span> <img style='height:0.7em;width:0.7em' alt='Curates' src='" + UIminiCur + "'> <span style='color:white'>" 
+			+ prevscore.curates + "<span>"; 
 		if (leftwait > 0)
 		{
 			prevtrack.innerHTML += " - " + leftwait + " <span style='color:#AA44FF'>left the waitlist</span>";
@@ -640,7 +640,7 @@ function toggleFeedback(event, track)
 			trackfeed.style.webkitTransition = "max-height 0.25s ease 0.25s, opacity 0.25s"; 
 			trackfeed.style.maxHeight = "0px"; 
 			trackfeed.style.opacity = "0"; 
-			prevtrack.style.textDecoration = "none"; 
+			prevtrack.style.fontStyle = "italic"; 
 		} 
 		else 
 		{ 
@@ -651,7 +651,7 @@ function toggleFeedback(event, track)
 			trackfeed.style.maxHeight = "1000px"; 
 			trackfeed.style.opacity = "1"; 
 			if (doscroll) log.scrollTop = log.scrollHeight; 
-			prevtrack.style.textDecoration = "underline"; 
+			prevtrack.style.fontStyle = "normal"; 
 		}
 	}
 	
