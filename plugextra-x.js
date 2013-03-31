@@ -176,11 +176,13 @@ annotx.onclick = function()
 	if (showannot)
 	{
 		showannot = false;
+		printChat("You will not be notified when somebody joins or leaves the room.");
 		this.style.color = "red";
 	}
 	else
 	{
 		showannot = true;
+		printChat("You will now be notified when somebody joins or leaves the room.");
 		this.style.color = "lime";
 	}
 }
