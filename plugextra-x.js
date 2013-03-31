@@ -482,7 +482,12 @@ function refreshUserlist()
 			user.style.color = "#D7498C";
 		}
 		user.setAttribute("onclick", "mentionUser('" + admins[i].id + "');");
-		user.innerHTML = admins[i].username + " <span style='font-size:0.7em'>(Admin)</span>";		
+		user.innerHTML = admins[i].username + " <span style='font-size:0.7em'>(Admin)</span>";
+		var vote;
+		if (user.vote == 1) vote = UIminiVP;
+		else if (user.vote == -1) vote = UIminiVN;
+		if (vote != "") user.innerHTML += "<img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
+		if (user.curated != false) user.innerHTML += "<img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
 		
 		stafflist.appendChild(user);
 	}
@@ -502,7 +507,12 @@ function refreshUserlist()
 			user.style.color = "#D7498C";
 		}
 		user.setAttribute("onclick", "mentionUser('" + ambs[i].id + "');");
-		user.innerHTML = ambs[i].username + " <span style='font-size:0.7em'>(Ambassador)</span>";		
+		user.innerHTML = ambs[i].username + " <span style='font-size:0.7em'>(Ambassador)</span>";
+		var vote;
+		if (user.vote == 1) vote = UIminiVP;
+		else if (user.vote == -1) vote = UIminiVN;
+		if (vote != "") user.innerHTML += "<img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
+		if (user.curated != false) user.innerHTML += "<img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
 		
 		stafflist.appendChild(user);
 	}
@@ -528,6 +538,11 @@ function refreshUserlist()
 		if (staff[i].status > 0) user.style.fontStyle = "italic";
 		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
 		user.innerHTML = staff[i].username + " <span style='font-size:0.7em'>(" + suffix[staff[i].permission] + ")</span>";		
+		var vote;
+		if (user.vote == 1) vote = UIminiVP;
+		else if (user.vote == -1) vote = UIminiVN;
+		if (vote != "") user.innerHTML += "<img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
+		if (user.curated != false) user.innerHTML += "<img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
 		
 		stafflist.appendChild(user);
 	}
@@ -557,6 +572,11 @@ function refreshUserlist()
 			}
 			user.setAttribute("onclick", "mentionUser('" + users[i].id + "');");
 			user.innerHTML = users[i].username;
+			var vote;
+			if (user.vote == 1) vote = UIminiVP;
+			else if (user.vote == -1) vote = UIminiVN;
+			if (vote != "") user.innerHTML += "<img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
+			if (user.curated != false) user.innerHTML += "<img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
 		
 			usersul.appendChild(user);
 		}
@@ -810,7 +830,9 @@ function showvoter(obj)
 	{
 		var oldvote = document.getElementById(obj.user.id + playcount); 
 		oldvote.style.color = spancolor; 
-		oldvote.innerHTML = vote; 
+		oldvote.innerHTML = vote;
+		var vicon = document.getElementById("pgx" + obj.user.id + "v");
+		if (vicon != null) vicon.setAttribute("src", obj.vote == 1 ? UIminiVP : UIminiVN);
 	} 
 	prevscore = API.getRoomScore(); 
 } 
