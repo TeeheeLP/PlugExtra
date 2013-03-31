@@ -16,7 +16,6 @@ var leftbooth = 0;
 var checkhistory = false;
 var autoskip = false;
 var showannot = true;
-var skinelem = null;
 
 function printChat(str)
 {
@@ -193,7 +192,7 @@ optionsmenu.innerHTML += "<p>Skins:</p>";
 var originalx = document.createElement("div");
 originalx.style.textAlign = "center";
 originalx.style.cursor = "pointer";
-originalx.style.color = "lightgray";
+originalx.style.color = "lime";
 originalx.innerHTML = "Original";
 originalx.onclick = function()
 {
@@ -201,6 +200,8 @@ originalx.onclick = function()
 	skinelem.style.color = "lightgray";
 	loadSkin("original");
 }
+
+var skinelem = originalx;
 
 optionsmenu.appendChild(originalx);
 
