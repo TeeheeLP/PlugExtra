@@ -486,7 +486,7 @@ function refreshUserlist()
 		var vote;
 		if (admins[i].vote == 1) vote = UIminiVP;
 		else if (admins[i].vote == -1) vote = UIminiVN;
-		if (vote != "") user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
+		if (vote != null) user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
 		if (admins[i].curated == false) user.innerHTML += " <img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
 		
 		stafflist.appendChild(user);
@@ -511,7 +511,7 @@ function refreshUserlist()
 		var vote;
 		if (ambs[i].vote == 1) vote = UIminiVP;
 		else if (ambs[i].vote == -1) vote = UIminiVN;
-		if (vote != "") user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
+		if (vote != null) user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
 		if (ambs[i].curated != false) user.innerHTML += " <img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
 		
 		stafflist.appendChild(user);
@@ -541,7 +541,7 @@ function refreshUserlist()
 		var vote;
 		if (staff[i].vote == 1) vote = UIminiVP;
 		else if (staff[i].vote == -1) vote = UIminiVN;
-		if (vote != "") user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
+		if (vote != null) user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
 		if (staff[i].curated != false) user.innerHTML += " <img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
 		
 		stafflist.appendChild(user);
@@ -575,7 +575,7 @@ function refreshUserlist()
 			var vote;
 			if (users[i].vote == 1) vote = UIminiVP;
 			else if (users[i].vote == -1) vote = UIminiVN;
-			if (vote != "") user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
+			if (vote != null) user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
 			if (users[i].curated != false) user.innerHTML += " <img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
 		
 			usersul.appendChild(user);
