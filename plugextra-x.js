@@ -67,13 +67,15 @@ var optmisopen = true;
 var optcontainer = document.createElement("div");
 optcontainer.style.position = "absolute";
 optcontainer.style.height = "97%";
-optcontainer.style.width = "150px";
+optcontainer.style.width = "170px";
 optcontainer.style.top = "0px";
 optcontainer.style.right = "0px";
 optcontainer.style.overflowX = "hidden";
 optcontainer.style.overflowY = "hidden";
 optcontainer.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
 optcontainer.style.borderLeft = "1px solid transparent";
+optcontainer.style.transition = "width 0.5s";
+optcontainer.style.webkitTransition = "width 0.5s";
 optcontainer.style.padding = "0px";
 
 var optionsmenu = document.createElement("div");
@@ -86,6 +88,7 @@ function showOptionsMenu()
 		optmenu.style.right = "0px";
 		optmenu.style.opacity = "1";
 		optmenu.parentNode.style.boxShadow = "0px 0px 10px #000000, -1px 0px #000000 inset";
+		optmenu.parentNode.style.width = "170px";
 		setTimeout(function() { optmisopen = true; }, "500");
 	}
 }
@@ -117,6 +120,7 @@ function hideOptionsMenu()
 		var optmenu = document.getElementById("optionsx");
 		optmenu.style.right = "-160px";
 		optmenu.parentNode.style.boxShadow = "0px 0px 0px #000000";
+		optmenu.parentNode.style.width = "0px";
 		optmenu.style.opacity = "0";
 		setTimeout(function() { optmisopen = false; }, "500");
 	}
