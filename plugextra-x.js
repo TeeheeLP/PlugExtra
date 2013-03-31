@@ -59,6 +59,77 @@ function loadSkin(skinname)
 	if (skinname != "" && skinname != null) printChat("Loaded skin " + skinname + ".");
 }
 
+//	------------
+//	Options Menu
+//	------------
+
+var optmisopen = true;
+var optionsmenu = document.createElement("div");
+
+function showOptionsMenu()
+{
+	if (!optmisopen)
+	{
+		var optmenu = document.getElementById("optionsx");
+		optmenu.style.right = "0px";
+		optmenu.style.opacity = "1";
+		optmenu.style.boxShadow = "0px 0px 10px #000000, -1px 0px #000000 inset";
+		setTimeout(function() { optmisopen = true; }, "500");
+	}
+}
+
+optionsmenu.id = "optionsx";
+optionsmenu.style.position = "absolute";
+optionsmenu.style.height = "97%";
+optionsmenu.style.width = "150px";
+optionsmenu.style.backgroundImage = "url('http://poke-helper.bplaced.net/images/noise.png')";
+optionsmenu.style.backgroundColor = "#070707";
+optionsmenu.style.top = "0px";
+optionsmenu.style.right = "0px";
+optionsmenu.style.transition = "left 0.5s, box-shadow 0.5s, opacity 0.3s";
+optionsmenu.style.webkitTransition = "left 0.5s, box-shadow 0.5s, opacity 0.3s";
+optionsmenu.style.color = "#FFFFFF";
+optionsmenu.style.zIndex = "9001";
+optionsmenu.style.padding = "10px";
+optionsmenu.style.overflowX = "hidden";
+optionsmenu.style.overflowY = "hidden";
+optionsmenu.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
+optionsmenu.style.borderRight = "1px solid transparent";
+optionsmenu.onclick = function() { showOptionsMenu(); };
+
+var hidemenubut = document.createElement("div");
+
+function hideOptionsMenu()
+{
+	if (optmisopen)
+	{
+		var userlist = document.getElementById("optionsx");
+		optmenu.style.left = "-160px";
+		optmenu.style.boxShadow = "0px 0px 0px #000000";
+		optmenu.style.opacity = "0";
+		setTimeout(function() { optmisopen = false; }, "500");
+	}
+}
+
+hidemenubut.style.backgroundColor = "#333333";
+hidemenubut.style.borderRadius = "7px";
+hidemenubut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
+hidemenubut.style.width = "133px";
+hidemenubut.style.textAlign = "center";
+hidemenubut.style.height = "1.5em";
+hidemenubut.style.display = "block";
+hidemenubut.style.cursor = "pointer";
+hidemenubut.style.lineHeight = "1.5em";
+hidemenubut.style.marginBottom = "5px";
+hidemenubut.style.fontSize = "1.2em";
+hidemenubut.style.fontWeight = "bold";
+hidemenubut.innerHTML = "Hide";
+hidemenubut.onclick = function() { hideOptionsMenu(); };
+
+optionsmenu.appendChild(hidemenubut);
+
+document.body.appendChild(optionsmenu);
+
 //	-------------------
 //	Userlist management
 //	-------------------
