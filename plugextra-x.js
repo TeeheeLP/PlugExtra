@@ -17,7 +17,6 @@ var checkhistory = false;
 var autoskip = false;
 var showannot = true;
 var trackyid = new Array;
-trackyid[0] = API.getMedia().cid;
 
 function printChat(str)
 {
@@ -581,10 +580,13 @@ function callback(obj)
 	playcount += 1;
 	trackyid[playcount - 1] = obj.media.cid;
 	log = document.getElementById("log");
-	log.innerHTML += "<div id='track" + playcount + "' style='text-decoration:underline;display:inline;' onmousedown='return toggleFeedback(event, " + playcount 
-		+ ")'>Track: <span style='color:white'>" + playcount + "</span> - <span style='color:white'>" + obj.dj.username 
-		+ "</span> is playing <span style='color:white;font-weight:bold;'>" + obj.media.title 
-		+ "</span> by <span style='color:white'>" + obj.media.author + "</span>.</div><div id='trackfeed" + playcount 
+	log.innerHTML += "<div id='track" + playcount 
+		+ "' style='text-decoration:underline;display:inline;' onmousedown='return toggleFeedback(event, " 
+		+ playcount + ")'>Track: <span style='color:white'>" + playcount 
+		+ "</span> - <span style='color:white'>" + obj.dj.username 
+		+ "</span> is playing <a href='http://youtu.be/'" + obj.media.cid 
+		+ " target='_blank'><span style='color:white;font-weight:bold;'>" + obj.media.title 
+		+ "</span> by <span style='color:white'>" + obj.media.author + "</span></a>.</div><div id='trackfeed" + playcount 
 		+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;-webkit-transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
 	if (doscroll) log.scrollTop = log.scrollHeight; 
 } 
@@ -647,22 +649,18 @@ function toggleFeedback(event, track)
 			trackfeed.style.opacity = "1"; 
 			if (doscroll) log.scrollTop = log.scrollHeight; 
 			prevtrack.style.textDecoration = "underline"; 
-		} 
-	}
-	else if (event.button == 2)
-	{
-		window.open("http://youtu.be/" + trackyid[playcount - 1], "_blank");
-		
-		return false;
+		}
 	}
 	
 	return true;
 }
 
-document.getElementById("log").innerHTML += "<div id='track" + (playcount) + "' style='text-decoration:underline;display:inline;' onmousedown='return toggleFeedback(event, " 
-	+ (playcount) + ")'>Track: <span style='color:white'>" + (playcount) + "</span> - <span style='color:white'>" + API.getDJs()[0].username 
-	+ "</span> is playing <span style='color:white;font-weight:bold;'>" + API.getMedia().title
-	+ "</span> by <span style='color:white'>" + API.getMedia().author + "</span>.</div><div id='trackfeed" + (playcount) 
+document.getElementById("log").innerHTML += "<div id='track" + (playcount) + 
+	"' style='text-decoration:underline;display:inline;' onmousedown='return toggleFeedback(event, " 
+	+ (playcount) + ")'>Track: <span style='color:white'>" + (playcount) + "</span> - <span style='color:white'>" 
+	+ API.getDJs()[0].username + "</span> is playing <a href='http://youtu.be/'" + API.getMedia().cid 
+	+ " target='_blank'><span style='color:white;font-weight:bold;'>" + API.getMedia().title
+	+ "</span> by <span style='color:white'>" + API.getMedia().author + "</span></a>.</div><div id='trackfeed" + (playcount) 
 	+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;-webkit-transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
 
 var expwoot = document.createElement("img");
