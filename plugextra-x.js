@@ -211,7 +211,7 @@ originalx.onclick = function()
 	if (skinelem != this)
 	{
 		this.style.backgroundColor = "#00DD00"
-		skinelem.style.color = "gray";
+		skinelem.style.backgroundColor = "gray";
 		skinelem = this;
 		loadSkin("original");
 	}
@@ -233,7 +233,7 @@ plugextrax.onclick = function()
 	if (skinelem != this)
 	{
 		this.style.backgroundColor = "#00DD00"
-		skinelem.style.color = "gray";
+		skinelem.style.backgroundColor = "gray";
 		skinelem = this;
 		loadSkin("plugextra");
 	}
