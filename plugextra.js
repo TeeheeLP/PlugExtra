@@ -1,5 +1,5 @@
 document.getElementsByTagName('head')[0].innerHTML += 
-  '<link type="text/css" rel="stylesheet" href="http://poke-helper.bplaced.net/main.css">';
+  '<link type="text/css" rel="stylesheet" href="https://raw.github.com/TeeheeLP/PlugExtra/dev/style.css">';
 
 function startBot()
 {
@@ -125,30 +125,9 @@ function stopDrag()
 
 var elem = document.createElement("p");
 elem.id = "log";
-elem.style.color = "lightgray";
-elem.style.position = "relative";
-elem.style.top = "288px";
-elem.style.display = "block";
-elem.style.zIndex = "15";
-elem.style.textShadow ="0px 0px 2px black";
-elem.style.height = "271px";
-elem.style.width = "837px";
-elem.style.overflowY = "scroll";
-elem.style.margin = "auto";
-elem.style.borderTop = "5px solid #333333";
-elem.style.borderBottom = "5px solid #333333";
-elem.style.padding = "5px";
-elem.style.backgroundColor = "#050505";
-elem.style.opacity = "0.8";
-//elem.style.boxShadow = "1px 1px 2px 1px #444444 inset";
-elem.style.transition = "background 0.5s, opacity 0.5s, height 0.5s";
-elem.style.webkitTransition = "background 0.5s, opacity 0.5s, height 0.5s";
-elem.style.right = "177px";
-//elem.style.resize = "both";
 elem.setAttribute("onmousedown", "isclicked = true;");
 elem.setAttribute("ondblclick", "resetLayout();");
-//elem.setAttribute("onmousemove", "dragLog(event);");
-//elem.setAttribute("onmouseup", "stopDrag();");
+
 document.body.appendChild(elem);
 
 var explog = document.createElement("img");
