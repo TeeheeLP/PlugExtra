@@ -1,13 +1,6 @@
 document.getElementsByTagName('head')[0].innerHTML += 
   '<link type="text/css" rel="stylesheet" href="https://raw.github.com/TeeheeLP/PlugExtra/dev/style.css">';
 
-function reloadStylesheets() {
-    var queryString = '?reload=' + new Date().getTime();
-    $('link[rel="stylesheet"]').each(function () {
-        this.href = this.href.replace(/\?.*|$/, queryString);
-    });
-}
-
 reloadStylesheets();
 
 function startBot()
