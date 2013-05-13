@@ -1,4 +1,9 @@
-.log {
+body {
+  background: #FFFFFF;
+  background-image:url('http://poke-helper.bplaced.net/images/backgroundlines.png');
+}
+
+#log {
   color: lightgray;
   position: relative;
   top: 288px;
