@@ -1,5 +1,9 @@
-document.getElementsByTagName('head')[0].innerHTML += 
-  '<link type="text/css" rel="stylesheet" href="https://raw.github.com/TeeheeLP/PlugExtra/dev/style.css">';
+var pgxStyle = document.createElement("link");
+pgxStyle.id = "pgxStyle";
+pgxStyle.type = "text/css";
+pgxStyle.href = "https://raw.github.com/TeeheeLP/PlugExtra/dev/style.css";
+
+document.getElementsByTagName('head')[0].appendChild(pgxStyle);
 
 function startBot()
 {
