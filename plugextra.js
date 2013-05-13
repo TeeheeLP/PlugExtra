@@ -1,3 +1,6 @@
+document.getElementsByTagName('head')[0].innerHTML += 
+  '<link type="text/css" rel="stylesheet" href="http://poke-helper.bplaced.net/main.css">';
+
 function startBot()
 {
 var scr = document.createElement("script");
