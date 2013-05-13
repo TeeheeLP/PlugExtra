@@ -1,6 +1,8 @@
 var pgxStyle = document.createElement("link");
 pgxStyle.id = "pgxStyle";
+pgxStyle.rel = "stylesheet";
 pgxStyle.type = "text/css";
+pgxStyle.media = "all";
 pgxStyle.href = "https://raw.github.com/TeeheeLP/PlugExtra/dev/style.css";
 
 document.getElementsByTagName('head')[0].appendChild(pgxStyle);
