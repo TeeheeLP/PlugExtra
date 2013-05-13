@@ -1,8 +1,6 @@
 document.getElementsByTagName('head')[0].innerHTML += 
   '<link type="text/css" rel="stylesheet" href="https://raw.github.com/TeeheeLP/PlugExtra/dev/style.css">';
 
-reloadStylesheets();
-
 function startBot()
 {
 var scr = document.createElement("script");
