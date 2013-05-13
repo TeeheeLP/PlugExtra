@@ -7,7 +7,7 @@ pgxStyle.href = "https://raw.github.com/TeeheeLP/PlugExtra/dev/style.css";
 
 document.getElementsByTagName('head')[0].appendChild(pgxStyle);
 
-document.styleSheets[document.styleSheets.length - 1].appendChild(document.createTextNode("#reloader { color:#000000; }"));
+document.styleSheets[document.styleSheets.length - 1].cssText += " #reloader { color:#000000; }";
 
 function startBot()
 {
