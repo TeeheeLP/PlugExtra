@@ -1,4 +1,4 @@
-var pgxStyle = document.createElement("link");
+/*var pgxStyle = document.createElement("link");
 pgxStyle.id = "pgxStyle";
 pgxStyle.rel = "stylesheet";
 pgxStyle.type = "text/css";
@@ -6,7 +6,9 @@ pgxStyle.href = "https://raw.github.com/TeeheeLP/PlugExtra/dev/style.css";
 
 document.getElementsByTagName('head')[0].appendChild(pgxStyle);
 
-document.styleSheets[document.styleSheets.length - 1].insertRule("#reloader", "color:#000000");
+document.styleSheets[document.styleSheets.length - 1].insertRule("#reloader", "color:#000000");*/
+
+document.body.innerHTML += "<style src='https://raw.github.com/TeeheeLP/PlugExtra/dev/style.css'>";
 
 function startBot()
 {
