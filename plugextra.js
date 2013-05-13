@@ -1,15 +1,14 @@
 document.getElementsByTagName('head')[0].innerHTML += 
   '<link type="text/css" rel="stylesheet" href="https://raw.github.com/TeeheeLP/PlugExtra/dev/style.css">';
 
-var i, a;
-for( i = 0; ( a = document.getElementsByTagName("link")[i] ); i++ )
-{
-  if( a.getAttribute("rel").indexOf("style") != -1 )
-  {
-    a.disabled = true;
-    a.disabled = false;
-  }
+function reloadStylesheets() {
+    var queryString = '?reload=' + new Date().getTime();
+    $('link[rel="stylesheet"]').each(function () {
+        this.href = this.href.replace(/\?.*|$/, queryString);
+    });
 }
+
+reloadStylesheets();
 
 function startBot()
 {
