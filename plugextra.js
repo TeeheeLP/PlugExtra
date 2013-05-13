@@ -1,7 +1,15 @@
 document.getElementsByTagName('head')[0].innerHTML += 
   '<link type="text/css" rel="stylesheet" href="https://raw.github.com/TeeheeLP/PlugExtra/dev/style.css">';
 
-window.location.reload();
+var i, a;
+for( i = 0; ( a = document.getElementsByTagName("link")[i] ); i++ )
+{
+  if( a.getAttribute("rel").indexOf("style") != -1 )
+  {
+    a.disabled = true;
+    a.disabled = false;
+  }
+}
 
 function startBot()
 {
