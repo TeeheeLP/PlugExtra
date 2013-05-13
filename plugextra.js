@@ -1,7 +1,7 @@
 document.getElementsByTagName('head')[0].innerHTML += 
   '<link type="text/css" rel="stylesheet" href="https://raw.github.com/TeeheeLP/PlugExtra/dev/style.css">';
 
-$('body').addClass('forceReload');
+window.location.reload();
 
 function startBot()
 {
