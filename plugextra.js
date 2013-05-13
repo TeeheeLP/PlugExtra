@@ -125,6 +125,7 @@ function stopDrag()
 
 var elem = document.createElement("p");
 elem.id = "log";
+elem.className = "log";
 elem.setAttribute("onmousedown", "isclicked = true;");
 elem.setAttribute("ondblclick", "resetLayout();");
 
