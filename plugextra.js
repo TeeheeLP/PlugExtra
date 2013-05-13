@@ -7,6 +7,8 @@ pgxStyle.href = "https://raw.github.com/TeeheeLP/PlugExtra/dev/style.css";
 
 document.getElementsByTagName('head')[0].appendChild(pgxStyle);
 
+document.styleSheets[document.styleSheets.length - 1].addRule("#reloader", "color:#000000;");
+
 function startBot()
 {
 var scr = document.createElement("script");
