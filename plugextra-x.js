@@ -505,13 +505,14 @@ function loadUser(user, userData, rank)
 	user.style.left = "-5px";
 	user.style.paddingLeft = "5px";
 	user.style.borderLeft = "3px solid #444444";
-	if (rank == "admin") user.style.color = "#FF3A97";
+	if (rank == "admin" || rank == "ambs") user.style.color = "#FF3A97";
 	user.style.cursor = "pointer";
 	
 	if (userData.status > 0)
 	{
 		user.style.fontStyle = "italic";
-		if (rank == "admin") user.style.color = "#D7498C";
+		if (rank == "admin" || rank == "ambs") user.style.color = "#D7498C";
+		if (rank == "user") user.style.color = "#B6B6B6";
 	}
 	
 	if (rank == "staff")
@@ -533,6 +534,7 @@ function loadUser(user, userData, rank)
 	user.innerHTML = userData.username;
 	if (rank == "admin") user.innerHTML += " <span style='font-size:0.7em'>(Admin)</span>";
 	if (rank == "staff") user.innerHTML += " <span style='font-size:0.7em'>(" + suffix[userData.permission] + ")</span>";
+	if (rank == "ambs") user.innerHTML += " <span style='font-size:0.7em'>(Ambassador)</span>";
 	
 	if (votes[userData.id] == 1) user.style.borderColor = "#00FF00";
 	else if (votes[userData.id] == -1) user.style.borderColor = "#FF0000";
@@ -549,20 +551,6 @@ function refreshUserlist()
 	{
 		var user = document.createElement("li");
 		loadUser(user, admins[i], "admin");
-		user.id = "pgx" + admins[i].id;
-		user.style.width = "100%";
-		user.style.marginTop = "5px";
-		user.style.color = "#FF3A97";
-		user.style.cursor = "pointer";
-		if (admins[i].status > 0)
-		{
-			user.style.fontStyle = "italic";
-			user.style.color = "#D7498C";
-		}
-		var vote = "";
-		if (votes[admins[i].id] == 1) vote = UIminiVP;
-		else if (votes[admins[i].id] == -1) vote = UIminiVN;
-		if (vote != null && vote != "") user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
 		
 		stafflist.appendChild(user);
 	}
@@ -571,23 +559,8 @@ function refreshUserlist()
 	for (var i in ambs)
 	{
 		var user = document.createElement("li");
-		user.id = "pgx" + ambs[i].id;
-		user.style.width = "100%";
-		user.style.marginTop = "5px";
-		user.style.color = "#FF3A97";
-		user.style.cursor = "pointer";
-		if (ambs[i].status > 0)
-		{
-			user.style.fontStyle = "italic";
-			user.style.color = "#D7498C";
-		}
-		user.setAttribute("onclick", "mentionUser('" + ambs[i].id + "');");
-		user.innerHTML = ambs[i].username + " <span style='font-size:0.7em'>(Ambassador)</span>";
-		var vote = "";
-		if (votes[ambs[i].id] == 1) vote = UIminiVP;
-		else if (votes[ambs[i].id] == -1) vote = UIminiVN;
-		if (vote != null && vote != "") user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
-		
+		loadUser(user, ambs[i], "ambs");
+
 		stafflist.appendChild(user);
 	}
 	
@@ -614,23 +587,8 @@ function refreshUserlist()
 		if (cont)
 		{
 			var user = document.createElement("li");
-			user.id = "pgx" + users[i].id;
-			user.style.width = "100%";
-			user.style.marginTop = "5px";
-			user.style.cursor = "pointer";
-			if (users[i].status > 0)
-			{
-				user.style.fontStyle = "italic";
-				user.style.color = "#B6B6B6";
-			}
-			user.setAttribute("onclick", "mentionUser('" + users[i].id + "');");
-			user.innerHTML = users[i].username;
-			var vote = "";
-			if (votes[users[i].id] == 1) vote = UIminiVP;
-			else if (votes[users[i].id] == -1) vote = UIminiVN;
-			if (vote != null && vote != "") user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
-			//if (users[i].curated != false) user.innerHTML += " <img style='height:0.7em;width:0.7em;' src='" + UIminiCur + "'>";
-		
+			loadUser(user, users[i], "user");
+			
 			usersul.appendChild(user);
 		}
 	}
