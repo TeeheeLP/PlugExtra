@@ -534,7 +534,7 @@ function loadUser(user, userData, rank)
 	user.setAttribute("onclick", "mentionUser('" + userData.id + "');");
 	
 	if (userData.permission == 2) 
-		user.innerHTML = "<img src='http://plug.dj/_/static/images/chat_bouncer_icon.dc83d4ff.png'>";
+		user.style.backgroundImage = "url('http://plug.dj/_/static/images/chat_bouncer_icon.dc83d4ff.png')";
 	if (userData.permission == 3) 
 		user.innerHTML = "<img src='http://plug.dj/_/static/images/chat_manager_icon.b33e31b4.png'>";
 	if (userData.permission == 4 && rank == "staff") 
