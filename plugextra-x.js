@@ -13,9 +13,9 @@ var olddjbooth = API.getDJs();
 var suffix = new Array("User", "Featured DJ", "Bouncer", "Manager", "Co-Host", "Host");
 var leftwait = 0;
 var leftbooth = 0;
-var checkhistory = false;
-var autoskip = false;
-var showannot = true;
+var checkhistory = DB.settings.checkHistory!=null ? DB.settings.checkHistory : false;
+var autoskip = DB.settings.autoSkip!=null ? DB.settings.autoSkip : false;
+var showannot = DB.settings.showAnnot!=null ? DB.settings.showAnnot : true;
 var emojicons = Emoji._cons;
 var emojimap = Emoji._map;
 
@@ -211,6 +211,8 @@ function toggleEmoji()
 		Emoji._cons = emojicons;
 		Emoji._map = emojimap;
 		emojix.style.backgroundColor = "#00FF00";
+		DB.settings.showEmoji = true;
+		DB.saveSettings();
 		printChat("Activated Emojis.");
 	}
 	else
@@ -218,6 +220,8 @@ function toggleEmoji()
 		Emoji._cons = null;
 		Emoji._map = null;
 		emojix.style.backgroundColor = "#FF0000";
+		DB.settings.showEmoji = false;
+		DB.saveSettings();
 		printChat("Deactivated Emojis.");
 	}
 }
@@ -1491,3 +1495,12 @@ function checkOwnIn(e, chatin)
 
 var chatinput = document.getElementById("chat-input-field");
 chatinput.setAttribute('onkeydown', 'checkOwnIn(event, this);');
+
+//         ---------------
+//	   Stuff that has to be done at the end
+//         ---------------
+
+if (DB.settings.showEmoji == false)
+{
+	toggleEmoji();
+}
