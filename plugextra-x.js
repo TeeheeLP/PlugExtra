@@ -1527,7 +1527,7 @@ if (DB.settings.showEmoji == false)
 	toggleEmoji();
 }
 
-if (DB.settings.showAnnot)
+if (DB.settings.showAnnot == false)
 	toggleAnnot();
 
 if (DB.settings.pgxWoot)
