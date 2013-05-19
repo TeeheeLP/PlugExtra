@@ -208,15 +208,15 @@ function toggleEmoji()
 {
 	if (Emoji._cons == null)
 	{
-		Emoji._cons == emojicons;
-		Emoji._map == emojimap;
+		Emoji._cons = emojicons;
+		Emoji._map = emojimap;
 		emojix.style.backgroundColor = "#00FF00";
 		printChat("Activated Emojis.");
 	}
 	else
 	{
-		Emoji._cons == null;
-		Emoji._map == null;
+		Emoji._cons = null;
+		Emoji._map = null;
 		emojix.style.backgroundColor = "#FF0000";
 		printChat("Deactivated Emojis.");
 	}
