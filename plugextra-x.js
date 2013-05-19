@@ -1603,4 +1603,4 @@ if (DB.settings.pgxSkin != null)
 	eval(DB.settings.pgxSkin + "x.click();");
 
 if (DB.settings.pgxCheckHistory != null)
-	setCheckHistoy(DB.settings.pgxCheckHistory);
+	setCheckHistory(DB.settings.pgxCheckHistory);
