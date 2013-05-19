@@ -498,6 +498,7 @@ stafflist.style.margin = "0px";
 
 function loadUser(user, userData, rank)
 {
+	var votes = Models.room.data.votes;
 	user.id = "pgx" + userData.id;
 	user.style.width = "100%";
 	user.style.marginTop = "5px";
