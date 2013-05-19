@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.3.1";
+var version = "1.3.2";
 
 var playcount = 1; 
 var autowoot = false;
@@ -16,6 +16,8 @@ var leftbooth = 0;
 var checkhistory = false;
 var autoskip = false;
 var showannot = true;
+var emojicons = Emoji._cons;
+var emojimap = Emoji._map;
 
 function printChat(str)
 {
@@ -113,6 +115,14 @@ optionsmenu.style.fontSize = "1.2em";
 optionsmenu.style.fontWeight = "bold";
 optionsmenu.setAttribute("onclick", "showOptionsMenu();");
 
+function createMenuItem(menuitem)
+{
+	menuitem.style.textAlign = "center";
+	menuitem.style.cursor = "pointer";
+	menuitem.width = "173px";
+	menuitem.style.marginLeft = "-10px";
+}
+
 var hidemenubut = document.createElement("div");
 
 function hideOptionsMenu()
@@ -145,10 +155,7 @@ hidemenubut.onclick = function() { hideOptionsMenu(); };
 optionsmenu.appendChild(hidemenubut);
 
 var streamx = document.createElement("div");
-streamx.style.textAlign = "center";
-streamx.style.cursor = "pointer";
-streamx.style.width = "173px";
-streamx.style.marginLeft = "-10px";
+createMenuItem(streamx);
 if (!DB.settings.streamDisabled) streamx.style.backgroundColor = "#00DD00";
 else streamx.style.backgroundColor = "#DD0000";
 streamx.innerHTML = "Stream";
@@ -169,11 +176,8 @@ streamx.onclick = function()
 optionsmenu.appendChild(streamx);
 
 var annotx = document.createElement("div");
-annotx.style.textAlign = "center";
-annotx.style.cursor = "pointer";
+createMenuItem(annotx);
 annotx.style.backgroundColor = "#00DD00";
-annotx.style.width = "173px";
-annotx.style.marginLeft = "-10px";
 annotx.innerHTML = "Annotations";
 annotx.onmousedown = function()
 {
@@ -200,11 +204,8 @@ skinx.innerHTML = "Skins:";
 optionsmenu.appendChild(skinx);
 
 var originalx = document.createElement("div");
-originalx.style.textAlign = "center";
-originalx.style.cursor = "pointer";
+createMenuItem(originalx);
 originalx.style.backgroundColor = "#00DD00";
-originalx.style.width = "173px";
-originalx.style.marginLeft = "-10px";
 originalx.innerHTML = "Original";
 originalx.onclick = function()
 {
@@ -222,11 +223,8 @@ var skinelem = originalx;
 optionsmenu.appendChild(originalx);
 
 var plugextrax = document.createElement("div");
-plugextrax.style.textAlign = "center";
-plugextrax.style.cursor = "pointer";
+createMenuItem(plugextrax);
 plugextrax.style.backgroundColor = "gray";
-plugextrax.style.width = "173px";
-plugextrax.style.marginLeft = "-10px";
 plugextrax.innerHTML = "PlugExtra";
 plugextrax.onclick = function()
 {
@@ -1078,14 +1076,14 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("1.3.1:<br>New:<br>\
+				printChat("1.3.2:<br>New:<br>\
+					Emojis can be disabled\
+					1.3.1:<br>New:<br>\
 					Exchanged the colored text in the track stats with the respective images.<br>\
 					Added an options menu.<br>\
 					Slightly changed the design.<br>\
 					Fixed:<br>\
-					Now only toggle feedback on next track when it was open.<br>\
-					1.2.9c:<br>New:<br>Annotations are on by default.<br> \
-					Fixed:<br>You won't be notified twice if a fan or friend joins the room.");
+					Now only toggle feedback on next track when it was open.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
