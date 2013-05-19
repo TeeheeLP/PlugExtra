@@ -293,6 +293,42 @@ plugextrax.onclick = function()
 
 optionsmenu.appendChild(plugextrax);
 
+var inhistoryx = document.createElement("div");
+inhistoryx.style.marginTop = "10px";
+inhistoryx.innerHTML = "Check History:";
+
+optionsmenu.appendChild(inhistoryx);
+
+function setCheckHistory(opt)
+{
+	if (opt == "on")
+	{
+		printChat("You will now be notified when the current song is in \
+			the history.");
+		checkhistory = true;
+		autoskip = false;
+		inhistoryelem.backgroundColor = "gray";
+		inhistoryelem = inhistoryOnx;
+		inhistoryelem.backgroundColor = "#00DD00";
+		checkInHistory();
+	}
+	else if (opt == "skip")
+	{
+		printChat("Songs that are in history will now be skipped automatically.");
+		checkhistory = true;
+		autoskip = true;
+		checkInHistory();
+	}
+	else if (opt == "off")
+	{
+		printChat("You will not be notified when the current song is in \
+			the history anymore.");
+		checkhistory = false;
+		autoskip = false;
+	}
+	else printChat("Please choose on, skip or off.");
+}
+
 var inhistoryOnx = document.createElement("div");
 createMenuItem(inhistoryOnx);
 inhistoryOnx.style.backgroundColor = "gray";
@@ -301,12 +337,6 @@ inhistoryOnx.onclick = function()
 {
 	
 };
-
-var inhistoryx = document.createElement("div");
-inhistoryx.style.marginTop = "10px";
-inhistoryx.innerHTML = "Check History:";
-
-optionsmenu.appendChild(inhistoryx);
 
 optionsmenu.appendChild(inhistoryOnx);
 
@@ -331,6 +361,8 @@ inhistoryOffx.onclick = function()
 };
 
 optionsmenu.appendChild(inhistoryOffx);
+
+var inhistoryelem = inhistoryOffx;
 
 optcontainer.appendChild(optionsmenu);
 
@@ -1316,29 +1348,7 @@ function checkOwnIn(e, chatin)
 				if (commandinfo.length > 1 && commandinfo[1] != null 
 					&& commandinfo[1] != "")
 				{
-					if (commandinfo[1] == "on")
-					{
-						printChat("You will now be notified when the current song is in \
-							the history.");
-						checkhistory = true;
-						autoskip = false;
-						checkInHistory();
-					}
-					else if (commandinfo[1] == "skip")
-					{
-						printChat("Songs that are in history will now be skipped automatically.");
-						checkhistory = true;
-						autoskip = true;
-						checkInHistory();
-					}
-					else if (commandinfo[1] == "off")
-					{
-						printChat("You will not be notified when the current song is in \
-							the history anymore.");
-						checkhistory = false;
-						autoskip = false;
-					}
-					else printChat("Please choose on, skip or off.");
+					setCheckHistory(commandinfo[1]);
 				}
 				else printChat("Please choose on, skip or off.");
 				break;
