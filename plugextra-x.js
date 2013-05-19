@@ -195,7 +195,7 @@ function toggleAnnot()
 		printChat("You will not be notified when somebody joins or leaves the room.");
 		DB.settings.showAnnot = false;
 		DB.saveSettings();
-		this.style.backgroundColor = "#DD0000";
+		annotx.style.backgroundColor = "#DD0000";
 	}
 	else
 	{
@@ -203,7 +203,7 @@ function toggleAnnot()
 		printChat("You will now be notified when somebody joins or leaves the room.");
 		DB.settings.showAnnot = true;
 		DB.saveSettings();
-		this.style.backgroundColor = "#00DD00"
+		annotx.style.backgroundColor = "#00DD00"
 	}
 }
 
