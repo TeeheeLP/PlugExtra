@@ -322,7 +322,7 @@ inhistorySkipx.onclick = function()
 optionsmenu.appendChild(inhistorySkipx);
 
 var inhistoryOffx = document.createElement("div");
-createMenuItem(inhistoryOnx);
+createMenuItem(inhistoryOffx);
 inhistoryOffx.style.backgroundColor = "gray";
 inhistoryOffx.innerHTML = "Off";
 inhistoryOffx.onclick = function()
