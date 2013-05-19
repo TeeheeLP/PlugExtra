@@ -532,6 +532,8 @@ function loadUser(user, userData, rank)
 	}
 	
 	user.setAttribute("onclick", "mentionUser('" + userData.id + "');");
+
+	user.style.background = "no-repeat center";
 	
 	if (userData.permission == 2) 
 		user.style.backgroundImage = "url('http://plug.dj/_/static/images/chat_bouncer_icon.dc83d4ff.png')";
@@ -541,8 +543,6 @@ function loadUser(user, userData, rank)
 		user.innerHTML = "<img src='http://plug.dj/_/static/images/chat_host_icon.58967038.png'>";
 	if (userData.permission == 5 && rank == "staff") 
 		user.innerHTML = "<img src='http://plug.dj/_/static/images/chat_host_icon.58967038.png'>";
-		
-	user.style.background += " center no-repeat";
 	
 	user.innerHTML += userData.username;
 	if (rank == "admin") user.innerHTML += " <span style='font-size:0.7em'>(Admin)</span>";
