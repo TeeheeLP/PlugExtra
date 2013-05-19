@@ -496,6 +496,45 @@ stafflist.style.listStyle = "none";
 stafflist.style.padding = "0px";
 stafflist.style.margin = "0px";
 
+function loadUser(user, userData, rank)
+{
+	user.id = "pgx" + userData.id;
+	user.style.width = "100%";
+	user.style.marginTop = "5px";
+	if (rank == "admin") user.style.color = "#FF3A97";
+	user.style.cursor = "pointer";
+	
+	if (userData.status > 0)
+	{
+		user.style.fontStyle = "italic";
+		if (rank == "admin") user.style.color = "#D7498C";
+	}
+	
+	if (rank == "staff")
+	{
+		if (userData.permission > 1)
+		{
+			user.style.color = "#D90066";
+			if (userData.status > 0) user.style.color = "#B72E6E";
+		}
+		else
+		{
+			user.style.color = "#5469FF";
+			if (userData.status > 0) user.style.color = "#5B65AC";
+		}
+	}
+	
+	user.setAttribute("onclick", "mentionUser('" + userData.id + "');");
+	
+	if (rank == "admin") user.innerHTML = userData.username + " <span style='font-size:0.7em'>(Admin)</span>";
+	if (rank == "staff") user.innerHTML = userData.username + " <span style='font-size:0.7em'>(" + suffix[userData.permission] + ")</span>";
+	
+	var vote = "";
+	if (votes[userData.id] == 1) vote = UIminiVP;
+	else if (votes[userData.id] == -1) vote = UIminiVN;
+	if (vote != null && vote != "") user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";	
+}
+
 function refreshUserlist()
 {
 	var votes = Models.room.data.votes;
@@ -506,6 +545,7 @@ function refreshUserlist()
 	for (var i in admins)
 	{
 		var user = document.createElement("li");
+		loadUser(user, admins[i], "admin");
 		user.id = "pgx" + admins[i].id;
 		user.style.width = "100%";
 		user.style.marginTop = "5px";
@@ -516,8 +556,6 @@ function refreshUserlist()
 			user.style.fontStyle = "italic";
 			user.style.color = "#D7498C";
 		}
-		user.setAttribute("onclick", "mentionUser('" + admins[i].id + "');");
-		user.innerHTML = admins[i].username + " <span style='font-size:0.7em'>(Admin)</span>";
 		var vote = "";
 		if (votes[admins[i].id] == 1) vote = UIminiVP;
 		else if (votes[admins[i].id] == -1) vote = UIminiVN;
@@ -554,27 +592,7 @@ function refreshUserlist()
 	for (var i in staff)
 	{
 		var user = document.createElement("li");
-		user.id = "pgx" + staff[i].id;
-		user.style.width = "100%";
-		user.style.marginTop = "5px";
-		if (staff[i].permission > 1)
-		{
-			user.style.color = "#D90066";
-			if (staff[i].status > 0) user.style.color = "#B72E6E";
-		}
-		else
-		{
-			user.style.color = "#5469FF";
-			if (staff[i].status > 0) user.style.color = "#5B65AC";
-		}
-		user.style.cursor = "pointer";
-		if (staff[i].status > 0) user.style.fontStyle = "italic";
-		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
-		user.innerHTML = staff[i].username + " <span style='font-size:0.7em'>(" + suffix[staff[i].permission] + ")</span>";		
-		var vote = "";
-		if (votes[staff[i].id] == 1) vote = UIminiVP;
-		else if (votes[staff[i].id] == -1) vote = UIminiVN;
-		if (vote != null && vote != "") user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";
+		loadUser(user, staff[i], "staff");
 		
 		stafflist.appendChild(user);
 	}
