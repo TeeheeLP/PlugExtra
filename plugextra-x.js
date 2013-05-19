@@ -858,7 +858,7 @@ function doCheckHistory()
 		{
 			//printChat("Got permission!");
 			API.sendChat("/me skips the current song because it is in the history.");
-			new ModerationForceSkipService(Models.room.data.historyID);
+			API.moderateForceSkip();
 			//printChat("Fired skip!");
 		}
 	}
@@ -1560,11 +1560,11 @@ function checkOwnIn(e, chatin)
 						{
 							if (commandinfo[0] == "$ban")
 							{
-								new ModerationKickUserService(id, message, -1);
+								API.moderateBanUser(id);
 							}
 							else 
 							{
-								new ModerationKickUserService(id, message, 60);
+								API.moderateKickUser(id);
 							}
 						}
 						else printChat("Can't find user " + username + ".");
