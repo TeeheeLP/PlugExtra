@@ -220,6 +220,8 @@ emojix.onclick = function()
 	}
 };
 
+optionsmenu.appendChild(emojix);
+
 var skinx = document.createElement("div");
 skinx.style.marginTop = "10px";
 skinx.innerHTML = "Skins:";
