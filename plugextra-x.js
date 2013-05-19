@@ -117,8 +117,11 @@ optionsmenu.setAttribute("onclick", "showOptionsMenu();");
 
 function createMenuItem(menuitem)
 {
-	menuitem.style.textAlign = "center";
-	menuitem.style.cursor = "pointer";
+	var style = menuitem.style;
+	style.textAlign = "center";
+	style.cursor = "pointer";
+	style.marginBottom = "10px";
+	style.borderRadius = "5px";
 	menuitem.width = "173px";
 }
 
