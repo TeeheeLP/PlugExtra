@@ -533,9 +533,16 @@ function loadUser(user, userData, rank)
 	
 	user.setAttribute("onclick", "mentionUser('" + userData.id + "');");
 	
-	user.innerHTML = userData.username;
+	if (userData.permission == 2) 
+		user.innerHTML = "<img src='http://plug.dj/_/static/images/chat_bouncer_icon.dc83d4ff.png'>";
+	if (userData.permission == 3) 
+		user.innerHTML = "<img src='http://plug.dj/_/static/images/chat_manager_icon.b33e31b4.png'>";
+	if (userData.permission == 4 && rank == "staff") 
+		user.innerHTML = "<img src='http://plug.dj/_/static/images/chat_host_icon.58967038.png'>";
+	if (userData.permission == 5 && rank == "staff") 
+		user.innerHTML = "<img src='http://plug.dj/_/static/images/chat_host_icon.58967038.png'>";
+	user.innerHTML += userData.username;
 	if (rank == "admin") user.innerHTML += " <span style='font-size:0.7em'>(Admin)</span>";
-	if (rank == "staff") user.innerHTML += " <span style='font-size:0.7em'>(" + suffix[userData.permission] + ")</span>";
 	if (rank == "ambs") user.innerHTML += " <span style='font-size:0.7em'>(Ambassador)</span>";
 	
 	if (votes[userData.id] == 1) user.style.borderColor = "#00FF00";
