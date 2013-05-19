@@ -533,7 +533,7 @@ function loadUser(user, userData, rank)
 	
 	user.setAttribute("onclick", "mentionUser('" + userData.id + "');");
 
-	user.style.background = "no-repeat center";
+	user.style.background = "no-repeat left center";
 	
 	if (userData.permission == 2) 
 		user.style.backgroundImage = "url('http://plug.dj/_/static/images/chat_bouncer_icon.dc83d4ff.png')";
