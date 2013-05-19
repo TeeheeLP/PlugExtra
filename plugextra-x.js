@@ -221,7 +221,7 @@ var emojix = document.createElement("div");
 
 function toggleEmoji()
 {
-	if (Emoji._cons == null)
+	if (Emoji._cons == "")
 	{
 		Emoji._cons = emojicons;
 		Emoji._map = emojimap;
@@ -232,8 +232,8 @@ function toggleEmoji()
 	}
 	else
 	{
-		Emoji._cons = null;
-		Emoji._map = null;
+		Emoji._cons = "";
+		Emoji._map = "";
 		emojix.style.borderColor = "#DD0000";
 		DB.settings.showEmoji = false;
 		DB.saveSettings();
