@@ -225,7 +225,7 @@ function toggleEmoji()
 	{
 		Emoji._cons = emojicons;
 		Emoji._map = emojimap;
-		emojix.style.backgroundColor = "#00FF00";
+		emojix.style.backgroundColor = "#00DD00";
 		DB.settings.showEmoji = true;
 		DB.saveSettings();
 		printChat("Activated Emojis.");
@@ -234,7 +234,7 @@ function toggleEmoji()
 	{
 		Emoji._cons = null;
 		Emoji._map = null;
-		emojix.style.backgroundColor = "#FF0000";
+		emojix.style.backgroundColor = "#DD0000";
 		DB.settings.showEmoji = false;
 		DB.saveSettings();
 		printChat("Deactivated Emojis.");
@@ -292,6 +292,45 @@ plugextrax.onclick = function()
 };
 
 optionsmenu.appendChild(plugextrax);
+
+var inhistoryOnx = document.createElement("div");
+createMenuItem(inhistoryOnx);
+inhistoryOnx.style.backgroundColor = "gray";
+inhistoryOnx.innerHTML = "On";
+inhistoryOnx.onclick = function()
+{
+	
+};
+
+var inhistoryx = document.createElement("div");
+inhistoryx.style.marginTop = "10px";
+inhistoryx.innerHTML = "Check History:";
+
+optionsmenu.appendChild(inhistoryx);
+
+optionsmenu.appendChild(inhistoryOnx);
+
+var inhistorySkipx = document.createElement("div");
+createMenuItem(inhistorySkipx);
+inhistorySkipx.style.backgroundColor = "gray";
+inhistorySkipx.innerHTML = "Skip";
+inhistorySkipx.onclick = function()
+{
+	
+};
+
+optionsmenu.appendChild(inhistorySkipx);
+
+var inhistoryOffx = document.createElement("div");
+createMenuItem(inhistoryOnx);
+inhistoryOffx.style.backgroundColor = "gray";
+inhistoryOffx.innerHTML = "Off";
+inhistoryOffx.onclick = function()
+{
+	
+};
+
+optionsmenu.appendChild(inhistoryOffx);
 
 optcontainer.appendChild(optionsmenu);
 
