@@ -1215,7 +1215,7 @@ function checkOwnIn(e, chatin)
 					Settings will now be saved.<br>\
 					Staff members now have their respective icon in the list.<br>\
 					Added Check History to the options.<br>\
-					You will now get a notification when it's your turn.<br>\
+					You will now get a notification when it is your turn.<br>\
 					1.3.1:<br>New:<br>\
 					Exchanged the colored text in the track stats with the respective images.<br>\
 					Added an options menu.<br>\
