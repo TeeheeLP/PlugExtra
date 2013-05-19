@@ -333,6 +333,12 @@ function setCheckHistory(opt)
 		inhistoryOffx.style.backgroundColor = "#00DD00";
 	}
 	else printChat("Please choose on, skip or off.");
+	
+	if (opt == "on" || opt == "skip" || opt == "off")
+	{
+		DB.settings.pgxCheckHistory = opt;
+		DB.saveSettings();
+	}
 }
 
 var inhistoryOnx = document.createElement("div");
@@ -1595,3 +1601,6 @@ if (DB.settings.pgxJoin)
 
 if (DB.settings.pgxSkin != null)
 	eval(DB.settings.pgxSkin + "x.click();");
+
+if (DB.settings.pgxCheckHistory != null)
+	setCheckHistoy(DB.settings.pgxCheckHistory);
