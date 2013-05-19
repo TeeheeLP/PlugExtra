@@ -1535,3 +1535,6 @@ if (DB.settings.pgxWoot)
 	
 if (DB.settings.pgxJoin)
 	toggleJoin();
+
+if (DB.settings.pgxSkin != null)
+	loadSkin(DB.settings.pgxSkin);
