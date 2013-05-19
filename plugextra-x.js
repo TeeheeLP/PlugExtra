@@ -506,7 +506,7 @@ function loadUser(user, userData, rank)
 	user.style.paddingLeft = "5px";
 	user.style.paddingTop = "2.5px";
 	user.style.paddingBottom = "2.5px";
-	user.style.borderLeft = "8px solid #444444";
+	user.style.borderLeft = "4px solid #444444";
 	if (rank == "admin" || rank == "ambs") user.style.color = "#FF3A97";
 	user.style.cursor = "pointer";
 	
