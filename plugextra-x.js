@@ -124,6 +124,7 @@ function createMenuItem(menuitem)
 	style.borderRadius = "5px";
 	style.height = "1.5em";
 	style.lineHeight = "1.5em";
+	style.boxShadow = "-1px -1px 2px #000000 inset, 1px 1px 2px #FFFFFF inset";
 	menuitem.width = "173px";
 }
 
