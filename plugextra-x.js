@@ -539,11 +539,11 @@ function loadUser(user, userData, rank)
 	if (userData.permission == 2) 
 		user.style.backgroundImage = "url('http://plug.dj/_/static/images/chat_bouncer_icon.dc83d4ff.png')";
 	if (userData.permission == 3) 
-		user.innerHTML = "<img src='http://plug.dj/_/static/images/chat_manager_icon.b33e31b4.png'>";
+		user.style.backgroundImage = "url('http://plug.dj/_/static/images/chat_manager_icon.b33e31b4.png')";
 	if (userData.permission == 4 && rank == "staff") 
-		user.innerHTML = "<img src='http://plug.dj/_/static/images/chat_host_icon.58967038.png'>";
+		user.style.backgroundImage = "url('http://plug.dj/_/static/images/chat_host_icon.58967038.png')";
 	if (userData.permission == 5 && rank == "staff") 
-		user.innerHTML = "<img src='http://plug.dj/_/static/images/chat_host_icon.58967038.png'>";
+		user.style.backgroundImage = "url('http://plug.dj/_/static/images/chat_host_icon.58967038.png')";
 	
 	user.innerHTML += userData.username;
 	if (rank == "admin") user.innerHTML += " <span style='font-size:0.7em'>(Admin)</span>";
