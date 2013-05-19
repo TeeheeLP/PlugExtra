@@ -519,16 +519,8 @@ function loadUser(user, userData, rank)
 	
 	if (rank == "staff")
 	{
-		if (userData.permission > 1)
-		{
-			user.style.color = "#D90066";
-			if (userData.status > 0) user.style.color = "#B72E6E";
-		}
-		else
-		{
-			user.style.color = "#5469FF";
-			if (userData.status > 0) user.style.color = "#5B65AC";
-		}
+		user.style.color = "#D90066";
+		if (userData.status > 0) user.style.color = "#B72E6E";
 	}
 	
 	user.setAttribute("onclick", "mentionUser('" + userData.id + "');");
