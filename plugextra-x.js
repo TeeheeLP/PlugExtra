@@ -1127,7 +1127,9 @@ function checkOwnIn(e, chatin)
 				printChat("1.3.2:<br>New:<br>\
 					Emojis can be disabled.<br>\
 					Changed the appearance of the option buttons.<br>\
-					\
+					You can see the votes in the userlist.<br>\
+					Settings will now be saved.<br>\
+					Staff members now have their respective icon in the list.<br>\
 					1.3.1:<br>New:<br>\
 					Exchanged the colored text in the track stats with the respective images.<br>\
 					Added an options menu.<br>\
