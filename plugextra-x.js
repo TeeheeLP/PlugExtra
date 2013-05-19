@@ -123,6 +123,7 @@ function createMenuItem(menuitem)
 	style.marginBottom = "10px";
 	style.borderRadius = "5px";
 	style.height = "1.5em";
+	style.lineHeight = "1.5em";
 	menuitem.width = "173px";
 }
 
