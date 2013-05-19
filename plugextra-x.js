@@ -24,6 +24,29 @@ function printChat(str)
 	Models.chat.receive({type:"update", message:("<span style='color:#00ACFF;'>" + str + "</span>")});
 }
 
+function setCookie(name, value)
+{
+	document.cookie += " " + name + "=" + value + ";";
+}
+
+function getCookie(name)
+{
+	var cookieVal = null;
+	var start = document.cookie.indexOf(" " + name + "=");
+	
+	if (start != -1)
+	{
+		start = document.cookie.indexOf("=", start) + 1;
+		var end = document.cookie.indexOf(";", start);
+		if (end != -1)
+		{
+			cookieVal = document.cookie.substring(start, end);
+		}
+	}
+	
+	return cookieVal;
+}
+
 var UIskinVN = Lang.ui.buttonVoteNegative;
 var UIskinVNS = Lang.ui.buttonVoteNegativeSelected;
 var UIskinVND = Lang.ui.buttonVoteNegativeDisabled;
