@@ -1537,4 +1537,4 @@ if (DB.settings.pgxJoin)
 	toggleJoin();
 
 if (DB.settings.pgxSkin != null)
-	loadSkin(DB.settings.pgxSkin);
+	eval(DB.settings.pgxSkin + "x.click();");
