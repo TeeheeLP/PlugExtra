@@ -502,11 +502,11 @@ function loadUser(user, userData, rank)
 	user.id = "pgx" + userData.id;
 	user.style.width = "100%";
 	user.style.position = "relative";
-	user.style.left = "-5px";
+	user.style.left = "-10px";
 	user.style.paddingLeft = "5px";
 	user.style.paddingTop = "2.5px";
 	user.style.paddingBottom = "2.5px";
-	user.style.borderLeft = "3px solid #444444";
+	user.style.borderLeft = "8px solid #444444";
 	if (rank == "admin" || rank == "ambs") user.style.color = "#FF3A97";
 	user.style.cursor = "pointer";
 	
