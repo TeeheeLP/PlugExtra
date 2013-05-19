@@ -227,7 +227,7 @@ emojix.style.backgroundColor = "#00DD00";
 emojix.innerHTML = "Emoji";
 emojix.onclick = function()
 {
-	
+	toggleEmoji();
 };
 
 optionsmenu.appendChild(emojix);
