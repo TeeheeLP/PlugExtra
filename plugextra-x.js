@@ -202,6 +202,24 @@ annotx.onmousedown = function()
 
 optionsmenu.appendChild(annotx);
 
+var emojix = document.createElement("div");
+createMenuItem(emojix);
+emojix.style.backgroundColor = "#00DD00";
+emojix.innerHTML = "Emoji";
+emojix.onclick = function()
+{
+	if (Emoji._cons == null)
+	{
+		Emoji._cons == emojicons;
+		Emoji._map == emojimap;
+	}
+	else
+	{
+		Emoji._cons == null;
+		Emoji._map == null;
+	}
+};
+
 var skinx = document.createElement("div");
 skinx.style.marginTop = "10px";
 skinx.innerHTML = "Skins:";
@@ -1084,7 +1102,9 @@ function checkOwnIn(e, chatin)
 				break;
 			case "$changes":
 				printChat("1.3.2:<br>New:<br>\
-					Emojis can be disabled\
+					Emojis can be disabled.<br>\
+					Changed the appearance of the option buttons.<br>\
+					\
 					1.3.1:<br>New:<br>\
 					Exchanged the colored text in the track stats with the respective images.<br>\
 					Added an options menu.<br>\
