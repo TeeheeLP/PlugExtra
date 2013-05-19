@@ -126,10 +126,9 @@ function createMenuItem(menuitem)
 	style.textAlign = "center";
 	style.cursor = "pointer";
 	style.marginBottom = "10px";
-	style.borderRadius = "5px";
+	style.borderRight = "4px solid gray";
 	style.height = "1.5em";
 	style.lineHeight = "1.5em";
-	style.boxShadow = "-1px -1px 2px #000000 inset, 1px 1px 2px #FFFFFF inset";
 	menuitem.width = "173px";
 }
 
@@ -166,20 +165,20 @@ optionsmenu.appendChild(hidemenubut);
 
 var streamx = document.createElement("div");
 createMenuItem(streamx);
-if (!DB.settings.streamDisabled) streamx.style.backgroundColor = "#00DD00";
-else streamx.style.backgroundColor = "#DD0000";
+if (!DB.settings.streamDisabled) streamx.style.borderColor = "#00DD00";
+else streamx.style.borderColor = "#DD0000";
 streamx.innerHTML = "Stream";
 streamx.onclick = function()
 {
 	if (!DB.settings.streamDisabled)
 	{
 		API.sendChat("/stream off");
-		this.style.backgroundColor = "#DD0000";
+		this.style.borderColor = "#DD0000";
 	}
 	else
 	{
 		API.sendChat("/stream on");
-		this.style.backgroundColor = "#00DD00"
+		this.style.borderColor = "#00DD00"
 	}
 };
 
@@ -195,7 +194,7 @@ function toggleAnnot()
 		printChat("You will not be notified when somebody joins or leaves the room.");
 		DB.settings.showAnnot = false;
 		DB.saveSettings();
-		annotx.style.backgroundColor = "#DD0000";
+		annotx.style.borderColor = "#DD0000";
 	}
 	else
 	{
@@ -203,12 +202,12 @@ function toggleAnnot()
 		printChat("You will now be notified when somebody joins or leaves the room.");
 		DB.settings.showAnnot = true;
 		DB.saveSettings();
-		annotx.style.backgroundColor = "#00DD00"
+		annotx.style.borderColor = "#00DD00"
 	}
 }
 
 createMenuItem(annotx);
-annotx.style.backgroundColor = "#00DD00";
+annotx.style.borderColor = "#00DD00";
 annotx.innerHTML = "Annotations";
 annotx.onmousedown = function()
 {
@@ -225,7 +224,7 @@ function toggleEmoji()
 	{
 		Emoji._cons = emojicons;
 		Emoji._map = emojimap;
-		emojix.style.backgroundColor = "#00DD00";
+		emojix.style.borderColor = "#00DD00";
 		DB.settings.showEmoji = true;
 		DB.saveSettings();
 		printChat("Activated Emojis.");
@@ -234,7 +233,7 @@ function toggleEmoji()
 	{
 		Emoji._cons = null;
 		Emoji._map = null;
-		emojix.style.backgroundColor = "#DD0000";
+		emojix.style.borderColor = "#DD0000";
 		DB.settings.showEmoji = false;
 		DB.saveSettings();
 		printChat("Deactivated Emojis.");
@@ -242,7 +241,7 @@ function toggleEmoji()
 }
 
 createMenuItem(emojix);
-emojix.style.backgroundColor = "#00DD00";
+emojix.style.borderColor = "#00DD00";
 emojix.innerHTML = "Emoji";
 emojix.onclick = function()
 {
@@ -259,14 +258,14 @@ optionsmenu.appendChild(skinx);
 
 var originalx = document.createElement("div");
 createMenuItem(originalx);
-originalx.style.backgroundColor = "#00DD00";
+originalx.style.borderColor = "#00DD00";
 originalx.innerHTML = "Original";
 originalx.onclick = function()
 {
 	if (skinelem != this)
 	{
-		this.style.backgroundColor = "#00DD00"
-		skinelem.style.backgroundColor = "gray";
+		this.style.borderColor = "#00DD00"
+		skinelem.style.borderColor = "gray";
 		skinelem = this;
 		loadSkin("original");
 	}
@@ -278,14 +277,14 @@ optionsmenu.appendChild(originalx);
 
 var plugextrax = document.createElement("div");
 createMenuItem(plugextrax);
-plugextrax.style.backgroundColor = "gray";
+plugextrax.style.borderColor = "gray";
 plugextrax.innerHTML = "PlugExtra";
 plugextrax.onclick = function()
 {
 	if (skinelem != this)
 	{
-		this.style.backgroundColor = "#00DD00"
-		skinelem.style.backgroundColor = "gray";
+		this.style.borderColor = "#00DD00"
+		skinelem.style.borderColor = "gray";
 		skinelem = this;
 		loadSkin("plugextra");
 	}
@@ -307,9 +306,9 @@ function setCheckHistory(opt)
 			the history.");
 		checkhistory = true;
 		autoskip = false;
-		inhistoryelem.style.backgroundColor = "gray";
+		inhistoryelem.style.borderColor = "gray";
 		inhistoryelem = inhistoryOnx;
-		inhistoryOnx.style.backgroundColor = "#00DD00";
+		inhistoryOnx.style.borderColor = "#00DD00";
 		checkInHistory();
 	}
 	else if (opt == "skip")
@@ -317,9 +316,9 @@ function setCheckHistory(opt)
 		printChat("Songs that are in history will now be skipped automatically.");
 		checkhistory = true;
 		autoskip = true;
-		inhistoryelem.style.backgroundColor = "gray";
+		inhistoryelem.style.borderColor = "gray";
 		inhistoryelem = inhistorySkipx;
-		inhistorySkipx.style.backgroundColor = "#00DD00";
+		inhistorySkipx.style.borderColor = "#00DD00";
 		checkInHistory();
 	}
 	else if (opt == "off")
@@ -328,9 +327,9 @@ function setCheckHistory(opt)
 			the history anymore.");
 		checkhistory = false;
 		autoskip = false;
-		inhistoryelem.style.backgroundColor = "gray";
+		inhistoryelem.style.borderColor = "gray";
 		inhistoryelem = inhistoryOffx;
-		inhistoryOffx.style.backgroundColor = "#00DD00";
+		inhistoryOffx.style.borderColor = "#00DD00";
 	}
 	else printChat("Please choose on, skip or off.");
 	
@@ -343,7 +342,7 @@ function setCheckHistory(opt)
 
 var inhistoryOnx = document.createElement("div");
 createMenuItem(inhistoryOnx);
-inhistoryOnx.style.backgroundColor = "gray";
+inhistoryOnx.style.borderColor = "gray";
 inhistoryOnx.innerHTML = "On";
 inhistoryOnx.onclick = function()
 {
@@ -354,7 +353,7 @@ optionsmenu.appendChild(inhistoryOnx);
 
 var inhistorySkipx = document.createElement("div");
 createMenuItem(inhistorySkipx);
-inhistorySkipx.style.backgroundColor = "gray";
+inhistorySkipx.style.borderColor = "gray";
 inhistorySkipx.innerHTML = "Skip";
 inhistorySkipx.onclick = function()
 {
@@ -365,7 +364,7 @@ optionsmenu.appendChild(inhistorySkipx);
 
 var inhistoryOffx = document.createElement("div");
 createMenuItem(inhistoryOffx);
-inhistoryOffx.style.backgroundColor = "#00DD00";
+inhistoryOffx.style.borderColor = "#00DD00";
 inhistoryOffx.innerHTML = "Off";
 inhistoryOffx.onclick = function()
 {
@@ -1213,6 +1212,7 @@ function checkOwnIn(e, chatin)
 					You can see the votes in the userlist.<br>\
 					Settings will now be saved.<br>\
 					Staff members now have their respective icon in the list.<br>\
+					Added Check History to the options.<br>\
 					1.3.1:<br>New:<br>\
 					Exchanged the colored text in the track stats with the respective images.<br>\
 					Added an options menu.<br>\
