@@ -541,6 +541,9 @@ function loadUser(user, userData, rank)
 		user.innerHTML = "<img src='http://plug.dj/_/static/images/chat_host_icon.58967038.png'>";
 	if (userData.permission == 5 && rank == "staff") 
 		user.innerHTML = "<img src='http://plug.dj/_/static/images/chat_host_icon.58967038.png'>";
+		
+	user.style.background += " center no-repeat";
+	
 	user.innerHTML += userData.username;
 	if (rank == "admin") user.innerHTML += " <span style='font-size:0.7em'>(Admin)</span>";
 	if (rank == "ambs") user.innerHTML += " <span style='font-size:0.7em'>(Ambassador)</span>";
