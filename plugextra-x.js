@@ -469,6 +469,8 @@ stafflist.style.margin = "0px";
 function refreshUserlist()
 {
 	var votelist = Models.room.data.votes;
+	while (!votelist)
+		votelist = Models.room.data.votes;
 	
 	var stafflist = document.getElementById("stafflistx");
 	stafflist.innerHTML = "";
