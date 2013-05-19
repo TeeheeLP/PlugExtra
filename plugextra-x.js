@@ -186,10 +186,8 @@ streamx.onclick = function()
 optionsmenu.appendChild(streamx);
 
 var annotx = document.createElement("div");
-createMenuItem(annotx);
-annotx.style.backgroundColor = "#00DD00";
-annotx.innerHTML = "Annotations";
-annotx.onmousedown = function()
+
+function toggleAnnot()
 {
 	if (showannot)
 	{
@@ -207,6 +205,14 @@ annotx.onmousedown = function()
 		DB.saveSettings();
 		this.style.backgroundColor = "#00DD00"
 	}
+}
+
+createMenuItem(annotx);
+annotx.style.backgroundColor = "#00DD00";
+annotx.innerHTML = "Annotations";
+annotx.onmousedown = function()
+{
+	toggleAnnot();
 };
 
 optionsmenu.appendChild(annotx);
@@ -1309,13 +1315,12 @@ function checkOwnIn(e, chatin)
 				{
 					if (commandinfo[1] == "on")
 					{
-						showannot = true;
-						printChat("You will now be notified when somebody joins or leaves the room.");
+						if (!showannot) toggleAnnot();
 					}
 					else if (commandinfo[1] == "off")
 					{
-						showannot = false;
-						printChat("You will not be notified when somebody joins or leaves the room.");
+						if (showannot) toggleAnnot();
+						
 					}
 					else printChat("Please choose on or off.");
 				}
@@ -1523,4 +1528,10 @@ if (DB.settings.showEmoji == false)
 }
 
 if (DB.settings.showAnnot)
-	annotx.click();
+	toggleAnnot();
+
+if (DB.settings.pgxWoot)
+	toggleWoot();
+	
+if (DB.settings.pgxJoin)
+	toggleJoin();
