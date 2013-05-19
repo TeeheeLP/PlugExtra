@@ -13,9 +13,9 @@ var olddjbooth = API.getDJs();
 var suffix = new Array("User", "Featured DJ", "Bouncer", "Manager", "Co-Host", "Host");
 var leftwait = 0;
 var leftbooth = 0;
-var checkhistory = DB.settings.checkHistory!=null ? DB.settings.checkHistory : false;
-var autoskip = DB.settings.autoSkip!=null ? DB.settings.autoSkip : false;
-var showannot = DB.settings.showAnnot!=null ? DB.settings.showAnnot : true;
+var checkhistory = false;
+var autoskip = false;
+var showannot = true;
 var emojicons = Emoji._cons;
 var emojimap = Emoji._map;
 
@@ -58,7 +58,12 @@ function loadSkin(skinname)
 			document.getElementById("dj-console").style.backgroundImage = "url(http://2dforts.dyndns.org/plug/DJConsole2.png)";
 			break;
 	}
-	if (skinname != "" && skinname != null) printChat("Loaded skin " + skinname + ".");
+	if (skinname != "" && skinname != null)
+	{
+		printChat("Loaded skin " + skinname + ".");
+		DB.settings.pgxSkin = skinname;
+		DB.saveSettings();
+	}
 }
 
 //	------------
@@ -190,12 +195,16 @@ annotx.onmousedown = function()
 	{
 		showannot = false;
 		printChat("You will not be notified when somebody joins or leaves the room.");
+		DB.settings.showAnnot = false;
+		DB.saveSettings();
 		this.style.backgroundColor = "#DD0000";
 	}
 	else
 	{
 		showannot = true;
 		printChat("You will now be notified when somebody joins or leaves the room.");
+		DB.settings.showAnnot = true;
+		DB.saveSettings();
 		this.style.backgroundColor = "#00DD00"
 	}
 };
@@ -906,6 +915,8 @@ function toggleWoot()
 		var expw = document.getElementById("expwoot");
 		expw.src = "http://2dforts.dyndns.org/plug/autowootoff.png";
 		printChat("Deactivated the autowoot bot.");
+		DB.settings.pgxWoot = false;
+		DB.saveSettings();
 	}
 	else
 	{
@@ -914,6 +925,8 @@ function toggleWoot()
 		var expw = document.getElementById("expwoot");
 		expw.src = "http://2dforts.dyndns.org/plug/autowooton.png";
 		printChat("Activated the autowoot bot.");
+		DB.settings.pgxWoot = true;
+		DB.saveSettings();
 	}
 }
 
@@ -943,6 +956,8 @@ function toggleJoin()
 		var expj = document.getElementById("expjoin");
 		expj.src = "http://2dforts.dyndns.org/plug/autojoinoff.png";
 		printChat("Deactivated the autojoin bot.");
+		DB.settings.pgxJoin = false;
+		DB.saveSettings();
 	}
 	else if (Models.playlist.selectedPlaylistID != 0 && Models.playlist.selectedPlaylistID != ""
 		&& Models.playlist.selectedPlaylistID != null)
@@ -952,6 +967,8 @@ function toggleJoin()
 		var expj = document.getElementById("expjoin");
 		expj.src = "http://2dforts.dyndns.org/plug/autojoinon.png";
 		printChat("Activated the autojoin bot.");
+		DB.settings.pgxJoin = true;
+		DB.saveSettings();
 	}
 	else printChat("You need an active playlist to use autojoin.");
 }
@@ -1504,3 +1521,6 @@ if (DB.settings.showEmoji == false)
 {
 	toggleEmoji();
 }
+
+if (DB.settings.showAnnot)
+	annotx.click();
