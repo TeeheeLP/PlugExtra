@@ -120,7 +120,6 @@ function createMenuItem(menuitem)
 	menuitem.style.textAlign = "center";
 	menuitem.style.cursor = "pointer";
 	menuitem.width = "173px";
-	menuitem.style.marginLeft = "-10px";
 }
 
 var hidemenubut = document.createElement("div");
