@@ -906,6 +906,7 @@ function callback(obj)
 	{
 		checkInHistory();
 	}
+	if (obj.dj.id == API.getSelf().id) document.getElementById("chat-sound").playMentionSound();
 	playcount += 1;
 	log = document.getElementById("log");
 	log.innerHTML += "<div id='track" + playcount 
@@ -1214,6 +1215,7 @@ function checkOwnIn(e, chatin)
 					Settings will now be saved.<br>\
 					Staff members now have their respective icon in the list.<br>\
 					Added Check History to the options.<br>\
+					You will now get a notification when it's your turn.<br>\
 					1.3.1:<br>New:<br>\
 					Exchanged the colored text in the track stats with the respective images.<br>\
 					Added an options menu.<br>\
