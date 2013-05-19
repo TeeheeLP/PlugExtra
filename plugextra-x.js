@@ -307,9 +307,9 @@ function setCheckHistory(opt)
 			the history.");
 		checkhistory = true;
 		autoskip = false;
-		inhistoryelem.backgroundColor = "gray";
+		inhistoryelem.style.backgroundColor = "gray";
 		inhistoryelem = inhistoryOnx;
-		inhistoryelem.backgroundColor = "#00DD00";
+		inhistoryOnx.style.backgroundColor = "#00DD00";
 		checkInHistory();
 	}
 	else if (opt == "skip")
@@ -317,6 +317,9 @@ function setCheckHistory(opt)
 		printChat("Songs that are in history will now be skipped automatically.");
 		checkhistory = true;
 		autoskip = true;
+		inhistoryelem.style.backgroundColor = "gray";
+		inhistoryelem = inhistorySkipx;
+		inhistorySkipx.style.backgroundColor = "#00DD00";
 		checkInHistory();
 	}
 	else if (opt == "off")
@@ -325,6 +328,9 @@ function setCheckHistory(opt)
 			the history anymore.");
 		checkhistory = false;
 		autoskip = false;
+		inhistoryelem.style.backgroundColor = "gray";
+		inhistoryelem = inhistoryOffx;
+		inhistoryOffx.style.backgroundColor = "#00DD00";
 	}
 	else printChat("Please choose on, skip or off.");
 }
@@ -335,7 +341,7 @@ inhistoryOnx.style.backgroundColor = "gray";
 inhistoryOnx.innerHTML = "On";
 inhistoryOnx.onclick = function()
 {
-	
+	setCheckHistory("on");
 };
 
 optionsmenu.appendChild(inhistoryOnx);
@@ -346,7 +352,7 @@ inhistorySkipx.style.backgroundColor = "gray";
 inhistorySkipx.innerHTML = "Skip";
 inhistorySkipx.onclick = function()
 {
-	
+	setCheckHistory("skip");
 };
 
 optionsmenu.appendChild(inhistorySkipx);
@@ -357,7 +363,7 @@ inhistoryOffx.style.backgroundColor = "#00DD00";
 inhistoryOffx.innerHTML = "Off";
 inhistoryOffx.onclick = function()
 {
-	
+	setCheckHistory("off");
 };
 
 optionsmenu.appendChild(inhistoryOffx);
