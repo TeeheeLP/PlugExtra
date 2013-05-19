@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.3.1";
+var version = "1.3.2";
 
 var playcount = 1; 
 var autowoot = false;
@@ -16,6 +16,8 @@ var leftbooth = 0;
 var checkhistory = false;
 var autoskip = false;
 var showannot = true;
+var emojicons = Emoji._cons;
+var emojimap = Emoji._map;
 
 function printChat(str)
 {
@@ -56,7 +58,12 @@ function loadSkin(skinname)
 			document.getElementById("dj-console").style.backgroundImage = "url(http://2dforts.dyndns.org/plug/DJConsole2.png)";
 			break;
 	}
-	if (skinname != "" && skinname != null) printChat("Loaded skin " + skinname + ".");
+	if (skinname != "" && skinname != null)
+	{
+		printChat("Loaded skin " + skinname + ".");
+		DB.settings.pgxSkin = skinname;
+		DB.saveSettings();
+	}
 }
 
 //	------------
@@ -113,6 +120,19 @@ optionsmenu.style.fontSize = "1.2em";
 optionsmenu.style.fontWeight = "bold";
 optionsmenu.setAttribute("onclick", "showOptionsMenu();");
 
+function createMenuItem(menuitem)
+{
+	var style = menuitem.style;
+	style.textAlign = "center";
+	style.cursor = "pointer";
+	style.marginBottom = "10px";
+	style.borderRight = "4px solid gray";
+	style.borderLeft = "4px solid gray";
+	style.height = "1.5em";
+	style.lineHeight = "1.5em";
+	menuitem.width = "173px";
+}
+
 var hidemenubut = document.createElement("div");
 
 function hideOptionsMenu()
@@ -145,53 +165,91 @@ hidemenubut.onclick = function() { hideOptionsMenu(); };
 optionsmenu.appendChild(hidemenubut);
 
 var streamx = document.createElement("div");
-streamx.style.textAlign = "center";
-streamx.style.cursor = "pointer";
-streamx.style.width = "173px";
-streamx.style.marginLeft = "-10px";
-if (!DB.settings.streamDisabled) streamx.style.backgroundColor = "#00DD00";
-else streamx.style.backgroundColor = "#DD0000";
+createMenuItem(streamx);
+if (!DB.settings.streamDisabled) streamx.style.borderColor = "#00DD00";
+else streamx.style.borderColor = "#DD0000";
 streamx.innerHTML = "Stream";
 streamx.onclick = function()
 {
 	if (!DB.settings.streamDisabled)
 	{
 		API.sendChat("/stream off");
-		this.style.backgroundColor = "#DD0000";
+		this.style.borderColor = "#DD0000";
 	}
 	else
 	{
 		API.sendChat("/stream on");
-		this.style.backgroundColor = "#00DD00"
+		this.style.borderColor = "#00DD00"
 	}
 };
 
 optionsmenu.appendChild(streamx);
 
 var annotx = document.createElement("div");
-annotx.style.textAlign = "center";
-annotx.style.cursor = "pointer";
-annotx.style.backgroundColor = "#00DD00";
-annotx.style.width = "173px";
-annotx.style.marginLeft = "-10px";
-annotx.innerHTML = "Annotations";
-annotx.onmousedown = function()
+
+function toggleAnnot()
 {
 	if (showannot)
 	{
 		showannot = false;
 		printChat("You will not be notified when somebody joins or leaves the room.");
-		this.style.backgroundColor = "#DD0000";
+		DB.settings.showAnnot = false;
+		DB.saveSettings();
+		annotx.style.borderColor = "#DD0000";
 	}
 	else
 	{
 		showannot = true;
 		printChat("You will now be notified when somebody joins or leaves the room.");
-		this.style.backgroundColor = "#00DD00"
+		DB.settings.showAnnot = true;
+		DB.saveSettings();
+		annotx.style.borderColor = "#00DD00"
 	}
+}
+
+createMenuItem(annotx);
+annotx.style.borderColor = "#00DD00";
+annotx.innerHTML = "Annotations";
+annotx.onmousedown = function()
+{
+	toggleAnnot();
 };
 
 optionsmenu.appendChild(annotx);
+
+var emojix = document.createElement("div");
+
+function toggleEmoji()
+{
+	if (Emoji._cons == "")
+	{
+		Emoji._cons = emojicons;
+		Emoji._map = emojimap;
+		emojix.style.borderColor = "#00DD00";
+		DB.settings.showEmoji = true;
+		DB.saveSettings();
+		printChat("Activated Emojis.");
+	}
+	else
+	{
+		Emoji._cons = "";
+		Emoji._map = "";
+		emojix.style.borderColor = "#DD0000";
+		DB.settings.showEmoji = false;
+		DB.saveSettings();
+		printChat("Deactivated Emojis.");
+	}
+}
+
+createMenuItem(emojix);
+emojix.style.borderColor = "#00DD00";
+emojix.innerHTML = "Emoji";
+emojix.onclick = function()
+{
+	toggleEmoji();
+};
+
+optionsmenu.appendChild(emojix);
 
 var skinx = document.createElement("div");
 skinx.style.marginTop = "10px";
@@ -200,18 +258,15 @@ skinx.innerHTML = "Skins:";
 optionsmenu.appendChild(skinx);
 
 var originalx = document.createElement("div");
-originalx.style.textAlign = "center";
-originalx.style.cursor = "pointer";
-originalx.style.backgroundColor = "#00DD00";
-originalx.style.width = "173px";
-originalx.style.marginLeft = "-10px";
+createMenuItem(originalx);
+originalx.style.borderColor = "#00DD00";
 originalx.innerHTML = "Original";
 originalx.onclick = function()
 {
 	if (skinelem != this)
 	{
-		this.style.backgroundColor = "#00DD00"
-		skinelem.style.backgroundColor = "gray";
+		this.style.borderColor = "#00DD00"
+		skinelem.style.borderColor = "gray";
 		skinelem = this;
 		loadSkin("original");
 	}
@@ -222,24 +277,104 @@ var skinelem = originalx;
 optionsmenu.appendChild(originalx);
 
 var plugextrax = document.createElement("div");
-plugextrax.style.textAlign = "center";
-plugextrax.style.cursor = "pointer";
-plugextrax.style.backgroundColor = "gray";
-plugextrax.style.width = "173px";
-plugextrax.style.marginLeft = "-10px";
+createMenuItem(plugextrax);
+plugextrax.style.borderColor = "gray";
 plugextrax.innerHTML = "PlugExtra";
 plugextrax.onclick = function()
 {
 	if (skinelem != this)
 	{
-		this.style.backgroundColor = "#00DD00"
-		skinelem.style.backgroundColor = "gray";
+		this.style.borderColor = "#00DD00"
+		skinelem.style.borderColor = "gray";
 		skinelem = this;
 		loadSkin("plugextra");
 	}
 };
 
 optionsmenu.appendChild(plugextrax);
+
+var inhistoryx = document.createElement("div");
+inhistoryx.style.marginTop = "10px";
+inhistoryx.innerHTML = "Check History:";
+
+optionsmenu.appendChild(inhistoryx);
+
+function setCheckHistory(opt)
+{
+	if (opt == "on")
+	{
+		printChat("You will now be notified when the current song is in \
+			the history.");
+		checkhistory = true;
+		autoskip = false;
+		inhistoryelem.style.borderColor = "gray";
+		inhistoryelem = inhistoryOnx;
+		inhistoryOnx.style.borderColor = "#00DD00";
+		checkInHistory();
+	}
+	else if (opt == "skip")
+	{
+		printChat("Songs that are in history will now be skipped automatically.");
+		checkhistory = true;
+		autoskip = true;
+		inhistoryelem.style.borderColor = "gray";
+		inhistoryelem = inhistorySkipx;
+		inhistorySkipx.style.borderColor = "#00DD00";
+		checkInHistory();
+	}
+	else if (opt == "off")
+	{
+		printChat("You will not be notified when the current song is in \
+			the history anymore.");
+		checkhistory = false;
+		autoskip = false;
+		inhistoryelem.style.borderColor = "gray";
+		inhistoryelem = inhistoryOffx;
+		inhistoryOffx.style.borderColor = "#00DD00";
+	}
+	else printChat("Please choose on, skip or off.");
+	
+	if (opt == "on" || opt == "skip" || opt == "off")
+	{
+		DB.settings.pgxCheckHistory = opt;
+		DB.saveSettings();
+	}
+}
+
+var inhistoryOnx = document.createElement("div");
+createMenuItem(inhistoryOnx);
+inhistoryOnx.style.borderColor = "gray";
+inhistoryOnx.innerHTML = "On";
+inhistoryOnx.onclick = function()
+{
+	setCheckHistory("on");
+};
+
+optionsmenu.appendChild(inhistoryOnx);
+
+var inhistorySkipx = document.createElement("div");
+createMenuItem(inhistorySkipx);
+inhistorySkipx.style.borderColor = "gray";
+inhistorySkipx.innerHTML = "Skip";
+inhistorySkipx.onclick = function()
+{
+	setCheckHistory("skip");
+};
+
+optionsmenu.appendChild(inhistorySkipx);
+
+var inhistoryOffx = document.createElement("div");
+createMenuItem(inhistoryOffx);
+inhistoryOffx.style.borderColor = "#00DD00";
+inhistoryOffx.innerHTML = "Off";
+inhistoryOffx.onclick = function()
+{
+	setCheckHistory("off");
+};
+
+optionsmenu.appendChild(inhistoryOffx);
+
+var inhistoryelem = inhistoryOffx;
 
 optcontainer.appendChild(optionsmenu);
 
@@ -463,26 +598,66 @@ stafflist.style.listStyle = "none";
 stafflist.style.padding = "0px";
 stafflist.style.margin = "0px";
 
+function loadUser(user, userData, rank)
+{
+	var votes = Models.room.data.votes;
+	user.id = "pgx" + userData.id;
+	user.style.width = "100%";
+	user.style.position = "relative";
+	user.style.left = "-10px";
+	user.style.paddingLeft = "5px";
+	user.style.paddingTop = "2.5px";
+	user.style.paddingBottom = "2.5px";
+	user.style.borderLeft = "4px solid #444444";
+	if (rank == "admin" || rank == "ambs") user.style.color = "#FF3A97";
+	user.style.cursor = "pointer";
+	
+	if (userData.status > 0)
+	{
+		user.style.fontStyle = "italic";
+		if (rank == "admin" || rank == "ambs") user.style.color = "#D7498C";
+		if (rank == "user") user.style.color = "#B6B6B6";
+	}
+	
+	if (rank == "staff")
+	{
+		user.style.color = "#D90066";
+		if (userData.status > 0) user.style.color = "#B72E6E";
+	}
+	
+	user.setAttribute("onclick", "mentionUser('" + userData.id + "');");
+
+	user.style.background = "no-repeat left center";
+	if (userData.permission > 1) user.style.paddingLeft = "15px";
+	
+	if (userData.permission == 2) 
+		user.style.backgroundImage = "url('http://plug.dj/_/static/images/chat_bouncer_icon.dc83d4ff.png')";
+	if (userData.permission == 3) 
+		user.style.backgroundImage = "url('http://plug.dj/_/static/images/chat_manager_icon.b33e31b4.png')";
+	if (userData.permission == 4 && rank == "staff") 
+		user.style.backgroundImage = "url('http://plug.dj/_/static/images/chat_host_icon.58967038.png')";
+	if (userData.permission == 5 && rank == "staff") 
+		user.style.backgroundImage = "url('http://plug.dj/_/static/images/chat_host_icon.58967038.png')";
+	
+	user.innerHTML += userData.username;
+	if (rank == "admin") user.innerHTML += " <span style='font-size:0.7em'>(Admin)</span>";
+	if (rank == "ambs") user.innerHTML += " <span style='font-size:0.7em'>(Ambassador)</span>";
+	
+	if (votes[userData.id] == 1) user.style.borderColor = "#00FF00";
+	else if (votes[userData.id] == -1) user.style.borderColor = "#FF0000";
+}
+
 function refreshUserlist()
 {
+	var votes = Models.room.data.votes;
+	
 	var stafflist = document.getElementById("stafflistx");
 	stafflist.innerHTML = "";
 	var admins = API.getAdmins();
 	for (var i in admins)
 	{
 		var user = document.createElement("li");
-		user.id = "pgx" + admins[i].id;
-		user.style.width = "100%";
-		user.style.marginTop = "5px";
-		user.style.color = "#FF3A97";
-		user.style.cursor = "pointer";
-		if (admins[i].status > 0)
-		{
-			user.style.fontStyle = "italic";
-			user.style.color = "#D7498C";
-		}
-		user.setAttribute("onclick", "mentionUser('" + admins[i].id + "');");
-		user.innerHTML = admins[i].username + " <span style='font-size:0.7em'>(Admin)</span>";		
+		loadUser(user, admins[i], "admin");
 		
 		stafflist.appendChild(user);
 	}
@@ -491,19 +666,8 @@ function refreshUserlist()
 	for (var i in ambs)
 	{
 		var user = document.createElement("li");
-		user.id = "pgx" + ambs[i].id;
-		user.style.width = "100%";
-		user.style.marginTop = "5px";
-		user.style.color = "#FF3A97";
-		user.style.cursor = "pointer";
-		if (ambs[i].status > 0)
-		{
-			user.style.fontStyle = "italic";
-			user.style.color = "#D7498C";
-		}
-		user.setAttribute("onclick", "mentionUser('" + ambs[i].id + "');");
-		user.innerHTML = ambs[i].username + " <span style='font-size:0.7em'>(Ambassador)</span>";		
-		
+		loadUser(user, ambs[i], "ambs");
+
 		stafflist.appendChild(user);
 	}
 	
@@ -511,23 +675,7 @@ function refreshUserlist()
 	for (var i in staff)
 	{
 		var user = document.createElement("li");
-		user.id = "pgx" + staff[i].id;
-		user.style.width = "100%";
-		user.style.marginTop = "5px";
-		if (staff[i].permission > 1)
-		{
-			user.style.color = "#D90066";
-			if (staff[i].status > 0) user.style.color = "#B72E6E";
-		}
-		else
-		{
-			user.style.color = "#5469FF";
-			if (staff[i].status > 0) user.style.color = "#5B65AC";
-		}
-		user.style.cursor = "pointer";
-		if (staff[i].status > 0) user.style.fontStyle = "italic";
-		user.setAttribute("onclick", "mentionUser('" + staff[i].id + "');");
-		user.innerHTML = staff[i].username + " <span style='font-size:0.7em'>(" + suffix[staff[i].permission] + ")</span>";		
+		loadUser(user, staff[i], "staff");
 		
 		stafflist.appendChild(user);
 	}
@@ -546,18 +694,8 @@ function refreshUserlist()
 		if (cont)
 		{
 			var user = document.createElement("li");
-			user.id = "pgx" + users[i].id;
-			user.style.width = "100%";
-			user.style.marginTop = "5px";
-			user.style.cursor = "pointer";
-			if (users[i].status > 0)
-			{
-				user.style.fontStyle = "italic";
-				user.style.color = "#B6B6B6";
-			}
-			user.setAttribute("onclick", "mentionUser('" + users[i].id + "');");
-			user.innerHTML = users[i].username;
-		
+			loadUser(user, users[i], "user");
+			
 			usersul.appendChild(user);
 		}
 	}
@@ -768,6 +906,7 @@ function callback(obj)
 	{
 		checkInHistory();
 	}
+	if (obj.dj.id == API.getSelf().id) document.getElementById("chat-sound").playMentionSound();
 	playcount += 1;
 	log = document.getElementById("log");
 	log.innerHTML += "<div id='track" + playcount 
@@ -804,15 +943,18 @@ function showvoter(obj)
 		var trackfeed = document.getElementById("trackfeed" + playcount); 
 		trackfeed.innerHTML += "<span style='color:white'>" + obj.user.username + "</span> voted <span id=\'" + obj.user.id + playcount + "' style='color:" 
 			+ spancolor + "'>" + vote + "</span>.<br>"; 
-		if (doscroll) log.scrollTop = log.scrollHeight; 
+		if (doscroll) log.scrollTop = log.scrollHeight;
 	} 
 	else 
 	{
 		var oldvote = document.getElementById(obj.user.id + playcount); 
 		oldvote.style.color = spancolor; 
-		oldvote.innerHTML = vote; 
+		oldvote.innerHTML = vote;
+		var vicon = document.getElementById("pgx" + obj.user.id + "v");
+		if (vicon != null) vicon.setAttribute("src", obj.vote == 1 ? UIminiVP : UIminiVN);
 	} 
 	prevscore = API.getRoomScore(); 
+	refreshUserlist();
 } 
 
 function toggleFeedback(event, track) 
@@ -863,6 +1005,8 @@ function toggleWoot()
 		var expw = document.getElementById("expwoot");
 		expw.src = "http://2dforts.dyndns.org/plug/autowootoff.png";
 		printChat("Deactivated the autowoot bot.");
+		DB.settings.pgxWoot = false;
+		DB.saveSettings();
 	}
 	else
 	{
@@ -871,6 +1015,8 @@ function toggleWoot()
 		var expw = document.getElementById("expwoot");
 		expw.src = "http://2dforts.dyndns.org/plug/autowooton.png";
 		printChat("Activated the autowoot bot.");
+		DB.settings.pgxWoot = true;
+		DB.saveSettings();
 	}
 }
 
@@ -900,6 +1046,8 @@ function toggleJoin()
 		var expj = document.getElementById("expjoin");
 		expj.src = "http://2dforts.dyndns.org/plug/autojoinoff.png";
 		printChat("Deactivated the autojoin bot.");
+		DB.settings.pgxJoin = false;
+		DB.saveSettings();
 	}
 	else if (Models.playlist.selectedPlaylistID != 0 && Models.playlist.selectedPlaylistID != ""
 		&& Models.playlist.selectedPlaylistID != null)
@@ -909,6 +1057,8 @@ function toggleJoin()
 		var expj = document.getElementById("expjoin");
 		expj.src = "http://2dforts.dyndns.org/plug/autojoinon.png";
 		printChat("Activated the autojoin bot.");
+		DB.settings.pgxJoin = true;
+		DB.saveSettings();
 	}
 	else printChat("You need an active playlist to use autojoin.");
 }
@@ -1058,14 +1208,20 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("1.3.1:<br>New:<br>\
+				printChat("1.3.2:<br>New:<br>\
+					Emojis can be disabled.<br>\
+					Changed the appearance of the option buttons.<br>\
+					You can see the votes in the userlist.<br>\
+					Settings will now be saved.<br>\
+					Staff members now have their respective icon in the list.<br>\
+					Added Check History to the options.<br>\
+					You will now get a notification when it is your turn.<br>\
+					1.3.1:<br>New:<br>\
 					Exchanged the colored text in the track stats with the respective images.<br>\
 					Added an options menu.<br>\
 					Slightly changed the design.<br>\
 					Fixed:<br>\
-					Now only toggle feedback on next track when it was open.<br>\
-					1.2.9c:<br>New:<br>Annotations are on by default.<br> \
-					Fixed:<br>You won't be notified twice if a fan or friend joins the room.");
+					Now only toggle feedback on next track when it was open.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
@@ -1207,29 +1363,7 @@ function checkOwnIn(e, chatin)
 				if (commandinfo.length > 1 && commandinfo[1] != null 
 					&& commandinfo[1] != "")
 				{
-					if (commandinfo[1] == "on")
-					{
-						printChat("You will now be notified when the current song is in \
-							the history.");
-						checkhistory = true;
-						autoskip = false;
-						checkInHistory();
-					}
-					else if (commandinfo[1] == "skip")
-					{
-						printChat("Songs that are in history will now be skipped automatically.");
-						checkhistory = true;
-						autoskip = true;
-						checkInHistory();
-					}
-					else if (commandinfo[1] == "off")
-					{
-						printChat("You will not be notified when the current song is in \
-							the history anymore.");
-						checkhistory = false;
-						autoskip = false;
-					}
-					else printChat("Please choose on, skip or off.");
+					setCheckHistory(commandinfo[1]);
 				}
 				else printChat("Please choose on, skip or off.");
 				break;
@@ -1247,13 +1381,12 @@ function checkOwnIn(e, chatin)
 				{
 					if (commandinfo[1] == "on")
 					{
-						showannot = true;
-						printChat("You will now be notified when somebody joins or leaves the room.");
+						if (!showannot) toggleAnnot();
 					}
 					else if (commandinfo[1] == "off")
 					{
-						showannot = false;
-						printChat("You will not be notified when somebody joins or leaves the room.");
+						if (showannot) toggleAnnot();
+						
 					}
 					else printChat("Please choose on or off.");
 				}
@@ -1450,3 +1583,27 @@ function checkOwnIn(e, chatin)
 
 var chatinput = document.getElementById("chat-input-field");
 chatinput.setAttribute('onkeydown', 'checkOwnIn(event, this);');
+
+//         ---------------
+//	   Stuff that has to be done at the end
+//         ---------------
+
+if (DB.settings.showEmoji == false)
+{
+	toggleEmoji();
+}
+
+if (DB.settings.showAnnot == false)
+	toggleAnnot();
+
+if (DB.settings.pgxWoot)
+	toggleWoot();
+	
+if (DB.settings.pgxJoin)
+	toggleJoin();
+
+if (DB.settings.pgxSkin != null)
+	eval(DB.settings.pgxSkin + "x.click();");
+
+if (DB.settings.pgxCheckHistory != null)
+	setCheckHistory(DB.settings.pgxCheckHistory);
