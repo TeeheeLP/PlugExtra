@@ -502,6 +502,7 @@ function loadUser(user, userData, rank)
 	user.id = "pgx" + userData.id;
 	user.style.width = "100%";
 	user.style.marginTop = "5px";
+	user.style.borderLeft = "3px solid #444444";
 	if (rank == "admin") user.style.color = "#FF3A97";
 	user.style.cursor = "pointer";
 	
@@ -527,13 +528,12 @@ function loadUser(user, userData, rank)
 	
 	user.setAttribute("onclick", "mentionUser('" + userData.id + "');");
 	
-	if (rank == "admin") user.innerHTML = userData.username + " <span style='font-size:0.7em'>(Admin)</span>";
-	if (rank == "staff") user.innerHTML = userData.username + " <span style='font-size:0.7em'>(" + suffix[userData.permission] + ")</span>";
+	user.innerHTML = userData.username;
+	if (rank == "admin") user.innerHTML += " <span style='font-size:0.7em'>(Admin)</span>";
+	if (rank == "staff") user.innerHTML += " <span style='font-size:0.7em'>(" + suffix[userData.permission] + ")</span>";
 	
-	var vote = "";
-	if (votes[userData.id] == 1) vote = UIminiVP;
-	else if (votes[userData.id] == -1) vote = UIminiVN;
-	if (vote != null && vote != "") user.innerHTML += " <img id='" + user.id + "v' style='height:0.7em;width:0.7em;' src='" + vote + "'>";	
+	if (votes[userData.id] == 1) user.style.borderColor = "#00FF00";
+	else if (votes[userData.id] == -1) user.style.borderColor = "#FF0000";
 }
 
 function refreshUserlist()
