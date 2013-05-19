@@ -501,7 +501,7 @@ function loadUser(user, userData, rank)
 	var votes = Models.room.data.votes;
 	user.id = "pgx" + userData.id;
 	user.style.width = "100%";
-	user.style.left = "-5px";
+	user.style.left = "-15px";
 	user.style.paddingLeft = "5px";
 	user.style.paddingTop = "2.5px";
 	user.style.paddingBottom = "2.5px";
