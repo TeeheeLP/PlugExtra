@@ -566,8 +566,8 @@ function toggleCurWaitList(list)
 	{
 		list.style.maxHeight = "3px";
 		list.style.overflowY = "hidden";
-		list.style.color = "#000000";
-		list.style.backgroundColor = "#000000";
+		list.style.color = "#FFFFFF";
+		list.style.backgroundColor = "#FFFFFF";
 	}
 	else 
 	{
@@ -587,6 +587,7 @@ curwaitlist.style.webkitTransition = "max-height 0.5s, background-color 0.5s, co
 curwaitlist.style.maxHeight = "500px";
 curwaitlist.style.overflowX = "visible";
 curwaitlist.style.overflowY = "auto";
+curwaitlist.style.borderRadius = "5px";
 curwaitlist.setAttribute("onclick", "toggleCurWaitList(this);");
 
 ulcontent.appendChild(curwaitlist);
