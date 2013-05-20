@@ -447,6 +447,12 @@ userlist.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
 userlist.style.borderRight = "1px solid transparent";
 userlist.onclick = function() { showUserList(); };
 
+$(function(){
+    $('#userlistx').slimScroll({
+        height: '250px'
+    });
+});
+
 var ulcontent = document.createElement("div");
 ulcontent.style.width = "130px";
 ulcontent.style.padding = "10px";
