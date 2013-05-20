@@ -635,4 +635,4 @@ function handler(event) {
 })(jQuery));
 
 
-$('log').perfectScrollbar();
+$('#log').perfectScrollbar();
