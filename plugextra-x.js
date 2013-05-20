@@ -498,7 +498,7 @@ function awayBot()
 		if ($.browser.webkit) 
 			awaybutx.style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #780078 100%)";
 		if ($.browser.mozilla) 
-			awaybutx.style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, ##780078 100%)";
+			awaybutx.style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, #780078 100%)";
 	}
 	else
 	{
