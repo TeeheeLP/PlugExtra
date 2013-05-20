@@ -473,6 +473,7 @@ awaymsgin.style.marginBottom = "5px";
 awaymsgin.style.marginLeft = "-10px";
 awaymsgin.style.width = "141px";
 awaymsgin.style.padding = "2px 5px";
+awaymsgin.style.border = "none";
 if ($.browser.webkit) awaymsgin.style.backgroundImage = "-webkit-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
 if ($.browser.mozilla) awaymsgin.style.backgroundImage = "-moz-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
 awaymsgin.setAttribute("onkeydown", "onPressAway(event);");
@@ -494,7 +495,10 @@ function awayBot()
 		willprintmsg = true;
 		var awaybutx = document.getElementById("awaybutx");
 		awaybutx.innerHTML = "Back";
-		awaybutx.style.backgroundColor = "#333388";
+		if ($.browser.webkit) 
+			awaybutx.style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #780078 100%)";
+		if ($.browser.mozilla) 
+			awaybutx.style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, ##780078 100%)";
 	}
 	else
 	{
@@ -504,7 +508,10 @@ function awayBot()
 		willprintmsg = false;
 		var awaybutx = document.getElementById("awaybutx");
 		awaybutx.innerHTML = "Away";
-		awaybutx.style.backgroundColor = "#333333";
+		if ($.browser.webkit) 
+			awaybutx.style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #575757 100%)";
+		if ($.browser.mozilla) 
+			awaybutx.style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, #575757 100%)";
 	}
 }
 
