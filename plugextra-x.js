@@ -549,7 +549,7 @@ function updateCurWaitList()
 	{
 		var user = document.createElement("li");
 		user.innerHTML = users[i].username;
-		user.style.color = "#D9F3FF";
+		user.style.color = "#FFFFFF";
 		if (users[i].id == API.getSelf().id)
 		{
 			user.style.fontWeight = "bold";
@@ -566,8 +566,8 @@ function toggleCurWaitList(list)
 	{
 		list.style.maxHeight = "3px";
 		list.style.overflowY = "hidden";
-		list.style.color = "#333333";
-		list.style.backgroundColor = "#333333";
+		list.style.color = "#000000";
+		list.style.backgroundColor = "#000000";
 	}
 	else 
 	{
