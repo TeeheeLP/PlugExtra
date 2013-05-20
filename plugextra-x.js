@@ -1241,7 +1241,7 @@ function checkOwnIn(e, chatin)
 				break;
 			case "$changes":
 				printChat("1.3.3:<br>New:\
-					Revamped the design completely.\
+					Revamped the design completely.<br>\
 					1.3.2:<br>New:<br>\
 					Emojis can be disabled.<br>\
 					Changed the appearance of the option buttons.<br>\
