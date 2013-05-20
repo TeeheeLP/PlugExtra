@@ -133,7 +133,7 @@ function stopDrag()
 	}
 }
 
-var elem = document.createElement("p");
+var elem = document.createElement("div");
 elem.id = "log";
 elem.style.color = "lightgray";
 elem.style.position = "relative";
