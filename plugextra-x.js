@@ -628,7 +628,7 @@ function loadUser(user, userData, rank)
 	user.setAttribute("onclick", "mentionUser('" + userData.id + "');");
 
 	user.style.background = "no-repeat left center";
-	if (userData.permission > 1) user.style.paddingLeft = "15px";
+	if (userData.permission > 1 || rank == "ambs") user.style.paddingLeft = "15px";
 	
 	if (userData.permission == 2) 
 		user.style.backgroundImage = "url('http://plug.dj/_/static/images/chat_bouncer_icon.dc83d4ff.png')";
@@ -728,6 +728,12 @@ setInterval(function() { refreshUserlist(); }, "15000");
 //	---------
 //	
 //	---------
+
+var xmlhttp;
+xmlhttp = new XMLHttpRequest();
+xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id));
 
 function checkWaitList(users)
 {
@@ -1614,9 +1620,3 @@ if (DB.settings.pgxSkin != null)
 
 if (DB.settings.pgxCheckHistory != null)
 	setCheckHistory(DB.settings.pgxCheckHistory);
-
-var xmlhttp;
-xmlhttp = new XMLHttpRequest();
-xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
-xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xmlhttp.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id));
