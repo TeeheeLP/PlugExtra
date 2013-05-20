@@ -10,7 +10,7 @@ document.styleSheets[document.styleSheets.length - 1].insertRule("#reloader", "c
 
 if (document.getElementById("plugextra") != null)
 {
-	document.removeChild(document.getElementById("userlistx"));
+	document.removeChild(document.getElementById("uslx"));
 	document.removeChild(document.getElementById("log"));
 	document.removeChild(document.getElementById("togg"));
 }
