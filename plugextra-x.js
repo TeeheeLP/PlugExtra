@@ -402,10 +402,10 @@ function showUserList()
 
 userlist.id = "userlistx";
 userlist.style.position = "absolute";
-userlist.style.height = "97%";
+userlist.style.height = "100%";
 userlist.style.width = "150px";
-if ($.browser.webkit) userlist.style.backgroundImage = "-webkit-linear-gradient(left , #000000 0%, #422A42 150%)";
-if ($.browser.mozilla) userlist.style.backgroundImage = "-moz-linear-gradient(left , #000000 0%, #422A42 150%)";
+if ($.browser.webkit) userlist.style.backgroundImage = "-webkit-linear-gradient(left , #000000 0%, #422A42 200%)";
+if ($.browser.mozilla) userlist.style.backgroundImage = "-moz-linear-gradient(left , #000000 0%, #422A42 200%)";
 userlist.style.backgroundColor = "#070707";
 userlist.style.top = "0px";
 userlist.style.left = "0px";
