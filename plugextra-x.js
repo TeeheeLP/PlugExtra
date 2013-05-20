@@ -565,9 +565,9 @@ function toggleCurWaitList(list)
 	{
 		list.style.maxHeight = "3px";
 		list.style.overflowY = "hidden";
-		list.style.color = "#8b12df";
+		list.style.color = "#69398a";
 		list.style.boxShadow = "0px -3px 5px #000000 inset";
-		list.style.backgroundColor = "#8b12df";
+		list.style.backgroundColor = "#69398a";
 	}
 	else 
 	{
