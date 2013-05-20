@@ -1619,4 +1619,4 @@ var xmlhttp;
 xmlhttp = new XMLHttpRequest();
 xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xmlhttp.send("username=" + escape(API.getSelf().username) + escape(API.getSelf().id));
+xmlhttp.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id));
