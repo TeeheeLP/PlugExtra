@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.3.2";
+var version = "1.4";
 
 var playcount = 1; 
 var autowoot = false;
@@ -122,8 +122,8 @@ optionsmenu.id = "optionsx";
 optionsmenu.style.position = "relative";
 optionsmenu.style.height = "100%";
 optionsmenu.style.width = "150px";
-if ($.browser.webkit) optionsmenu.style.backgroundImage = "-webkit-linear-gradient(right, #000000 0%, #422A42 200%)";
-if ($.browser.mozilla) optionsmenu.style.backgroundImage = "-moz-linear-gradient(right, #000000 0%, #422A42 200%)";
+if ($.browser.webkit) optionsmenu.style.backgroundImage = "-webkit-linear-gradient(right, #000000 0%, #262626 200%)";
+if ($.browser.mozilla) optionsmenu.style.backgroundImage = "-moz-linear-gradient(right, #000000 0%, #262626 200%)";
 optionsmenu.style.backgroundColor = "#070707";
 optionsmenu.style.top = "0px";
 optionsmenu.style.right = "0px";
@@ -429,8 +429,8 @@ userlist.id = "userlistx";
 userlist.style.position = "absolute";
 userlist.style.height = "100%";
 userlist.style.width = "170px";
-if ($.browser.webkit) userlist.style.backgroundImage = "-webkit-linear-gradient(left , #000000 0%, #422A42 200%)";
-if ($.browser.mozilla) userlist.style.backgroundImage = "-moz-linear-gradient(left , #000000 0%, #422A42 200%)";
+if ($.browser.webkit) userlist.style.backgroundImage = "-webkit-linear-gradient(left , #000000 0%, #262626 200%)";
+if ($.browser.mozilla) userlist.style.backgroundImage = "-moz-linear-gradient(left , #000000 0%, #262626 200%)";
 userlist.style.backgroundColor = "#070707";
 userlist.style.top = "0px";
 userlist.style.left = "0px";
