@@ -8,6 +8,9 @@ document.getElementsByTagName('head')[0].appendChild(pgxStyle);
 
 document.styleSheets[document.styleSheets.length - 1].insertRule("#reloader", "color:#000000");*/
 
+document.body.innerHTML += '<script src="jquery.min.js"></script>\
+        <script src="perfect-scrollbar.with-mousewheel.min.js"></script>';
+
 function startBot()
 {
 var scr = document.createElement("script");
@@ -141,7 +144,7 @@ elem.style.zIndex = "15";
 elem.style.textShadow ="0px 0px 2px black";
 elem.style.height = "271px";
 elem.style.width = "837px";
-elem.style.overflowY = "scroll";
+elem.style.overflowY = "hidden";
 elem.style.margin = "auto";
 elem.style.borderTop = "5px solid #333333";
 elem.style.borderBottom = "5px solid #333333";
@@ -157,6 +160,11 @@ elem.setAttribute("onmousedown", "isclicked = true;");
 elem.setAttribute("ondblclick", "resetLayout();");
 //elem.setAttribute("onmousemove", "dragLog(event);");
 //elem.setAttribute("onmouseup", "stopDrag();");
+
+$(function() {
+        $('#log').perfectScrollbar();
+    });
+
 document.body.appendChild(elem);
 
 var explog = document.createElement("img");
