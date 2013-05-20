@@ -104,6 +104,7 @@ function showOptionsMenu()
 	}
 }
 
+optcontainer.id = "optcx";
 optcontainer.style.position = "absolute";
 optcontainer.style.height = "100%";
 optcontainer.style.width = "170px";
@@ -396,6 +397,7 @@ document.body.appendChild(optcontainer);
 
 var uslcontainer = document.createElement("div");
 
+uslcontainer.id = "uslx";
 uslcontainer.style.position = "absolute";
 uslcontainer.style.height = "100%";
 uslcontainer.style.width = "170px";
@@ -558,7 +560,7 @@ function toggleCurWaitList(list)
 	if (list.style.maxHeight == "500px")
 	{
 		list.style.maxHeight = "3px";
-		list.style.overflowY = "hidden";
+		list.style.overflow = "hidden";
 		list.style.color = "#780078";
 		list.style.boxShadow = "0px -3px 8px #000000 inset";
 		list.style.backgroundColor = "#780078";
@@ -567,7 +569,7 @@ function toggleCurWaitList(list)
 	{
 		list.style.maxHeight = "500px";
 		list.style.color = "#FFFFFF";
-		setTimeout(function() {list.style.overflowY = "auto";}, "500");
+		setTimeout(function() {list.style.overflow = "auto"; list.style.overflowX = "visible"; }, "500");
 		list.style.boxShadow = "0px 0px 0px black inset";
 		list.style.backgroundColor = "transparent";
 	}
