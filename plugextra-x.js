@@ -122,7 +122,8 @@ optionsmenu.id = "optionsx";
 optionsmenu.style.position = "relative";
 optionsmenu.style.height = "100%";
 optionsmenu.style.width = "150px";
-optionsmenu.style.backgroundImage = "url('http://poke-helper.bplaced.net/images/noise.png')";
+if ($.browser.webkit) optionsmenu.style.backgroundImage = "-webkit-linear-gradient(right, #000000 0%, #422A42 200%)";
+if ($.browser.mozilla) optionsmenu.style.backgroundImage = "-moz-linear-gradient(right, #000000 0%, #422A42 200%)";
 optionsmenu.style.backgroundColor = "#070707";
 optionsmenu.style.top = "0px";
 optionsmenu.style.right = "0px";
@@ -148,6 +149,8 @@ function createMenuItem(menuitem)
 	style.borderLeft = "4px solid gray";
 	style.height = "1.5em";
 	style.lineHeight = "1.5em";
+	if ($.browser.webkit) style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #1F1F1F 100%)";
+	if ($.browser.mozilla) style.backgroundImage = "-mozilla-linear-gradient(bottom, #000000 0%, #1F1F1F 100%)";
 	menuitem.width = "173px";
 }
 
