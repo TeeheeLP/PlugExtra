@@ -8,9 +8,6 @@ document.getElementsByTagName('head')[0].appendChild(pgxStyle);
 
 document.styleSheets[document.styleSheets.length - 1].insertRule("#reloader", "color:#000000");*/
 
-document.head.innerHTML += '<script src="jquery.min.js"></script>\
-        <script src="perfect-scrollbar.with-mousewheel.min.js"></script>';
-
 function startBot()
 {
 var scr = document.createElement("script");
@@ -160,10 +157,6 @@ elem.setAttribute("onmousedown", "isclicked = true;");
 elem.setAttribute("ondblclick", "resetLayout();");
 //elem.setAttribute("onmousemove", "dragLog(event);");
 //elem.setAttribute("onmouseup", "stopDrag();");
-
-$(function() {
-        $('#log').perfectScrollbar();
-    });
 
 document.body.appendChild(elem);
 
