@@ -8,16 +8,6 @@ document.getElementsByTagName('head')[0].appendChild(pgxStyle);
 
 document.styleSheets[document.styleSheets.length - 1].insertRule("#reloader", "color:#000000");*/
 
-if (document.getElementById("plugextra") != null)
-{
-	document.body.removeChild(document.getElementById("uslx"));
-	document.body.removeChild(document.getElementById("optx"));
-	document.body.removeChild(document.getElementById("log"));
-	document.body.removeChild(document.getElementById("togg"));
-	document.body.removeChild(document.getElementById("expjoin"));
-	document.body.removeChild(document.getElementById("expwoot"));
-}
-
 function startBot()
 {
 var scr = document.createElement("script");
