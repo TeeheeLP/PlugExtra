@@ -430,11 +430,13 @@ userlist.style.color = "#FFFFFF";
 userlist.style.zIndex = "9001";
 userlist.style.overflowX = "hidden";
 userlist.style.overflowY = "scroll";
+userlist.style.padding = "0px";
 userlist.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
 userlist.style.borderRight = "1px solid transparent";
 userlist.onclick = function() { showUserList(); };
 
 var ulcontent = document.createElement("div");
+ulcontent.style.width = "150px";
 ulcontent.style.padding = "10px";
 
 function hideUserList()
