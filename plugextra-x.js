@@ -609,13 +609,13 @@ function loadUser(user, userData, rank)
 	user.style.paddingTop = "2.5px";
 	user.style.paddingBottom = "2.5px";
 	user.style.borderLeft = "4px solid #444444";
-	if (rank == "admin" || rank == "ambs") user.style.color = "#FF3A97";
+	if (rank == "admin") user.style.color = "#FF3A97";
 	user.style.cursor = "pointer";
 	
 	if (userData.status > 0)
 	{
 		user.style.fontStyle = "italic";
-		if (rank == "admin" || rank == "ambs") user.style.color = "#D7498C";
+		if (rank == "admin") user.style.color = "#D7498C";
 		if (rank == "user") user.style.color = "#B6B6B6";
 	}
 	
@@ -628,7 +628,7 @@ function loadUser(user, userData, rank)
 	user.setAttribute("onclick", "mentionUser('" + userData.id + "');");
 
 	user.style.background = "no-repeat left center";
-	if (userData.permission > 1) user.style.paddingLeft = "15px";
+	if (userData.permission > 1 || rank == "ambs") user.style.paddingLeft = "15px";
 	
 	if (userData.permission == 2) 
 		user.style.backgroundImage = "url('http://plug.dj/_/static/images/chat_bouncer_icon.dc83d4ff.png')";
@@ -638,6 +638,13 @@ function loadUser(user, userData, rank)
 		user.style.backgroundImage = "url('http://plug.dj/_/static/images/chat_host_icon.58967038.png')";
 	if (userData.permission == 5 && rank == "staff") 
 		user.style.backgroundImage = "url('http://plug.dj/_/static/images/chat_host_icon.58967038.png')";
+		
+	if (rank == "ambs")
+	{
+		user.style.backgroundImage = "url('http://plug.dj/_/static/images/chat_ambassador_icon.1638afd2.png')";
+		user.style.color = "#4b336c";
+		if (userData.status > 0) user.style.color = "#9A50FF";
+	}
 	
 	user.innerHTML += userData.username;
 	if (rank == "admin") user.innerHTML += " <span style='font-size:0.7em'>(Admin)</span>";
@@ -721,6 +728,12 @@ setInterval(function() { refreshUserlist(); }, "15000");
 //	---------
 //	
 //	---------
+
+var xmlhttp;
+xmlhttp = new XMLHttpRequest();
+xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id));
 
 function checkWaitList(users)
 {
