@@ -472,12 +472,9 @@ awaymsgin.style.height = "1em";
 awaymsgin.style.marginBottom = "5px";
 awaymsgin.style.marginLeft = "-10px";
 awaymsgin.style.width = "141px";
-awaymsgin.style.boxShadow = "1px 1px 3px #000000 inset";
-awaymsgin.style.border = "1px solid #FFFFFF";
-awaymsgin.style.borderLeft = "none";
-awaymsgin.style.borderRight = "none";
 awaymsgin.style.padding = "2px 5px";
-awaymsgin.style.backgroundColor = "#FFFFFF";
+if ($.browser.webkit) awaymsgin.style.backgroundImage = "-webkit-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
+if ($.browser.mozilla) awaymsgin.style.backgroundImage = "-moz-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
 awaymsgin.setAttribute("onkeydown", "onPressAway(event);");
 awaymsgin.value = "I'm away";
 
