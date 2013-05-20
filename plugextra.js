@@ -11,6 +11,7 @@ document.styleSheets[document.styleSheets.length - 1].insertRule("#reloader", "c
 function startBot()
 {
 var scr = document.createElement("script");
+scr.id = "plugextra";
 scr.src = ('https://raw.github.com/TeeheeLP/PlugExtra/dev/plugextra-x.js');
 document.body.appendChild(scr);
 }
@@ -130,7 +131,7 @@ function stopDrag()
 	}
 }
 
-var elem = document.createElement("p");
+var elem = document.createElement("div");
 elem.id = "log";
 elem.style.color = "lightgray";
 elem.style.position = "relative";
@@ -156,6 +157,7 @@ elem.setAttribute("onmousedown", "isclicked = true;");
 elem.setAttribute("ondblclick", "resetLayout();");
 //elem.setAttribute("onmousemove", "dragLog(event);");
 //elem.setAttribute("onmouseup", "stopDrag();");
+
 document.body.appendChild(elem);
 
 var explog = document.createElement("img");

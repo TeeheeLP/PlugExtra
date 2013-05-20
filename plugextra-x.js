@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.3.2";
+var version = "1.3.3";
 
 var playcount = 1; 
 var autowoot = false;
@@ -66,6 +66,24 @@ function loadSkin(skinname)
 	}
 }
 
+function stylizeButton(but)
+{
+	if ($.browser.webkit) 
+		but.style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #575757 100%)";
+	if ($.browser.mozilla) 
+		but.style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, #575757 100%)";
+	but.style.width = "173px";
+	but.style.textAlign = "center";
+	but.style.height = "1.5em";
+	but.style.display = "block";
+	but.style.cursor = "pointer";
+	but.style.lineHeight = "1.5em";
+	but.style.marginBottom = "5px";
+	but.style.marginLeft = "-10px";
+	but.style.fontSize = "1.2em";
+	but.style.fontWeight = "bold";
+}
+
 //	------------
 //	Options Menu
 //	------------
@@ -86,6 +104,7 @@ function showOptionsMenu()
 	}
 }
 
+optcontainer.id = "optcx";
 optcontainer.style.position = "absolute";
 optcontainer.style.height = "100%";
 optcontainer.style.width = "170px";
@@ -104,7 +123,8 @@ optionsmenu.id = "optionsx";
 optionsmenu.style.position = "relative";
 optionsmenu.style.height = "100%";
 optionsmenu.style.width = "150px";
-optionsmenu.style.backgroundImage = "url('http://poke-helper.bplaced.net/images/noise.png')";
+if ($.browser.webkit) optionsmenu.style.backgroundImage = "-webkit-linear-gradient(right, #000000 0%, #262626 200%)";
+if ($.browser.mozilla) optionsmenu.style.backgroundImage = "-moz-linear-gradient(right, #000000 0%, #262626 200%)";
 optionsmenu.style.backgroundColor = "#070707";
 optionsmenu.style.top = "0px";
 optionsmenu.style.right = "0px";
@@ -130,6 +150,8 @@ function createMenuItem(menuitem)
 	style.borderLeft = "4px solid gray";
 	style.height = "1.5em";
 	style.lineHeight = "1.5em";
+	if ($.browser.webkit) style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #1F1F1F 100%)";
+	if ($.browser.mozilla) style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, #1F1F1F 100%)";
 	menuitem.width = "173px";
 }
 
@@ -147,18 +169,7 @@ function hideOptionsMenu()
 	}
 }
 
-hidemenubut.style.backgroundColor = "#333333";
-hidemenubut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
-hidemenubut.style.width = "173px";
-hidemenubut.style.textAlign = "center";
-hidemenubut.style.height = "1.5em";
-hidemenubut.style.display = "block";
-hidemenubut.style.cursor = "pointer";
-hidemenubut.style.lineHeight = "1.5em";
-hidemenubut.style.marginBottom = "5px";
-hidemenubut.style.marginLeft = "-10px";
-hidemenubut.style.fontSize = "1.2em";
-hidemenubut.style.fontWeight = "bold";
+stylizeButton(hidemenubut);
 hidemenubut.innerHTML = "Hide";
 hidemenubut.onclick = function() { hideOptionsMenu(); };
 
@@ -384,6 +395,19 @@ document.body.appendChild(optcontainer);
 //	Userlist management
 //	-------------------
 
+var uslcontainer = document.createElement("div");
+
+uslcontainer.id = "uslx";
+uslcontainer.style.position = "absolute";
+uslcontainer.style.height = "100%";
+uslcontainer.style.width = "230px";
+uslcontainer.style.top = "0px";
+uslcontainer.style.left = "0px";
+uslcontainer.style.padding = "0px";
+uslcontainer.style.margin = "0px";
+uslcontainer.style.overflowX = "hidden";
+uslcontainer.style.overflowY = "hidden";
+
 var dissmartcl = true;
 var userlist = document.createElement("div");
 
@@ -400,11 +424,15 @@ function showUserList()
 	}
 }
 
+uslcontainer.appendChild(userlist);
+document.body.appendChild(uslcontainer);
+
 userlist.id = "userlistx";
 userlist.style.position = "absolute";
-userlist.style.height = "97%";
-userlist.style.width = "150px";
-userlist.style.backgroundImage = "url('http://poke-helper.bplaced.net/images/noise.png')";
+userlist.style.height = "100%";
+userlist.style.width = "200px";
+if ($.browser.webkit) userlist.style.backgroundImage = "-webkit-linear-gradient(left , #000000 0%, #262626 200%)";
+if ($.browser.mozilla) userlist.style.backgroundImage = "-moz-linear-gradient(left , #000000 0%, #262626 200%)";
 userlist.style.backgroundColor = "#070707";
 userlist.style.top = "0px";
 userlist.style.left = "0px";
@@ -412,12 +440,16 @@ userlist.style.transition = "left 0.5s, box-shadow 0.5s, opacity 0.3s";
 userlist.style.webkitTransition = "left 0.5s, box-shadow 0.5s, opacity 0.3s";
 userlist.style.color = "#FFFFFF";
 userlist.style.zIndex = "9001";
-userlist.style.padding = "10px";
 userlist.style.overflowX = "hidden";
 userlist.style.overflowY = "scroll";
+userlist.style.padding = "0px";
 userlist.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
 userlist.style.borderRight = "1px solid transparent";
 userlist.onclick = function() { showUserList(); };
+
+var ulcontent = document.createElement("div");
+ulcontent.style.width = "160px";
+ulcontent.style.padding = "10px";
 
 function hideUserList()
 {
@@ -432,39 +464,27 @@ function hideUserList()
 }
 
 var hidelistbut = document.createElement("div");
-hidelistbut.style.backgroundColor = "#333333";
-hidelistbut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
-hidelistbut.style.width = "153px";
-hidelistbut.style.textAlign = "center";
-hidelistbut.style.height = "1.5em";
-hidelistbut.style.display = "block";
-hidelistbut.style.cursor = "pointer";
-hidelistbut.style.lineHeight = "1.5em";
-hidelistbut.style.marginBottom = "5px";
-hidelistbut.style.marginLeft = "-10px";
-hidelistbut.style.fontSize = "1.2em";
-hidelistbut.style.fontWeight = "bold";
+stylizeButton(hidelistbut);
+hidelistbut.style.width = "183px";
 hidelistbut.innerHTML = "Hide";
 hidelistbut.onclick = function() { hideUserList(); };
 
-userlist.appendChild(hidelistbut);
+ulcontent.appendChild(hidelistbut);
 
 var awaymsgin = document.createElement("input");
 awaymsgin.id = "awaymsginx";
 awaymsgin.style.height = "1em";
 awaymsgin.style.marginBottom = "5px";
 awaymsgin.style.marginLeft = "-10px";
-awaymsgin.style.width = "141px";
-awaymsgin.style.boxShadow = "1px 1px 3px #000000 inset";
-awaymsgin.style.border = "1px solid #FFFFFF";
-awaymsgin.style.borderLeft = "none";
-awaymsgin.style.borderRight = "none";
+awaymsgin.style.width = "183px";
 awaymsgin.style.padding = "2px 5px";
-awaymsgin.style.backgroundColor = "#FFFFFF";
+awaymsgin.style.border = "none";
+if ($.browser.webkit) awaymsgin.style.backgroundImage = "-webkit-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
+if ($.browser.mozilla) awaymsgin.style.backgroundImage = "-moz-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
 awaymsgin.setAttribute("onkeydown", "onPressAway(event);");
 awaymsgin.value = "I'm away";
 
-userlist.appendChild(awaymsgin);
+ulcontent.appendChild(awaymsgin);
 
 function awayBot()
 {
@@ -480,7 +500,10 @@ function awayBot()
 		willprintmsg = true;
 		var awaybutx = document.getElementById("awaybutx");
 		awaybutx.innerHTML = "Back";
-		awaybutx.style.backgroundColor = "#333388";
+		if ($.browser.webkit) 
+			awaybutx.style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #780078 100%)";
+		if ($.browser.mozilla) 
+			awaybutx.style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, #780078 100%)";
 	}
 	else
 	{
@@ -490,7 +513,10 @@ function awayBot()
 		willprintmsg = false;
 		var awaybutx = document.getElementById("awaybutx");
 		awaybutx.innerHTML = "Away";
-		awaybutx.style.backgroundColor = "#333333";
+		if ($.browser.webkit) 
+			awaybutx.style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #575757 100%)";
+		if ($.browser.mozilla) 
+			awaybutx.style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, #575757 100%)";
 	}
 }
 
@@ -501,23 +527,13 @@ function onPressAway(e)
 }
 
 var awaybut = document.createElement("div");
+stylizeButton(awaybut);
 awaybut.id = "awaybutx";
-awaybut.style.backgroundColor = "#333333";
-awaybut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
-awaybut.style.width = "153px";
-awaybut.style.textAlign = "center";
-awaybut.style.height = "1.5em";
-awaybut.style.display = "block";
-awaybut.style.cursor = "pointer";
-awaybut.style.lineHeight = "1.5em";
-awaybut.style.marginBottom = "5px";
-awaybut.style.marginLeft = "-10px";
-awaybut.style.fontSize = "1.2em";
-awaybut.style.fontWeight = "bold";
+awaybut.style.width = "183px";
 awaybut.innerHTML = "Away";
 awaybut.onclick = function() { awayBot(); };
 
-userlist.appendChild(awaybut);
+ulcontent.appendChild(awaybut);
 
 function updateCurWaitList()
 {
@@ -529,7 +545,6 @@ function updateCurWaitList()
 	{
 		var user = document.createElement("li");
 		user.innerHTML = users[i].username;
-		user.style.color = "#D9F3FF";
 		if (users[i].id == API.getSelf().id)
 		{
 			user.style.fontWeight = "bold";
@@ -545,15 +560,17 @@ function toggleCurWaitList(list)
 	if (list.style.maxHeight == "500px")
 	{
 		list.style.maxHeight = "3px";
-		list.style.overflowY = "hidden";
-		list.style.color = "#333333";
-		list.style.backgroundColor = "#333333";
+		list.style.overflow = "hidden";
+		list.style.color = "#780078";
+		list.style.boxShadow = "0px -3px 8px #000000 inset";
+		list.style.backgroundColor = "#780078";
 	}
 	else 
 	{
 		list.style.maxHeight = "500px";
 		list.style.color = "#FFFFFF";
-		setTimeout(function() {list.style.overflowY = "auto";}, "500");
+		setTimeout(function() {list.style.overflow = "auto"; list.style.overflowX = "visible"; }, "500");
+		list.style.boxShadow = "0px 0px 0px black inset";
 		list.style.backgroundColor = "transparent";
 	}
 }
@@ -562,14 +579,16 @@ var curwaitlist = document.createElement("ol");
 curwaitlist.id = "waitlistx";
 curwaitlist.style.margin = "0px 0px 5px 0px";
 curwaitlist.style.padding = "10px 0px 0px 27px";
-curwaitlist.style.transition = "max-height 0.5s, background-color 0.5s, color 0.5s";
-curwaitlist.style.webkitTransition = "max-height 0.5s, background-color 0.5s, color 0.5s";
+curwaitlist.style.transition = "max-height 0.5s, background-color 0.5s, color 0.5s, box-shadow 0.5s";
+curwaitlist.style.webkitTransition = "max-height 0.5s, background-color 0.5s, color 0.5s, box-shadow 0.5s";
 curwaitlist.style.maxHeight = "500px";
 curwaitlist.style.overflowX = "visible";
 curwaitlist.style.overflowY = "auto";
+curwaitlist.style.borderRadius = "5px";
+curwaitlist.style.boxShadow = "0px 0px 0px black inset";
 curwaitlist.setAttribute("onclick", "toggleCurWaitList(this);");
 
-userlist.appendChild(curwaitlist);
+ulcontent.appendChild(curwaitlist);
 
 var curusercount = document.createElement("div");
 curusercount.id = "cusercount";
@@ -590,7 +609,7 @@ function mentionUser(id)
 	}
 }
 
-userlist.appendChild(curusercount);
+ulcontent.appendChild(curusercount);
 
 var stafflist = document.createElement("ul");
 stafflist.id = "stafflistx";
@@ -708,7 +727,7 @@ function refreshUserlist()
 	}
 	document.getElementById("cusercount").innerHTML = API.getUsers().length + " users online";
 }
-userlist.appendChild(stafflist);
+ulcontent.appendChild(stafflist);
 
 var users = API.getUsers();
 var usersul = document.createElement("ul");
@@ -717,9 +736,9 @@ usersul.style.listStyle = "none";
 usersul.style.padding = "0px";
 usersul.style.margin = "0px";
 
-userlist.appendChild(usersul);
+ulcontent.appendChild(usersul);
 
-document.body.appendChild(userlist);
+userlist.appendChild(ulcontent);
 
 updateCurWaitList();
 refreshUserlist();
@@ -1152,7 +1171,7 @@ function firstRun()
 {
 	printChat("Succesfully started PlugExtra! Using version " + version + "<br> \
 		Enter $help to view a list of available commands or $manual to see an instruction \
-		on how to use the plugin.<br> Use $skin to choose between the original or the plugextra skin.");
+		on how to use the plugin.");
 	if (API.getSelf().permission > 1)
 		printChat("Use $modhelp to view commands only available to mods.");
 }
@@ -1221,7 +1240,9 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("1.3.2:<br>New:<br>\
+				printChat("1.3.3:<br>New:\
+					Revamped the design completely.<br>\
+					1.3.2:<br>New:<br>\
 					Emojis can be disabled.<br>\
 					Changed the appearance of the option buttons.<br>\
 					You can see the votes in the userlist.<br>\
