@@ -1171,7 +1171,7 @@ function firstRun()
 {
 	printChat("Succesfully started PlugExtra! Using version " + version + "<br> \
 		Enter $help to view a list of available commands or $manual to see an instruction \
-		on how to use the plugin.<br> Use $skin to choose between the original or the plugextra skin.");
+		on how to use the plugin.");
 	if (API.getSelf().permission > 1)
 		printChat("Use $modhelp to view commands only available to mods.");
 }
