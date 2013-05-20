@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.4";
+var version = "1.3.3";
 
 var playcount = 1; 
 var autowoot = false;
@@ -1240,7 +1240,9 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("1.3.2:<br>New:<br>\
+				printChat("1.3.3:<br>New:\
+					Revamped the design completely.\
+					1.3.2:<br>New:<br>\
 					Emojis can be disabled.<br>\
 					Changed the appearance of the option buttons.<br>\
 					You can see the votes in the userlist.<br>\
