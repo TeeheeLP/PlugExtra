@@ -523,6 +523,7 @@ function onPressAway(e)
 
 var awaybut = document.createElement("div");
 stylizeButton(awaybut);
+awaybut.id = "awaybutx";
 awaybut.style.width = "153px";
 awaybut.innerHTML = "Away";
 awaybut.onclick = function() { awayBot(); };
