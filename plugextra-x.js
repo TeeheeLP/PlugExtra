@@ -66,6 +66,24 @@ function loadSkin(skinname)
 	}
 }
 
+function stylizeButton(but)
+{
+	if ($.browser.webkit) 
+		but.style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #575757 100%)";
+	if ($.browser.mozilla) 
+		but.style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, #575757 100%)";
+	but.style.width = "173px";
+	but.style.textAlign = "center";
+	but.style.height = "1.5em";
+	but.style.display = "block";
+	but.style.cursor = "pointer";
+	but.style.lineHeight = "1.5em";
+	but.style.marginBottom = "5px";
+	but.style.marginLeft = "-10px";
+	but.style.fontSize = "1.2em";
+	but.style.fontWeight = "bold";
+}
+
 //	------------
 //	Options Menu
 //	------------
@@ -147,7 +165,7 @@ function hideOptionsMenu()
 	}
 }
 
-hidemenubut.style.backgroundColor = "#333333";
+/*hidemenubut.style.backgroundColor = "#333333";
 hidemenubut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
 hidemenubut.style.width = "173px";
 hidemenubut.style.textAlign = "center";
@@ -158,7 +176,8 @@ hidemenubut.style.lineHeight = "1.5em";
 hidemenubut.style.marginBottom = "5px";
 hidemenubut.style.marginLeft = "-10px";
 hidemenubut.style.fontSize = "1.2em";
-hidemenubut.style.fontWeight = "bold";
+hidemenubut.style.fontWeight = "bold";*/
+stylizeButton(hidemenubut);
 hidemenubut.innerHTML = "Hide";
 hidemenubut.onclick = function() { hideOptionsMenu(); };
 
