@@ -404,7 +404,8 @@ userlist.id = "userlistx";
 userlist.style.position = "absolute";
 userlist.style.height = "97%";
 userlist.style.width = "150px";
-userlist.style.backgroundImage = "url('http://poke-helper.bplaced.net/images/noise.png')";
+userlist.style.backgroundImage = "-webkit-linear-gradient(left , #000000 0%, #422A42 62%),\
+	-moz-linear-gradient(left , #000000 0%, #422A42 62%);";
 userlist.style.backgroundColor = "#070707";
 userlist.style.top = "0px";
 userlist.style.left = "0px";
