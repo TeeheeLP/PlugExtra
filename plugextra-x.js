@@ -150,7 +150,7 @@ function createMenuItem(menuitem)
 	style.height = "1.5em";
 	style.lineHeight = "1.5em";
 	if ($.browser.webkit) style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #1F1F1F 100%)";
-	if ($.browser.mozilla) style.backgroundImage = "-mozilla-linear-gradient(bottom, #000000 0%, #1F1F1F 100%)";
+	if ($.browser.mozilla) style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, #1F1F1F 100%)";
 	menuitem.width = "173px";
 }
 
