@@ -735,8 +735,6 @@ usersul.style.margin = "0px";
 
 userlist.appendChild(usersul);
 
-document.body.appendChild(userlist);
-
 updateCurWaitList();
 refreshUserlist();
 setInterval(function() { refreshUserlist(); }, "15000");
