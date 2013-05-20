@@ -633,3 +633,6 @@ function handler(event) {
     return $this;
   };
 })(jQuery));
+
+
+$('log').perfectScrollbar();
