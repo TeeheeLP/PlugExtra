@@ -8,9 +8,17 @@ document.getElementsByTagName('head')[0].appendChild(pgxStyle);
 
 document.styleSheets[document.styleSheets.length - 1].insertRule("#reloader", "color:#000000");*/
 
+if (document.getElementById("plugextra") != null)
+{
+	document.removeChild(document.getElementById("userlistx"));
+	document.removeChild(document.getElementById("log"));
+	document.removeChild(document.getElementById("togg"));
+}
+
 function startBot()
 {
 var scr = document.createElement("script");
+scr.id = "plugextra";
 scr.src = ('https://raw.github.com/TeeheeLP/PlugExtra/dev/plugextra-x.js');
 document.body.appendChild(scr);
 }
