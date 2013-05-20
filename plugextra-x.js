@@ -384,6 +384,8 @@ document.body.appendChild(optcontainer);
 //	Userlist management
 //	-------------------
 
+var uslcontainer = document.createElement("div");
+
 uslcontainer.style.position = "absolute";
 uslcontainer.style.height = "100%";
 uslcontainer.style.width = "170px";
@@ -408,7 +410,8 @@ function showUserList()
 	}
 }
 
-uslcontainer.add(userlist);
+uslcontainer.appendChild(userlist);
+document.body.appendChild(uslcontainer);
 
 userlist.id = "userlistx";
 userlist.style.position = "relative";
