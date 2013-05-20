@@ -418,7 +418,7 @@ document.body.appendChild(uslcontainer);
 userlist.id = "userlistx";
 userlist.style.position = "absolute";
 userlist.style.height = "100%";
-userlist.style.width = "150px";
+userlist.style.width = "170px";
 if ($.browser.webkit) userlist.style.backgroundImage = "-webkit-linear-gradient(left , #000000 0%, #422A42 200%)";
 if ($.browser.mozilla) userlist.style.backgroundImage = "-moz-linear-gradient(left , #000000 0%, #422A42 200%)";
 userlist.style.backgroundColor = "#070707";
@@ -436,7 +436,7 @@ userlist.style.borderRight = "1px solid transparent";
 userlist.onclick = function() { showUserList(); };
 
 var ulcontent = document.createElement("div");
-ulcontent.style.width = "150px";
+ulcontent.style.width = "170px";
 ulcontent.style.padding = "10px";
 
 function hideUserList()
