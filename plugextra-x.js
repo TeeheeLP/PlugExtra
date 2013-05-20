@@ -430,7 +430,7 @@ document.body.appendChild(uslcontainer);
 userlist.id = "userlistx";
 userlist.style.position = "absolute";
 userlist.style.height = "100%";
-userlist.style.width = "220px";
+userlist.style.width = "200px";
 if ($.browser.webkit) userlist.style.backgroundImage = "-webkit-linear-gradient(left , #000000 0%, #262626 200%)";
 if ($.browser.mozilla) userlist.style.backgroundImage = "-moz-linear-gradient(left , #000000 0%, #262626 200%)";
 userlist.style.backgroundColor = "#070707";
@@ -448,7 +448,7 @@ userlist.style.borderRight = "1px solid transparent";
 userlist.onclick = function() { showUserList(); };
 
 var ulcontent = document.createElement("div");
-ulcontent.style.width = "180px";
+ulcontent.style.width = "160px";
 ulcontent.style.padding = "10px";
 
 function hideUserList()
@@ -465,7 +465,7 @@ function hideUserList()
 
 var hidelistbut = document.createElement("div");
 stylizeButton(hidelistbut);
-hidelistbut.style.width = "203px";
+hidelistbut.style.width = "183px";
 hidelistbut.innerHTML = "Hide";
 hidelistbut.onclick = function() { hideUserList(); };
 
@@ -476,7 +476,7 @@ awaymsgin.id = "awaymsginx";
 awaymsgin.style.height = "1em";
 awaymsgin.style.marginBottom = "5px";
 awaymsgin.style.marginLeft = "-10px";
-awaymsgin.style.width = "203px";
+awaymsgin.style.width = "183px";
 awaymsgin.style.padding = "2px 5px";
 awaymsgin.style.border = "none";
 if ($.browser.webkit) awaymsgin.style.backgroundImage = "-webkit-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
@@ -529,7 +529,7 @@ function onPressAway(e)
 var awaybut = document.createElement("div");
 stylizeButton(awaybut);
 awaybut.id = "awaybutx";
-awaybut.style.width = "203px";
+awaybut.style.width = "183px";
 awaybut.innerHTML = "Away";
 awaybut.onclick = function() { awayBot(); };
 
