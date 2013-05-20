@@ -428,12 +428,14 @@ userlist.style.transition = "left 0.5s, box-shadow 0.5s, opacity 0.3s";
 userlist.style.webkitTransition = "left 0.5s, box-shadow 0.5s, opacity 0.3s";
 userlist.style.color = "#FFFFFF";
 userlist.style.zIndex = "9001";
-userlist.style.padding = "10px";
 userlist.style.overflowX = "hidden";
 userlist.style.overflowY = "scroll";
 userlist.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
 userlist.style.borderRight = "1px solid transparent";
 userlist.onclick = function() { showUserList(); };
+
+var ulcontent = document.createElement("div");
+ulcontent.style.padding = "10px";
 
 function hideUserList()
 {
@@ -463,7 +465,7 @@ hidelistbut.style.fontWeight = "bold";
 hidelistbut.innerHTML = "Hide";
 hidelistbut.onclick = function() { hideUserList(); };
 
-userlist.appendChild(hidelistbut);
+ulcontent.appendChild(hidelistbut);
 
 var awaymsgin = document.createElement("input");
 awaymsgin.id = "awaymsginx";
@@ -480,7 +482,7 @@ awaymsgin.style.backgroundColor = "#FFFFFF";
 awaymsgin.setAttribute("onkeydown", "onPressAway(event);");
 awaymsgin.value = "I'm away";
 
-userlist.appendChild(awaymsgin);
+ulcontent.appendChild(awaymsgin);
 
 function awayBot()
 {
@@ -533,7 +535,7 @@ awaybut.style.fontWeight = "bold";
 awaybut.innerHTML = "Away";
 awaybut.onclick = function() { awayBot(); };
 
-userlist.appendChild(awaybut);
+ulcontent.appendChild(awaybut);
 
 function updateCurWaitList()
 {
@@ -585,7 +587,7 @@ curwaitlist.style.overflowX = "visible";
 curwaitlist.style.overflowY = "auto";
 curwaitlist.setAttribute("onclick", "toggleCurWaitList(this);");
 
-userlist.appendChild(curwaitlist);
+ulcontent.appendChild(curwaitlist);
 
 var curusercount = document.createElement("div");
 curusercount.id = "cusercount";
@@ -606,7 +608,7 @@ function mentionUser(id)
 	}
 }
 
-userlist.appendChild(curusercount);
+ulcontent.appendChild(curusercount);
 
 var stafflist = document.createElement("ul");
 stafflist.id = "stafflistx";
@@ -724,7 +726,7 @@ function refreshUserlist()
 	}
 	document.getElementById("cusercount").innerHTML = API.getUsers().length + " users online";
 }
-userlist.appendChild(stafflist);
+ulcontent.appendChild(stafflist);
 
 var users = API.getUsers();
 var usersul = document.createElement("ul");
@@ -733,7 +735,9 @@ usersul.style.listStyle = "none";
 usersul.style.padding = "0px";
 usersul.style.margin = "0px";
 
-userlist.appendChild(usersul);
+ulcontent.appendChild(usersul);
+
+userlist.appendChild(ulcontent);
 
 updateCurWaitList();
 refreshUserlist();
