@@ -436,7 +436,7 @@ userlist.style.borderRight = "1px solid transparent";
 userlist.onclick = function() { showUserList(); };
 
 var ulcontent = document.createElement("div");
-ulcontent.style.width = "170px";
+ulcontent.style.width = "130px";
 ulcontent.style.padding = "10px";
 
 function hideUserList()
