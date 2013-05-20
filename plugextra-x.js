@@ -465,7 +465,7 @@ function hideUserList()
 
 var hidelistbut = document.createElement("div");
 stylizeButton(hidelistbut);
-hidelistbut.style.width = "153px";
+hidelistbut.style.width = "203px";
 hidelistbut.innerHTML = "Hide";
 hidelistbut.onclick = function() { hideUserList(); };
 
@@ -476,7 +476,7 @@ awaymsgin.id = "awaymsginx";
 awaymsgin.style.height = "1em";
 awaymsgin.style.marginBottom = "5px";
 awaymsgin.style.marginLeft = "-10px";
-awaymsgin.style.width = "141px";
+awaymsgin.style.width = "203px";
 awaymsgin.style.padding = "2px 5px";
 awaymsgin.style.border = "none";
 if ($.browser.webkit) awaymsgin.style.backgroundImage = "-webkit-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
@@ -529,7 +529,7 @@ function onPressAway(e)
 var awaybut = document.createElement("div");
 stylizeButton(awaybut);
 awaybut.id = "awaybutx";
-awaybut.style.width = "153px";
+awaybut.style.width = "203px";
 awaybut.innerHTML = "Away";
 awaybut.onclick = function() { awayBot(); };
 
