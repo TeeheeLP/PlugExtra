@@ -393,6 +393,8 @@ uslcontainer.style.top = "0px";
 uslcontainer.style.left = "0px";
 uslcontainer.style.padding = "0px";
 uslcontainer.style.margin = "0px";
+uslcontainer.style.overflowX = "hidden";
+uslcontainer.style.overflowY = "hidden";
 
 var dissmartcl = true;
 var userlist = document.createElement("div");
