@@ -414,7 +414,7 @@ uslcontainer.appendChild(userlist);
 document.body.appendChild(uslcontainer);
 
 userlist.id = "userlistx";
-userlist.style.position = "relative";
+userlist.style.position = "absolute";
 userlist.style.height = "100%";
 userlist.style.width = "150px";
 if ($.browser.webkit) userlist.style.backgroundImage = "-webkit-linear-gradient(left , #000000 0%, #422A42 200%)";
