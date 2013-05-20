@@ -8,6 +8,8 @@ document.getElementsByTagName('head')[0].appendChild(pgxStyle);
 
 document.styleSheets[document.styleSheets.length - 1].insertRule("#reloader", "color:#000000");*/
 
+document.head.innerHTML += '<script type="text/javascript" src="libs/jquery.slimscroll.min.js"></script>';
+
 function startBot()
 {
 var scr = document.createElement("script");
