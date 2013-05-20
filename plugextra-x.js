@@ -384,6 +384,14 @@ document.body.appendChild(optcontainer);
 //	Userlist management
 //	-------------------
 
+uslcontainer.style.position = "absolute";
+uslcontainer.style.height = "100%";
+uslcontainer.style.width = "170px";
+uslcontainer.style.top = "0px";
+uslcontainer.style.left = "0px";
+uslcontainer.style.padding = "0px";
+uslcontainer.style.margin = "0px";
+
 var dissmartcl = true;
 var userlist = document.createElement("div");
 
@@ -400,8 +408,10 @@ function showUserList()
 	}
 }
 
+uslcontainer.add(userlist);
+
 userlist.id = "userlistx";
-userlist.style.position = "absolute";
+userlist.style.position = "relative";
 userlist.style.height = "100%";
 userlist.style.width = "150px";
 if ($.browser.webkit) userlist.style.backgroundImage = "-webkit-linear-gradient(left , #000000 0%, #422A42 200%)";
