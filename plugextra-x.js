@@ -471,9 +471,9 @@ function hideUserList()
 }
 
 var hidelistbut = document.createElement("div");
-hidelistbut.style.backgroundColor = "#333333";
+stylizeButton(hidelistbut);
+/*hidelistbut.style.backgroundColor = "#333333";
 hidelistbut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
-hidelistbut.style.width = "153px";
 hidelistbut.style.textAlign = "center";
 hidelistbut.style.height = "1.5em";
 hidelistbut.style.display = "block";
@@ -482,7 +482,8 @@ hidelistbut.style.lineHeight = "1.5em";
 hidelistbut.style.marginBottom = "5px";
 hidelistbut.style.marginLeft = "-10px";
 hidelistbut.style.fontSize = "1.2em";
-hidelistbut.style.fontWeight = "bold";
+hidelistbut.style.fontWeight = "bold";*/
+hidelistbut.style.width = "153px";
 hidelistbut.innerHTML = "Hide";
 hidelistbut.onclick = function() { hideUserList(); };
 
