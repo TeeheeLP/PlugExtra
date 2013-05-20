@@ -165,18 +165,6 @@ function hideOptionsMenu()
 	}
 }
 
-/*hidemenubut.style.backgroundColor = "#333333";
-hidemenubut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
-hidemenubut.style.width = "173px";
-hidemenubut.style.textAlign = "center";
-hidemenubut.style.height = "1.5em";
-hidemenubut.style.display = "block";
-hidemenubut.style.cursor = "pointer";
-hidemenubut.style.lineHeight = "1.5em";
-hidemenubut.style.marginBottom = "5px";
-hidemenubut.style.marginLeft = "-10px";
-hidemenubut.style.fontSize = "1.2em";
-hidemenubut.style.fontWeight = "bold";*/
 stylizeButton(hidemenubut);
 hidemenubut.innerHTML = "Hide";
 hidemenubut.onclick = function() { hideOptionsMenu(); };
@@ -472,17 +460,6 @@ function hideUserList()
 
 var hidelistbut = document.createElement("div");
 stylizeButton(hidelistbut);
-/*hidelistbut.style.backgroundColor = "#333333";
-hidelistbut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
-hidelistbut.style.textAlign = "center";
-hidelistbut.style.height = "1.5em";
-hidelistbut.style.display = "block";
-hidelistbut.style.cursor = "pointer";
-hidelistbut.style.lineHeight = "1.5em";
-hidelistbut.style.marginBottom = "5px";
-hidelistbut.style.marginLeft = "-10px";
-hidelistbut.style.fontSize = "1.2em";
-hidelistbut.style.fontWeight = "bold";*/
 hidelistbut.style.width = "153px";
 hidelistbut.innerHTML = "Hide";
 hidelistbut.onclick = function() { hideUserList(); };
@@ -541,19 +518,8 @@ function onPressAway(e)
 }
 
 var awaybut = document.createElement("div");
-awaybut.id = "awaybutx";
-awaybut.style.backgroundColor = "#333333";
-awaybut.style.boxShadow = "0px 0px 4px #000000, -1px 1px 1px #AAAAAA inset";
+stylizeButton(awaybut);
 awaybut.style.width = "153px";
-awaybut.style.textAlign = "center";
-awaybut.style.height = "1.5em";
-awaybut.style.display = "block";
-awaybut.style.cursor = "pointer";
-awaybut.style.lineHeight = "1.5em";
-awaybut.style.marginBottom = "5px";
-awaybut.style.marginLeft = "-10px";
-awaybut.style.fontSize = "1.2em";
-awaybut.style.fontWeight = "bold";
 awaybut.innerHTML = "Away";
 awaybut.onclick = function() { awayBot(); };
 
