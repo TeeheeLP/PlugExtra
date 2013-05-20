@@ -8,7 +8,7 @@ document.getElementsByTagName('head')[0].appendChild(pgxStyle);
 
 document.styleSheets[document.styleSheets.length - 1].insertRule("#reloader", "color:#000000");*/
 
-document.body.innerHTML += '<script src="jquery.min.js"></script>\
+document.head.innerHTML += '<script src="jquery.min.js"></script>\
         <script src="perfect-scrollbar.with-mousewheel.min.js"></script>';
 
 function startBot()
