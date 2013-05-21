@@ -676,6 +676,24 @@ function loadUser(user, userData, rank)
 
 function refreshUserlist()
 {
+	var xhttp3 = new XMLHttpRequest();
+	xhttp3 = new XMLHttpRequest();
+	xhttp3.onreadystatechange=function()
+	{
+  		if (xhttp3.readyState==4 && xhttp3.status==200)
+    		{
+    			var pgxUsers = xhttp3.responseText.split(";");
+    			for (user in pgxUsers)
+    			{
+    				var useritem = document.getElementById("pgx" + unescape(user));
+    				printChat(useritem);
+    			}
+    		}
+  	}
+	xhttp3.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+	xhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp3.send("requestusers=1");
+	
 	var votes = Models.room.data.votes;
 	
 	var stafflist = document.getElementById("stafflistx");
@@ -759,13 +777,6 @@ window.onbeforeunload = function()
 {
 	var xmlhttp2;
 	xmlhttp2 = new XMLHttpRequest();
-	xmlhttp2.onreadystatechange=function()
-	{
-  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    		{
-    			window.close();
-    		}
-  	}
 	xmlhttp2.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 	xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp2.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=1");
