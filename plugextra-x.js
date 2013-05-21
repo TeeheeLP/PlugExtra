@@ -681,7 +681,7 @@ function refreshUserlist()
 	{
   		if (xhttp3.readyState>=4)
     		{
-    			printChat(xhttp3.responseText);
+    			printChat(xhttp3.responseXML);
     		}
   	}
 	xhttp3.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
