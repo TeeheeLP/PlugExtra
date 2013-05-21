@@ -618,7 +618,7 @@ stafflist.style.listStyle = "none";
 stafflist.style.padding = "0px";
 stafflist.style.margin = "0px";
 
-document.styleSheets[0].insertRule(".useritemx { transition:border 0.15s !important; -webkit-transition:border 0.15s !important; }", 0);
+document.styleSheets[0].insertRule(".useritemx { transition:border-width 0.15s !important; -webkit-transition:border-width 0.15s !important; }", 0);
 document.styleSheets[0].insertRule(".useritemx:hover { border-width:8px !important; color:yellow !important; }", 0);
 
 function loadUser(user, userData, rank)
@@ -633,6 +633,8 @@ function loadUser(user, userData, rank)
 	user.style.paddingTop = "2.5px";
 	user.style.paddingBottom = "2.5px";
 	user.style.borderLeft = "4px solid #444444";
+	user.style.transition = "border-color 0.25s";
+	user.style.webkitTransition = "border-color 0.25s";
 	if (rank == "admin") user.style.color = "#FF3A97";
 	user.style.cursor = "pointer";
 	
