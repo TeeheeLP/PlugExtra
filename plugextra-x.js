@@ -141,6 +141,8 @@ optionsmenu.style.fontSize = "1.2em";
 optionsmenu.style.fontWeight = "bold";
 optionsmenu.setAttribute("onclick", "showOptionsMenu();");
 
+document.styleSheets[0].insertRule(".pgxButton:hover { border-width:7px !important; }", 0);
+
 function createMenuItem(menuitem)
 {
 	var style = menuitem.style;
@@ -151,6 +153,9 @@ function createMenuItem(menuitem)
 	style.borderLeft = "4px solid gray";
 	style.height = "1.5em";
 	style.lineHeight = "1.5em";
+	style.transition = "border-width 0.15s";
+	style.webkitTransition = "border-width 0.15s";
+	menuitem.className = "pgxButton";
 	if ($.browser.webkit) style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #1F1F1F 100%)";
 	if ($.browser.mozilla) style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, #1F1F1F 100%)";
 	menuitem.width = "173px";
@@ -618,10 +623,13 @@ stafflist.style.listStyle = "none";
 stafflist.style.padding = "0px";
 stafflist.style.margin = "0px";
 
+document.styleSheets[0].insertRule(".useritemx:hover { border-width:8px !important; color:yellow !important; }", 0);
+
 function loadUser(user, userData, rank)
 {
 	var votes = Models.room.data.votes;
 	user.id = "pgx" + userData.id;
+	user.className = "useritemx";
 	user.style.width = "100%";
 	user.style.position = "relative";
 	user.style.left = "-10px";
@@ -629,6 +637,8 @@ function loadUser(user, userData, rank)
 	user.style.paddingTop = "2.5px";
 	user.style.paddingBottom = "2.5px";
 	user.style.borderLeft = "4px solid #444444";
+	user.style.transition = "border-width 0.15s";
+	user.style.webkitTransition = "border-width 0.15s";
 	if (rank == "admin") user.style.color = "#FF3A97";
 	user.style.cursor = "pointer";
 	
@@ -675,7 +685,25 @@ function loadUser(user, userData, rank)
 }
 
 function refreshUserlist()
-{
+{	
+	var xmlhttp3;
+	xmlhttp3 = new XMLHttpRequest();
+	xmlhttp3.onload = function()
+	{
+		if (xmlhttp.status >= 200 && xmlhttp.readyState >= 4)
+		{
+			var userIDs = xmlhttp3.responseText.split(";");
+			
+			for (var id in userIDs)
+			{
+				//printChat(userIDs[id]);
+			}
+		}
+	}
+	xmlhttp3.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+	xmlhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp3.send("requestusers=1");
+	
 	var votes = Models.room.data.votes;
 	
 	var stafflist = document.getElementById("stafflistx");
@@ -754,6 +782,16 @@ xmlhttp = new XMLHttpRequest();
 xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlhttp.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=0");
+
+window.onbeforeunload = function()
+{
+	var xmlhttp2;
+	xmlhttp2 = new XMLHttpRequest();
+	xmlhttp2.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", false);
+	xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp2.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=1");
+	//alert("Done saving.");
+};
 
 function checkWaitList(users)
 {
