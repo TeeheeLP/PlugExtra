@@ -618,10 +618,14 @@ stafflist.style.listStyle = "none";
 stafflist.style.padding = "0px";
 stafflist.style.margin = "0px";
 
+document.styleSheets[0].insertRule(".useritemx { transition:border 0.5s; -webkit-transition:border 0.5s; }\
+	.useritemx:hover { border-width:8px; }");
+
 function loadUser(user, userData, rank)
 {
 	var votes = Models.room.data.votes;
 	user.id = "pgx" + userData.id;
+	user.class = "useritemx";
 	user.style.width = "100%";
 	user.style.position = "relative";
 	user.style.left = "-10px";
