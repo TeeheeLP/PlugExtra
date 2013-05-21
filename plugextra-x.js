@@ -687,17 +687,24 @@ function loadUser(user, userData, rank)
 	
 	if (pgxUsers[userData.id])
 	{
-		var xU = document.createElement("span");
-		xU.style.color = "#FFFFFF";
-		xU.style.textShadow = "0px 0px 2px #c483c1";
-		xU.style.fontStyle = "italic";
-		xU.innerHTML = " X";
-		user.appendChild(xU);
+		if (freshIDs[userData.id])
+		{
+			var xU = document.createElement("span");
+			xU.style.color = "#FFFFFF";
+			xU.style.textShadow = "0px 0px 2px #c483c1";
+			xU.style.fontStyle = "italic";
+			xU.innerHTML = " X";
+			user.appendChild(xU);
+		}
+		else pgxUsers[userData.id] = false;
 	}
 }
 
+var freshIDs = new Array();
+
 function refreshUserlist()
 {	
+	freshIDs = new Array();
 	var xmlhttp3;
 	xmlhttp3 = new XMLHttpRequest();
 	xmlhttp3.onload = function()
@@ -717,6 +724,7 @@ function refreshUserlist()
 					{
 						//printChat(pgxUItem.innerHTML);
 						pgxUsers[userIDs[id]] = true;
+						freshIDs[userIDs[id]] = true;
 					}
 				}
 			}
