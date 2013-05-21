@@ -696,7 +696,7 @@ function refreshUserlist()
 			
 			for (var id in userIDs)
 			{
-				printChat(id);
+				printChat(userIDs[id]);
 			}
 		}
 	}
