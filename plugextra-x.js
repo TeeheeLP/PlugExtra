@@ -679,9 +679,9 @@ function refreshUserlist()
 	var xhttp3 = new XMLHttpRequest();
 	xhttp3.onreadystatechange=function()
 	{
-  		if (xhttp3.readyState==4 && xhttp3.status==200)
+  		if (xhttp3.readyState>=4)
     		{
-    			alert("TEST");
+    			printChat(xhttp3.responseText);
     		}
   	}
 	xhttp3.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
