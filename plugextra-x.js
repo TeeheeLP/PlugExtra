@@ -618,7 +618,7 @@ stafflist.style.listStyle = "none";
 stafflist.style.padding = "0px";
 stafflist.style.margin = "0px";
 
-document.styleSheets[0].insertRule(".useritemx { transition:border 0.5s !important; -webkit-transition:border 0.5s !important; }", 0);
+document.styleSheets[0].insertRule(".useritemx { transition:border 0.15s !important; -webkit-transition:border 0.15s !important; }", 0);
 document.styleSheets[0].insertRule(".useritemx:hover { border-width:8px !important; color:yellow !important; }", 0);
 
 function loadUser(user, userData, rank)
