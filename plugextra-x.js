@@ -632,8 +632,8 @@ function loadUser(user, userData, rank)
 	user.style.paddingTop = "2.5px";
 	user.style.paddingBottom = "2.5px";
 	user.style.borderLeft = "4px solid #444444";
-	user.style.transition = "border-color 0.25s, border-width 0.15s";
-	user.style.webkitTransition = "border-color 0.25s, border-width 0.15s";
+	user.style.transition = "border-width 0.15s";
+	user.style.webkitTransition = "border-width 0.15s";
 	if (rank == "admin") user.style.color = "#FF3A97";
 	user.style.cursor = "pointer";
 	
