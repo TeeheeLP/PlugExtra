@@ -704,9 +704,11 @@ function refreshUserlist()
 					if (pgxUItem != null)
 					{
 						printChat(pgxUItem.innerHTML);
-						var xU = document.createElement("div");
-						xU.style.float = "right";
-						xU.style.color = "#FFFFFF";
+						var xU = document.createElement("span");
+						xU.style.cssFloat = "right";
+						xU.style.color = "#333333";
+						xU.style.textShadow = "0px 0px 3px #c483c1";
+						xU.style.fontStyle = "italic";
 						xU.innerHTML = "X";
 						pgxUItem.appendChild(xU);
 					}
