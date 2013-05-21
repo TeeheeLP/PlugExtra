@@ -759,10 +759,10 @@ window.onbeforeunload = function()
 {
 	var xmlhttp2;
 	xmlhttp2 = new XMLHttpRequest();
-	xmlhttp2.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+	xmlhttp2.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", false);
 	xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp2.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=1");
-	alert("Done saving.");
+	//alert("Done saving.");
 };
 
 function checkWaitList(users)
