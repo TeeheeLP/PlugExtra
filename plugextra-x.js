@@ -630,6 +630,7 @@ function loadUser(user, userData, rank)
 	var votes = Models.room.data.votes;
 	user.id = "pgx" + userData.id;
 	user.className = "useritemx";
+	user.style.color = "#FFFFFF";
 	user.style.width = "100%";
 	user.style.position = "relative";
 	user.style.left = "-10px";
@@ -706,9 +707,10 @@ function refreshUserlist()
 						printChat(pgxUItem.innerHTML);
 						var xU = document.createElement("span");
 						xU.style.cssFloat = "right";
-						xU.style.color = "#333333";
-						xU.style.textShadow = "0px 0px 3px #c483c1";
+						xU.style.color = "#FFFFFF";
+						xU.style.textShadow = "0px 0px 2px #c483c1";
 						xU.style.fontStyle = "italic";
+						if (pgxUItem.style.color == "#FFFFFF") xU.style.marginRight = "-15px";
 						xU.innerHTML = "X";
 						pgxUItem.appendChild(xU);
 					}
