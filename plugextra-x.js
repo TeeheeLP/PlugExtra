@@ -696,7 +696,17 @@ function refreshUserlist()
 			
 			for (var id in userIDs)
 			{
-				//printChat(userIDs[id]);
+				if (userIDs[id] != "" && userIDs[id] != null)
+				{
+					var pgxUItem = document.getElementById("pgx" + userIDs[id]);
+					if (pgxUItem != null)
+					{
+						var xU = document.createElement("div");
+						xU.style.float = "right";
+						xU.innerHTML = "X";
+						pgxUItem.appendChild(xU);
+					}
+				}
 			}
 		}
 	}
