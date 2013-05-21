@@ -700,11 +700,11 @@ function refreshUserlist()
 				if (userIDs[id] != "" && userIDs[id] != null)
 				{
 					var pgxUItem = document.getElementById("pgx" + userIDs[id]);
-					printChat("Almost...");
+					printChat("Almost... pgx" + userIDs[id]);
 					if (pgxUItem != null)
 					{
 						printChat(pgxUItem.innerHTML);
-						pgxUItem.style.backgroundColor = "#FFFFFF !important";
+						pgxUItem.innerHTML = "FOUND";
 					}
 				}
 			}
