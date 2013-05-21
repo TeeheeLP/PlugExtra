@@ -18,6 +18,7 @@ var autoskip = false;
 var showannot = true;
 var emojicons = Emoji._cons;
 var emojimap = Emoji._map;
+var pgxUsers = new Array();
 
 function printChat(str)
 {
@@ -683,6 +684,17 @@ function loadUser(user, userData, rank)
 	
 	if (votes[userData.id] == 1) user.style.borderColor = "#00FF00";
 	else if (votes[userData.id] == -1) user.style.borderColor = "#FF0000";
+	
+	if (pgxUsers[userData.id])
+	{
+		var xU = document.createElement("span");
+		xU.style.color = "#FFFFFF";
+		xU.style.textShadow = "0px 0px 2px #c483c1";
+		xU.style.fontStyle = "italic";
+		if (pgxUItem.style.color == "#FFFFFF") xU.style.marginRight = "-15px";
+		xU.innerHTML = " X";
+		pgxUItem.appendChild(xU);
+	}
 }
 
 function refreshUserlist()
@@ -705,13 +717,7 @@ function refreshUserlist()
 					if (pgxUItem != null)
 					{
 						//printChat(pgxUItem.innerHTML);
-						var xU = document.createElement("span");
-						xU.style.color = "#FFFFFF";
-						xU.style.textShadow = "0px 0px 2px #c483c1";
-						xU.style.fontStyle = "italic";
-						if (pgxUItem.style.color == "#FFFFFF") xU.style.marginRight = "-15px";
-						xU.innerHTML = " X";
-						pgxUItem.appendChild(xU);
+						pgxUsers[userIDs[id]] = true;
 					}
 				}
 			}
