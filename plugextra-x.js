@@ -704,7 +704,11 @@ function refreshUserlist()
 					if (pgxUItem != null)
 					{
 						printChat(pgxUItem.innerHTML);
-						pgxUItem.innerHTML = "FOUND";
+						var xU = document.createElement("div");
+						xU.style.float = "right";
+						xU.style.color = "#FFFFFF";
+						xU.innerHTML = "X";
+						pgxUItem.appendChild(xU);
 					}
 				}
 			}
