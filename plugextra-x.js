@@ -693,7 +693,7 @@ function loadUser(user, userData, rank)
 		xU.style.fontStyle = "italic";
 		if (pgxUItem.style.color == "#FFFFFF") xU.style.marginRight = "-15px";
 		xU.innerHTML = " X";
-		pgxUItem.appendChild(xU);
+		user.appendChild(xU);
 	}
 }
 
