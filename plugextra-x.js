@@ -66,6 +66,8 @@ function loadSkin(skinname)
 	}
 }
 
+document.styleSheets[0].insertRule(".pgxButton:hover { border-width:7px !important; }", 0);
+
 function stylizeButton(but)
 {
 	if ($.browser.webkit) 
@@ -82,6 +84,9 @@ function stylizeButton(but)
 	but.style.marginLeft = "-10px";
 	but.style.fontSize = "1.2em";
 	but.style.fontWeight = "bold";
+	but.style.transition = "border-width: 0.15s";
+	but.style.webkitTransition = "border-width: 0.15s";
+	but.className = "pgxButton";
 }
 
 //	------------
