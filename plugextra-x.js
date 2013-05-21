@@ -706,12 +706,11 @@ function refreshUserlist()
 					{
 						//printChat(pgxUItem.innerHTML);
 						var xU = document.createElement("span");
-						xU.style.cssFloat = "right";
 						xU.style.color = "#FFFFFF";
 						xU.style.textShadow = "0px 0px 2px #c483c1";
 						xU.style.fontStyle = "italic";
 						if (pgxUItem.style.color == "#FFFFFF") xU.style.marginRight = "-15px";
-						xU.innerHTML = "X";
+						xU.innerHTML = " X";
 						pgxUItem.appendChild(xU);
 					}
 				}
