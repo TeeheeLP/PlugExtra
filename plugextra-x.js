@@ -759,18 +759,23 @@ var waitforlogout = true;
 
 window.onbeforeunload = function()
 {
-	var xmlhttp2;
-	xmlhttp2 = new XMLHttpRequest();
-	xmlhttp2.onreadystatechange=function()
+	if (waitforlogout)
 	{
-  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    		{
-    			waitforlogout = false;
-    		}
-  	}
-	xmlhttp2.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
-	xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xmlhttp2.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=1");
+		var xmlhttp2;
+		xmlhttp2 = new XMLHttpRequest();
+		xmlhttp2.onreadystatechange=function()
+		{
+  			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    			{
+    				waitforlogout = false;
+    				window.close();
+    			}
+  		}
+		xmlhttp2.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+		xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xmlhttp2.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=1");
+		return false;
+	}
 };
 
 function checkWaitList(users)
