@@ -681,10 +681,10 @@ function refreshUserlist()
 	{
   		if (xhttp3.readyState>=4)
     		{
-    			printChat(xhttp3.responseXML);
+    			printChat(xhttp3.responseText);
     		}
   	}
-	xhttp3.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+	xhttp3.open("GET", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 	xhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp3.send("requestusers=1");
 	
