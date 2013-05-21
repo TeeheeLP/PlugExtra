@@ -618,8 +618,8 @@ stafflist.style.listStyle = "none";
 stafflist.style.padding = "0px";
 stafflist.style.margin = "0px";
 
-document.styleSheets[0].insertRule(".useritemx { transition:border 0.5s !important; -webkit-transition:border 0.5s !important; }\
-	.useritemx:hover { border-width:8px !important; }", 0);
+document.styleSheets[0].insertRule(".useritemx { transition:border 0.5s !important; -webkit-transition:border 0.5s !important; }", 0);
+document.styleSheets[0].insertRule(".useritemx:hover { border-width:8px !important; color:yellow !important; }");
 
 function loadUser(user, userData, rank)
 {
