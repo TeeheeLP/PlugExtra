@@ -684,7 +684,7 @@ function refreshUserlist()
     			printChat(xhttp3.responseText);
     		}
   	}
-	xhttp3.open("GET", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+	xhttp3.open("GET", "http://www.teeheekeiken.bplaced.net/plugextra.php", true);
 	xhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp3.send("requestusers=1");
 	
