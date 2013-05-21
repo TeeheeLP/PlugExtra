@@ -153,8 +153,8 @@ function createMenuItem(menuitem)
 	style.borderLeft = "4px solid gray";
 	style.height = "1.5em";
 	style.lineHeight = "1.5em";
-	style.transition = "border-width: 0.15s";
-	style.webkitTransition = "border-width: 0.15s";
+	style.transition = "border-width 0.15s";
+	style.webkitTransition = "border-width 0.15s";
 	menuitem.className = "pgxButton";
 	if ($.browser.webkit) style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #1F1F1F 100%)";
 	if ($.browser.mozilla) style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, #1F1F1F 100%)";
