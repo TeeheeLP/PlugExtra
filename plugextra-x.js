@@ -697,14 +697,14 @@ function refreshUserlist()
 			
 			for (var id in userIDs)
 			{
-				printChat(id + " " + userIDs[id]);
+				//printChat(id + " " + userIDs[id]);
 				if (userIDs[id] != "" && userIDs[id] != null)
 				{
 					var pgxUItem = document.getElementById("pgx" + userIDs[id]);
-					printChat("Almost... pgx" + userIDs[id]);
+					//printChat("Almost... pgx" + userIDs[id]);
 					if (pgxUItem != null)
 					{
-						printChat(pgxUItem.innerHTML);
+						//printChat(pgxUItem.innerHTML);
 						var xU = document.createElement("span");
 						xU.style.cssFloat = "right";
 						xU.style.color = "#FFFFFF";
