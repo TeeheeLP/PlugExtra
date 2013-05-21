@@ -619,7 +619,7 @@ stafflist.style.padding = "0px";
 stafflist.style.margin = "0px";
 
 document.styleSheets[0].insertRule(".useritemx { transition:border 0.5s; -webkit-transition:border 0.5s; }\
-	.useritemx:hover { border-width:8px; }");
+	.useritemx:hover { border-width:8px; }", 0);
 
 function loadUser(user, userData, rank)
 {
