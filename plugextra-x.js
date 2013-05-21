@@ -686,6 +686,24 @@ function loadUser(user, userData, rank)
 
 function refreshUserlist()
 {	
+	var xmlhttp3;
+	xmlhttp3 = new XMLHttpRequest();
+	xmlhttp3.onload = function()
+	{
+		if (xmlhttp.status >= 200 && xmlhttp.readyState >= 4)
+		{
+			var userIDs = xmlhttp3.responseText.split(";");
+			
+			for (var id in userIDs)
+			{
+				printChat(id);
+			}
+		}
+	}
+	xmlhttp3.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+	xmlhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp3.send("requestusers=1");
+	
 	var votes = Models.room.data.votes;
 	
 	var stafflist = document.getElementById("stafflistx");
