@@ -677,17 +677,16 @@ function loadUser(user, userData, rank)
 function refreshUserlist()
 {
 	var xhttp3 = new XMLHttpRequest();
-	xhttp3 = new XMLHttpRequest();
 	xhttp3.onreadystatechange=function()
 	{
   		if (xhttp3.readyState==4 && xhttp3.status==200)
     		{
     			var pgxUsers = xhttp3.responseText.split(";");
-    			printChat(xhttp3.responseText);
-    			for (user in pgxUsers)
+    			printChat(xhttp3.responseText + "full");
+    			for (var user in pgxUsers)
     			{
     				var useritem = document.getElementById("pgx" + unescape(user));
-    				printChat(useritem);
+    				printChat(useritem + "part");
     			}
     		}
   	}
