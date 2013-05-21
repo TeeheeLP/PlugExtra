@@ -112,6 +112,7 @@ optcontainer.style.top = "0px";
 optcontainer.style.right = "0px";
 optcontainer.style.overflowX = "hidden";
 optcontainer.style.overflowY = "hidden";
+optcontainer.style.zIndex = "9001";
 optcontainer.style.boxShadow = "0px 0px 10px #000000, -1px -1px #000000 inset";
 optcontainer.style.transition = "width 0.5s";
 optcontainer.style.webkitTransition = "width 0.5s";
@@ -430,7 +431,7 @@ document.body.appendChild(uslcontainer);
 userlist.id = "userlistx";
 userlist.style.position = "absolute";
 userlist.style.height = "100%";
-userlist.style.width = "200px";
+userlist.style.width = "190px";
 if ($.browser.webkit) userlist.style.backgroundImage = "-webkit-linear-gradient(left , #000000 0%, #262626 200%)";
 if ($.browser.mozilla) userlist.style.backgroundImage = "-moz-linear-gradient(left , #000000 0%, #262626 200%)";
 userlist.style.backgroundColor = "#070707";
@@ -448,7 +449,7 @@ userlist.style.borderRight = "1px solid transparent";
 userlist.onclick = function() { showUserList(); };
 
 var ulcontent = document.createElement("div");
-ulcontent.style.width = "160px";
+ulcontent.style.width = "150px";
 ulcontent.style.padding = "10px";
 
 function hideUserList()
@@ -465,7 +466,7 @@ function hideUserList()
 
 var hidelistbut = document.createElement("div");
 stylizeButton(hidelistbut);
-hidelistbut.style.width = "183px";
+hidelistbut.style.width = "173px";
 hidelistbut.innerHTML = "Hide";
 hidelistbut.onclick = function() { hideUserList(); };
 
@@ -476,7 +477,7 @@ awaymsgin.id = "awaymsginx";
 awaymsgin.style.height = "1em";
 awaymsgin.style.marginBottom = "5px";
 awaymsgin.style.marginLeft = "-10px";
-awaymsgin.style.width = "183px";
+awaymsgin.style.width = "173px";
 awaymsgin.style.padding = "2px 5px";
 awaymsgin.style.border = "none";
 if ($.browser.webkit) awaymsgin.style.backgroundImage = "-webkit-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
@@ -529,7 +530,7 @@ function onPressAway(e)
 var awaybut = document.createElement("div");
 stylizeButton(awaybut);
 awaybut.id = "awaybutx";
-awaybut.style.width = "183px";
+awaybut.style.width = "173px";
 awaybut.innerHTML = "Away";
 awaybut.onclick = function() { awayBot(); };
 
@@ -752,7 +753,7 @@ var xmlhttp;
 xmlhttp = new XMLHttpRequest();
 xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xmlhttp.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id));
+xmlhttp.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=0");
 
 function checkWaitList(users)
 {
