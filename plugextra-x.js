@@ -755,8 +755,6 @@ xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlhttp.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=0");
 
-var waitforlogout = true;
-
 window.onbeforeunload = function()
 {
 	if (waitforlogout)
@@ -767,14 +765,13 @@ window.onbeforeunload = function()
 		{
   			if (xmlhttp.readyState==4 && xmlhttp.status==200)
     			{
-    				waitforlogout = false;
     				window.close();
     			}
   		}
 		xmlhttp2.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 		xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xmlhttp2.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=1");
-		return false;
+		alert("Done saving.");
 	}
 };
 
