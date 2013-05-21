@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.3.3";
+var version = "1.4";
 
 var playcount = 1; 
 var autowoot = false;
@@ -696,11 +696,14 @@ function refreshUserlist()
 			
 			for (var id in userIDs)
 			{
+				printChat(id + " " + userIDs[id]);
 				if (userIDs[id] != "" && userIDs[id] != null)
 				{
 					var pgxUItem = document.getElementById("pgx" + userIDs[id]);
+					printChat("Almost...");
 					if (pgxUItem != null)
 					{
+						printChat(pgxUItem.innerHTML);
 						pgxUItem.style.backgroundColor = "#FFFFFF !important";
 					}
 				}
