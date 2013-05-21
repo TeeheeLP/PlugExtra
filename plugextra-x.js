@@ -772,6 +772,7 @@ window.onbeforeunload = function()
 		xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xmlhttp2.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=1");
 		alert("Done saving.");
+		return "Done saving.";
 	}
 };
 
