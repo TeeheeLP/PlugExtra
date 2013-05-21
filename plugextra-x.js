@@ -681,13 +681,7 @@ function refreshUserlist()
 	{
   		if (xhttp3.readyState==4 && xhttp3.status==200)
     		{
-    			var pgxUsers = xhttp3.responseText.split(";");
-    			printChat(xhttp3.responseText + "full");
-    			for (var user in pgxUsers)
-    			{
-    				var useritem = document.getElementById("pgx" + unescape(user));
-    				printChat(useritem + "part");
-    			}
+    			printChat("TEST");
     		}
   	}
 	xhttp3.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
