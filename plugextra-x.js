@@ -771,8 +771,6 @@ window.onbeforeunload = function()
 	xmlhttp2.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 	xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp2.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=1");
-
-	return true;
 };
 
 function checkWaitList(users)
