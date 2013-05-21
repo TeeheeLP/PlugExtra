@@ -757,23 +757,20 @@ xmlhttp.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.
 
 window.onbeforeunload = function()
 {
-	if (waitforlogout)
+	var xmlhttp2;
+	xmlhttp2 = new XMLHttpRequest();
+	xmlhttp2.onreadystatechange=function()
 	{
-		var xmlhttp2;
-		xmlhttp2 = new XMLHttpRequest();
-		xmlhttp2.onreadystatechange=function()
-		{
-  			if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    			{
-    				window.close();
-    			}
-  		}
-		xmlhttp2.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
-		xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xmlhttp2.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=1");
-		alert("Done saving.");
-		return "Done saving.";
-	}
+  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    		{
+    			window.close();
+    		}
+  	}
+	xmlhttp2.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+	xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp2.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=1");
+	alert("Done saving.");
+	return "Done saving.";
 };
 
 function checkWaitList(users)
