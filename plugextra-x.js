@@ -701,10 +701,7 @@ function refreshUserlist()
 					var pgxUItem = document.getElementById("pgx" + userIDs[id]);
 					if (pgxUItem != null)
 					{
-						var xU = document.createElement("div");
-						xU.style.float = "right";
-						xU.innerHTML = "X";
-						pgxUItem.appendChild(xU);
+						pgxUItem.style.backgroundColor = "#FFFFFF !important";
 					}
 				}
 			}
