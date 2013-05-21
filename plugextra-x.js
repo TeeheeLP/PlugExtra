@@ -675,19 +675,7 @@ function loadUser(user, userData, rank)
 }
 
 function refreshUserlist()
-{
-	var xhttp3 = new XMLHttpRequest();
-	xhttp3.onreadystatechange=function()
-	{
-  		if (xhttp3.readyState>=4)
-    		{
-    			printChat(xhttp3.responseText);
-    		}
-  	}
-	xhttp3.open("GET", "http://teeheekeiken.bplaced.net/plugextra.php", true);
-	xhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp3.send(null);
-	
+{	
 	var votes = Models.room.data.votes;
 	
 	var stafflist = document.getElementById("stafflistx");
