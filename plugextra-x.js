@@ -467,13 +467,35 @@ autojoinx.onclick = function()
 
 optionsmenu.appendChild(autojoinx);
 
+function toggleLog()
+{
+	if (elem.style.pointerEvents == "none")
+	{
+		elem.style.pointerEvents = "auto";
+		elem.style.backgroundColor = "#050505";
+		elem.style.height = "276px";
+		elem.style.opacity = "0.8";
+		elem.scrollTop = elem.scrollHeight;
+		togglelogx.style.borderColor = "#00DD00";
+	}
+	else 
+	{
+		elem.style.pointerEvents = "none";
+		elem.style.backgroundColor = "transparent";
+		elem.style.height = "5px";
+		elem.style.opacity = "0";
+		elem.scrollTop = elem.scrollHeight;
+		togglelogx.style.borderColor = "#DD0000";
+	}
+}
+
 var togglelogx = document.createElement("div");
 createMenuItem(togglelogx);
 togglelogx.style.borderColor = "#00DD00";
 togglelogx.innerHTML = "Log";
 togglelogx.onclick = function()
 {
-	toggleJoin();
+	toggleLog();
 }
 
 optionsmenu.appendChild(autojoinx);
