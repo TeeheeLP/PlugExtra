@@ -903,7 +903,7 @@ function loadUser(user, userData, rank)
 		xU.style.fontStyle = "italic";
 		xU.style.fontWeight = "bold";
 		xU.style.marginLeft = "3px";
-		xU.style.marginBottom = "-10px";
+		xU.style.marginBottom = "-5px";
 		xU.style.width = "29px";
 		xU.style.height = "15px";
 		xU.title = "PlugExtra User";
