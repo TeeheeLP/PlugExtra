@@ -498,7 +498,7 @@ togglelogx.onclick = function()
 	toggleLog();
 }
 
-optionsmenu.appendChild(autojoinx);
+optionsmenu.appendChild(togglelogx);
 
 optcontainer.appendChild(optionsmenu);
 
