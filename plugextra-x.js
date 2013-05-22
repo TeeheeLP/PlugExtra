@@ -890,7 +890,6 @@ function loadUser(user, userData, rank)
 	
 	user.innerHTML += userData.username;
 	if (rank == "admin") user.innerHTML += " <span style='font-size:0.7em'>(Admin)</span>";
-	if (rank == "ambs") user.innerHTML += " <span style='font-size:0.7em'>(Ambassador)</span>";
 	
 	if (votes[userData.id] == 1) user.style.borderColor = "#00FF00";
 	else if (votes[userData.id] == -1) user.style.borderColor = "#FF0000";
