@@ -400,9 +400,32 @@ inhistoryOffx.onclick = function()
 	setCheckHistory("off");
 };
 
+var inhistoryelem = inhistoryOffx;
+
 optionsmenu.appendChild(inhistoryOffx);
 
-var inhistoryelem = inhistoryOffx;
+var autowootx = document.createElement("div");
+createMenuItem(autowootx);
+autowootx.style.marginTop = "10px";
+autowootx.style.borderColor = "#DD0000";
+autowootx.innerHTML = "Auto-Woot";
+autowootx.onclick = function()
+{
+	toggleWoot();
+}
+
+optionsmenu.appendChild(autowootx);
+
+var autojoinx = document.createElement("div");
+createMenuItem(autojoinx);
+autojoinx.style.borderColor = "#DD0000";
+autojoinx.innerHTML = "Auto-Woot";
+autojoinx.onclick = function()
+{
+	toggleJoin();
+}
+
+optionsmenu.appendChild(autojoinx);
 
 optcontainer.appendChild(optionsmenu);
 
