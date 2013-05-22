@@ -486,20 +486,23 @@ optionsmenu.appendChild(sleepingpgx);
 
 switch(API.getSelf().status)
 {
-	case -1;
+	case -1:
 		curStatuspgx = idlepgx;
 		break;
-	case 0;
+	case 0:
 		curStatuspgx = availablepgx;
 		break;
-	case 1;
+	case 1:
 		curStatuspgx = awaypgx;
 		break;
-	case 2;
+	case 2:
 		curStatuspgx = workingpgx;
 		break;
-	case 3;
+	case 3:
 		curStatuspgx = sleepingpgx;
+		break;
+	default:
+		curStatuspgx = availablepgx;
 		break;
 }
 
