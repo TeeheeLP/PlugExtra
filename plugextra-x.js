@@ -404,11 +404,51 @@ var inhistoryelem = inhistoryOffx;
 
 optionsmenu.appendChild(inhistoryOffx);
 
+function toggleWoot()
+{
+	if (autowoot)
+	{
+		autowoot = false;
+		autowootx.style.borderColor = "#DD0000";
+		DB.settings.pgxWoot = false;
+		DB.saveSettings();
+	}
+	else
+	{
+		autowoot = true;
+		document.getElementById("button-vote-positive").click();
+		autowootx.style.borderColor = "#00DD00";
+		DB.settings.pgxWoot = true;
+		DB.saveSettings();
+	}
+}
+
+function toggleJoin()
+{
+	if (autojoin)
+	{
+		autojoin = false;
+		autojoinx.style.borderColor = "#DD0000";
+		DB.settings.pgxJoin = false;
+		DB.saveSettings();
+	}
+	else if (Models.playlist.selectedPlaylistID != 0 && Models.playlist.selectedPlaylistID != ""
+		&& Models.playlist.selectedPlaylistID != null)
+	{
+		autojoin = true;
+		joinList();
+		autojoinx.style.borderColor = "#00DD00";
+		DB.settings.pgxJoin = true;
+		DB.saveSettings();
+	}
+	else printChat("You need an active playlist to use autojoin.");
+}
+
 var autowootx = document.createElement("div");
 createMenuItem(autowootx);
-autowootx.style.marginTop = "10px";
+autowootx.style.marginTop = "25px";
 autowootx.style.borderColor = "#DD0000";
-autowootx.innerHTML = "Auto-Woot";
+autowootx.innerHTML = "Autowoot";
 autowootx.onclick = function()
 {
 	toggleWoot();
@@ -419,8 +459,19 @@ optionsmenu.appendChild(autowootx);
 var autojoinx = document.createElement("div");
 createMenuItem(autojoinx);
 autojoinx.style.borderColor = "#DD0000";
-autojoinx.innerHTML = "Auto-Woot";
+autojoinx.innerHTML = "Autojoin";
 autojoinx.onclick = function()
+{
+	toggleJoin();
+}
+
+optionsmenu.appendChild(autojoinx);
+
+var togglelogx = document.createElement("div");
+createMenuItem(togglelogx);
+togglelogx.style.borderColor = "#00DD00";
+togglelogx.innerHTML = "Log";
+togglelogx.onclick = function()
 {
 	toggleJoin();
 }
@@ -1122,90 +1173,6 @@ document.getElementById("log").innerHTML += "<div id='track" + (playcount) +
 	+ "' target='_blank'><span style='color:white;font-weight:bold;'>" + API.getMedia().title
 	+ "</span> by <span style='color:white'>" + API.getMedia().author + "</span></a>.</div><div id='trackfeed" + (playcount) 
 	+ "' style='overflow-x:hidden;max-height:1000px;transition:max-height 0.5s ease 0.5s, opacity 0.5s;-webkit-transition:max-height 0.5s ease 0.5s, opacity 0.5s;'></div><br>"; 
-
-var expwoot = document.createElement("img");
-
-function toggleWoot()
-{
-	if (autowoot)
-	{
-		autowoot = false;
-		var expw = document.getElementById("expwoot");
-		expw.src = "http://2dforts.dyndns.org/plug/autowootoff.png";
-		printChat("Deactivated the autowoot bot.");
-		DB.settings.pgxWoot = false;
-		DB.saveSettings();
-	}
-	else
-	{
-		autowoot = true;
-		document.getElementById("button-vote-positive").click();
-		var expw = document.getElementById("expwoot");
-		expw.src = "http://2dforts.dyndns.org/plug/autowooton.png";
-		printChat("Activated the autowoot bot.");
-		DB.settings.pgxWoot = true;
-		DB.saveSettings();
-	}
-}
-
-expwoot.style.position = "relative";
-expwoot.id = "expwoot";
-expwoot.style.top = "245px";
-expwoot.style.width = "30px";
-expwoot.style.height = "30px";
-expwoot.style.margin = "auto";
-expwoot.style.zIndex = "15";
-expwoot.style.left = "195px";
-expwoot.style.cursor = "pointer";
-expwoot.style.display = "block";
-expwoot.onclick = function () { toggleWoot(); };
-expwoot.title = "Toggle Auto-Woot";
-expwoot.src = "http://2dforts.dyndns.org/plug/autowootoff.png";
-
-document.body.appendChild(expwoot);
-
-var expjoin = document.createElement("img");
-
-function toggleJoin()
-{
-	if (autojoin)
-	{
-		autojoin = false;
-		var expj = document.getElementById("expjoin");
-		expj.src = "http://2dforts.dyndns.org/plug/autojoinoff.png";
-		printChat("Deactivated the autojoin bot.");
-		DB.settings.pgxJoin = false;
-		DB.saveSettings();
-	}
-	else if (Models.playlist.selectedPlaylistID != 0 && Models.playlist.selectedPlaylistID != ""
-		&& Models.playlist.selectedPlaylistID != null)
-	{
-		autojoin = true;
-		joinList();
-		var expj = document.getElementById("expjoin");
-		expj.src = "http://2dforts.dyndns.org/plug/autojoinon.png";
-		printChat("Activated the autojoin bot.");
-		DB.settings.pgxJoin = true;
-		DB.saveSettings();
-	}
-	else printChat("You need an active playlist to use autojoin.");
-}
-
-expjoin.style.position = "relative";
-expjoin.id = "expjoin";
-expjoin.style.top = "215px";
-expjoin.style.width = "30px";
-expjoin.src = "http://2dforts.dyndns.org/plug/autojoinoff.png";
-expjoin.style.height = "30px";
-expjoin.style.margin = "auto";
-expjoin.style.zIndex = "15";
-expjoin.style.left = "165px";
-expjoin.style.cursor = "pointer";
-expjoin.style.display = "block";
-expjoin.onclick = function () { toggleJoin(); };
-expjoin.title = "Toggle Auto-Join";
-
-document.body.appendChild(expjoin);
 
 //	Realtime management
 
