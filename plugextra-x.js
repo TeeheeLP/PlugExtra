@@ -1050,7 +1050,9 @@ window.onbeforeunload = function()
 	xmlhttp2.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=1"
 		+ "&autowoot=" + (autowoot ? 1 : 0) + "&autojoin=" + (autojoin ? 1 : 0) + "&skin=" + curSkinName + "&annotations="
 		+ (showannot ? 1 : 0) + "&emoji=" + ((Emoji._cons == "" ? false : true) ? 1 : 0) + "&checkhistory="
-		+ checkhistoryStr + "&log=" + (elem.style.pointerEvents == "none" ? 0 : 1));
+		+ checkhistoryStr + "&log=" + (elem.style.pointerEvents == "none" ? 0 : 1) + "&logsize="
+		+ (elem.style.height + "#" + elem.style.width) + "&logposition="
+		+ (elem.style.right + "#" + elem.style.top));
 	//alert("Done saving.");
 };
 
