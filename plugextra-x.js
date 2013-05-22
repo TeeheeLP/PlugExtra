@@ -848,10 +848,8 @@ ulcontent.appendChild(usersul);
 
 userlist.appendChild(ulcontent);
 
-updateCurWaitList();
-refreshUserlist();
-setInterval(function() 
-{ 
+function refreshpgXUsers()
+{
 	var xmlhttp3;
 	xmlhttp3 = new XMLHttpRequest();
 	xmlhttp3.onload = function()
@@ -880,6 +878,14 @@ setInterval(function()
 	xmlhttp3.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 	xmlhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp3.send("requestusers=1");
+}
+
+updateCurWaitList();
+refreshpgXUsers();
+refreshUserlist();
+setInterval(function() 
+{ 
+	refreshpgXUsers();
 	
 	refreshUserlist(); 
 }, "15000");
