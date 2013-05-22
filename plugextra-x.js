@@ -404,6 +404,86 @@ var inhistoryelem = inhistoryOffx;
 
 optionsmenu.appendChild(inhistoryOffx);
 
+var curStatpgx = availablepgx;
+
+function pgxSetStatus(statusname)
+{
+	var statint = -2;
+	curStatpgx.style.borderColor = "gray";
+	
+	switch(statusname)
+	{
+		case "idle":
+			statint = -1;
+			curStatpgx = idlepgx;
+			break;
+		case "available":
+			statint = 0;
+			curStatpgx = availablepgx;
+			break;
+		case "afk":
+			statint = 1;
+			curStatpgx = awaypgx;
+			break;
+		case "working":
+			statint = 2;
+			curStatpgx = workingpgx;
+			break;
+		case "sleeping":
+			statint = 3;
+			curStatpgx = sleepingpgx;
+			break;
+	}
+	
+	curStatpgx.style.borderColor = "#00DD00";
+	
+	if (statint >= -1)
+	{
+		Models.user.changeStatus(statint);
+	}
+}
+
+var statuspgx = document.createElement("div");
+statuspgx.style.marginTop = "10px";
+statuspgx.innerHTML = "Status:";
+
+optionsmenu.appendChild(statuspgx);
+
+var idlepgx = document.createElement("div");
+createMenuItem(idlepgx);
+idlepgx.innerHTML = "Idle";
+idlepgx.onclick = function() { pgxSetStatus("idle"); }
+
+optionsmenu.appendChild(idlepgx);
+
+var availablepgx = document.createElement("div");
+createMenuItem(availablepgx);
+availablepgx.innerHTML = "Available";
+availablepgx.onclick = function() { pgxSetStatus("available"); }
+
+optionsmenu.appendChild(availablepgx);
+
+var awaypgx = document.createElement("div");
+createMenuItem(awaypgx);
+awaypgx.innerHTML = "AFK";
+awaypgx.onclick = function() { pgxSetStatus("afk"); }
+
+optionsmenu.appendChild(awaypgx);
+
+var workingpgx = document.createElement("div");
+createMenuItem(workingpgx);
+workingpgx.innerHTML = "Working";
+workingpgx.onclick = function() { pgxSetStatus("working"); }
+
+optionsmenu.appendChild(workingpgx);
+
+var sleepingpgx = document.createElement("div");
+createMenuItem(sleepingpgx);
+sleepingpgx.innerHTML = "Sleeping";
+sleepingpgx.onclick = function() { pgxSetStatus("sleeping"); }
+
+optionsmenu.appendChild(sleepingpgx);
+
 function toggleWoot()
 {
 	if (autowoot)
