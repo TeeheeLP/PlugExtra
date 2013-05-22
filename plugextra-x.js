@@ -461,8 +461,6 @@ createMenuItem(availablepgx);
 availablepgx.innerHTML = "Available";
 availablepgx.onclick = function() { pgxSetStatus("available"); }
 
-curStatpgx = availablepgx;
-
 optionsmenu.appendChild(availablepgx);
 
 var awaypgx = document.createElement("div");
@@ -485,6 +483,27 @@ sleepingpgx.innerHTML = "Sleeping";
 sleepingpgx.onclick = function() { pgxSetStatus("sleeping"); }
 
 optionsmenu.appendChild(sleepingpgx);
+
+switch(API.getSelf().status)
+{
+	case -1;
+		curStatuspgx = idlepgx;
+		break;
+	case 0;
+		curStatuspgx = availablepgx;
+		break;
+	case 1;
+		curStatuspgx = awaypgx;
+		break;
+	case 2;
+		curStatuspgx = workingpgx;
+		break;
+	case 3;
+		curStatuspgx = sleepingpgx;
+		break;
+}
+
+curStatuspgx.style.borderColor = "#00DD00";
 
 function toggleWoot()
 {
