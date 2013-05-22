@@ -691,6 +691,7 @@ function loadUser(user, userData, rank)
 		xU.style.color = "#FFFFFF";
 		xU.style.textShadow = "0px 0px 2px #c483c1";
 		xU.style.fontStyle = "italic";
+		xU.style.fontWeight = "bold";
 		xU.innerHTML = " X";
 		user.appendChild(xU);
 	}
