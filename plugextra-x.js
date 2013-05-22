@@ -897,14 +897,17 @@ function loadUser(user, userData, rank)
 	
 	if (pgxUsers[userData.id])
 	{
-		var xU = document.createElement("span");
+		var xU = document.createElement("img");
 		xU.style.color = "#FFFFFF";
 		xU.style.textShadow = "0px 0px 2px #c483c1";
 		xU.style.fontStyle = "italic";
 		xU.style.fontWeight = "bold";
-		xU.style.marginLeft = "5px";
-		xU.title = "X";
-		xU.innerHTML = "<img style='width:29px;height:15px;' src='http://teeheekeiken.bplaced.net/images/pgxIconLight.png'>";
+		xU.style.marginLeft = "3px";
+		xU.style.marginBottom = "-10px";
+		xU.style.width = "29px";
+		xU.style.height = "15px";
+		xU.title = "PlugExtra User";
+		xU.src = "http://teeheekeiken.bplaced.net/images/pgxIconLight.png";
 		user.appendChild(xU);
 	}
 }
