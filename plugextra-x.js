@@ -1040,7 +1040,7 @@ window.onbeforeunload = function()
 	xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp2.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=1"
 		+ "&autowoot=" + (autowoot ? 1 : 0) + "&autojoin=" + (autojoin ? 1 : 0) + "&skin=" + curSkinName + "&annotations="
-		+ (showannot ? 1 : 0) + "&emoji=" + ((Emoji._cons == "" ? false : true)) ? 1 : 0));
+		+ (showannot ? 1 : 0) + "&emoji=" + ((Emoji._cons == "" ? false : true) ? 1 : 0));
 	//alert("Done saving.");
 };
 
