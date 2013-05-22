@@ -484,6 +484,8 @@ sleepingpgx.onclick = function() { pgxSetStatus("sleeping"); }
 
 optionsmenu.appendChild(sleepingpgx);
 
+curStatuspgx = availablepgx;
+
 switch(API.getSelf().status)
 {
 	case -1:
@@ -500,9 +502,6 @@ switch(API.getSelf().status)
 		break;
 	case 3:
 		curStatuspgx = sleepingpgx;
-		break;
-	default:
-		curStatuspgx = availablepgx;
 		break;
 }
 
