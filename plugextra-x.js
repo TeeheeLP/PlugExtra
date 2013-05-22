@@ -1458,22 +1458,15 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("1.3.3:<br>New:\
-					Revamped the design completely.<br>\
-					1.3.2:<br>New:<br>\
-					Emojis can be disabled.<br>\
-					Changed the appearance of the option buttons.<br>\
-					You can see the votes in the userlist.<br>\
-					Settings will now be saved.<br>\
-					Staff members now have their respective icon in the list.<br>\
-					Added Check History to the options.<br>\
-					You will now get a notification when it is your turn.<br>\
-					1.3.1:<br>New:<br>\
-					Exchanged the colored text in the track stats with the respective images.<br>\
-					Added an options menu.<br>\
-					Slightly changed the design.<br>\
+				printChat("1.4:<br>New:\
+					You can now see other PlugExtra users.<br>\
+					Added status buttons to the options menu.<br>\
+					Moved the three buttons at the log to the options menu.<br>\
+					Removed most chat messages on button presses.<br>\
 					Fixed:<br>\
-					Now only toggle feedback on next track when it was open.");
+					The log height won't reset after collapsing it.<br>\
+					1.3.3:<br>New:\
+					Revamped the design completely.");
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
