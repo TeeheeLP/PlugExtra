@@ -49,6 +49,9 @@ function loadSkin(skinname)
 			Lang.ui.buttonVotePositiveSelected = UIskinVPS;
 			Lang.ui.buttonVotePositiveDisabled = UIskinVPD;
 			document.getElementById("dj-console").style.backgroundImage = UIbooth;
+			originalx.style.borderColor = "#00DD00"
+			skinelem.style.borderColor = "gray";
+			skinelem = originalx;
 			success = true;
 			break;
 		case "plugextra":
@@ -59,6 +62,9 @@ function loadSkin(skinname)
 			Lang.ui.buttonVotePositiveSelected = "http://2dforts.dyndns.org/plug/ButtonVotePositiveSelected.png";
 			Lang.ui.buttonVotePositiveDisabled = "http://2dforts.dyndns.org/plug/ButtonVotePositiveDisabled.png";
 			document.getElementById("dj-console").style.backgroundImage = "url(http://2dforts.dyndns.org/plug/DJConsole2.png)";
+			plugextrax.style.borderColor = "#00DD00"
+			skinelem.style.borderColor = "gray";
+			skinelem = plugextrax;
 			success = true;
 			break;
 	}
