@@ -404,38 +404,38 @@ var inhistoryelem = inhistoryOffx;
 
 optionsmenu.appendChild(inhistoryOffx);
 
-var curStatpgx;
+var curStatuspgx;
 
 function pgxSetStatus(statusname)
 {
 	var statint = -2;
-	curStatpgx.style.borderColor = "gray";
+	curStatuspgx.style.borderColor = "gray";
 	
 	switch(statusname)
 	{
 		case "idle":
 			statint = -1;
-			curStatpgx = idlepgx;
+			curStatuspgx = idlepgx;
 			break;
 		case "available":
 			statint = 0;
-			curStatpgx = availablepgx;
+			curStatuspgx = availablepgx;
 			break;
 		case "afk":
 			statint = 1;
-			curStatpgx = awaypgx;
+			curStatuspgx = awaypgx;
 			break;
 		case "working":
 			statint = 2;
-			curStatpgx = workingpgx;
+			curStatuspgx = workingpgx;
 			break;
 		case "sleeping":
 			statint = 3;
-			curStatpgx = sleepingpgx;
+			curStatuspgx = sleepingpgx;
 			break;
 	}
 	
-	curStatpgx.style.borderColor = "#00DD00";
+	curStatuspgx.style.borderColor = "#00DD00";
 	
 	if (statint >= -1)
 	{
@@ -484,8 +484,6 @@ sleepingpgx.onclick = function() { pgxSetStatus("sleeping"); }
 
 optionsmenu.appendChild(sleepingpgx);
 
-curStatuspgx = availablepgx;
-
 switch(API.getSelf().status)
 {
 	case -1:
@@ -502,6 +500,9 @@ switch(API.getSelf().status)
 		break;
 	case 3:
 		curStatuspgx = sleepingpgx;
+		break;
+	default:
+		curStatuspgx = availablepgx;
 		break;
 }
 
