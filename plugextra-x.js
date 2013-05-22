@@ -38,6 +38,7 @@ var UIminiCur = "http://plug.dj/_/static/images/score_meta_curate.2d21301a.png";
 
 function loadSkin(skinname)
 {
+	var success = false;
 	switch (skinname)
 	{
 		case "original":
@@ -48,6 +49,7 @@ function loadSkin(skinname)
 			Lang.ui.buttonVotePositiveSelected = UIskinVPS;
 			Lang.ui.buttonVotePositiveDisabled = UIskinVPD;
 			document.getElementById("dj-console").style.backgroundImage = UIbooth;
+			success = true;
 			break;
 		case "plugextra":
 			Lang.ui.buttonVoteNegative = "http://2dforts.dyndns.org/plug/ButtonVoteNegative.png";
@@ -57,14 +59,16 @@ function loadSkin(skinname)
 			Lang.ui.buttonVotePositiveSelected = "http://2dforts.dyndns.org/plug/ButtonVotePositiveSelected.png";
 			Lang.ui.buttonVotePositiveDisabled = "http://2dforts.dyndns.org/plug/ButtonVotePositiveDisabled.png";
 			document.getElementById("dj-console").style.backgroundImage = "url(http://2dforts.dyndns.org/plug/DJConsole2.png)";
+			success = true;
 			break;
 	}
-	if (skinname != "" && skinname != null)
+	if (success)
 	{
-		printChat("Loaded skin " + skinname + ".");
 		DB.settings.pgxSkin = skinname;
 		DB.saveSettings();
 	}
+	
+	return success;
 }
 
 function stylizeButton(but)
@@ -1468,7 +1472,7 @@ function checkOwnIn(e, chatin)
 				if (commandinfo.length > 1 && commandinfo[1] != null 
 					&& commandinfo[1] != "")
 				{
-					loadSkin(commandinfo[1]);
+					if (loadSkin(commandinfo[1])) printChat("Loaded skin " + skinname + ".");
 				}
 				else printChat("Please choose a skin: original, plugextra");
 				break;
