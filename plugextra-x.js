@@ -19,6 +19,7 @@ var showannot = true;
 var emojicons = Emoji._cons;
 var emojimap = Emoji._map;
 var pgxUsers = new Array();
+var curSkinName = "original";
 
 function printChat(str)
 {
@@ -70,6 +71,7 @@ function loadSkin(skinname)
 	}
 	if (success)
 	{
+		curSkinName = skinname;
 		DB.settings.pgxSkin = skinname;
 		DB.saveSettings();
 	}
@@ -1036,7 +1038,9 @@ window.onbeforeunload = function()
 	xmlhttp2 = new XMLHttpRequest();
 	xmlhttp2.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", false);
 	xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xmlhttp2.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=1");
+	xmlhttp2.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=1"
+		+ "&autowoot=" + autowoot + "&autojoin=" + autojoin + "&skin=" + curSkinName + "&annotations="
+		+ showannot + "&emoji=" + (Emoji._cons == "" ? false : true));
 	//alert("Done saving.");
 };
 
