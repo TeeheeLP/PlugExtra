@@ -20,6 +20,7 @@ var emojicons = Emoji._cons;
 var emojimap = Emoji._map;
 var pgxUsers = new Array();
 var curSkinName = "original";
+var logsizepgx = "276px";
 
 function printChat(str)
 {
@@ -579,7 +580,7 @@ function toggleLog()
 	{
 		elem.style.pointerEvents = "auto";
 		elem.style.backgroundColor = "#050505";
-		elem.style.height = "276px";
+		elem.style.height = logsizepgx;
 		elem.style.opacity = "0.8";
 		elem.scrollTop = elem.scrollHeight;
 		togglelogx.style.borderColor = "#00DD00";
@@ -588,6 +589,7 @@ function toggleLog()
 	{
 		elem.style.pointerEvents = "none";
 		elem.style.backgroundColor = "transparent";
+		logsizepgx = elem.style.height;
 		elem.style.height = "5px";
 		elem.style.opacity = "0";
 		elem.scrollTop = elem.scrollHeight;
