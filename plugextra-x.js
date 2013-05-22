@@ -1472,7 +1472,7 @@ function checkOwnIn(e, chatin)
 				if (commandinfo.length > 1 && commandinfo[1] != null 
 					&& commandinfo[1] != "")
 				{
-					if (loadSkin(commandinfo[1])) printChat("Loaded skin " + skinname + ".");
+					if (loadSkin(commandinfo[1])) printChat("Loaded skin " + commandinfo[1] + ".");
 				}
 				else printChat("Please choose a skin: original, plugextra");
 				break;
