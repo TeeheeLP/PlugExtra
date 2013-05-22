@@ -404,7 +404,7 @@ var inhistoryelem = inhistoryOffx;
 
 optionsmenu.appendChild(inhistoryOffx);
 
-var curStatpgx = availablepgx;
+var curStatpgx;
 
 function pgxSetStatus(statusname)
 {
@@ -460,6 +460,8 @@ var availablepgx = document.createElement("div");
 createMenuItem(availablepgx);
 availablepgx.innerHTML = "Available";
 availablepgx.onclick = function() { pgxSetStatus("available"); }
+
+curStatpgx = availablepgx;
 
 optionsmenu.appendChild(availablepgx);
 
