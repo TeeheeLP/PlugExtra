@@ -1358,9 +1358,13 @@ function checkOwnIn(e, chatin)
 				break;
 			case "$autowoot":
 				toggleWoot();
+				if (autowoot) printChat("Activated autowoot.");
+				else printChat("Deactivated autowoot.");
 				break;
 			case "$autojoin":
 				toggleJoin();
+				if (autojoin) printChat("Activated autojoin.");
+				else printChat("Deactivated autojoin.");
 				break;
 			case "$back":
 				if (isaway)
