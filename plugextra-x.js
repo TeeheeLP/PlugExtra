@@ -569,7 +569,7 @@ function hideUserList()
 	if (dissmartcl)
 	{
 		var userlist = document.getElementById("userlistx");
-		userlist.style.left = "-160px";
+		userlist.style.left = "-180px";
 		userlist.style.boxShadow = "0px 0px 0px #000000";
 		userlist.style.opacity = "0";
 		setTimeout(function() { dissmartcl = false; userlist.style.overflowY = "hidden"; }, "500");
