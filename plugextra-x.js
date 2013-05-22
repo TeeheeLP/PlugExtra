@@ -904,7 +904,7 @@ function loadUser(user, userData, rank)
 		xU.style.fontWeight = "bold";
 		xU.style.marginLeft = "5px";
 		xU.title = "X";
-		xU.innerHTML = "<img src='http://teeheekeiken.bplaced.net/images/pgxIconLight.png'>";
+		xU.innerHTML = "<img style='width:29px;height:15px;' src='http://teeheekeiken.bplaced.net/images/pgxIconLight.png'>";
 		user.appendChild(xU);
 	}
 }
