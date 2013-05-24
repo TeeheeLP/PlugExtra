@@ -51,7 +51,12 @@ function requestPMs()
 	{
 		if (mailHTTPpgX.status >= 200 && mailHTTPpgX.readyState >= 4)
 		{
-			printNotification(unescape(mailHTTPpgX.responseText));
+			var response = unescape(mailHTTPpgX.responseText);
+			var messages = response.split("pgxFrom-");
+			for (var i in messages)
+			{
+				printNotification(i + " " + messages[i]);
+			}
 		}
 	}
 	mailHTTPpgX.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
