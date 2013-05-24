@@ -45,7 +45,7 @@ function sendPM(at, message)
 			+ escape(API.getSelf().id) + "&fromname=" + escape(API.getSelf().username));
 	}
 	
-	chatin.value = "$w @" + at.username + " : ";
+	document.getElementById("chat-input-field").value = "$w @" + at.username + " : ";
 }
 
 function requestPMs()
