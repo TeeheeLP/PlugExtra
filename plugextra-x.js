@@ -1541,7 +1541,7 @@ function checkOwnIn(e, chatin)
 					var infostart = -1;
 					for (i in commandinfo)
 					{
-						if (commandinfo[i] == ":" && infostart == -1)
+						if (commandinfo[i] == ":")
 						{
 							infostart = i;
 							break;
@@ -1572,7 +1572,7 @@ function checkOwnIn(e, chatin)
 						message = "";
 						for (var i = infostart; i < commandinfo.length; i++)
 						{
-							if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
+							if (i > infostart && commandinfo[i] != "" && commandinfo[i] != null)
 								message += " ";
 							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
 								message += commandinfo[i];
@@ -1581,10 +1581,6 @@ function checkOwnIn(e, chatin)
 						
 						printNotification(API.getSelf().username + ": " + message);
 						sendPM(user, message);
-						
-						setTimeout(function() { 
-							document.getElementById("chat-input-field").value = "@" 
-							+ user.username + " : "; }, 1000);
 					}
 					else printChat("Couldn't find user " + username + ".");
 				}
