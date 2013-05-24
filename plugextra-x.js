@@ -1538,10 +1538,10 @@ function checkOwnIn(e, chatin)
 						&& commandinfo[2] != "")
 				{
 					var username = "";
-					var infostart = 0;
+					var infostart = -1;
 					for (i in commandinfo)
 					{
-						if (commandinfo[i] == ":")
+						if (commandinfo[i] == ":" && infostart == -1)
 						{
 							infostart = i;
 							break;
