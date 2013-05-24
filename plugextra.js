@@ -1,18 +1,17 @@
-/*var pgxStyle = document.createElement("link");
-pgxStyle.id = "pgxStyle";
-pgxStyle.rel = "stylesheet";
-pgxStyle.type = "text/css";
-pgxStyle.href = "https://raw.github.com/TeeheeLP/PlugExtra/dev/style.css";
-
-document.getElementsByTagName('head')[0].appendChild(pgxStyle);
-
-document.styleSheets[document.styleSheets.length - 1].insertRule("#reloader", "color:#000000");*/
+//	PlugExtra by Jonas "TeeheeKeiken" Tödter is licensed under a Creative Commons 
+//	Attribution-NonCommercial-NoDerivs 3.0 Unported License.
+//	http://creativecommons.org/licenses/by-nc-nd/3.0/
+//
+//	When sharing PlugExtra the official PlugExtra website has to be mentioned.
+//	http://teeheelp.github.io/PlugExtra/
+//
+//	Author: Jonas "TeeheeKeiken" Tödter
 
 function startBot()
 {
 var scr = document.createElement("script");
 scr.id = "plugextra";
-scr.src = ('https://raw.github.com/TeeheeLP/PlugExtra/dev/plugextra-x.js');
+scr.src = ('https://raw.github.com/TeeheeLP/PlugExtra/master/plugextra-x.js');
 document.body.appendChild(scr);
 }
 
