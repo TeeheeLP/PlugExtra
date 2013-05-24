@@ -1581,7 +1581,7 @@ function checkOwnIn(e, chatin)
 						}
 						message = message.slice(2, message.length);
 						
-						printNotification("At " + user.username + ": " + message);
+						printNotification("To " + user.username + ": " + message);
 						sendPM(user, message);
 						whisperUserpgx = user;
 					}
@@ -1589,21 +1589,21 @@ function checkOwnIn(e, chatin)
 				}
 				break;
 			case "$r":
-				if (commandinfo.length > 1 && commandinfo[2] != null 
-						&& commandinfo[2] != "")
+				if (commandinfo.length > 0 && commandinfo[1] != null 
+						&& commandinfo[1] != "")
 				{
 					if (whisperUserpgx != null && API.getUser(whisperUserpgx.id) != null)
 					{
 						var message = "";
-						for (var i = 2; i < commandinfo.length; i++)
+						for (var i = 1; i < commandinfo.length; i++)
 						{
-							if (i > 2 && commandinfo[i] != "" && commandinfo[i] != null)
-								message += " ";
 							if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
+								message += " ";
+							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
 								message += commandinfo[i];
 						}
 						
-						printNotification("At " + whisperUserpgx.username + ": " + message);
+						printNotification("To " + whisperUserpgx.username + ": " + message);
 						sendPM(whisperUserpgx, message);
 					}
 				}
