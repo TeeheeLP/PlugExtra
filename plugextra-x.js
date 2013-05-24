@@ -1584,7 +1584,7 @@ function checkOwnIn(e, chatin)
 						
 						setTimeout(function() { 
 							document.getElementById("chat-input-field").value = "@" 
-							+ user.username + " : "; }, 100);
+							+ user.username + " : "; }, 1000);
 					}
 					else printChat("Couldn't find user " + username + ".");
 				}
