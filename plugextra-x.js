@@ -116,7 +116,11 @@ function requestPMs()
 				var message = messages[i].split("pgXMessage-");
 				if (message[0] != null && message[0] != "")
 				{
-					if (!inboxDoFillpgx) printNotification(message[0] + ": " + message[1]);
+					if (!inboxDoFillpgx)
+					{
+						printNotification(message[0] + ": " + message[1]);
+						Chat.playSound();
+					}
 					else inboxpgx[inboxpgx.length] = message[0] + ": " + message[1];
 				}
 			}
@@ -128,7 +132,6 @@ function requestPMs()
 						<br> Type '$inbox' to read " + (inboxpgx.length > 1 ? "them." : "it."));
 				inboxDoFillpgx = false;
 			}
-			if (messages[0] != null && messages[0] != "") Chat.playSound();
 			setTimeout(function() { requestPMs(); }, 3000);
 		}
 	}
