@@ -1,3 +1,12 @@
+//	PlugExtra by Jonas "TeeheeKeiken" Tödter is licensed under a Creative Commons 
+//	Attribution-NonCommercial-NoDerivs 3.0 Unported License.
+//	http://creativecommons.org/licenses/by-nc-nd/3.0/
+//
+//	When sharing PlugExtra the official PlugExtra website has to be mentioned.
+//	http://teeheelp.github.io/PlugExtra/
+//
+//	Author: Jonas "TeeheeKeiken" Tödter
+
 //	-- Basic Stuff --
 
 var version = "1.4.1";
@@ -116,7 +125,11 @@ function requestPMs()
 				var message = messages[i].split("pgXMessage-");
 				if (message[0] != null && message[0] != "")
 				{
-					if (!inboxDoFillpgx) printNotification(message[0] + ": " + message[1]);
+					if (!inboxDoFillpgx)
+					{
+						printNotification(message[0] + ": " + message[1]);
+						Chat.playSound();
+					}
 					else inboxpgx[inboxpgx.length] = message[0] + ": " + message[1];
 				}
 			}
