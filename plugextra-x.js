@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.4";
+var version = "1.4.1";
 
 var playcount = 1; 
 var autowoot = false;
@@ -21,10 +21,119 @@ var emojimap = Emoji._map;
 var pgxUsers = new Array();
 var curSkinName = "original";
 var logsizepgx = "276px";
+var inboxpgx = new Array();
+var inboxDoFillpgx = true;
+var whisperUserpgx;
+
+function requestSettings()
+{
+	var xmlhttp;
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.onload = function()
+	{
+		if (xmlhttp.status >= 200 && xmlhttp.readyState >= 4)
+		{
+			var response = xmlhttp.responseText.split("-");
+			
+			if (response[4] == 0)
+			{
+				toggleEmoji();
+			}
+
+			if (response[3] == 0)
+				toggleAnnot();
+
+			if (response[0] == 1)
+				toggleWoot();
+	
+			if (response[1] == 1)
+				toggleJoin();
+
+			if (response[2] != null)
+				eval(response[2] + "x.click();");
+
+			if (response[5] != null)
+				setCheckHistory(response[5]);
+			
+			if (response[6] == 0)
+				toggleLog();
+			
+			if (response[7] != null)
+			{
+				var logsizeSetting = response[7].split("#");
+				
+				elem.style.height = logsizeSetting[0];
+				elem.style.width = logsizeSetting[1];
+			}
+			
+			if (response[8] != null)
+			{
+				var logposSetting = response[8].split("#");
+				
+				elem.style.right = logposSetting[0];
+				elem.style.top = logposSetting[1];
+			}
+		}
+	}
+	xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send("requestsettings=1&id=" + escape(API.getSelf().id));
+}
 
 function printChat(str)
 {
-	Models.chat.receive({type:"update", message:("<span style='color:#00ACFF;'>" + str + "</span>")});
+	Models.chat.receive({type:"update", message:("<span style='color:#00ACFF;'> " + str + "</span>")});
+}
+
+function printNotification(str)
+{
+	Models.chat.receive({type:"update", message:("<span style='color:#efbf00;'> " + str + "</span>")});
+}
+
+function sendPM(at, message)
+{
+	if (at != null && at != "" && message != null && message != "")
+	{
+		var mailHTTPpgX = new XMLHttpRequest();
+		mailHTTPpgX.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+		mailHTTPpgX.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		mailHTTPpgX.send("sendpm=1&message=" + escape(message) + "&at=" + escape(at.id) + "&from="
+			+ escape(API.getSelf().id) + "&fromname=" + escape(API.getSelf().username));
+	}
+}
+
+function requestPMs()
+{
+	var mailHTTPpgX = new XMLHttpRequest();
+	mailHTTPpgX.onload = function()
+	{
+		if (mailHTTPpgX.status >= 200 && mailHTTPpgX.readyState >= 4)
+		{
+			var response = unescape(mailHTTPpgX.responseText);
+			var messages = response.split("pgXFrom-");
+			for (var i in messages)
+			{
+				var message = messages[i].split("pgXMessage-");
+				if (message[0] != null && message[0] != "")
+				{
+					if (!inboxDoFillpgx) printNotification(message[0] + ": " + message[1]);
+					else inboxpgx[inboxpgx.length] = message[0] + ": " + message[1];
+				}
+			}
+			if (inboxDoFillpgx)
+			{
+				if (inboxpgx.length > 0) 
+					printNotification("You have " + inboxpgx.length + " new " 
+						+ (inboxpgx.length > 1 ? "messages" : "message") + " in your inbox!\
+						<br> Type '$inbox' to read " + (inboxpgx.length > 1 ? "them." : "it."));
+				inboxDoFillpgx = false;
+			}
+			setTimeout(function() { requestPMs(); }, 3000);
+		}
+	}
+	mailHTTPpgX.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+	mailHTTPpgX.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	mailHTTPpgX.send("requestinbox=1&id=" + escape(API.getSelf().id));
 }
 
 var UIskinVN = Lang.ui.buttonVoteNegative;
@@ -608,6 +717,60 @@ togglelogx.onclick = function()
 
 optionsmenu.appendChild(togglelogx);
 
+var awaymsgin = document.createElement("input");
+awaymsgin.id = "awaymsginx";
+awaymsgin.style.height = "1em";
+awaymsgin.style.marginTop = "10px";
+awaymsgin.style.marginBottom = "5px";
+awaymsgin.style.width = "140px";
+awaymsgin.style.padding = "2px 5px";
+awaymsgin.style.border = "none";
+if ($.browser.webkit) awaymsgin.style.backgroundImage = "-webkit-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
+if ($.browser.mozilla) awaymsgin.style.backgroundImage = "-moz-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
+awaymsgin.setAttribute("onkeydown", "onPressAway(event);");
+awaymsgin.value = "I'm away";
+
+optionsmenu.appendChild(awaymsgin);
+
+function awayBot()
+{
+	if (!isaway)
+	{
+		var awaymsgin = document.getElementById("awaymsginx");
+		if (awaymsgin.value != "" && awaymsgin.value != null)
+			awaymsg = awaymsgin.value;
+		else awaymsg = "I'm away";
+		printChat("You will now reply this message when being mentioned: " + awaymsg);
+		isaway = true;
+		willprintmsg = true;
+		var awaybutx = document.getElementById("awaybutx");
+		awaybutx.style.borderColor = "#00DD00";
+	}
+	else
+	{
+		printChat("You are no longer away!");
+		isaway = false;
+		willprintmsg = false;
+		var awaybutx = document.getElementById("awaybutx");
+		awaybutx.style.borderColor = "#DD0000";
+	}
+}
+
+function onPressAway(e)
+{
+	if (e.keyCode == 13)
+		awayBot();
+}
+
+var awaybut = document.createElement("div");
+createMenuItem(awaybut);
+awaybut.id = "awaybutx";
+awaybut.innerHTML = "Away";
+awaybut.style.borderColor = "#DD0000";
+awaybut.onclick = function() { awayBot(); };
+
+optionsmenu.appendChild(awaybut);
+
 optcontainer.appendChild(optionsmenu);
 
 document.body.appendChild(optcontainer);
@@ -691,70 +854,6 @@ hidelistbut.innerHTML = "Hide";
 hidelistbut.onclick = function() { hideUserList(); };
 
 ulcontent.appendChild(hidelistbut);
-
-var awaymsgin = document.createElement("input");
-awaymsgin.id = "awaymsginx";
-awaymsgin.style.height = "1em";
-awaymsgin.style.marginBottom = "5px";
-awaymsgin.style.marginLeft = "-10px";
-awaymsgin.style.width = "173px";
-awaymsgin.style.padding = "2px 5px";
-awaymsgin.style.border = "none";
-if ($.browser.webkit) awaymsgin.style.backgroundImage = "-webkit-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
-if ($.browser.mozilla) awaymsgin.style.backgroundImage = "-moz-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
-awaymsgin.setAttribute("onkeydown", "onPressAway(event);");
-awaymsgin.value = "I'm away";
-
-ulcontent.appendChild(awaymsgin);
-
-function awayBot()
-{
-	if (!isaway)
-	{
-		var awaymsgin = document.getElementById("awaymsginx");
-		if (awaymsgin.value != "" && awaymsgin.value != null)
-			awaymsg = awaymsgin.value;
-		else awaymsg = "I'm away";
-		Models.user.changeStatus(1);
-		printChat("You will now reply this message when being mentioned: " + awaymsg);
-		isaway = true;
-		willprintmsg = true;
-		var awaybutx = document.getElementById("awaybutx");
-		awaybutx.innerHTML = "Back";
-		if ($.browser.webkit) 
-			awaybutx.style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #780078 100%)";
-		if ($.browser.mozilla) 
-			awaybutx.style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, #780078 100%)";
-	}
-	else
-	{
-		Models.user.changeStatus(0);
-		printChat("You are no longer away!");
-		isaway = false;
-		willprintmsg = false;
-		var awaybutx = document.getElementById("awaybutx");
-		awaybutx.innerHTML = "Away";
-		if ($.browser.webkit) 
-			awaybutx.style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #575757 100%)";
-		if ($.browser.mozilla) 
-			awaybutx.style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, #575757 100%)";
-	}
-}
-
-function onPressAway(e)
-{
-	if (e.keyCode == 13)
-		awayBot();
-}
-
-var awaybut = document.createElement("div");
-stylizeButton(awaybut);
-awaybut.id = "awaybutx";
-awaybut.style.width = "173px";
-awaybut.innerHTML = "Away";
-awaybut.onclick = function() { awayBot(); };
-
-ulcontent.appendChild(awaybut);
 
 function updateCurWaitList()
 {
@@ -1412,6 +1511,9 @@ function checkOwnIn(e, chatin)
 					$help - Displays this message<br> \
 					$version - Displays the current version<br> \
 					$changes - Shows the newest changes<br> \
+					$inbox - Shows your inbox<br>\
+					$w [name] : [message] - Whispers a message to a user<br>\
+					$r : [message] - Whispers a message to the last user you whispered to<br>\
 					$reset - Resets the log position<br> \
 					$nick [name] - Changes your nick<br> \
 					$autowoot - Toggles the autowoot bot<br> \
@@ -1458,15 +1560,100 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("1.4:<br>New:\
+				printChat(" 1.4.1:<br>New:<br>\
+					Added whispering.<br>\
+					Moved the awaybot to the options menu.<br>\
+					Now remembers the log position and size.<br>\
+					1.4:<br>New:<br>\
 					You can now see other PlugExtra users.<br>\
 					Added status buttons to the options menu.<br>\
 					Moved the three buttons at the log to the options menu.<br>\
 					Removed most chat messages on button presses.<br>\
 					Fixed:<br>\
-					The log height won't reset after collapsing it.<br>\
-					1.3.3:<br>New:\
-					Revamped the design completely.");
+					The log height won't reset after collapsing it.<br>");
+				break;
+			case "$inbox":
+				if (inboxpgx.length > 0 && inboxpgx[0] != "")
+				{
+					for (var i in inboxpgx)
+					{
+						printNotification(inboxpgx[i]);
+						inboxpgx[i] = "";
+					}
+				}
+				break;
+			case "$w":
+				if (commandinfo.length > 2 && commandinfo[2] != null 
+						&& commandinfo[2] != "")
+				{
+					var username = "";
+					var infostart = -1;
+					for (i in commandinfo)
+					{
+						if (commandinfo[i] == ":")
+						{
+							infostart = i;
+							break;
+						}
+						if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
+							username += " ";
+						if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+							username += commandinfo[i];
+					}
+					isvalid = false;
+					var user;
+					if (username[0] == '@') username = username.slice(1, username.length);
+					
+					var users = API.getUsers();
+					for (i in users)
+					{
+						if (users[i].username == username)
+						{
+							isvalid = true;
+							user = users[i];
+						}
+					}
+					
+					var message;
+					
+					if (isvalid)
+					{
+						message = "";
+						for (var i = infostart; i < commandinfo.length; i++)
+						{
+							if (i > infostart && commandinfo[i] != "" && commandinfo[i] != null)
+								message += " ";
+							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+								message += commandinfo[i];
+						}
+						message = message.slice(2, message.length);
+						
+						printNotification("To " + user.username + ": " + message);
+						sendPM(user, message);
+						whisperUserpgx = user;
+					}
+					else printChat("Couldn't find user " + username + ".");
+				}
+				break;
+			case "$r":
+				if (commandinfo.length > 0 && commandinfo[1] != null 
+						&& commandinfo[1] != "")
+				{
+					if (whisperUserpgx != null && API.getUser(whisperUserpgx.id) != null)
+					{
+						var message = "";
+						for (var i = 1; i < commandinfo.length; i++)
+						{
+							if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
+								message += " ";
+							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+								message += commandinfo[i];
+						}
+						
+						printNotification("To " + whisperUserpgx.username + ": " + message);
+						sendPM(whisperUserpgx, message);
+					}
+				}
 				break;
 			case "$reset":
 				var log = document.getElementById("log");
@@ -1837,22 +2024,5 @@ chatinput.setAttribute('onkeydown', 'checkOwnIn(event, this);');
 //	   Stuff that has to be done at the end
 //         ---------------
 
-if (DB.settings.showEmoji == false)
-{
-	toggleEmoji();
-}
-
-if (DB.settings.showAnnot == false)
-	toggleAnnot();
-
-if (DB.settings.pgxWoot)
-	toggleWoot();
-	
-if (DB.settings.pgxJoin)
-	toggleJoin();
-
-if (DB.settings.pgxSkin != null)
-	eval(DB.settings.pgxSkin + "x.click();");
-
-if (DB.settings.pgxCheckHistory != null)
-	setCheckHistory(DB.settings.pgxCheckHistory);
+requestPMs();
+requestSettings();
