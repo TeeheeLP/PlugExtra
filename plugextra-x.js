@@ -44,6 +44,8 @@ function sendPM(at, message)
 		mailHTTPpgX.send("sendpm=1&message=" + escape(message) + "&at=" + escape(at.id) + "&from="
 			+ escape(API.getSelf().id) + "&fromname=" + escape(API.getSelf().username));
 	}
+	
+	chatin.value = "$w @" + at.username + " : ";
 }
 
 function requestPMs()
@@ -1534,8 +1536,8 @@ function checkOwnIn(e, chatin)
 				}
 				break;
 			case "$w":
-				if (commandinfo.length > 1 && commandinfo[1] != null 
-						&& commandinfo[1] != "")
+				if (commandinfo.length > 2 && commandinfo[2] != null 
+						&& commandinfo[2] != "")
 				{
 					var username = "";
 					var infostart = 0;
@@ -1577,6 +1579,7 @@ function checkOwnIn(e, chatin)
 							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
 								message += commandinfo[i];
 						}
+						message.slice(1, message.length);
 						
 						printNotification(API.getSelf().username + ": " + message);
 						sendPM(user, message);
