@@ -1580,7 +1580,7 @@ function checkOwnIn(e, chatin)
 					Moved the three buttons at the log to the options menu.<br>\
 					Removed most chat messages on button presses.<br>\
 					Fixed:<br>\
-					The log height won't reset after collapsing it.<br>\");
+					The log height won't reset after collapsing it.<br>");
 				break;
 			case "$inbox":
 				if (inboxpgx.length > 0 && inboxpgx[0] != "")
