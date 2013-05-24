@@ -44,8 +44,6 @@ function sendPM(at, message)
 		mailHTTPpgX.send("sendpm=1&message=" + escape(message) + "&at=" + escape(at.id) + "&from="
 			+ escape(API.getSelf().id) + "&fromname=" + escape(API.getSelf().username));
 	}
-	
-	document.getElementById("chat-input-field").value = "$w @" + at.username + " : ";
 }
 
 function requestPMs()
@@ -1579,10 +1577,11 @@ function checkOwnIn(e, chatin)
 							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
 								message += commandinfo[i];
 						}
-						message.slice(1, message.length);
+						message = message.slice(1, message.length);
 						
 						printNotification(API.getSelf().username + ": " + message);
 						sendPM(user, message);
+						chatin.value = "@" + user.username + " : ";
 					}
 					else printChat("Couldn't find user " + username + ".");
 				}
