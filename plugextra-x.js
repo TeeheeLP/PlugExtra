@@ -763,7 +763,7 @@ function onPressAway(e)
 }
 
 var awaybut = document.createElement("div");
-createMenuButton(awaybut);
+createMenuItem(awaybut);
 awaybut.id = "awaybutx";
 awaybut.innerHTML = "Away";
 awaybut.style.borderColor = "#DD0000";
