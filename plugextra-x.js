@@ -54,6 +54,25 @@ function requestSettings()
 
 			if (response[5] != null)
 				setCheckHistory(response[5]);
+			
+			if (response[6] == 0)
+				toggleLog();
+			
+			if (response[7] != null)
+			{
+				var logsizeSetting = respone[7].split("#");
+				
+				elem.style.height = logsizeSetting[0];
+				elem.style.width = logsizeSetting[1];
+			}
+			
+			if (response[8] != null)
+			{
+				var logposSetting = response[8].split("#");
+				
+				elem.style.right = logposSetting[0];
+				elem.style.top = logposSetting[1];
+			}
 		}
 	}
 	xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
@@ -1551,15 +1570,17 @@ function checkOwnIn(e, chatin)
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
 			case "$changes":
-				printChat("1.4:<br>New:\
+				printChat(" 1.4.1:<br>New:<br>\
+					Added whispering.<br>\
+					Moved the awaybot to the options menu.<br>\
+					Now remembers the log position and size.<br>\
+					1.4:<br>New:<br>\
 					You can now see other PlugExtra users.<br>\
 					Added status buttons to the options menu.<br>\
 					Moved the three buttons at the log to the options menu.<br>\
 					Removed most chat messages on button presses.<br>\
 					Fixed:<br>\
-					The log height won't reset after collapsing it.<br>\
-					1.3.3:<br>New:\
-					Revamped the design completely.");
+					The log height won't reset after collapsing it.<br>\");
 				break;
 			case "$inbox":
 				if (inboxpgx.length > 0 && inboxpgx[0] != "")
