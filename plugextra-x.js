@@ -128,6 +128,7 @@ function requestPMs()
 						<br> Type '$inbox' to read " + (inboxpgx.length > 1 ? "them." : "it."));
 				inboxDoFillpgx = false;
 			}
+			if (messages[0] != null && messages[0] != "") Chat.playSound();
 			setTimeout(function() { requestPMs(); }, 3000);
 		}
 	}
