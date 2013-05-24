@@ -717,6 +717,60 @@ togglelogx.onclick = function()
 
 optionsmenu.appendChild(togglelogx);
 
+var awaymsgin = document.createElement("input");
+awaymsgin.id = "awaymsginx";
+awaymsgin.style.height = "1em";
+awaymsgin.style.marginBottom = "5px";
+awaymsgin.style.marginLeft = "-10px";
+awaymsgin.style.width = "173px";
+awaymsgin.style.padding = "2px 5px";
+awaymsgin.style.border = "none";
+if ($.browser.webkit) awaymsgin.style.backgroundImage = "-webkit-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
+if ($.browser.mozilla) awaymsgin.style.backgroundImage = "-moz-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
+awaymsgin.setAttribute("onkeydown", "onPressAway(event);");
+awaymsgin.value = "I'm away";
+
+optionsmenu.appendChild(awaymsgin);
+
+function awayBot()
+{
+	if (!isaway)
+	{
+		var awaymsgin = document.getElementById("awaymsginx");
+		if (awaymsgin.value != "" && awaymsgin.value != null)
+			awaymsg = awaymsgin.value;
+		else awaymsg = "I'm away";
+		printChat("You will now reply this message when being mentioned: " + awaymsg);
+		isaway = true;
+		willprintmsg = true;
+		var awaybutx = document.getElementById("awaybutx");
+		awaybutx.style.borderColor = "#00DD00";
+	}
+	else
+	{
+		printChat("You are no longer away!");
+		isaway = false;
+		willprintmsg = false;
+		var awaybutx = document.getElementById("awaybutx");
+		awaybutx.style.borderColor = "#DD0000";
+	}
+}
+
+function onPressAway(e)
+{
+	if (e.keyCode == 13)
+		awayBot();
+}
+
+var awaybut = document.createElement("div");
+createMenuButton(awaybut);
+awaybut.id = "awaybutx";
+awaybut.innerHTML = "Away";
+awaybut.style.borderColor = "#DD0000";
+awaybut.onclick = function() { awayBot(); };
+
+optionsmenu.appendChild(awaybut);
+
 optcontainer.appendChild(optionsmenu);
 
 document.body.appendChild(optcontainer);
@@ -800,70 +854,6 @@ hidelistbut.innerHTML = "Hide";
 hidelistbut.onclick = function() { hideUserList(); };
 
 ulcontent.appendChild(hidelistbut);
-
-var awaymsgin = document.createElement("input");
-awaymsgin.id = "awaymsginx";
-awaymsgin.style.height = "1em";
-awaymsgin.style.marginBottom = "5px";
-awaymsgin.style.marginLeft = "-10px";
-awaymsgin.style.width = "173px";
-awaymsgin.style.padding = "2px 5px";
-awaymsgin.style.border = "none";
-if ($.browser.webkit) awaymsgin.style.backgroundImage = "-webkit-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
-if ($.browser.mozilla) awaymsgin.style.backgroundImage = "-moz-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
-awaymsgin.setAttribute("onkeydown", "onPressAway(event);");
-awaymsgin.value = "I'm away";
-
-ulcontent.appendChild(awaymsgin);
-
-function awayBot()
-{
-	if (!isaway)
-	{
-		var awaymsgin = document.getElementById("awaymsginx");
-		if (awaymsgin.value != "" && awaymsgin.value != null)
-			awaymsg = awaymsgin.value;
-		else awaymsg = "I'm away";
-		Models.user.changeStatus(1);
-		printChat("You will now reply this message when being mentioned: " + awaymsg);
-		isaway = true;
-		willprintmsg = true;
-		var awaybutx = document.getElementById("awaybutx");
-		awaybutx.innerHTML = "Back";
-		if ($.browser.webkit) 
-			awaybutx.style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #780078 100%)";
-		if ($.browser.mozilla) 
-			awaybutx.style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, #780078 100%)";
-	}
-	else
-	{
-		Models.user.changeStatus(0);
-		printChat("You are no longer away!");
-		isaway = false;
-		willprintmsg = false;
-		var awaybutx = document.getElementById("awaybutx");
-		awaybutx.innerHTML = "Away";
-		if ($.browser.webkit) 
-			awaybutx.style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #575757 100%)";
-		if ($.browser.mozilla) 
-			awaybutx.style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, #575757 100%)";
-	}
-}
-
-function onPressAway(e)
-{
-	if (e.keyCode == 13)
-		awayBot();
-}
-
-var awaybut = document.createElement("div");
-stylizeButton(awaybut);
-awaybut.id = "awaybutx";
-awaybut.style.width = "173px";
-awaybut.innerHTML = "Away";
-awaybut.onclick = function() { awayBot(); };
-
-ulcontent.appendChild(awaybut);
 
 function updateCurWaitList()
 {
