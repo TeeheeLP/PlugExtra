@@ -21,6 +21,8 @@ var emojimap = Emoji._map;
 var pgxUsers = new Array();
 var curSkinName = "original";
 var logsizepgx = "276px";
+var inboxpgx = new Array();
+var inboxDoFillpgx = true;
 
 function printChat(str)
 {
@@ -56,9 +58,21 @@ function requestPMs()
 			for (var i in messages)
 			{
 				var message = messages[i].split("pgXMessage-");
-				if (i > 0)
-					printNotification(message[0] + ": " + message[1]);
+				if (message[0] != null && message[0] != "")
+				{
+					if (!inboxDoFillpgx) printNotification(message[0] + ": " + message[1]);
+					else inboxpgx[i] = message[0] + ": " + message[1];
+				}
 			}
+			if (inboxDoFillpgx)
+			{
+				if (inboxpgx.length > 0) 
+					printNotification("You have " + inboxpgx.length + " new " 
+						+ (inboxpgx.length > 1 ? "messages" : "message") + " in your inbox!\
+						<br> Type '$inbox' to read " + (inboxpgx.length > 1 ? "them." : "it."));
+				inboxDoFillpgx = false;
+			}
+			setTimeout(function() { requestPMs(); }, 3000);
 		}
 	}
 	mailHTTPpgX.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
@@ -1875,6 +1889,8 @@ chatinput.setAttribute('onkeydown', 'checkOwnIn(event, this);');
 //         ---------------
 //	   Stuff that has to be done at the end
 //         ---------------
+
+requestPMs();
 
 if (DB.settings.showEmoji == false)
 {
