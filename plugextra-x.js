@@ -23,6 +23,7 @@ var curSkinName = "original";
 var logsizepgx = "276px";
 var inboxpgx = new Array();
 var inboxDoFillpgx = true;
+var whisperUserpgx;
 
 function printChat(str)
 {
@@ -1467,6 +1468,7 @@ function checkOwnIn(e, chatin)
 					$changes - Shows the newest changes<br> \
 					$inbox - Shows your inbox<br>\
 					$w [name] : [message] - Whispers a message to a user<br>\
+					$r : [message] - Whispers a message to the last user you whispered to<br>\
 					$reset - Resets the log position<br> \
 					$nick [name] - Changes your nick<br> \
 					$autowoot - Toggles the autowoot bot<br> \
@@ -1579,10 +1581,31 @@ function checkOwnIn(e, chatin)
 						}
 						message = message.slice(2, message.length);
 						
-						printNotification(API.getSelf().username + ": " + message);
+						printNotification("At " + user.username + ": " + message);
 						sendPM(user, message);
+						whisperUserpgx = user;
 					}
 					else printChat("Couldn't find user " + username + ".");
+				}
+				break;
+			case "$r":
+				if (commandinfo.length > 1 && commandinfo[2] != null 
+						&& commandinfo[2] != "")
+				{
+					if (whisperUserpgx != null && API.getUser(whisperUserpgx.id) != null)
+					{
+						var message = "";
+						for (var i = 2; i < commandinfo.length; i++)
+						{
+							if (i > 2 && commandinfo[i] != "" && commandinfo[i] != null)
+								message += " ";
+							if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
+								message += commandinfo[i];
+						}
+						
+						printNotification("At " + whisperUserpgx.username + ": " + message);
+						sendPM(whisperUserpgx, message);
+					}
 				}
 				break;
 			case "$reset":
