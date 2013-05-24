@@ -1521,6 +1521,16 @@ function checkOwnIn(e, chatin)
 					1.3.3:<br>New:\
 					Revamped the design completely.");
 				break;
+			case "$inbox":
+				if (inboxpgx.length > 0 && inboxpgx[0] != "")
+				{
+					for (var i in inboxpgx)
+					{
+						printNotification(inboxpgx[i]);
+						inboxpgx[i] = "";
+					}
+				}
+				break;
 			case "$reset":
 				var log = document.getElementById("log");
 				log.style.top = "288px";
