@@ -1,6 +1,6 @@
 //	-- Basic Stuff --
 
-var version = "1.4";
+var version = "1.4.1";
 
 var playcount = 1; 
 var autowoot = false;
@@ -24,6 +24,42 @@ var logsizepgx = "276px";
 var inboxpgx = new Array();
 var inboxDoFillpgx = true;
 var whisperUserpgx;
+
+function requestSettings()
+{
+	var xmlhttp;
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.onload = function()
+	{
+		if (xmlhttp.status >= 200 && xmlhttp.readyState >= 4)
+		{
+			var response = xmlhttp.responseText.split("-");
+			
+			if (response[4] == 0)
+			{
+				toggleEmoji();
+			}
+
+			if (response[3] == 0)
+				toggleAnnot();
+
+			if (response[0] == 1)
+				toggleWoot();
+	
+			if (response[1] == 1)
+				toggleJoin();
+
+			if (response[2] != null)
+				eval(response[2] + "x.click();");
+
+			if (response[5] != null)
+				setCheckHistory(response[5]);
+		}
+	}
+	xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send("requestsettings=1&id=" + escape(API.getSelf().id));
+}
 
 function printChat(str)
 {
@@ -1978,23 +2014,4 @@ chatinput.setAttribute('onkeydown', 'checkOwnIn(event, this);');
 //         ---------------
 
 requestPMs();
-
-if (DB.settings.showEmoji == false)
-{
-	toggleEmoji();
-}
-
-if (DB.settings.showAnnot == false)
-	toggleAnnot();
-
-if (DB.settings.pgxWoot)
-	toggleWoot();
-	
-if (DB.settings.pgxJoin)
-	toggleJoin();
-
-if (DB.settings.pgxSkin != null)
-	eval(DB.settings.pgxSkin + "x.click();");
-
-if (DB.settings.pgxCheckHistory != null)
-	setCheckHistory(DB.settings.pgxCheckHistory);
+requestSettings();
