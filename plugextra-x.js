@@ -1577,11 +1577,14 @@ function checkOwnIn(e, chatin)
 							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
 								message += commandinfo[i];
 						}
-						message = message.slice(1, message.length);
+						message = message.slice(2, message.length);
 						
 						printNotification(API.getSelf().username + ": " + message);
 						sendPM(user, message);
-						chatin.value = "@" + user.username + " : ";
+						
+						setTimeout(function() { 
+							document.getElementById("chat-input-field").value = "@" 
+							+ user.username + " : "; }, 100);
 					}
 					else printChat("Couldn't find user " + username + ".");
 				}
