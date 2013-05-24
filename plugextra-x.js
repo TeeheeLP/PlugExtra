@@ -60,7 +60,7 @@ function requestSettings()
 			
 			if (response[7] != null)
 			{
-				var logsizeSetting = respone[7].split("#");
+				var logsizeSetting = response[7].split("#");
 				
 				elem.style.height = logsizeSetting[0];
 				elem.style.width = logsizeSetting[1];
