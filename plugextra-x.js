@@ -61,7 +61,7 @@ function requestPMs()
 				if (message[0] != null && message[0] != "")
 				{
 					if (!inboxDoFillpgx) printNotification(message[0] + ": " + message[1]);
-					else inboxpgx[i] = message[0] + ": " + message[1];
+					else inboxpgx[inboxpgx.length] = message[0] + ": " + message[1];
 				}
 			}
 			if (inboxDoFillpgx)
@@ -1465,6 +1465,8 @@ function checkOwnIn(e, chatin)
 					$help - Displays this message<br> \
 					$version - Displays the current version<br> \
 					$changes - Shows the newest changes<br> \
+					$inbox - Shows your inbox<br>\
+					$w [name] : [message] - Whispers a message to a user<br>\
 					$reset - Resets the log position<br> \
 					$nick [name] - Changes your nick<br> \
 					$autowoot - Toggles the autowoot bot<br> \
@@ -1529,6 +1531,56 @@ function checkOwnIn(e, chatin)
 						printNotification(inboxpgx[i]);
 						inboxpgx[i] = "";
 					}
+				}
+				break;
+			case "$w":
+				if (commandinfo.length > 1 && commandinfo[1] != null 
+						&& commandinfo[1] != "")
+				{
+					var username = "";
+					var infostart = 0;
+					for (i in commandinfo)
+					{
+						if (commandinfo[i] == ":")
+						{
+							infostart = i;
+							break;
+						}
+						if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
+							username += " ";
+						if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+							username += commandinfo[i];
+					}
+					isvalid = false;
+					var user;
+					if (username[0] == '@') username = username.slice(1, username.length);
+					
+					var users = API.getUsers();
+					for (i in users)
+					{
+						if (users[i].username == username)
+						{
+							isvalid = true;
+							user = users[i];
+						}
+					}
+					
+					var message;
+					
+					if (isvalid)
+					{
+						message = "";
+						for (var i = infostart; i < commandinfo.length; i++)
+						{
+							if (i > infostart + 1 && commandinfo[i] != "" && commandinfo[i] != null)
+								message += " ";
+							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+								message += commandinfo[i];
+						}
+						
+						sendPM(user, message);
+					}
+					else printChat("Couldn't find user " + username + ".");
 				}
 				break;
 			case "$reset":
