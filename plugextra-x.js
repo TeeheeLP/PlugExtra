@@ -1513,7 +1513,7 @@ function checkOwnIn(e, chatin)
 					$changes - Shows the newest changes<br> \
 					$inbox - Shows your inbox<br>\
 					$w [name] : [message] - Whispers a message to a user<br>\
-					$r : [message] - Whispers a message to the last user you whispered to<br>\
+					$r [message] - Whispers a message to the last user you whispered to<br>\
 					$reset - Resets the log position<br> \
 					$nick [name] - Changes your nick<br> \
 					$autowoot - Toggles the autowoot bot<br> \
