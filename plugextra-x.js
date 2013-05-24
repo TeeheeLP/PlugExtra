@@ -27,6 +27,38 @@ function printChat(str)
 	Models.chat.receive({type:"update", message:("<span style='color:#00ACFF;'>" + str + "</span>")});
 }
 
+function printNotification(str)
+{
+	Models.chat.receive({type:"update", message:("<span style='color:#efbf00;'>" + str + "</span>")});
+}
+
+function sendPM(at, message)
+{
+	if (at != null && at != "" && message != null && message != "")
+	{
+		var mailHTTPpgX = new XMLHttpRequest();
+		mailHTTPpgX.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+		mailHTTPpgX.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		mailHTTPpgX.send("sendpm=1&message=" + escape(message) + "&at=" + escape(at.id) + "&from="
+			+ escape(API.getSelf().id) + "&fromname=" + escape(API.getSelf().username));
+	}
+}
+
+function requestPMs()
+{
+	var mailHTTPpgX = new XMLHttpRequest();
+	mailHTTPpgX.onload = function()
+	{
+		if (mailHTTPpgX.status >= 200 && mailHTTPpgX.readyState >= 4)
+		{
+			printNotification(mailHTTPpgX.responseText);
+		}
+	}
+	mailHTTPpgX.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+	mailHTTPpgX.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	mailHTTPpgX.send("requestinbox=1&id=" + escape(API.getSelf().id));
+}
+
 var UIskinVN = Lang.ui.buttonVoteNegative;
 var UIskinVNS = Lang.ui.buttonVoteNegativeSelected;
 var UIskinVND = Lang.ui.buttonVoteNegativeDisabled;
