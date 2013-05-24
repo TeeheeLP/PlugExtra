@@ -52,7 +52,7 @@ function requestPMs()
 		if (mailHTTPpgX.status >= 200 && mailHTTPpgX.readyState >= 4)
 		{
 			var response = unescape(mailHTTPpgX.responseText);
-			var messages = response.split("pgxFrom-");
+			var messages = response.split("pgXFrom-");
 			for (var i in messages)
 			{
 				printNotification(i + " " + messages[i]);
