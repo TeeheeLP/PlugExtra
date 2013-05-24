@@ -24,12 +24,12 @@ var logsizepgx = "276px";
 
 function printChat(str)
 {
-	Models.chat.receive({type:"update", message:("<span style='color:#00ACFF;'>" + str + "</span>")});
+	Models.chat.receive({type:"update", message:("<span style='color:#00ACFF;'> " + str + "</span>")});
 }
 
 function printNotification(str)
 {
-	Models.chat.receive({type:"update", message:("<span style='color:#efbf00;'>" + str + "</span>")});
+	Models.chat.receive({type:"update", message:("<span style='color:#efbf00;'> " + str + "</span>")});
 }
 
 function sendPM(at, message)
