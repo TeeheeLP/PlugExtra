@@ -55,7 +55,9 @@ function requestPMs()
 			var messages = response.split("pgXFrom-");
 			for (var i in messages)
 			{
-				printNotification(i + " " + messages[i]);
+				var message = messages[i].split("pgXMessage-");
+				if (i > 0)
+					printNotification(message[0] + ": " + message[1]);
 			}
 		}
 	}
