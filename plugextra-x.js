@@ -1572,7 +1572,7 @@ function checkOwnIn(e, chatin)
 						message = "";
 						for (var i = infostart + 1; i < commandinfo.length; i++)
 						{
-							if (i > infostart + 2 && commandinfo[i] != "" && commandinfo[i] != null)
+							if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
 								message += " ";
 							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
 								message += commandinfo[i];
