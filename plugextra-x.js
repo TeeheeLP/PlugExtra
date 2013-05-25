@@ -741,6 +741,7 @@ awaymsgin.style.marginBottom = "5px";
 awaymsgin.style.width = "140px";
 awaymsgin.style.padding = "2px 5px";
 awaymsgin.style.border = "none";
+awaymsgin.style.backgroundImage = "linear-gradient(to bottom, #C2C2C2 0%, #FFFFFF 100%)";
 if ($.browser.webkit) awaymsgin.style.backgroundImage = "-webkit-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
 if ($.browser.mozilla) awaymsgin.style.backgroundImage = "-moz-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
 awaymsgin.setAttribute("onkeydown", "onPressAway(event);");
