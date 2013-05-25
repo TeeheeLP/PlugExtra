@@ -1037,12 +1037,12 @@ function loadUser(user, userData, rank)
 		xU.style.height = "15px";
 		if (Ambspgx.indexOf(userData.id) > -1) 
 		{
-			xU.title = "PlugExtra Developer";
+			xU.title = "PlugExtra Ambassador";
 			xU.src = "http://teeheekeiken.bplaced.net/images/pgxAmbIconLight.png";
 		}
 		else if (userData.id == Leadpgx)
 		{
-			xU.title = "PlugExtra Ambassador";
+			xU.title = "PlugExtra Developer";
 			xU.src = "http://teeheekeiken.bplaced.net/images/pgxLeadIconLight.png";
 		}
 		else
