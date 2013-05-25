@@ -2031,7 +2031,7 @@ function checkOwnIn(e, chatin)
 			}
 		}
 		
-		if (chatin.value[0] == "/") chatin.value = "";
+		if (iscommand) chatin.value = "";
 	}
 }
 
