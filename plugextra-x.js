@@ -1800,15 +1800,15 @@ function checkOwnIn(e, chatin)
 					
 					if (isvalid)
 					{
-						printChat("Username: " + user.username
-							+ "<br>ID: " + user.id
-							+ "<br>Rank: " + suffix[user.permission]
-							+ "<br>Fans: " + user.fans
-							+ "<br>DJ points: " + user.djPoints
-							+ "<br>Listener points: " + user.listenerPoints
-							+ "<br>Curator points: " + user.curatorPoints
-							+ "<br>Total points: " + (user.djPoints + user.listenerPoints
-								+ user.curatorPoints));
+						printChat("<table><tr><td>Username:</td><td>" + user.username
+							+ "</td></tr><tr><td>ID:</td><td>" + user.id
+							+ "</td></tr><tr><td>Rank:</td><td>" + suffix[user.permission]
+							+ "</td></tr><tr><td>Fans:</td><td>" + user.fans
+							+ "</td></tr><tr><td>DJ points:</td><td>" + user.djPoints
+							+ "</td></tr><tr><td>Listener points:</td><td>" + user.listenerPoints
+							+ "</td></tr><tr><td>Curator points:</td><td>" + user.curatorPoints
+							+ "</td></tr><tr><td>Total points:</td><td>" + (user.djPoints + user.listenerPoints
+								+ user.curatorPoints) + "</td></tr></table>");
 					}
 					else printChat("Couldn't find user " + username + ".");
 				}
