@@ -33,6 +33,8 @@ var logsizepgx = "276px";
 var inboxpgx = new Array();
 var inboxDoFillpgx = true;
 var whisperUserpgx;
+var Leadpgx;
+var Ambspgx = new Array();
 
 function requestSettings()
 {
@@ -145,7 +147,7 @@ function requestPMs()
 				if (inboxpgx.length > 0) 
 					printNotification("You have " + inboxpgx.length + " new " 
 						+ (inboxpgx.length > 1 ? "messages" : "message") + " in your inbox!\
-						<br> Type '$inbox' to read " + (inboxpgx.length > 1 ? "them." : "it."));
+						<br> Type '/inbox' to read " + (inboxpgx.length > 1 ? "them." : "it."));
 				inboxDoFillpgx = false;
 			}
 			setTimeout(function() { requestPMs(); }, 3000);
@@ -1033,8 +1035,21 @@ function loadUser(user, userData, rank)
 		xU.style.marginBottom = "-3px";
 		xU.style.width = "29px";
 		xU.style.height = "15px";
-		xU.title = "PlugExtra User";
-		xU.src = "http://teeheekeiken.bplaced.net/images/pgxIconLight.png";
+		if (Ambspgx.indexOf(userData.id)) 
+		{
+			xU.title = "PlugExtra Developer";
+			xU.src = "http://teeheekeiken.bplaced.net/images/pgxAmbIconLight.png";
+		}
+		else if (userData.id == Leadpgx)
+		{
+			xU.title = "PlugExtra Ambassador";
+			xU.src = "http://teeheekeiken.bplaced.net/images/pgxLeadIconLight.png";
+		}
+		else
+		{
+			xU.title = "PlugExtra User";
+			xU.src = "http://teeheekeiken.bplaced.net/images/pgxIconLight.png";
+		}
 		user.appendChild(xU);
 	}
 }
@@ -1512,10 +1527,9 @@ API.addEventListener(API.CHAT, checkMessage);
 function firstRun()
 {
 	printChat("Succesfully started PlugExtra! Using version " + version + "<br> \
-		Enter $help to view a list of available commands or $manual to see an instruction \
-		on how to use the plugin.");
+		Enter /cmds to view a list of available commands.");
 	if (API.getSelf().permission > 1)
-		printChat("Use $modhelp to view commands only available to mods.");
+		printChat("Use /modhelp to view commands only available to mods.");
 }
 
 firstRun();
@@ -1529,62 +1543,41 @@ function checkOwnIn(e, chatin)
 	{
 		switch(commandinfo[0])
 		{
-			case "$help":
+			case "/cmds":
 				printChat("Here is a list of available commands:<br> \
 					( <> = optional [] = necessary )<br> \
-					$manual - Shows how to use the plugin<br> \
-					$help - Displays this message<br> \
-					$version - Displays the current version<br> \
-					$changes - Shows the newest changes<br> \
-					$inbox - Shows your inbox<br>\
-					$w [name] : [message] - Whispers a message to a user<br>\
-					$r [message] - Whispers a message to the last user you whispered to<br>\
-					$reset - Resets the log position<br> \
-					$nick [name] - Changes your nick<br> \
-					$autowoot - Toggles the autowoot bot<br> \
-					$autojoin - Toggles the autojoin bot<br> \
-					$back - Deactivates the awaybot<br> \
-					$away &ltmessage&gt - Activates or deactivates the awaybot<br> \
-					$status [status] - Changes your status<br> \
-					$whois [name] - Shows information about a user<br> \
-					$inhistory [on/skip/off] - Displays if the current song is in the history and \
+					/cmds - Displays this message<br> \
+					/version - Displays the current version<br> \
+					/changes - Shows the newest changes<br> \
+					/inbox - Shows your inbox<br>\
+					/w [name] : [message] - Whispers a message to a user<br>\
+					/r [message] - Whispers a message to the last user you whispered to<br>\
+					/reset - Resets the log position<br> \
+					/nick [name] - Changes your nick<br> \
+					/autowoot - Toggles the autowoot bot<br> \
+					/autojoin - Toggles the autojoin bot<br> \
+					/back - Deactivates the awaybot<br> \
+					/away &ltmessage&gt - Activates or deactivates the awaybot<br> \
+					/status [status] - Changes your status<br> \
+					/whois [name] - Shows information about a user<br> \
+					/inhistory [on/skip/off] - Displays if the current song is in the history and \
 						skips it if set to 'skip' (may glitch visuals for a few songs)<br> \
-					$skin [original/plugextra] - Chooses a skin<br> \
-					$annotations [on/off] - Turns annotations on or off");
+					/skin [original/plugextra] - Chooses a skin<br> \
+					/annotations [on/off] - Turns annotations on or off");
 				break;
-			case "$version":
+			case "/version":
 				printChat("Running on version " + version);
 				break;
-			case "$manual":
-				printChat("What information do you need?<br> \
-					$list: Information about the userlist<br> \
-					$log: Information about the log<br> \
-					$buttons: Information about the log buttons<br> \
-					$awaybot: Information about the awaybot");
-				break;
-			case "$list":
-				printChat("The userlist is at the left hand side of the screen. You can click at the very left \
-					to show it if it's hidden. It contains a list of all users currently in the waitlist \
-					and in the room. Clicking the waitlist will hide it if it is visible or show it if it \
-					is hidden.");
-				break;
-			case "$log":
-				printChat("The log displays information suchs as woots and mehs for the current song. \
-					You can move the log in the middle of the screen by dragging it \
-					with the top bar. Double click it or enter $reset to move the log back to \
-					it's original position. Use the black button at its bottom right hand corner to hide \
-					or show the log. You can also drag the bottom bar to resize the log.");
-				break;
-			case "$buttons":
+			case "/buttons":
 				printChat("When a log button is pressed it begins to glow slightly. The blue button \
 					toggles autojoin which makes you automatically join the waitlist if you're not \
 					in it already, while the green button toggles autowoot which makes you woot every song.");
 				break;
-			case "$awaybot":
+			case "/awaybot":
 				printChat("By clicking the 'Away'-button in the userlist or using the $away command you \
 					automatically reply with a specified message whenever somebody is mentioning you.");
 				break;
-			case "$changes":
+			case "/changes":
 				printChat(" 1.4.1:<br>New:<br>\
 					Added whispering.<br>\
 					Moved the awaybot to the options menu.<br>\
@@ -1597,7 +1590,7 @@ function checkOwnIn(e, chatin)
 					Fixed:<br>\
 					The log height won't reset after collapsing it.<br>");
 				break;
-			case "$inbox":
+			case "/inbox":
 				if (inboxpgx.length > 0 && inboxpgx[0] != "")
 				{
 					for (var i in inboxpgx)
@@ -1607,7 +1600,7 @@ function checkOwnIn(e, chatin)
 					}
 				}
 				break;
-			case "$w":
+			case "/w":
 				if (commandinfo.length > 2 && commandinfo[2] != null 
 						&& commandinfo[2] != "")
 				{
@@ -1660,7 +1653,7 @@ function checkOwnIn(e, chatin)
 					else printChat("Couldn't find user " + username + ".");
 				}
 				break;
-			case "$r":
+			case "/r":
 				if (commandinfo.length > 0 && commandinfo[1] != null 
 						&& commandinfo[1] != "")
 				{
@@ -1680,7 +1673,7 @@ function checkOwnIn(e, chatin)
 					}
 				}
 				break;
-			case "$reset":
+			case "/reset":
 				var log = document.getElementById("log");
 				log.style.top = "288px";
 				log.style.right = "177px";
@@ -1696,7 +1689,7 @@ function checkOwnIn(e, chatin)
 				but3.style.left = "171px";
 				printChat("Reset the log position.");
 				break;
-			case "$nick":
+			case "/nick":
 				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
 				{
 					var nick = "";
@@ -1716,23 +1709,23 @@ function checkOwnIn(e, chatin)
 				}
 				else printChat("No nick specified.");
 				break;
-			case "$autowoot":
+			case "/autowoot":
 				toggleWoot();
 				if (autowoot) printChat("Activated autowoot.");
 				else printChat("Deactivated autowoot.");
 				break;
-			case "$autojoin":
+			case "/autojoin":
 				toggleJoin();
 				if (autojoin) printChat("Activated autojoin.");
 				else printChat("Deactivated autojoin.");
 				break;
-			case "$back":
+			case "/back":
 				if (isaway)
 				{
 					document.getElementById("awaybutx").click();
 				}
 				break;
-			case "$away":
+			case "/away":
 				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
 				{
 					var awaymsg = "";
@@ -1747,7 +1740,7 @@ function checkOwnIn(e, chatin)
 				}
 				document.getElementById("awaybutx").click();
 				break;
-			case "$status":
+			case "/status":
 				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
 				{
 					var stat = commandinfo[1].toLowerCase();
@@ -1778,7 +1771,7 @@ function checkOwnIn(e, chatin)
 				}
 				else printChat("No status specified.");
 				break;
-			case "$whois":
+			case "/whois":
 				if (commandinfo.length > 1 && commandinfo[1] != null 
 					&& commandinfo[1] != "")
 				{
@@ -1820,7 +1813,7 @@ function checkOwnIn(e, chatin)
 					else printChat("Couldn't find user " + username + ".");
 				}
 				break;
-			case "$inhistory":
+			case "/inhistory":
 				if (commandinfo.length > 1 && commandinfo[1] != null 
 					&& commandinfo[1] != "")
 				{
@@ -1828,7 +1821,7 @@ function checkOwnIn(e, chatin)
 				}
 				else printChat("Please choose on, skip or off.");
 				break;
-			case "$skin":
+			case "/skin":
 				if (commandinfo.length > 1 && commandinfo[1] != null 
 					&& commandinfo[1] != "")
 				{
@@ -1836,7 +1829,7 @@ function checkOwnIn(e, chatin)
 				}
 				else printChat("Please choose a skin: original, plugextra");
 				break;
-			case "$annotations":
+			case "/annotations":
 				if (commandinfo.length > 1 && commandinfo[1] != null 
 					&& commandinfo[1] != "")
 				{
@@ -1863,7 +1856,7 @@ function checkOwnIn(e, chatin)
 			ismodcommand = true;
 			switch(commandinfo[0])
 			{
-				case "$modhelp":
+				case "/modhelp":
 					printChat("List of mod commands:<br> \
 						( <> = optional [] = necessary )<br> \
 						$remove [name] - Removes a user from the waitlist or dj \
@@ -1873,7 +1866,7 @@ function checkOwnIn(e, chatin)
 							60 minutes and displays the given reason message<br> \
 						$ban [name] : &ltreason&gt - Bans a specified user");
 					break;
-				case "$remove":
+				case "/remove":
 					if (commandinfo.length > 1 && commandinfo[1] != null 
 						&& commandinfo[1] != "")
 					{
@@ -1920,7 +1913,7 @@ function checkOwnIn(e, chatin)
 					}
 					else printChat("No user specified.");
 					break;
-				case "$add":
+				case "/add":
 					if (commandinfo.length > 1 && commandinfo[1] != null 
 						&& commandinfo[1] != "")
 					{
@@ -1970,8 +1963,8 @@ function checkOwnIn(e, chatin)
 					}
 					else printChat("No user specified.");
 					break;
-				case "$ban":
-				case "$kick":
+				case "/ban":
+				case "/kick":
 					if (commandinfo.length > 1 && commandinfo[1] != null 
 						&& commandinfo[1] != "")
 					{
@@ -2019,7 +2012,7 @@ function checkOwnIn(e, chatin)
 						
 						if (isvalid)
 						{
-							if (commandinfo[0] == "$ban")
+							if (commandinfo[0] == "/ban")
 							{
 								API.moderateBanUser(id);
 							}
@@ -2038,7 +2031,7 @@ function checkOwnIn(e, chatin)
 			}
 		}
 		
-		if (chatin.value[0] == "$") chatin.value = "";
+		if (chatin.value[0] == "/") chatin.value = "";
 	}
 }
 
@@ -2051,3 +2044,36 @@ chatinput.setAttribute('onkeydown', 'checkOwnIn(event, this);');
 
 requestPMs();
 requestSettings();
+
+function requestRanked()
+{
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.onload = function()
+	{
+		if (xmlhttp.status >= 200 && xmlhttp.readyState >= 4)
+		{
+			var ranked = xmlhttp.responseText.split("pgxLead");
+			if (ranked[0] != null && ranked[0] != "")
+			{
+				Leadpgx = ranked[0];
+			}
+			if (ranked[1] != null && ranked[1] != "")
+			{
+				var ambs = ranked[1].split("pgxAmb");
+				for (var i in ambs)
+				{
+					if (ambs[i] != null && ambs[i] != "")
+					{
+						Ambspgx[Ambspgx.length] = ambs[i];
+					}
+				}
+			}
+		}
+	}
+	xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send("requestranked=1");
+}
+
+requestRanked();
