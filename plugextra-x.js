@@ -204,6 +204,7 @@ function loadSkin(skinname)
 
 function stylizeButton(but)
 {
+	but.style.backgroundImage = "linear-gradient(to top, #000000 0%, #575757 100%)";
 	if ($.browser.webkit) 
 		but.style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #575757 100%)";
 	if ($.browser.mozilla) 
@@ -260,6 +261,7 @@ optionsmenu.id = "optionsx";
 optionsmenu.style.position = "relative";
 optionsmenu.style.height = "100%";
 optionsmenu.style.width = "150px";
+optionsmenu.style.backgroundImage = "linear-gradient(to left, #000000 0%, #262626 200%)";
 if ($.browser.webkit) optionsmenu.style.backgroundImage = "-webkit-linear-gradient(right, #000000 0%, #262626 200%)";
 if ($.browser.mozilla) optionsmenu.style.backgroundImage = "-moz-linear-gradient(right, #000000 0%, #262626 200%)";
 optionsmenu.style.backgroundColor = "#070707";
@@ -292,6 +294,7 @@ function createMenuItem(menuitem)
 	style.transition = "border-width 0.15s";
 	style.webkitTransition = "border-width 0.15s";
 	menuitem.className = "pgxButton";
+	style.backgroundImage = "linear-gradient(to top, #000000 0%, #1F1F1F 100%)";
 	if ($.browser.webkit) style.backgroundImage = "-webkit-linear-gradient(bottom, #000000 0%, #1F1F1F 100%)";
 	if ($.browser.mozilla) style.backgroundImage = "-moz-linear-gradient(bottom, #000000 0%, #1F1F1F 100%)";
 	menuitem.width = "173px";
@@ -738,6 +741,7 @@ awaymsgin.style.marginBottom = "5px";
 awaymsgin.style.width = "140px";
 awaymsgin.style.padding = "2px 5px";
 awaymsgin.style.border = "none";
+awaymsgin.style.backgroundImage = "linear-gradient(to bottom, #C2C2C2 0%, #FFFFFF 100%)";
 if ($.browser.webkit) awaymsgin.style.backgroundImage = "-webkit-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
 if ($.browser.mozilla) awaymsgin.style.backgroundImage = "-moz-linear-gradient(top, #C2C2C2 0%, #FFFFFF 100%)";
 awaymsgin.setAttribute("onkeydown", "onPressAway(event);");
@@ -828,8 +832,9 @@ userlist.id = "userlistx";
 userlist.style.position = "absolute";
 userlist.style.height = "100%";
 userlist.style.width = "190px";
-if ($.browser.webkit) userlist.style.backgroundImage = "-webkit-linear-gradient(left , #000000 0%, #262626 200%)";
-if ($.browser.mozilla) userlist.style.backgroundImage = "-moz-linear-gradient(left , #000000 0%, #262626 200%)";
+userlist.style.backgroundImage = "linear-gradient(to right, #000000 0%, #262626 200%)";
+if ($.browser.webkit) userlist.style.backgroundImage = "-webkit-linear-gradient(left, #000000 0%, #262626 200%)";
+if ($.browser.mozilla) userlist.style.backgroundImage = "-moz-linear-gradient(left, #000000 0%, #262626 200%)";
 userlist.style.backgroundColor = "#070707";
 userlist.style.top = "0px";
 userlist.style.left = "0px";
