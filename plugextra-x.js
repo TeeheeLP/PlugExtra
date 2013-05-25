@@ -1035,7 +1035,7 @@ function loadUser(user, userData, rank)
 		xU.style.marginBottom = "-3px";
 		xU.style.width = "29px";
 		xU.style.height = "15px";
-		if (Ambspgx.indexOf(userData.id)) 
+		if (Ambspgx.indexOf(userData.id) > -1) 
 		{
 			xU.title = "PlugExtra Developer";
 			xU.src = "http://teeheekeiken.bplaced.net/images/pgxAmbIconLight.png";
