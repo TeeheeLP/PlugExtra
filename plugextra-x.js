@@ -133,7 +133,7 @@ function requestPMs()
 						{
 							if (API.getUsers()[user].username == message[0])
 							{
-								whisperUserpgx = API.getUser()[user];
+								whisperUserpgx = API.getUsers()[user];
 							}
 						}
 					}
