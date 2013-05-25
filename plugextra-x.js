@@ -129,6 +129,13 @@ function requestPMs()
 					{
 						printNotification(message[0] + ": " + message[1]);
 						Chat.playSound();
+						for (var user in API.getUsers())
+						{
+							if (API.getUsers()[user].username == message[0])
+							{
+								whisperUserpgx = API.getUsers()[user];
+							}
+						}
 					}
 					else inboxpgx[inboxpgx.length] = message[0] + ": " + message[1];
 				}
