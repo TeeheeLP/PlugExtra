@@ -131,9 +131,9 @@ function requestPMs()
 						Chat.playSound();
 						for (var user in API.getUsers())
 						{
-							if (user.username == message[0])
+							if (API.getUser()[user].username == message[0])
 							{
-								whisperUserpgx = user;
+								whisperUserpgx = API.getUser()[user];
 							}
 						}
 					}
