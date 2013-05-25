@@ -58,16 +58,16 @@ function requestSettings()
 			if (response[1] == 1)
 				toggleJoin();
 
-			if (response[2] != null)
+			if (response[2] != null && response[2] != "")
 				eval(response[2] + "x.click();");
 
-			if (response[5] != null)
+			if (response[5] != null && response[5] != "")
 				setCheckHistory(response[5]);
 			
 			if (response[6] == 0)
 				toggleLog();
 			
-			if (response[7] != null)
+			if (response[7] != null && response[7] != "")
 			{
 				var logsizeSetting = response[7].split("#");
 				
@@ -75,7 +75,7 @@ function requestSettings()
 				elem.style.width = logsizeSetting[1];
 			}
 			
-			if (response[8] != null)
+			if (response[8] != null && response[8] != "")
 			{
 				var logposSetting = response[8].split("#");
 				
