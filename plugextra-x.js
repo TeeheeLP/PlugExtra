@@ -1195,7 +1195,7 @@ function uploadSettings()
 	//alert("Done saving.");
 };
 
-window.onbeforeunload = uploadSettings();
+if (!$.browser.opera) window.onbeforeunload = uploadSettings();
 if ($.browser.opera) window.onclose = uploadSettings();
 
 function checkWaitList(users)
