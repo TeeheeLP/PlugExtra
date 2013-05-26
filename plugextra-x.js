@@ -1173,7 +1173,7 @@ xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlhttp.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=0");
 
-window.onclose = function()
+window.onbeforeunload = function()
 {
 	var xmlhttp2;
 	xmlhttp2 = new XMLHttpRequest();
