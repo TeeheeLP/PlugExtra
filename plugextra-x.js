@@ -1173,7 +1173,7 @@ xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlhttp.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=0");
 
-window.onbeforeunload = function()
+function uploadSettings()
 {
 	var xmlhttp2;
 	xmlhttp2 = new XMLHttpRequest();
@@ -1194,6 +1194,9 @@ window.onbeforeunload = function()
 		+ (elem.style.right + "#" + elem.style.top));
 	//alert("Done saving.");
 };
+
+window.onbeforeunload = uploadSettings();
+if ($.browser.opera) window.onclose = uploadSettings();
 
 function checkWaitList(users)
 {
