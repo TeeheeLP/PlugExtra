@@ -1123,7 +1123,7 @@ userlist.appendChild(ulcontent);
 
 function refreshpgXUsers()
 {
-	var xmlhttp3;
+	/*var xmlhttp3;
 	xmlhttp3 = new XMLHttpRequest();
 	xmlhttp3.onload = function()
 	{
@@ -1150,7 +1150,7 @@ function refreshpgXUsers()
 	}
 	xmlhttp3.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 	xmlhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xmlhttp3.send("requestusers=1");
+	xmlhttp3.send("requestusers=1");*/
 }
 
 updateCurWaitList();
@@ -1167,15 +1167,15 @@ setInterval(function()
 //	
 //	---------
 
-var xmlhttp;
+/*var xmlhttp;
 xmlhttp = new XMLHttpRequest();
 xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xmlhttp.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=0");
+xmlhttp.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=0");*/
 
 function uploadSettings()
 {
-	var xmlhttp2;
+	/*var xmlhttp2;
 	xmlhttp2 = new XMLHttpRequest();
 	xmlhttp2.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", false);
 	xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -1191,7 +1191,7 @@ function uploadSettings()
 		+ (showannot ? 1 : 0) + "&emoji=" + ((Emoji._cons == "" ? false : true) ? 1 : 0) + "&checkhistory="
 		+ checkhistoryStr + "&log=" + (elem.style.pointerEvents == "none" ? 0 : 1) + "&logsize="
 		+ (elem.style.height + "#" + elem.style.width) + "&logposition="
-		+ (elem.style.right + "#" + elem.style.top));
+		+ (elem.style.right + "#" + elem.style.top));*/
 	//alert("Done saving.");
 };
 
