@@ -38,7 +38,7 @@ var Ambspgx = new Array();
 
 function requestSettings()
 {
-	var xmlhttp;
+	/*var xmlhttp;
 	xmlhttp = new XMLHttpRequest();
 	xmlhttp.onload = function()
 	{
@@ -88,7 +88,7 @@ function requestSettings()
 	}
 	xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xmlhttp.send("requestsettings=1&id=" + escape(API.getSelf().id));
+	xmlhttp.send("requestsettings=1&id=" + escape(API.getSelf().id));*/
 }
 
 function printChat(str)
@@ -103,19 +103,19 @@ function printNotification(str)
 
 function sendPM(at, message)
 {
-	if (at != null && at != "" && message != null && message != "")
+	/*if (at != null && at != "" && message != null && message != "")
 	{
 		var mailHTTPpgX = new XMLHttpRequest();
 		mailHTTPpgX.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 		mailHTTPpgX.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		mailHTTPpgX.send("sendpm=1&message=" + escape(message) + "&at=" + escape(at.id) + "&from="
 			+ escape(API.getSelf().id) + "&fromname=" + escape(API.getSelf().username));
-	}
+	}*/
 }
 
 function requestPMs()
 {
-	var mailHTTPpgX = new XMLHttpRequest();
+	/*var mailHTTPpgX = new XMLHttpRequest();
 	mailHTTPpgX.onload = function()
 	{
 		if (mailHTTPpgX.status >= 200 && mailHTTPpgX.readyState >= 4)
@@ -155,7 +155,7 @@ function requestPMs()
 	}
 	mailHTTPpgX.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 	mailHTTPpgX.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	mailHTTPpgX.send("requestinbox=1&id=" + escape(API.getSelf().id));
+	mailHTTPpgX.send("requestinbox=1&id=" + escape(API.getSelf().id));*/
 }
 
 var UIskinVN = Lang.ui.buttonVoteNegative;
@@ -1533,6 +1533,7 @@ function firstRun()
 		Enter /cmds to view a list of available commands.");
 	if (API.getSelf().permission > 1)
 		printChat("Use /modhelp to view commands only available to mods.");
+	printNotification("Whispering and saving settings is temporarily disabled due to problems!");
 }
 
 firstRun();
@@ -2050,7 +2051,7 @@ requestSettings();
 
 function requestRanked()
 {
-	var xmlhttp = new XMLHttpRequest();
+	/*var xmlhttp = new XMLHttpRequest();
 	xmlhttp = new XMLHttpRequest();
 	xmlhttp.onload = function()
 	{
@@ -2076,7 +2077,7 @@ function requestRanked()
 	}
 	xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xmlhttp.send("requestranked=1");
+	xmlhttp.send("requestranked=1");*/
 }
 
 requestRanked();
