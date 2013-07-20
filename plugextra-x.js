@@ -86,7 +86,7 @@ function requestSettings()
 	}
 	xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xmlhttp.send("requestsettings=1&id=" + escape(API.getSelf().id));*/
+	xmlhttp.send("requestsettings=1&id=" + escape(API.getUser().id));*/
 }
 
 function printChat(str)
@@ -107,7 +107,7 @@ function sendPM(at, message)
 		mailHTTPpgX.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 		mailHTTPpgX.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		mailHTTPpgX.send("sendpm=1&message=" + escape(message) + "&at=" + escape(at.id) + "&from="
-			+ escape(API.getSelf().id) + "&fromname=" + escape(API.getSelf().username));
+			+ escape(API.getUser().id) + "&fromname=" + escape(API.getUser().username));
 	}*/
 }
 
@@ -153,7 +153,7 @@ function requestPMs()
 	}
 	mailHTTPpgX.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 	mailHTTPpgX.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	mailHTTPpgX.send("requestinbox=1&id=" + escape(API.getSelf().id));*/
+	mailHTTPpgX.send("requestinbox=1&id=" + escape(API.getUser().id));*/
 }
 
 /*var UIskinVN = Lang.ui.buttonVoteNegative;
@@ -619,7 +619,7 @@ sleepingpgx.onclick = function() { pgxSetStatus("sleeping"); }
 
 optionsmenu.appendChild(sleepingpgx);
 
-switch(API.getSelf().status)
+switch(API.getUser().status)
 {
 	case -1:
 		curStatuspgx = idlepgx;
@@ -890,7 +890,7 @@ function updateCurWaitList()
 	{
 		var user = document.createElement("li");
 		user.innerHTML = users[i].username;
-		if (users[i].id == API.getSelf().id)
+		if (users[i].id == API.getUser().id)
 		{
 			user.style.fontWeight = "bold";
 			user.style.fontStyle = "italic";
@@ -1169,7 +1169,7 @@ setInterval(function()
 xmlhttp = new XMLHttpRequest();
 xmlhttp.open("POST", "http://teeheekeiken.bplaced.net/plugextra.php", true);
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xmlhttp.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=0");*/
+xmlhttp.send("username=" + escape(API.getUser().username) + "&id=" + escape(API.getUser().id) + "&logout=0");*/
 
 function uploadSettings()
 {
@@ -1184,7 +1184,7 @@ function uploadSettings()
 		else checkhistoryStr = "on";
 	}
 	else checkhistoryStr = "off";
-	xmlhttp2.send("username=" + escape(API.getSelf().username) + "&id=" + escape(API.getSelf().id) + "&logout=1"
+	xmlhttp2.send("username=" + escape(API.getUser().username) + "&id=" + escape(API.getUser().id) + "&logout=1"
 		+ "&autowoot=" + (autowoot ? 1 : 0) + "&autojoin=" + (autojoin ? 1 : 0) + "&skin=" + curSkinName + "&annotations="
 		+ (showannot ? 1 : 0) + "&emoji=" + ((Emoji._cons == "" ? false : true) ? 1 : 0) + "&checkhistory="
 		+ checkhistoryStr + "&log=" + (elem.style.pointerEvents == "none" ? 0 : 1) + "&logsize="
@@ -1278,11 +1278,11 @@ function joinList()
 	var cont = true; 
 	for (var i = 0; i < API.getWaitList().length; i++) 
 	{ 
-		if (API.getSelf().id == API.getWaitList()[i].id) cont = false; 
+		if (API.getUser().id == API.getWaitList()[i].id) cont = false; 
 	} 
 	for (var i = 0; i < API.getDJs().length; i++) 
 	{ 
-		if (API.getSelf().id == API.getDJs()[i].id) cont = false; 
+		if (API.getUser().id == API.getDJs()[i].id) cont = false; 
 	} 
 	
 	if (cont) 
@@ -1328,7 +1328,7 @@ function doCheckHistory()
 		}
 		//printChat("Is in history!");
 		//printChat(media.title + " by " + media.author + " is in the current history!");
-		if (autoskip && (API.getSelf().permission > 1 || API.getDJs()[0].id == API.getSelf().id))
+		if (autoskip && (API.getUser().permission > 1 || API.getDJs()[0].id == API.getUser().id))
 		{
 			//printChat("Got permission!");
 			API.sendChat("/me skips the current song because it is in the history.");
@@ -1380,7 +1380,7 @@ function callback(obj)
 	{
 		checkInHistory();
 	}
-	if (obj.dj.id == API.getSelf().id) document.getElementById("chat-sound").playMentionSound();
+	if (obj.dj.id == API.getUser().id) document.getElementById("chat-sound").playMentionSound();
 	playcount += 1;
 	log = document.getElementById("log");
 	log.innerHTML += "<div id='track" + playcount 
@@ -1501,7 +1501,7 @@ function checkMessage(data)
 {
 	if (isaway && willprintmsg)
 	{
-		if (data.message.search("@" + API.getSelf().username) != -1)
+		if (data.message.search("@" + API.getUser().username) != -1)
 		{
 			API.sendChat("@" + data.from + " " + awaymsg);
 			willprintmsg = false;
@@ -1511,7 +1511,7 @@ function checkMessage(data)
 	if (API.getUser(data.fromID).permission > 1)
 	{
 		var commandinfo = data.message.split(' ');
-		if (commandinfo[0] == "@" + API.getSelf().username)
+		if (commandinfo[0] == "@" + API.getUser().username)
 		{
 			if (commandinfo[1] == "!disable" && autojoin)
 			{
@@ -1529,7 +1529,7 @@ function firstRun()
 {
 	printChat("Succesfully started PlugExtra! Using version " + version + "<br> \
 		Enter /cmds to view a list of available commands.");
-	if (API.getSelf().permission > 1)
+	if (API.getUser().permission > 1)
 		printChat("Use /modhelp to view commands only available to mods.");
 	printNotification("Whispering and saving settings is temporarily disabled due to problems!");
 }
@@ -1853,7 +1853,7 @@ function checkOwnIn(e, chatin)
 				break;
 		}
 		
-		if (API.getSelf().permission > 1)
+		if (API.getUser().permission > 1)
 		{
 			ismodcommand = true;
 			switch(commandinfo[0])
