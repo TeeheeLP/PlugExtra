@@ -327,7 +327,7 @@ hidemenubut.onclick = function() { hideOptionsMenu(); };
 
 optionsmenu.appendChild(hidemenubut);
 
-var streamx = document.createElement("div");
+/*var streamx = document.createElement("div");
 createMenuItem(streamx);
 if (!DB.settings.streamDisabled) streamx.style.borderColor = "#00DD00";
 else streamx.style.borderColor = "#DD0000";
@@ -346,7 +346,7 @@ streamx.onclick = function()
 	}
 };
 
-optionsmenu.appendChild(streamx);
+optionsmenu.appendChild(streamx);*/
 
 var annotx = document.createElement("div");
 
