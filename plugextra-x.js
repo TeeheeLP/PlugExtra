@@ -1288,7 +1288,7 @@ function joinList()
 	
 	if (cont) 
 	{ 
-		API.waitListJoin(); 
+		API.djJoin();
 	} 
 } 
 
@@ -1300,7 +1300,7 @@ function doCheckHistory()
 	//printChat("autoskip: " + autoskip);
 	//printChat("checkhistory: " + checkhistory);
 	//printChat(Models.history.data[0]);
-	var history = Models.history.data;
+	var history = API.getHistory();
 	var media = API.getMedia();
 	//printChat("History: " + history.length + history[0].media.title + " " + history[0].media.author);
 	//printChat("Old/New DJ: " + history[0].user.id + " | " + API.getDJs()[0].id);
@@ -1343,11 +1343,11 @@ function doCheckHistory()
 function checkInHistory()
 {
 	//printChat("Cycling...");
-	if (Models.history.hasLoaded && Models.history.data != null && Models.history.data != undefined && Models.history.data != "")
+	if (API.getHistory() != null)
 	{
 		doCheckHistory();
 	}
-	else setTimeout(function() { Models.history.load(); checkInHistory(); Models.history.reset(); }, "5000");
+	else setTimeout(function() { checkInHistory(); }, "5000");
 }
 
 API.addEventListener(API.DJ_ADVANCE, callback); 
