@@ -964,7 +964,7 @@ document.styleSheets[0].insertRule(".useritemx:hover { border-width:8px !importa
 
 function loadUser(user, userData, rank)
 {
-	var votes = Models.room.data.votes;
+	var votes;
 	user.id = "pgx" + userData.id;
 	user.className = "useritemx";
 	user.style.color = "#FFFFFF";
@@ -1017,8 +1017,11 @@ function loadUser(user, userData, rank)
 	user.innerHTML += userData.username;
 	if (rank == "admin") user.innerHTML += " <span style='font-size:0.7em'>(Admin)</span>";
 	
-	if (votes[userData.id] == 1) user.style.borderColor = "#00FF00";
-	else if (votes[userData.id] == -1) user.style.borderColor = "#FF0000";
+	if (votes != null)
+	{
+		if (votes[userData.id] == 1) user.style.borderColor = "#00FF00";
+		else if (votes[userData.id] == -1) user.style.borderColor = "#FF0000";
+	}
 	
 	if (pgxUsers[userData.id])
 	{
