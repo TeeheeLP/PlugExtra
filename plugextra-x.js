@@ -91,12 +91,12 @@ function requestSettings()
 
 function printChat(str)
 {
-	Models.chat.receive({type:"update", message:("<span style='color:#00ACFF;'> " + str + "</span>")});
+	API.chatLog("<span style='color:#00ACFF;'> " + str + "</span>");
 }
 
 function printNotification(str)
 {
-	Models.chat.receive({type:"update", message:("<span style='color:#efbf00;'> " + str + "</span>")});
+	API.chatLog("<span style='color:#efbf00;'> " + str + "</span>");
 }
 
 function sendPM(at, message)
@@ -356,16 +356,16 @@ function toggleAnnot()
 	{
 		showannot = false;
 		printChat("You will not be notified when somebody joins or leaves the room.");
-		DB.settings.showAnnot = false;
-		DB.saveSettings();
+		//DB.settings.showAnnot = false;
+		//DB.saveSettings();
 		annotx.style.borderColor = "#DD0000";
 	}
 	else
 	{
 		showannot = true;
 		printChat("You will now be notified when somebody joins or leaves the room.");
-		DB.settings.showAnnot = true;
-		DB.saveSettings();
+		//DB.settings.showAnnot = true;
+		//DB.saveSettings();
 		annotx.style.borderColor = "#00DD00"
 	}
 }
@@ -386,20 +386,20 @@ function toggleEmoji()
 {
 	if (Emoji._cons == "")
 	{
-		Emoji._cons = emojicons;
-		Emoji._map = emojimap;
+		//Emoji._cons = emojicons;
+		//Emoji._map = emojimap;
 		emojix.style.borderColor = "#00DD00";
-		DB.settings.showEmoji = true;
-		DB.saveSettings();
+		//DB.settings.showEmoji = true;
+		//DB.saveSettings();
 		printChat("Activated Emojis.");
 	}
 	else
 	{
-		Emoji._cons = "";
-		Emoji._map = "";
+		//Emoji._cons = "";
+		//Emoji._map = "";
 		emojix.style.borderColor = "#DD0000";
-		DB.settings.showEmoji = false;
-		DB.saveSettings();
+		//DB.settings.showEmoji = false;
+		//DB.saveSettings();
 		printChat("Deactivated Emojis.");
 	}
 }
@@ -499,8 +499,8 @@ function setCheckHistory(opt)
 	
 	if (opt == "on" || opt == "skip" || opt == "off")
 	{
-		DB.settings.pgxCheckHistory = opt;
-		DB.saveSettings();
+		//DB.settings.pgxCheckHistory = opt;
+		//DB.saveSettings();
 	}
 }
 
@@ -574,7 +574,7 @@ function pgxSetStatus(statusname)
 	
 	if (statint >= -1)
 	{
-		Models.user.changeStatus(statint);
+		API.setStatus(statint);
 	}
 }
 
@@ -649,16 +649,16 @@ function toggleWoot()
 	{
 		autowoot = false;
 		autowootx.style.borderColor = "#DD0000";
-		DB.settings.pgxWoot = false;
-		DB.saveSettings();
+		//DB.settings.pgxWoot = false;
+		//DB.saveSettings();
 	}
 	else
 	{
 		autowoot = true;
 		document.getElementById("button-vote-positive").click();
 		autowootx.style.borderColor = "#00DD00";
-		DB.settings.pgxWoot = true;
-		DB.saveSettings();
+		//DB.settings.pgxWoot = true;
+		//DB.saveSettings();
 	}
 }
 
@@ -668,19 +668,17 @@ function toggleJoin()
 	{
 		autojoin = false;
 		autojoinx.style.borderColor = "#DD0000";
-		DB.settings.pgxJoin = false;
-		DB.saveSettings();
+		//DB.settings.pgxJoin = false;
+		//DB.saveSettings();
 	}
-	else if (Models.playlist.selectedPlaylistID != 0 && Models.playlist.selectedPlaylistID != ""
-		&& Models.playlist.selectedPlaylistID != null)
+	else 
 	{
 		autojoin = true;
 		joinList();
 		autojoinx.style.borderColor = "#00DD00";
-		DB.settings.pgxJoin = true;
-		DB.saveSettings();
+		//DB.settings.pgxJoin = true;
+		//DB.saveSettings();
 	}
-	else printChat("You need an active playlist to use autojoin.");
 }
 
 var autowootx = document.createElement("div");
