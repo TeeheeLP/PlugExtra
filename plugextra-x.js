@@ -1055,7 +1055,7 @@ function loadUser(user, userData, rank)
 
 function refreshUserlist()
 {	
-	var votes = Models.room.data.votes;
+	var votes;
 	
 	var stafflist = document.getElementById("stafflistx");
 	stafflist.innerHTML = "";
