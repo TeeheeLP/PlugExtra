@@ -1232,7 +1232,7 @@ function checkWaitList(users)
 	oldwaitlist = API.getWaitList();
 }
 
-API.addEventListener(API.WAIT_LIST_UPDATE, checkWaitList);
+API.on(API.WAIT_LIST_UPDATE, checkWaitList);
 
 function checkDJBooth()
 {
@@ -1272,7 +1272,7 @@ function checkDJBooth()
 	olddjbooth = API.getDJs();
 }
 
-API.addEventListener(API.DJ_UPDATE, checkDJBooth);
+API.on(API.DJ_UPDATE, checkDJBooth);
 
 function joinList() 
 { 
@@ -1350,7 +1350,7 @@ function checkInHistory()
 	else setTimeout(function() { checkInHistory(); }, "5000");
 }
 
-API.addEventListener(API.DJ_ADVANCE, callback); 
+API.on(API.DJ_ADVANCE, callback); 
 function callback(obj) 
 { 
 	if (autojoin) joinList(); 
@@ -1395,7 +1395,7 @@ function callback(obj)
 	if (doscroll) log.scrollTop = log.scrollHeight; 
 } 
 
-API.addEventListener(API.CURATE_UPDATE, showcura); 
+API.on(API.CURATE_UPDATE, showcura); 
 function showcura(obj) 
 { 
 	log = document.getElementById("log"); 
@@ -1406,7 +1406,7 @@ function showcura(obj)
 	prevscore = API.getRoomScore(); 
 } 
 
-API.addEventListener(API.VOTE_UPDATE, showvoter); 
+API.on(API.VOTE_UPDATE, showvoter); 
 function showvoter(obj) 
 { 
 	var vote = obj.vote == 1 ? "woot" : "meh"; 
@@ -1481,7 +1481,7 @@ function onUserJoined(user)
 	refreshUserlist();
 }
 
-API.addEventListener(API.USER_JOIN, onUserJoined);
+API.on(API.USER_JOIN, onUserJoined);
 
 function onUserLeft(user)
 {
@@ -1492,7 +1492,7 @@ function onUserLeft(user)
 	refreshUserlist();
 }
 
-API.addEventListener(API.USER_LEAVE, onUserLeft);
+API.on(API.USER_LEAVE, onUserLeft);
 
 //	---------------
 //	Chat management
@@ -1524,7 +1524,7 @@ function checkMessage(data)
 	}
 }
 
-API.addEventListener(API.CHAT, checkMessage);
+API.on(API.CHAT, checkMessage);
 
 function firstRun()
 {
