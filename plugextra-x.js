@@ -1544,239 +1544,379 @@ function checkOwnIn(chatin)
 	var iscommand = true;
 	var commandinfo = chatin.split(' ');
 	
-	if (e.keyCode == 13)
+	switch(commandinfo[0])
 	{
-		switch(commandinfo[0])
-		{
-			case "/cmds":
-				printChat("Here is a list of available commands:<br> \
-					( <> = optional [] = necessary )<br> \
-					/cmds - Displays this message<br> \
-					/version - Displays the current version<br> \
-					/changes - Shows the newest changes<br> \
-					/inbox - Shows your inbox<br>\
-					/w [name] : [message] - Whispers a message to a user<br>\
-					/r [message] - Whispers a message to the last user you whispered to<br>\
-					/reset - Resets the log position<br> \
-					/nick [name] - Changes your nick<br> \
-					/autowoot - Toggles the autowoot bot<br> \
-					/autojoin - Toggles the autojoin bot<br> \
-					/back - Deactivates the awaybot<br> \
-					/away &ltmessage&gt - Activates or deactivates the awaybot<br> \
-					/status [status] - Changes your status<br> \
-					/whois [name] - Shows information about a user<br> \
-					/inhistory [on/skip/off] - Displays if the current song is in the history and \
-						skips it if set to 'skip' (may glitch visuals for a few songs)<br> \
-					/skin [original/plugextra] - Chooses a skin<br> \
-					/annotations [on/off] - Turns annotations on or off");
-				break;
-			case "/version":
-				printChat("Running on version " + version);
-				break;
-			case "/buttons":
-				printChat("When a log button is pressed it begins to glow slightly. The blue button \
-					toggles autojoin which makes you automatically join the waitlist if you're not \
-					in it already, while the green button toggles autowoot which makes you woot every song.");
-				break;
-			case "/awaybot":
-				printChat("By clicking the 'Away'-button in the userlist or using the $away command you \
-					automatically reply with a specified message whenever somebody is mentioning you.");
-				break;
-			case "/changes":
-				printChat(" 1.4.1:<br>New:<br>\
-					Added whispering.<br>\
-					Moved the awaybot to the options menu.<br>\
-					Now remembers the log position and size.<br>\
-					1.4:<br>New:<br>\
-					You can now see other PlugExtra users.<br>\
-					Added status buttons to the options menu.<br>\
-					Moved the three buttons at the log to the options menu.<br>\
-					Removed most chat messages on button presses.<br>\
-					Fixed:<br>\
-					The log height won't reset after collapsing it.<br>");
-				break;
-			case "/inbox":
-				if (inboxpgx.length > 0 && inboxpgx[0] != "")
+		case "/cmds":
+			printChat("Here is a list of available commands:<br> \
+				( <> = optional [] = necessary )<br> \
+				/cmds - Displays this message<br> \
+				/version - Displays the current version<br> \
+				/changes - Shows the newest changes<br> \
+				/inbox - Shows your inbox<br>\
+				/w [name] : [message] - Whispers a message to a user<br>\
+				/r [message] - Whispers a message to the last user you whispered to<br>\
+				/reset - Resets the log position<br> \
+				/nick [name] - Changes your nick<br> \
+				/autowoot - Toggles the autowoot bot<br> \
+				/autojoin - Toggles the autojoin bot<br> \
+				/back - Deactivates the awaybot<br> \
+				/away &ltmessage&gt - Activates or deactivates the awaybot<br> \
+				/status [status] - Changes your status<br> \
+				/whois [name] - Shows information about a user<br> \
+				/inhistory [on/skip/off] - Displays if the current song is in the history and \
+					skips it if set to 'skip' (may glitch visuals for a few songs)<br> \
+				/skin [original/plugextra] - Chooses a skin<br> \
+				/annotations [on/off] - Turns annotations on or off");
+			break;
+		case "/version":
+			printChat("Running on version " + version);
+			break;
+		case "/buttons":
+			printChat("When a log button is pressed it begins to glow slightly. The blue button \
+				toggles autojoin which makes you automatically join the waitlist if you're not \
+				in it already, while the green button toggles autowoot which makes you woot every song.");
+			break;
+		case "/awaybot":
+			printChat("By clicking the 'Away'-button in the userlist or using the $away command you \
+				automatically reply with a specified message whenever somebody is mentioning you.");
+			break;
+		case "/changes":
+			printChat(" 1.4.1:<br>New:<br>\
+				Added whispering.<br>\
+				Moved the awaybot to the options menu.<br>\
+				Now remembers the log position and size.<br>\
+				1.4:<br>New:<br>\
+				You can now see other PlugExtra users.<br>\
+				Added status buttons to the options menu.<br>\
+				Moved the three buttons at the log to the options menu.<br>\
+				Removed most chat messages on button presses.<br>\
+				Fixed:<br>\
+				The log height won't reset after collapsing it.<br>");
+			break;
+		case "/inbox":
+			if (inboxpgx.length > 0 && inboxpgx[0] != "")
+			{
+				for (var i in inboxpgx)
 				{
-					for (var i in inboxpgx)
+					printNotification(inboxpgx[i]);
+					inboxpgx[i] = "";
+				}
+			}
+			break;
+		case "/w":
+			if (commandinfo.length > 2 && commandinfo[2] != null 
+				&& commandinfo[2] != "")
+			{
+				var username = "";
+				var infostart = -1;
+				for (i in commandinfo)
+				{
+					if (commandinfo[i] == ":")
 					{
-						printNotification(inboxpgx[i]);
-						inboxpgx[i] = "";
+						infostart = i;
+						break;
+					}
+					if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
+						username += " ";
+					if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+						username += commandinfo[i];
+				}
+				isvalid = false;
+				var user;
+				if (username[0] == '@') username = username.slice(1, username.length);
+				
+				var users = API.getUsers();
+				for (i in users)
+				{
+					if (users[i].username == username)
+					{
+						isvalid = true;
+						user = users[i];
 					}
 				}
+				
+				var message;
+				
+				if (isvalid)
+				{
+					message = "";
+					for (var i = infostart; i < commandinfo.length; i++)
+					{
+						if (i > infostart && commandinfo[i] != "" && commandinfo[i] != null)
+							message += " ";
+						if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+							message += commandinfo[i];
+					}
+					message = message.slice(2, message.length);
+					
+					printNotification("To " + user.username + ": " + message);
+					sendPM(user, message);
+					whisperUserpgx = user;
+				}
+				else printChat("Couldn't find user " + username + ".");
+			}
+			break;
+		case "/r":
+			if (commandinfo.length > 0 && commandinfo[1] != null 
+					&& commandinfo[1] != "")
+			{
+				if (whisperUserpgx != null && API.getUser(whisperUserpgx.id) != null)
+				{
+					var message = "";
+					for (var i = 1; i < commandinfo.length; i++)
+					{
+						if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
+							message += " ";
+						if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+							message += commandinfo[i];
+					}
+					
+					printNotification("To " + whisperUserpgx.username + ": " + message);
+					sendPM(whisperUserpgx, message);
+				}
+			}
+			break;
+		case "/reset":
+			var log = document.getElementById("log");
+			log.style.top = "288px";
+			log.style.right = "177px";
+			log.style.zIndex = "8";
+			var but1 = document.getElementById("togg");
+			but1.style.top = "280px";
+			but1.style.left = "225px";
+			var but2 = document.getElementById("expwoot");
+			but2.style.top = "255px";
+			but2.style.left = "198px";
+			var but3 = document.getElementById("expjoin");
+			but3.style.top = "230px";
+			but3.style.left = "171px";
+			printChat("Reset the log position.");
+			break;
+		case "/nick":
+			if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
+			{
+				var nick = "";
+				for (i in commandinfo)
+				{
+					if (i > 0)
+					{
+						nick += commandinfo[i] + " ";
+					}
+				}
+				
+				if (nick != null && nick != "")
+				{
+					Models.user.changeDisplayName(nick);
+				}
+				else printChat("No nick specified.");
+			}
+			else printChat("No nick specified.");
+			break;
+		case "/autowoot":
+			toggleWoot();
+			if (autowoot) printChat("Activated autowoot.");
+			else printChat("Deactivated autowoot.");
+			break;
+		case "/autojoin":
+			toggleJoin();
+			if (autojoin) printChat("Activated autojoin.");
+			else printChat("Deactivated autojoin.");
+			break;
+		case "/back":
+			if (isaway)
+			{
+				document.getElementById("awaybutx").click();
+			}
+			break;
+		case "/away":
+			if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
+			{
+				var awaymsg = "";
+				for (i in commandinfo)
+				{
+					if (i > 0)
+					{
+						awaymsg += commandinfo[i] + " ";
+					}
+				}
+				document.getElementById("awaymsginx").value = awaymsg;
+			}
+			document.getElementById("awaybutx").click();
+			break;
+		case "/status":
+			if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
+			{
+				var stat = commandinfo[1].toLowerCase();
+				var statint;
+				switch(stat)
+				{
+					case "idle":
+						statint = -1;
+						break;
+					case "available":
+						statint = 0;
+						break;
+					case "afk":
+						statint = 1;
+						break;
+					case "working":
+						statint = 2;
+						break;
+					case "sleeping":
+						statint = 3;
+						break;
+				}
+				if (statint >= -1)
+				{
+					Models.user.changeStatus(statint);
+				}
+				else printChat("This is no valid status: " + stat);
+			}
+			else printChat("No status specified.");
+			break;
+		case "/whois":
+			if (commandinfo.length > 1 && commandinfo[1] != null 
+				&& commandinfo[1] != "")
+			{
+				var username = "";
+				for (i in commandinfo)
+				{
+					if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
+						username += " ";
+					if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+						username += commandinfo[i];
+				}
+				isvalid = false;
+				var id;
+				if (username[0] == '@') username = username.slice(1, username.length);
+				
+				var users = API.getUsers();
+				for (i in users)
+				{
+					if (users[i].username == username)
+					{
+						isvalid = true;
+						id = users[i].id;
+					}
+				}
+				var user = API.getUser(id);
+				
+				if (isvalid)
+				{
+					printChat("<table><tr><td>Username:</td><td> " + user.username
+						+ "</td></tr><tr><td>ID:</td><td> " + user.id
+						+ "</td></tr><tr><td>Rank:</td><td> " + suffix[user.permission]
+						+ "</td></tr><tr><td>Fans:</td><td> " + user.fans
+						+ "</td></tr><tr><td>DJ points:</td><td> " + user.djPoints
+						+ "</td></tr><tr><td>Listener points:</td><td> " + user.listenerPoints
+						+ "</td></tr><tr><td>Curator points:</td><td> " + user.curatorPoints
+						+ "</td></tr><tr><td>Total points:</td><td> " + (user.djPoints + user.listenerPoints
+							+ user.curatorPoints) + "</td></tr></table>");
+				}
+				else printChat("Couldn't find user " + username + ".");
+			}
+			break;
+		case "/inhistory":
+			if (commandinfo.length > 1 && commandinfo[1] != null 
+				&& commandinfo[1] != "")
+			{
+				setCheckHistory(commandinfo[1]);
+			}
+			else printChat("Please choose on, skip or off.");
+			break;
+		case "/skin":
+			if (commandinfo.length > 1 && commandinfo[1] != null 
+				&& commandinfo[1] != "")
+			{
+				if (loadSkin(commandinfo[1])) printChat("Loaded skin " + commandinfo[1] + ".");
+			}
+			else printChat("Please choose a skin: original, plugextra");
+			break;
+		case "/annotations":
+			if (commandinfo.length > 1 && commandinfo[1] != null 
+				&& commandinfo[1] != "")
+			{
+				if (commandinfo[1] == "on")
+				{
+					if (!showannot) toggleAnnot();
+				}
+				else if (commandinfo[1] == "off")
+				{
+					if (showannot) toggleAnnot();
+					
+				}
+				else printChat("Please choose on or off.");
+			}
+			else printChat("Please choose on or off.");
+			break;
+		default:
+			iscommand = false;
+			break;
+	}
+	
+	if (API.getUser().permission > 1)
+	{
+		ismodcommand = true;
+		switch(commandinfo[0])
+		{
+			case "/modhelp":
+				printChat("List of mod commands:<br> \
+					( <> = optional [] = necessary )<br> \
+					$remove [name] - Removes a user from the waitlist or dj \
+						booth<br> \
+					$add [name] - Adds a user to the waitlist<br> \
+					$kick [name] : &ltreason&gt - Kicks a user for \
+						60 minutes and displays the given reason message<br> \
+					$ban [name] : &ltreason&gt - Bans a specified user");
 				break;
-			case "/w":
-				if (commandinfo.length > 2 && commandinfo[2] != null 
-						&& commandinfo[2] != "")
+			case "/remove":
+				if (commandinfo.length > 1 && commandinfo[1] != null 
+					&& commandinfo[1] != "")
 				{
 					var username = "";
-					var infostart = -1;
 					for (i in commandinfo)
 					{
-						if (commandinfo[i] == ":")
-						{
-							infostart = i;
-							break;
-						}
 						if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
 							username += " ";
 						if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
 							username += commandinfo[i];
 					}
 					isvalid = false;
-					var user;
+					var id;
 					if (username[0] == '@') username = username.slice(1, username.length);
 					
-					var users = API.getUsers();
-					for (i in users)
+					var waitlist = API.getWaitList();
+					var djbooth = API.getDJs();
+					for (n in waitlist)
 					{
-						if (users[i].username == username)
+						if (username == waitlist[n].username)
 						{
 							isvalid = true;
-							user = users[i];
+							id = waitlist[n].id;
 						}
 					}
-					
-					var message;
+					if (!isvalid)
+					{
+						for (n in djbooth)
+						{
+							if (username == djbooth[n].username)
+							{
+								isvalid = true;
+								id = djbooth[n].id;
+							}
+						}
+					}
 					
 					if (isvalid)
 					{
-						message = "";
-						for (var i = infostart; i < commandinfo.length; i++)
-						{
-							if (i > infostart && commandinfo[i] != "" && commandinfo[i] != null)
-								message += " ";
-							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
-								message += commandinfo[i];
-						}
-						message = message.slice(2, message.length);
-						
-						printNotification("To " + user.username + ": " + message);
-						sendPM(user, message);
-						whisperUserpgx = user;
+						new ModerationRemoveDJService(id);
 					}
-					else printChat("Couldn't find user " + username + ".");
+					else
+						printChat("Couldn't find " + username + " in waitlist or dj booth.");
 				}
+				else printChat("No user specified.");
 				break;
-			case "/r":
-				if (commandinfo.length > 0 && commandinfo[1] != null 
-						&& commandinfo[1] != "")
-				{
-					if (whisperUserpgx != null && API.getUser(whisperUserpgx.id) != null)
-					{
-						var message = "";
-						for (var i = 1; i < commandinfo.length; i++)
-						{
-							if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
-								message += " ";
-							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
-								message += commandinfo[i];
-						}
-						
-						printNotification("To " + whisperUserpgx.username + ": " + message);
-						sendPM(whisperUserpgx, message);
-					}
-				}
-				break;
-			case "/reset":
-				var log = document.getElementById("log");
-				log.style.top = "288px";
-				log.style.right = "177px";
-				log.style.zIndex = "8";
-				var but1 = document.getElementById("togg");
-				but1.style.top = "280px";
-				but1.style.left = "225px";
-				var but2 = document.getElementById("expwoot");
-				but2.style.top = "255px";
-				but2.style.left = "198px";
-				var but3 = document.getElementById("expjoin");
-				but3.style.top = "230px";
-				but3.style.left = "171px";
-				printChat("Reset the log position.");
-				break;
-			case "/nick":
-				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
-				{
-					var nick = "";
-					for (i in commandinfo)
-					{
-						if (i > 0)
-						{
-							nick += commandinfo[i] + " ";
-						}
-					}
-					
-					if (nick != null && nick != "")
-					{
-						Models.user.changeDisplayName(nick);
-					}
-					else printChat("No nick specified.");
-				}
-				else printChat("No nick specified.");
-				break;
-			case "/autowoot":
-				toggleWoot();
-				if (autowoot) printChat("Activated autowoot.");
-				else printChat("Deactivated autowoot.");
-				break;
-			case "/autojoin":
-				toggleJoin();
-				if (autojoin) printChat("Activated autojoin.");
-				else printChat("Deactivated autojoin.");
-				break;
-			case "/back":
-				if (isaway)
-				{
-					document.getElementById("awaybutx").click();
-				}
-				break;
-			case "/away":
-				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
-				{
-					var awaymsg = "";
-					for (i in commandinfo)
-					{
-						if (i > 0)
-						{
-							awaymsg += commandinfo[i] + " ";
-						}
-					}
-					document.getElementById("awaymsginx").value = awaymsg;
-				}
-				document.getElementById("awaybutx").click();
-				break;
-			case "/status":
-				if (commandinfo.length > 1 && commandinfo[1] != null && commandinfo[1] != "")
-				{
-					var stat = commandinfo[1].toLowerCase();
-					var statint;
-					switch(stat)
-					{
-						case "idle":
-							statint = -1;
-							break;
-						case "available":
-							statint = 0;
-							break;
-						case "afk":
-							statint = 1;
-							break;
-						case "working":
-							statint = 2;
-							break;
-						case "sleeping":
-							statint = 3;
-							break;
-					}
-					if (statint >= -1)
-					{
-						Models.user.changeStatus(statint);
-					}
-					else printChat("This is no valid status: " + stat);
-				}
-				else printChat("No status specified.");
-				break;
-			case "/whois":
+			case "/add":
 				if (commandinfo.length > 1 && commandinfo[1] != null 
 					&& commandinfo[1] != "")
 				{
@@ -1801,242 +1941,97 @@ function checkOwnIn(chatin)
 							id = users[i].id;
 						}
 					}
-					var user = API.getUser(id);
 					
 					if (isvalid)
 					{
-						printChat("<table><tr><td>Username:</td><td> " + user.username
-							+ "</td></tr><tr><td>ID:</td><td> " + user.id
-							+ "</td></tr><tr><td>Rank:</td><td> " + suffix[user.permission]
-							+ "</td></tr><tr><td>Fans:</td><td> " + user.fans
-							+ "</td></tr><tr><td>DJ points:</td><td> " + user.djPoints
-							+ "</td></tr><tr><td>Listener points:</td><td> " + user.listenerPoints
-							+ "</td></tr><tr><td>Curator points:</td><td> " + user.curatorPoints
-							+ "</td></tr><tr><td>Total points:</td><td> " + (user.djPoints + user.listenerPoints
-								+ user.curatorPoints) + "</td></tr></table>");
-					}
-					else printChat("Couldn't find user " + username + ".");
-				}
-				break;
-			case "/inhistory":
-				if (commandinfo.length > 1 && commandinfo[1] != null 
-					&& commandinfo[1] != "")
-				{
-					setCheckHistory(commandinfo[1]);
-				}
-				else printChat("Please choose on, skip or off.");
-				break;
-			case "/skin":
-				if (commandinfo.length > 1 && commandinfo[1] != null 
-					&& commandinfo[1] != "")
-				{
-					if (loadSkin(commandinfo[1])) printChat("Loaded skin " + commandinfo[1] + ".");
-				}
-				else printChat("Please choose a skin: original, plugextra");
-				break;
-			case "/annotations":
-				if (commandinfo.length > 1 && commandinfo[1] != null 
-					&& commandinfo[1] != "")
-				{
-					if (commandinfo[1] == "on")
-					{
-						if (!showannot) toggleAnnot();
-					}
-					else if (commandinfo[1] == "off")
-					{
-						if (showannot) toggleAnnot();
-						
-					}
-					else printChat("Please choose on or off.");
-				}
-				else printChat("Please choose on or off.");
-				break;
-			default:
-				iscommand = false;
-				break;
-		}
-		
-		if (API.getUser().permission > 1)
-		{
-			ismodcommand = true;
-			switch(commandinfo[0])
-			{
-				case "/modhelp":
-					printChat("List of mod commands:<br> \
-						( <> = optional [] = necessary )<br> \
-						$remove [name] - Removes a user from the waitlist or dj \
-							booth<br> \
-						$add [name] - Adds a user to the waitlist<br> \
-						$kick [name] : &ltreason&gt - Kicks a user for \
-							60 minutes and displays the given reason message<br> \
-						$ban [name] : &ltreason&gt - Bans a specified user");
-					break;
-				case "/remove":
-					if (commandinfo.length > 1 && commandinfo[1] != null 
-						&& commandinfo[1] != "")
-					{
-						var username = "";
-						for (i in commandinfo)
-						{
-							if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
-								username += " ";
-							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
-								username += commandinfo[i];
-						}
-						isvalid = false;
-						var id;
-						if (username[0] == '@') username = username.slice(1, username.length);
-						
 						var waitlist = API.getWaitList();
 						var djbooth = API.getDJs();
-						for (n in waitlist)
+						for (i in waitlist)
 						{
-							if (username == waitlist[n].username)
-							{
-								isvalid = true;
-								id = waitlist[n].id;
-							}
+							if (id == waitlist[i].id)
+								isvalid = false;
 						}
-						if (!isvalid)
+						for (i in djbooth)
 						{
-							for (n in djbooth)
-							{
-								if (username == djbooth[n].username)
-								{
-									isvalid = true;
-									id = djbooth[n].id;
-								}
-							}
+							if (id == djbooth[i].id)
+								isvalid = false;
 						}
-						
 						if (isvalid)
 						{
-							new ModerationRemoveDJService(id);
+							new ModerationAddDJService(id);
 						}
-						else
-							printChat("Couldn't find " + username + " in waitlist or dj booth.");
+						else printChat(username + " already is a dj.");
 					}
-					else printChat("No user specified.");
-					break;
-				case "/add":
-					if (commandinfo.length > 1 && commandinfo[1] != null 
-						&& commandinfo[1] != "")
+					else printChat("Can't find user " + username + ".");
+				}
+				else printChat("No user specified.");
+				break;
+			case "/ban":
+			case "/kick":
+				if (commandinfo.length > 1 && commandinfo[1] != null 
+					&& commandinfo[1] != "")
+				{
+					var username = "";
+					var infostart = 0;
+					for (i in commandinfo)
 					{
-						var username = "";
-						for (i in commandinfo)
+						if (commandinfo[i] == ":")
 						{
-							if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
-								username += " ";
-							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
-								username += commandinfo[i];
+							infostart = i;
+							break;
 						}
-						isvalid = false;
-						var id;
-						if (username[0] == '@') username = username.slice(1, username.length);
-						
-						var users = API.getUsers();
-						for (i in users)
-						{
-							if (users[i].username == username)
-							{
-								isvalid = true;
-								id = users[i].id;
-							}
-						}
-						
-						if (isvalid)
-						{
-							var waitlist = API.getWaitList();
-							var djbooth = API.getDJs();
-							for (i in waitlist)
-							{
-								if (id == waitlist[i].id)
-									isvalid = false;
-							}
-							for (i in djbooth)
-							{
-								if (id == djbooth[i].id)
-									isvalid = false;
-							}
-							if (isvalid)
-							{
-								new ModerationAddDJService(id);
-							}
-							else printChat(username + " already is a dj.");
-						}
-						else printChat("Can't find user " + username + ".");
+						if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
+							username += " ";
+						if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+							username += commandinfo[i];
 					}
-					else printChat("No user specified.");
-					break;
-				case "/ban":
-				case "/kick":
-					if (commandinfo.length > 1 && commandinfo[1] != null 
-						&& commandinfo[1] != "")
+					isvalid = false;
+					var id;
+					if (username[0] == '@') username = username.slice(1, username.length);
+					
+					var users = API.getUsers();
+					for (i in users)
 					{
-						var username = "";
-						var infostart = 0;
-						for (i in commandinfo)
+						if (users[i].username == username)
 						{
-							if (commandinfo[i] == ":")
-							{
-								infostart = i;
-								break;
-							}
-							if (i > 1 && commandinfo[i] != "" && commandinfo[i] != null)
-								username += " ";
-							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
-								username += commandinfo[i];
+							isvalid = true;
+							id = users[i].id;
 						}
-						isvalid = false;
-						var id;
-						if (username[0] == '@') username = username.slice(1, username.length);
-						
-						var users = API.getUsers();
-						for (i in users)
-						{
-							if (users[i].username == username)
-							{
-								isvalid = true;
-								id = users[i].id;
-							}
-						}
-						
-						var message;
-						
-						if (isvalid)
-						{
-							message = "";
-							for (var i = infostart; i < commandinfo.length; i++)
-							{
-								if (i > infostart + 1 && commandinfo[i] != "" && commandinfo[i] != null)
-									message += " ";
-								if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
-									message += commandinfo[i];
-							}
-						}
-						
-						if (isvalid)
-						{
-							if (commandinfo[0] == "/ban")
-							{
-								API.moderateBanUser(id);
-							}
-							else 
-							{
-								API.moderateKickUser(id);
-							}
-						}
-						else printChat("Can't find user " + username + ".");
 					}
-					else printChat("No user specified.");
-					break;
-				default:
-					ismodcommand = iscommand;
-					break;
-			}
+					
+					var message;
+					
+					if (isvalid)
+					{
+						message = "";
+						for (var i = infostart; i < commandinfo.length; i++)
+						{
+							if (i > infostart + 1 && commandinfo[i] != "" && commandinfo[i] != null)
+								message += " ";
+							if (i > 0 && commandinfo[i] != "" && commandinfo[i] != null)
+								message += commandinfo[i];
+						}
+					}
+					
+					if (isvalid)
+					{
+						if (commandinfo[0] == "/ban")
+						{
+							API.moderateBanUser(id);
+						}
+						else 
+						{
+							API.moderateKickUser(id);
+						}
+					}
+					else printChat("Can't find user " + username + ".");
+				}
+				else printChat("No user specified.");
+				break;
+			default:
+				ismodcommand = iscommand;
+				break;
 		}
-		
-		if (iscommand) chatin.value = "";
 	}
 }
 
