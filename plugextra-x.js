@@ -164,10 +164,10 @@ var UIskinVND = Lang.ui.buttonVoteNegativeDisabled;
 var UIskinVP = Lang.ui.buttonVotePositive;
 var UIskinVPS = Lang.ui.buttonVotePositiveSelected;
 var UIskinVPD = Lang.ui.buttonVotePositiveDisabled;
-var UIbooth = document.getElementById("dj-console").style.backgroundImage;
+var UIbooth = document.getElementById("dj-console").style.backgroundImage;*/
 var UIminiVP = "http://plug.dj/_/static/images/score_meta_positive.d294bbf1.png";
 var UIminiVN = "http://plug.dj/_/static/images/score_meta_negative.4d264fee.png";
-var UIminiCur = "http://plug.dj/_/static/images/score_meta_curate.2d21301a.png";*/
+var UIminiCur = "http://plug.dj/_/static/images/score_meta_curate.2d21301a.png";
 
 function loadSkin(skinname)
 {
