@@ -1539,10 +1539,10 @@ function firstRun()
 
 firstRun();
 
-function checkOwnIn(e, chatin)
+function checkOwnIn(chatin)
 {
 	var iscommand = true;
-	var commandinfo = chatin.value.split(' ');
+	var commandinfo = chatin.split(' ');
 	
 	if (e.keyCode == 13)
 	{
@@ -2040,8 +2040,7 @@ function checkOwnIn(e, chatin)
 	}
 }
 
-var chatinput = document.getElementById("chat-input-field");
-chatinput.setAttribute('onkeydown', 'checkOwnIn(event, this);');
+API.on(API.CHAT_COMMAND, checkOwnIn;
 
 //         ---------------
 //	   Stuff that has to be done at the end
