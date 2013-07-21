@@ -2035,7 +2035,7 @@ function checkOwnIn(chatin)
 	}
 }
 
-API.on(API.CHAT_COMMAND, checkOwnIn;
+API.on(API.CHAT_COMMAND, checkOwnIn);
 
 //         ---------------
 //	   Stuff that has to be done at the end
