@@ -91,12 +91,14 @@ function requestSettings()
 
 function printChat(str)
 {
-	API.chatLog("<span style='color:#00ACFF;'> " + str + "</span>");
+	API.chatLog(str);
+	//API.chatLog("<span style='color:#00ACFF;'> " + str + "</span>");
 }
 
 function printNotification(str)
 {
-	API.chatLog("<span style='color:#efbf00;'> " + str + "</span>");
+	API.chatLog(str);
+	//API.chatLog("<span style='color:#efbf00;'> " + str + "</span>");
 }
 
 function sendPM(at, message)
